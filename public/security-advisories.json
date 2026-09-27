@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://cert.europa.eu/publications/security-advisories-rss",
+  "home_page_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
   "description": "Events collected by UnlimitedPipe 0.10.7",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.7"
   },
   "items": [
+    {
+      "id": "f97a165404d78729190a",
+      "title": "Canadian Centre for Cyber Security: AL26-024 - Critical vulnerabilities affecting Citrix NetScaler ADC and NetScaler Gateway – CVE-2026-88771 and CVE-2026-88772",
+      "content_text": "Canadian Centre for Cyber Security: AL26-024 - Critical vulnerabilities affecting Citrix NetScaler ADC and NetScaler Gateway – CVE-2026-88771 and CVE-2026-88772",
+      "date_published": "2026-09-27T18:02:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f97a165404d78729190a",
+          "source": "rss",
+          "type": "change",
+          "key": "https://cyber.gc.ca/en/alerts-advisories/al26-024-critical-vulnerabilities-affecting-citrix-netscaler-adc-netscaler-gateway-cve-2026-88771-cve-2026-88772",
+          "source_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
+          "timestamp": null,
+          "observed_at": "2026-09-27T19:04:14Z",
+          "data": {
+            "change": "added",
+            "label": "Canadian Centre for Cyber Security: AL26-024 - Critical vulnerabilities affecting Citrix NetScaler ADC and NetScaler Gateway – CVE-2026-88771 and CVE-2026-88772",
+            "item_type": "entry",
+            "summary": "added: Canadian Centre for Cyber Security: AL26-024 - Critical vulnerabilities affecting Citrix NetScaler ADC and NetScaler Gateway – CVE-2026-88771 and CVE-2026-88772",
+            "after": {
+              "title": "Canadian Centre for Cyber Security: AL26-024 - Critical vulnerabilities affecting Citrix NetScaler ADC and NetScaler Gateway – CVE-2026-88771 and CVE-2026-88772",
+              "link": "https://cyber.gc.ca/en/alerts-advisories/al26-024-critical-vulnerabilities-affecting-citrix-netscaler-adc-netscaler-gateway-cve-2026-88771-cve-2026-88772",
+              "id": "https://cyber.gc.ca/en/alerts-advisories/al26-024-critical-vulnerabilities-affecting-citrix-netscaler-adc-netscaler-gateway-cve-2026-88771-cve-2026-88772",
+              "author": "Canadian Centre for Cyber Security",
+              "published_at": "2026-09-27T18:02:05Z",
+              "updated_at": "2026-09-27T18:02:05Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Alerts and advisories",
+                "url": "https://cyber.gc.ca/api/cccs/atom/v1/get?feed=alerts_advisories&lang=en",
+                "feed_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en"
+              },
+              "agency": "Canadian Centre for Cyber Security"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.cyber.gc.ca/api/cccs/atom/v1/get?feed=alerts_advisories&lang=en",
+            "elapsed_ms": 228,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.7"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.7",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.7",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.7",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.7",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://cyber.gc.ca/en/alerts-advisories/al26-024-critical-vulnerabilities-affecting-citrix-netscaler-adc-netscaler-gateway-cve-2026-88771-cve-2026-88772"
+    },
     {
       "id": "6746f32d6bf48b0df48e",
       "title": "CERT-EU: 2026-014: Critical Vulnerabilities in Citrix NetScaler ADC and Gateway",
