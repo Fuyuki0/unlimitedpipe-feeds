@@ -1,0 +1,39 @@
+# Checks every feed a pull request adds or changes: it must load, run, write readable items
+# with links, and find nothing new on a second run. The report is on the check's summary page;
+# a maintainer reads it before merging.
+name: Check feeds
+
+on:
+  pull_request:
+    paths: ["feeds/**", "README.md"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install "unlimitedpipe>=0.10.6"
+      - name: Find the changed feeds
+        id: changed
+        run: |
+          files=$(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'feeds/*.yml' | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          if grep -l "browser: true" $files 2>/dev/null | grep -q .; then echo "browser=yes" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.changed.outputs.browser == 'yes'
+        run: pip install "playwright>=1.45" && python -m playwright install --with-deps chromium
+      - name: Check them
+        if: steps.changed.outputs.files != ''
+        env:
+          SEC_CONTACT: ${{ secrets.SEC_CONTACT }}
+        run: |
+          set -o pipefail
+          unlimited check ${{ steps.changed.outputs.files }} --markdown --readme README.md \
+            | tee -a "$GITHUB_STEP_SUMMARY"
