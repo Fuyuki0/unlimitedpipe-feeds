@@ -7,10 +7,11 @@ sources:
     timeout: 60
 operators:
   - type: select
-    fields: [id=cve.id, published=cve.published, text=cve.descriptions.0.value, score=cve.metrics.cvssMetricV31.0.cvssData.baseScore]
+    fields: [id=cve.id, published=cve.published, text=cve.descriptions.0.value, first=cve.metrics.cvssMetricV31.0.cvssData.baseScore, second=cve.metrics.cvssMetricV31.1.cvssData.baseScore]
   - type: map
     assign:
-      - 'title=id + " (critical" + replace(" " + score, "^ $", "") + "): " + replace(text, "^(.{0,140}[^ ]*).*$", "\\1")'
+      # NVD's own score and the reporter's can differ: show the higher, the one rated critical
+      - 'title=id + " (critical" + default(" " + max(first, second), "") + "): " + replace(text, "^(.{0,140}[^ ]*).*$", "\\1")'
       - 'summary=text'
       - 'link="https://nvd.nist.gov/vuln/detail/" + id'
       - 'published_at=published + "Z"'

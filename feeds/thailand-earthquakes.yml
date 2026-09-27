@@ -12,6 +12,8 @@ operators:
       - 'place=replace(place, "^.*\\(([^)]*)\\)\\s*$", "\\1")'
       - 'title="M" + magnitude + " earthquake in " + place'
       - 'summary=replace(summary, "(?s)^.*?(\\d{4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d).*?Lat\\. ([\\d.]+) , Long\\. ([\\d.]+).*$", "At \\1 Thai time (UTC+7), latitude \\2, longitude \\3, magnitude ") + magnitude'
+  # the feed sometimes lists an empty record (magnitude 0.0 at 0, 0 on 1970-01-01)
+  - {type: filter, expr: 'magnitude > 0 and not (title matches " in $")'}
   - {type: diff, only: [added], emit_initial: true}
 outputs:
   - {type: feed, path: ../public/thailand-earthquakes.xml, title: "Earthquakes around Thailand (TMD)", link: "https://earthquake.tmd.go.th/"}

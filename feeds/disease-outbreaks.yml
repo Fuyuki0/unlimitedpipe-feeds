@@ -2,7 +2,7 @@ name: disease-outbreaks
 description: World Health Organization Disease Outbreak News - confirmed outbreaks of Ebola, cholera, avian flu, mpox and more, with WHO's assessment.
 sources:
   - type: web
-    url: "https://www.who.int/api/news/diseaseoutbreaknews?$orderby=PublicationDate%20desc&$top=30&$select=Title,PublicationDate,UrlName,Summary"
+    url: "https://www.who.int/api/news/diseaseoutbreaknews?$orderby=PublicationDate%20desc&$top=100&$select=Title,PublicationDate,UrlName,Summary&$filter=PublicationDate%20ge%20${DAYS_AGO_60}T00:00:00Z%20and%20PublicationDate%20le%20${TODAY}T23:59:59Z"
     records: value
 operators:
   - type: map
