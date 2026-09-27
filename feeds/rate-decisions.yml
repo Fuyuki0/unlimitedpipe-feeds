@@ -1,0 +1,27 @@
+name: rate-decisions
+description: Interest rate decisions of the Federal Reserve, the European Central Bank, the Bank of England, the Bank of Japan, the Bank of Canada, the Reserve Bank of Australia and the Reserve Bank of India.
+sources:
+  - type: rss
+    url:
+      - https://www.federalreserve.gov/feeds/press_monetary.xml
+      - https://www.ecb.europa.eu/rss/press.html
+      - https://www.bankofengland.co.uk/rss/news
+      - https://www.boj.or.jp/en/rss/whatsnew.xml
+      - https://www.bankofcanada.ca/content_type/press-releases/feed/
+      - https://www.rba.gov.au/rss/rss-cb-media-releases.xml
+      - https://www.rbi.org.in/pressreleases_rss.xml
+operators:
+  - type: filter
+    expr: 'title matches "(?i)FOMC statement|monetary policy decision|bank rate|statement on monetary policy|policy (interest )?rate|monetary policy statement|resolution of the monetary policy committee|changes to the (key )?(interest )?rates"'
+  - type: map
+    assign:
+      - 'bank=replace(source_url, "^https?://(?:www\\d?\\.)?([^/]+).*$", "\\1")'
+      - 'bank=replace(replace(replace(replace(bank, "^federalreserve\\.gov$", "Federal Reserve"), "^ecb\\.europa\\.eu$", "ECB"), "^bankofengland\\.co\\.uk$", "Bank of England"), "^boj\\.or\\.jp$", "Bank of Japan")'
+      - 'bank=replace(replace(replace(bank, "^bankofcanada\\.ca$", "Bank of Canada"), "^rba\\.gov\\.au$", "Reserve Bank of Australia"), "^rbi\\.org\\.in$", "Reserve Bank of India")'
+      - 'title=bank + " rate decision: " + title'
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/rate-decisions.xml, title: Central bank interest rate decisions}
+  - {type: feed, path: ../public/rate-decisions.json, title: Central bank interest rate decisions}

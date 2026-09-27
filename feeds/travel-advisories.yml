@@ -6,14 +6,18 @@ sources:
       - "https://travel.state.gov/_res/rss/TAsTWs.xml"
       - "https://www.gov.uk/foreign-travel-advice.atom"
 operators:
+  # travel.state.gov answers from two sites at random, the old one with out-of-date advisories:
+  # keep the current site's items.
+  - {type: filter, expr: 'source_url contains "gov.uk" or link contains "/tsg_aem/"'}
   - type: map
     assign:
       - 'issuer=replace(replace(source_url, "^.*state\\.gov.*$", "US"), "^.*gov\\.uk.*$", "UK")'
       - 'title=replace(title, "^(.*?) - (Level \\d.*)$", "\\1: \\2")'
       - 'title=issuer + " travel advice for " + title'
+      - 'version=title + " " + published_at'   # an update keeps its link; the US feed has two links per page
   - {type: sort, by: [published_at], reverse: true}
-  - {type: dedupe, by: [link]}
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: dedupe, by: [version]}
+  - {type: diff, key: version, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/travel-advisories.xml, title: "Travel advisories (US State Department, UK FCDO)", link: "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html"}
   - {type: feed, path: ../public/travel-advisories.json, title: "Travel advisories (US State Department, UK FCDO)", link: "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html"}

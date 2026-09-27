@@ -1,0 +1,18 @@
+name: us-economy
+description: US economic data releases from the Bureau of Economic Analysis (GDP, income and spending, trade), the Census Bureau (retail sales, housing, orders) and weekly jobless claims from the Department of Labor.
+sources:
+  - type: rss
+    url: [https://apps.bea.gov/rss/rss.xml, https://www.census.gov/economic-indicators/indicator.xml, https://www.dol.gov/rss/releases.xml]
+operators:
+  # The Labor Department's feed is all its news: keep its economic data.
+  - {type: filter, expr: 'not (source_url contains "dol.gov") or title matches "(?i)weekly claims|employment situation|job openings"'}
+  - type: map
+    assign:
+      - 'agency=replace(replace(replace(source_url, "^.*bea\\.gov.*$", "BEA"), "^.*census\\.gov.*$", "Census Bureau"), "^.*dol\\.gov.*$", "Labor Department")'
+      - 'title=agency + ": " + title'
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-economy.xml, title: US economic data releases}
+  - {type: feed, path: ../public/us-economy.json, title: US economic data releases}

@@ -1,0 +1,12 @@
+name: business-news
+description: Business and markets news from CNBC and MarketWatch, merged - companies, earnings, markets and the economy.
+sources:
+  - type: rss
+    url: ["https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10001147", https://feeds.content.dowjones.io/public/rss/mw_topstories]
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/business-news.xml, title: Business news, max_items: 150}
+  - {type: feed, path: ../public/business-news.json, title: Business news, max_items: 150}

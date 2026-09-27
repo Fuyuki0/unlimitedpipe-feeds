@@ -1,19 +1,24 @@
 name: sec-cyber-incidents
-description: Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05), as soon as they file.
+description: Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05), from EDGAR full-text search of the last 30 days.
 sources:
-  - type: rss
-    url:
-      - "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&count=100&output=atom"
-      - "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&count=100&start=100&output=atom"
+  - type: web
+    url: "https://efts.sec.gov/LATEST/search-index?q=%22cybersecurity%20incident%22&forms=8-K&dateRange=custom&startdt=${DAYS_AGO_30}&enddt=${TODAY}"
     user_agent: "UnlimitedPipe ${SEC_CONTACT}"
+    records: hits.hits
 operators:
-  - {type: filter, expr: 'summary contains "Item 1.05:"'}
+  - type: select
+    fields: [id=_id, items=_source.items, company=_source.display_names.0, cik=_source.ciks.0, form=_source.form, published_at=_source.file_date]
+  - {type: filter, expr: 'items contains "1.05"'}
   - type: map
     assign:
-      - 'title=replace(title, "^8-K(/A)? - (.*?) \\(\\d+\\) \\(Filer\\)$", "\\2") + " disclosed a cybersecurity incident"'
-      - 'summary=replace(summary, "^Filed: \\S+ AccNo: \\S+ Size: \\S+ \\S+\\s*", "")'
-  - {type: dedupe, by: [link]}
-  - {type: diff, only: [added], emit_initial: true}
+      - 'company=replace(replace(company, "\\s*\\(CIK \\d+\\)$", ""), "\\s+", " ")'
+      - 'title=company + " disclosed a material cybersecurity incident"'
+      - 'accession=replace(id, ":.*$", "")'
+      - 'link="https://www.sec.gov/Archives/edgar/data/" + replace(cik, "^0+", "") + "/" + replace(accession, "-", "") + "/" + replace(id, "^[^:]*:", "")'
+      - 'summary=form + " filed " + published_at + " under Item 1.05 (material cybersecurity incidents)."'
+  - {type: dedupe, by: [accession]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: accession, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/sec-cyber-incidents.xml, title: Cybersecurity incidents disclosed to the SEC, link: "https://www.sec.gov/edgar/search/"}
   - {type: feed, path: ../public/sec-cyber-incidents.json, title: Cybersecurity incidents disclosed to the SEC, link: "https://www.sec.gov/edgar/search/"}

@@ -1,0 +1,12 @@
+name: tech-news
+description: Technology news from The Verge, Ars Technica and TechCrunch, merged - companies, products, AI and the internet.
+sources:
+  - type: rss
+    url: [https://www.theverge.com/rss/index.xml, https://feeds.arstechnica.com/arstechnica/index, https://techcrunch.com/feed/]
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/tech-news.xml, title: Tech news, max_items: 150}
+  - {type: feed, path: ../public/tech-news.json, title: Tech news, max_items: 150}

@@ -9,7 +9,7 @@ operators:
     assign:
       - 'headline=trim(replace(message, "(?s)^.*?\\n((?:ALERT|WARNING|WATCH|EXTENDED WARNING|SUMMARY|CANCEL \\w+)[^\\n]*).*$", "\\1"))'
       - 'scale=trim(replace(message, "(?s)^.*?NOAA Scale: ([^\\r\\n]+).*$", "\\1"))'
-      - 'kind=replace(replace(replace(scale, "^G.*$", "geomagnetic storm"), "^S.*$", "solar radiation storm"), "^R.*$", "radio blackout")'
+      - 'kind=replace(replace(replace(scale, "^G.*$", "geomagnetic storm"), "^S.*$", "solar radiation storm"), "^R.*$", "radio blackout from a solar flare")'
       - 'title="Solar storm, " + kind + " " + replace(scale, " - ", ", ") + ": " + headline'
       - 'when=trim(replace(message, "(?s)^(?:.*?((?:Valid From|Threshold Reached|Begin Time): [^\\r\\n]*(?:\\s+(?:Valid To|End Time): [^\\r\\n]*)?))?.*$", "\\1"))'
       - 'impacts=trim(replace(replace(message, "(?s)^(?:.*?Potential Impacts: (.*))?.*$", "\\1"), "\\s+", " "))'

@@ -1,6 +1,7 @@
 # UnlimitedPipe feeds
 
-77 free feeds, updated every hour by a GitHub Actions workflow and served by GitHub Pages.
+81 free feeds, refreshed about every 3 hours by a GitHub Actions workflow and served by GitHub
+Pages.
 No server, no database, no account. Each feed is one short YAML file, built with
 [UnlimitedPipe](https://github.com/Fuyuki0/unlimitedpipe).
 
@@ -30,6 +31,7 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | Feed | What it follows |
 | --- | --- |
 | [dev-releases](https://feeds.daemonfill.dev/dev-releases.xml) | Releases of uv, Ruff, Node.js, Deno, Bun, VS Code, Rust, TypeScript |
+| [tech-news](https://feeds.daemonfill.dev/tech-news.xml) | Technology news from The Verge, Ars Technica and TechCrunch |
 | [cloud-status](https://feeds.daemonfill.dev/cloud-status.xml) | New incidents at GitHub, Cloudflare, OpenAI, Anthropic and Google Cloud |
 | [hn-top](https://feeds.daemonfill.dev/hn-top.xml) | Hacker News stories with 300+ points |
 | [show-hn](https://feeds.daemonfill.dev/show-hn.xml) | Show HN projects with 100+ points |
@@ -44,7 +46,7 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | [security-news](https://feeds.daemonfill.dev/security-news.xml) | Krebs on Security, BleepingComputer, The Hacker News, Schneier on Security |
 | [security-advisories](https://feeds.daemonfill.dev/security-advisories.xml) | Critical advisories and alerts from CERT-EU, JPCERT/CC (Japan) and the Canadian Centre for Cyber Security |
 | [data-breaches](https://feeds.daemonfill.dev/data-breaches.xml) | Data breaches added to Have I Been Pwned, with accounts and data exposed (CC BY 4.0) |
-| [sec-cyber-incidents](https://feeds.daemonfill.dev/sec-cyber-incidents.xml) | Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05) |
+| [sec-cyber-incidents](https://feeds.daemonfill.dev/sec-cyber-incidents.xml) | Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05), from EDGAR full-text search |
 
 ### Money, economy and government
 
@@ -57,6 +59,9 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | [sanctions-actions](https://feeds.daemonfill.dev/sanctions-actions.xml) | New US sanctions actions from the Treasury (OFAC): designations, removals, licenses |
 | [us-new-rules](https://feeds.daemonfill.dev/us-new-rules.xml) | Significant new US federal rules from the Federal Register |
 | [central-banks](https://feeds.daemonfill.dev/central-banks.xml) | Press releases of the Fed, ECB, Bank of Japan, Bank of England and Reserve Bank of India, without routine operations |
+| [rate-decisions](https://feeds.daemonfill.dev/rate-decisions.xml) | Interest rate decisions of the Fed, ECB, Bank of England, Bank of Japan, Bank of Canada, RBA and RBI |
+| [us-economy](https://feeds.daemonfill.dev/us-economy.xml) | US economic data releases: GDP, income, trade, retail sales, housing, orders, jobless claims (BEA, Census, Labor Department) |
+| [business-news](https://feeds.daemonfill.dev/business-news.xml) | Business and markets news from CNBC and MarketWatch |
 | [world-leaders](https://feeds.daemonfill.dev/world-leaders.xml) | Official announcements of the White House, the Kremlin and the European Commission |
 | [usd-rates](https://feeds.daemonfill.dev/usd-rates.xml) | The US dollar against the baht, yen, yuan, rupee and euro, daily (ECB reference rates) |
 | [activist-stakes](https://feeds.daemonfill.dev/activist-stakes.xml) | Investors disclosing a new stake of 5% or more in a US public company (SEC Schedule 13D) |
@@ -119,7 +124,7 @@ Each feed labels items by outlet; state media is marked as such.
 
 | Feed | What it follows |
 | --- | --- |
-| [earthquakes](https://feeds.daemonfill.dev/earthquakes.xml) | Significant earthquakes worldwide (USGS) |
+| [earthquakes](https://feeds.daemonfill.dev/earthquakes.xml) | Earthquakes of magnitude 4.5 and above worldwide (USGS) |
 | [disaster-alerts](https://feeds.daemonfill.dev/disaster-alerts.xml) | Orange and red GDACS alerts: earthquakes, cyclones, floods, volcanoes, droughts, wildfires |
 | [hurricanes](https://feeds.daemonfill.dev/hurricanes.xml) | Atlantic and eastern Pacific hurricanes, each new National Hurricane Center advisory |
 | [typhoons](https://feeds.daemonfill.dev/typhoons.xml) | Western Pacific and Indian Ocean typhoon warnings (Joint Typhoon Warning Center) |
@@ -137,7 +142,7 @@ Each feed labels items by outlet; state media is marked as such.
 | --- | --- |
 | [science-news](https://feeds.daemonfill.dev/science-news.xml) | Nature, New Scientist and ScienceDaily |
 | [health-papers](https://feeds.daemonfill.dev/health-papers.xml) | New medical research preprints on medRxiv (not yet peer reviewed) |
-| [space-weather](https://feeds.daemonfill.dev/space-weather.xml) | Solar storms: geomagnetic storms, radiation storms and radio blackouts (NOAA SWPC) |
+| [space-weather](https://feeds.daemonfill.dev/space-weather.xml) | Solar storms: geomagnetic storms, radiation storms and radio blackouts from solar flares (NOAA SWPC) |
 | [space-launches](https://feeds.daemonfill.dev/space-launches.xml) | Rocket launches worldwide as soon as they are scheduled (Launch Library 2) |
 | [nasa-image](https://feeds.daemonfill.dev/nasa-image.xml) | NASA Image of the Day |
 
@@ -149,7 +154,8 @@ reads CISA's official JSON, builds a title and an NVD link for each vulnerabilit
 only the ones it has not seen before.
 
 [`.github/workflows/unlimitedpipe-feeds.yml`](.github/workflows/unlimitedpipe-feeds.yml) was
-generated by `unlimited publish feeds/*.yml` and runs them all every hour. What each feed has
+generated by `unlimited publish feeds/*.yml`. It is scheduled every hour and GitHub starts it
+when it has room, so the feeds refresh about every 3 hours. What each feed has
 already seen lives in `.unlimitedpipe/state/`, so every run adds only new items. A source that
 is down keeps its feed as it was; the other feeds still update.
 

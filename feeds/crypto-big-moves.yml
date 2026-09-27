@@ -13,6 +13,7 @@ operators:
       - 'moved=replace("" + round(value, 1), "^(?!-)", "+")'
       - 'title=name + " " + moved + "% in 24 hours"'
       - 'summary=name + " moved " + moved + "% in the 24 hours to " + replace(observed_at, "^(\\d{4}-\\d\\d-\\d\\d)T(\\d\\d:\\d\\d).*$", "\\1 \\2 UTC") + ", from DefiLlama prices. Data, not investment advice."'
+      - 'summary=summary + " One of the biggest " + replace(replace(moved, "^\\+.*$", "gainers"), "^-.*$", "losers") + " among large coins that day."'
       - 'link="https://www.coingecko.com/en/coins/" + coin'
       - 'day=coin + " " + replace(observed_at, "T.*$", "")'
   - {type: select, fields: [title, summary, link, day, value]}
