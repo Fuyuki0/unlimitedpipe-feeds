@@ -1,6 +1,6 @@
 # Express lane trigger
 
-A Cloudflare Worker (free plan) that starts the feeds workflow every 15 minutes with lane
+A Cloudflare Worker (free plan) that starts the feeds workflow every 5 minutes with lane
 `express`, because GitHub's own schedule starts runs late or not at all when it is busy.
 
 ```bash
