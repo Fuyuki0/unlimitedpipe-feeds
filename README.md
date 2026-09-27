@@ -1,6 +1,6 @@
 # UnlimitedPipe feeds
 
-82 free feeds, served by GitHub Pages. 18 time-sensitive ones (disasters, security incidents,
+83 free feeds, served by GitHub Pages. 18 time-sensitive ones (disasters, security incidents,
 SEC filings, rate decisions, top headlines) are in an express lane scheduled every 15 minutes;
 the rest refresh about every 3 hours.
 No server, no database, no account. Each feed is one short YAML file, built with
@@ -134,6 +134,7 @@ Each feed labels items by outlet; state media is marked as such.
 | [volcanoes](https://feeds.daemonfill.dev/volcanoes.xml) | Weekly volcanic activity reports (Smithsonian Global Volcanism Program) |
 | [natural-events](https://feeds.daemonfill.dev/natural-events.xml) | Wildfires, severe storms, volcanoes, floods and icebergs happening now (NASA EONET) |
 | [disease-outbreaks](https://feeds.daemonfill.dev/disease-outbreaks.xml) | WHO Disease Outbreak News: Ebola, cholera, avian flu, mpox and more |
+| [travel-health-notices](https://feeds.daemonfill.dev/travel-health-notices.xml) | CDC travel health notices: outbreaks and health risks for travelers by country, levels 1 to 4 |
 | [food-drug-recalls](https://feeds.daemonfill.dev/food-drug-recalls.xml) | US food, drug and medical device recalls (FDA) |
 | [europe-health-threats](https://feeds.daemonfill.dev/europe-health-threats.xml) | Disease threats and outbreak assessments from the European CDC (ECDC) |
 | [fda-news](https://feeds.daemonfill.dev/fda-news.xml) | FDA press releases: approvals, safety warnings, enforcement |
