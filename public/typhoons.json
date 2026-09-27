@@ -2,12 +2,102 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Typhoon warnings (JTWC)",
   "home_page_url": "https://www.metoc.navy.mil/jtwc/jtwc.html",
-  "description": "Events collected by UnlimitedPipe 0.9.1",
+  "description": "Events collected by UnlimitedPipe 0.10.2",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.9.1"
+    "generator": "UnlimitedPipe 0.10.2"
   },
   "items": [
+    {
+      "id": "3df26514911cb6c5ed04",
+      "title": "Typhoon 25W (Surigae) Warning #16 (Northwest Pacific/North Indian Ocean*)",
+      "content_text": "Typhoon 25W (Surigae) Warning #16\nIssued at 27/0300Z\nTC Warning Text\nTC Warning Graphic\n3 Hour Position Update Graphic Valid 26/2100Z\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+      "date_published": "2026-09-27T02:08:02Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3df26514911cb6c5ed04",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss#Typhoon 25W (Surigae) Warning #16",
+          "source_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+          "timestamp": null,
+          "observed_at": "2026-09-27T02:09:13Z",
+          "data": {
+            "change": "added",
+            "label": "Typhoon 25W (Surigae) Warning #16 (Northwest Pacific/North Indian Ocean*)",
+            "item_type": "entry",
+            "summary": "added: Typhoon 25W (Surigae) Warning #16 (Northwest Pacific/North Indian Ocean*)",
+            "after": {
+              "title": "Typhoon 25W (Surigae) Warning #16 (Northwest Pacific/North Indian Ocean*)",
+              "link": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+              "id": "https://www.metoc.navy.mil/jtwc/rss/NWPAC-NIO-WARNINGS",
+              "author": "CDO.JTWC.fct@navy.mil (JTWC CDO)",
+              "published_at": "2026-09-27T02:08:02Z",
+              "updated_at": "2026-09-27T02:08:02Z",
+              "summary": "Typhoon 25W (Surigae) Warning #16\nIssued at 27/0300Z\nTC Warning Text\nTC Warning Graphic\n3 Hour Position Update Graphic Valid 26/2100Z\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+              "categories": [
+                "Northwest Pacific/North Indian Ocean* Tropical Systems"
+              ],
+              "feed": {
+                "title": "JTWC TROPICAL CYCLONE INFORMATION FEED",
+                "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+                "feed_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss"
+              },
+              "region": "Northwest Pacific/North Indian Ocean*",
+              "warning": "Typhoon 25W (Surigae) Warning #16"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+            "elapsed_ms": 304,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.2"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.2",
+              "args": {
+                "expr": "summary matches \"Warning #\\\\d+\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.2",
+              "args": {
+                "assign": [
+                  "region=replace(title, \"^Current (.+?) Tropical Systems$\", \"\\\\1\")",
+                  "warning=replace(summary, \"(?s)^\\\\s*([^\\\\n]*?Warning #\\\\d+).*$\", \"\\\\1\")",
+                  "title=warning + \" (\" + region + \")\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.2",
+              "args": {
+                "key": "warning",
+                "namespace": "typhoons",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+      "tags": [
+        "Northwest Pacific/North Indian Ocean* Tropical Systems"
+      ]
+    },
     {
       "id": "c702840952c84a13c4db",
       "title": "Hurricane 17E (Polo) Warning #25 (Central/Eastern Pacific)",
