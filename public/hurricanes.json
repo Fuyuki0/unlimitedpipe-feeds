@@ -2,12 +2,103 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Hurricanes and tropical storms (NHC)",
   "home_page_url": "https://www.nhc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.6",
+  "description": "Events collected by UnlimitedPipe 0.10.7",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.6"
+    "generator": "UnlimitedPipe 0.10.7"
   },
   "items": [
+    {
+      "id": "95e88adb342ad71a4637",
+      "title": "Hurricane Polo (EP2), advisory 27/1746Z",
+      "content_text": "NOAA HURRICANE HUNTERS INVESTIGATING POLO. ...PREPARATIONS TO PROTECT LIFE AND PROPERTY SHOULD BE RUSHED TO COMPLETION TODAY IN BAJA CALIFORNIA SUR AS POWERFUL POLO APPROACHES... As of 11:00 AM MST Sun Sep 27 the center of Polo was located near 21.3, -114.0 with movement NNW at 12 mph. The minimum central pressure was 950 mb with maximum sustained winds of about 125 mph.",
+      "date_published": "2026-09-27T17:46:38Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "95e88adb342ad71a4637",
+          "source": "rss",
+          "type": "change",
+          "key": "summary-ep172026-202609271746",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-27T17:51:26Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane Polo (EP2), advisory 27/1746Z",
+            "item_type": "entry",
+            "summary": "added: Hurricane Polo (EP2), advisory 27/1746Z",
+            "after": {
+              "title": "Hurricane Polo (EP2), advisory 27/1746Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/271746.shtml",
+              "id": "summary-ep172026-202609271746",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-27T17:46:38Z",
+              "updated_at": "2026-09-27T17:46:38Z",
+              "summary": "NOAA HURRICANE HUNTERS INVESTIGATING POLO. ...PREPARATIONS TO PROTECT LIFE AND PROPERTY SHOULD BE RUSHED TO COMPLETION TODAY IN BAJA CALIFORNIA SUR AS POWERFUL POLO APPROACHES... As of 11:00 AM MST Sun Sep 27 the center of Polo was located near 21.3, -114.0 with movement NNW at 12 mph. The minimum central pressure was 950 mb with maximum sustained winds of about 125 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 37,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.7"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.7",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.7",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.7",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.7",
+              "args": {
+                "namespace": "hurricanes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/271746.shtml"
+    },
     {
       "id": "7056c2028ec7860a3e45",
       "title": "Hurricane Polo (EP2), advisory 27/1457Z",
