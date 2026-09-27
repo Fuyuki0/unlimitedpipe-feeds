@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
-  "description": "Events collected by UnlimitedPipe 0.3.2",
+  "home_page_url": "https://cert.europa.eu/publications/security-advisories-rss",
+  "description": "Events collected by UnlimitedPipe 0.10.7",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.3.2"
+    "generator": "UnlimitedPipe 0.10.7"
   },
   "items": [
+    {
+      "id": "6746f32d6bf48b0df48e",
+      "title": "CERT-EU: 2026-014: Critical Vulnerabilities in Citrix NetScaler ADC and Gateway",
+      "content_text": "On 27 September 2026, Citrix published a security bulletin addressing 8 vulnerabilities affecting customer-managed Citrix NetScaler ADC and Citrix NetScaler Gateway, among which 2 critical unauthenticated Remote Code Execution (RCE) vulnerabilities. Citrix has confirmed active exploitation of these 2 critical vulnerabilities in the wild.\nCERT-EU recommends updating affected software and running a compromise assessment on those exposed on the internet.",
+      "date_published": "2026-09-27T19:40:52Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6746f32d6bf48b0df48e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://cert.europa.eu/publications/security-advisories-10951",
+          "source_url": "https://cert.europa.eu/publications/security-advisories-rss",
+          "timestamp": null,
+          "observed_at": "2026-09-27T17:49:03Z",
+          "data": {
+            "change": "added",
+            "label": "CERT-EU: 2026-014: Critical Vulnerabilities in Citrix NetScaler ADC and Gateway",
+            "item_type": "entry",
+            "summary": "added: CERT-EU: 2026-014: Critical Vulnerabilities in Citrix NetScaler ADC and Gateway",
+            "after": {
+              "title": "CERT-EU: 2026-014: Critical Vulnerabilities in Citrix NetScaler ADC and Gateway",
+              "link": "https://cert.europa.eu/publications/security-advisories/2026-014/",
+              "id": "https://cert.europa.eu/publications/security-advisories-10951",
+              "author": null,
+              "published_at": "2026-09-27T19:40:52Z",
+              "updated_at": "2026-09-27T19:40:52Z",
+              "summary": "On 27 September 2026, Citrix published a security bulletin addressing 8 vulnerabilities affecting customer-managed Citrix NetScaler ADC and Citrix NetScaler Gateway, among which 2 critical unauthenticated Remote Code Execution (RCE) vulnerabilities. Citrix has confirmed active exploitation of these 2 critical vulnerabilities in the wild.\nCERT-EU recommends updating affected software and running a compromise assessment on those exposed on the internet.",
+              "categories": [],
+              "feed": {
+                "title": "Latest publications of type Security Advisories",
+                "url": "https://cert.europa.eu/publications/security-advisories/",
+                "feed_url": "https://cert.europa.eu/publications/security-advisories-rss"
+              },
+              "agency": "CERT-EU"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://cert.europa.eu/publications/security-advisories-rss",
+            "elapsed_ms": 571,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.7"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.7",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.7",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.7",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.7",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://cert.europa.eu/publications/security-advisories/2026-014/"
+    },
     {
       "id": "e60a4a14b2c6512ad6a1",
       "title": "Canadian Centre for Cyber Security: AL26-023 - Vulnerability Impacting Microsoft SharePoint Server - CVE-2026-65660",
