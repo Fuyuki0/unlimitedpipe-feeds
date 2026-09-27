@@ -1,0 +1,16 @@
+name: travel-health-notices
+description: CDC travel health notices - disease outbreaks and health risks for travelers, by country, with their level from 1 (usual precautions) to 4 (avoid nonessential travel).
+sources:
+  - type: rss
+    url: https://wwwnc.cdc.gov/travel/rss/notices.xml
+operators:
+  - type: map
+    assign:
+      - 'title="CDC travel health notice, " + title'
+      - 'version=link + " " + published_at'   # an updated notice keeps its link
+  - {type: dedupe, by: [version]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: version, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/travel-health-notices.xml, title: "CDC travel health notices", link: "https://wwwnc.cdc.gov/travel/notices"}
+  - {type: feed, path: ../public/travel-health-notices.json, title: "CDC travel health notices", link: "https://wwwnc.cdc.gov/travel/notices"}
