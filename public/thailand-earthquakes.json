@@ -2,12 +2,91 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Earthquakes around Thailand (TMD)",
   "home_page_url": "https://earthquake.tmd.go.th/",
-  "description": "Events collected by UnlimitedPipe 0.10.4",
+  "description": "Events collected by UnlimitedPipe 0.10.6",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.4"
+    "generator": "UnlimitedPipe 0.10.6"
   },
   "items": [
+    {
+      "id": "999ef1ecb0f831355990",
+      "title": "M0.0 earthquake in",
+      "content_text": "At 1970-01-01 14:00:00 Thai time (UTC+7), latitude 0.000, longitude 0.000, magnitude 0.0",
+      "date_published": "1970-01-01T07:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "999ef1ecb0f831355990",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-27T15:36:27Z",
+          "data": {
+            "change": "added",
+            "label": "M0.0 earthquake in",
+            "item_type": "entry",
+            "summary": "added: M0.0 earthquake in",
+            "after": {
+              "title": "M0.0 earthquake in ",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=",
+              "author": null,
+              "published_at": "1970-01-01T07:00:00Z",
+              "updated_at": "1970-01-01T07:00:00Z",
+              "summary": "At 1970-01-01 14:00:00 Thai time (UTC+7), latitude 0.000, longitude 0.000, magnitude 0.0",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "0.0",
+              "place": ""
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1577,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.6"
+            },
+            {
+              "step": "map",
+              "version": "0.10.6",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.6",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake="
+    },
     {
       "id": "29c7e56398d0604834bb",
       "title": "M2.3 earthquake in Myanmar",
