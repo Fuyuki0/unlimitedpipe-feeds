@@ -1,7 +1,7 @@
 # UnlimitedPipe feeds
 
-83 free feeds, served by GitHub Pages. 18 time-sensitive ones (disasters, security incidents,
-SEC filings, rate decisions, top headlines) are in an express lane scheduled every 15 minutes;
+88 free feeds, served by GitHub Pages. 20 time-sensitive ones (disasters, security incidents,
+critical vulnerabilities, SEC filings, rate decisions, economic data, top headlines) are in an express lane scheduled every 15 minutes;
 the rest refresh about every 3 hours.
 No server, no database, no account. Each feed is one short YAML file, built with
 [UnlimitedPipe](https://github.com/Fuyuki0/unlimitedpipe).
@@ -33,7 +33,7 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | --- | --- |
 | [dev-releases](https://feeds.daemonfill.dev/dev-releases.xml) | Releases of uv, Ruff, Node.js, Deno, Bun, VS Code, Rust, TypeScript |
 | [tech-news](https://feeds.daemonfill.dev/tech-news.xml) | Technology news from The Verge, Ars Technica and TechCrunch |
-| [cloud-status](https://feeds.daemonfill.dev/cloud-status.xml) | New incidents at GitHub, Cloudflare, OpenAI, Anthropic and Google Cloud |
+| [cloud-status](https://feeds.daemonfill.dev/cloud-status.xml) | New incidents at GitHub, Cloudflare, OpenAI, Anthropic, Google Cloud and AWS |
 | [hn-top](https://feeds.daemonfill.dev/hn-top.xml) | Hacker News stories with 300+ points |
 | [show-hn](https://feeds.daemonfill.dev/show-hn.xml) | Show HN projects with 100+ points |
 | [python-news](https://feeds.daemonfill.dev/python-news.xml) | Python releases and new PEPs |
@@ -44,6 +44,7 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | Feed | What it follows |
 | --- | --- |
 | [exploited-vulnerabilities](https://feeds.daemonfill.dev/exploited-vulnerabilities.xml) | Vulnerabilities newly added to CISA's Known Exploited list |
+| [critical-vulnerabilities](https://feeds.daemonfill.dev/critical-vulnerabilities.xml) | New vulnerabilities rated critical (CVSS 9 to 10) in the US National Vulnerability Database |
 | [security-news](https://feeds.daemonfill.dev/security-news.xml) | Krebs on Security, BleepingComputer, The Hacker News, Schneier on Security |
 | [security-advisories](https://feeds.daemonfill.dev/security-advisories.xml) | Critical advisories and alerts from CERT-EU, JPCERT/CC (Japan) and the Canadian Centre for Cyber Security |
 | [data-breaches](https://feeds.daemonfill.dev/data-breaches.xml) | Data breaches added to Have I Been Pwned, with accounts and data exposed (CC BY 4.0) |
@@ -59,9 +60,12 @@ on it: `unlimited rss https://feeds.daemonfill.dev/ai-news.json`.
 | [lobbying-big-spenders](https://feeds.daemonfill.dev/lobbying-big-spenders.xml) | US lobbying reports of $1 million or more, as filed with Congress |
 | [sanctions-actions](https://feeds.daemonfill.dev/sanctions-actions.xml) | New US sanctions actions from the Treasury (OFAC): designations, removals, licenses |
 | [us-new-rules](https://feeds.daemonfill.dev/us-new-rules.xml) | Significant new US federal rules from the Federal Register |
+| [court-rulings](https://feeds.daemonfill.dev/court-rulings.xml) | Opinions of the US Supreme Court and the federal courts of appeals (CourtListener) |
+| [eu-laws](https://feeds.daemonfill.dev/eu-laws.xml) | New EU regulations, directives and decisions from the Official Journal (EUR-Lex) |
 | [central-banks](https://feeds.daemonfill.dev/central-banks.xml) | Press releases of the Fed, ECB, Bank of Japan, Bank of England and Reserve Bank of India, without routine operations |
 | [rate-decisions](https://feeds.daemonfill.dev/rate-decisions.xml) | Interest rate decisions of the Fed, ECB, Bank of England, Bank of Japan, Bank of Canada, RBA and RBI |
 | [us-economy](https://feeds.daemonfill.dev/us-economy.xml) | US economic data releases: GDP, income, trade, retail sales, housing, orders, jobless claims (BEA, Census, Labor Department) |
+| [us-indicators](https://feeds.daemonfill.dev/us-indicators.xml) | The numbers themselves: inflation, core inflation, payrolls, unemployment, jobless claims, the Fed funds rate and mortgage rates (FRED) |
 | [business-news](https://feeds.daemonfill.dev/business-news.xml) | Business and markets news from CNBC and MarketWatch |
 | [market-prices](https://feeds.daemonfill.dev/market-prices.xml) | Daily closes of the S&P 500, Nasdaq, Dow, Nikkei 225, VIX, the US 10-year yield and WTI oil (FRED) |
 | [world-leaders](https://feeds.daemonfill.dev/world-leaders.xml) | Official announcements of the White House, the Kremlin and the European Commission |
@@ -136,6 +140,7 @@ Each feed labels items by outlet; state media is marked as such.
 | [disease-outbreaks](https://feeds.daemonfill.dev/disease-outbreaks.xml) | WHO Disease Outbreak News: Ebola, cholera, avian flu, mpox and more |
 | [travel-health-notices](https://feeds.daemonfill.dev/travel-health-notices.xml) | CDC travel health notices: outbreaks and health risks for travelers by country, levels 1 to 4 |
 | [food-drug-recalls](https://feeds.daemonfill.dev/food-drug-recalls.xml) | US food, drug and medical device recalls (FDA) |
+| [drug-approvals](https://feeds.daemonfill.dev/drug-approvals.xml) | New drugs the FDA approved for the first time, with what each is approved for |
 | [europe-health-threats](https://feeds.daemonfill.dev/europe-health-threats.xml) | Disease threats and outbreak assessments from the European CDC (ECDC) |
 | [fda-news](https://feeds.daemonfill.dev/fda-news.xml) | FDA press releases: approvals, safety warnings, enforcement |
 

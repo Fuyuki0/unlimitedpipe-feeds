@@ -1,0 +1,22 @@
+name: drug-approvals
+description: New drugs the US FDA approved for the first time (novel drug approvals), with what each is approved for.
+sources:
+  - type: web
+    url: https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026
+    each: "table tbody tr"
+    field: ["name=td:nth-of-type(2)", "ingredient=td:nth-of-type(3)", "approved=td:nth-of-type(4)", "use=td:nth-of-type(5)"]
+operators:
+  - {type: filter, expr: 'name != ""'}
+  - type: map
+    assign:
+      - 'use=replace(replace(trim(use), "^To (adults|patients|pediatric)", "for \\1"), "^To ", "to ")'
+      - 'title="FDA approves " + trim(name) + " (" + trim(ingredient) + ") " + replace(use, "^(.{150}[^ ,]*)[ ,].+$", "\\1…")'
+      - 'summary="Novel drug approval of " + trim(approved) + ": " + trim(name) + " (" + trim(ingredient) + ") " + use + "."'
+      - 'published_at=date(replace(replace(replace(trim(approved), "^(\\d)/", "0\\1/"), "/(\\d)/", "/0\\1/"), "^(\\d\\d)/(\\d\\d)/(\\d{4})$", "\\3-\\1-\\2"))'
+      - 'link="https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"'
+      - 'drug=trim(name)'
+  - {type: select, fields: [title, summary, link, published_at, drug]}
+  - {type: diff, key: drug, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/drug-approvals.xml, title: "FDA novel drug approvals"}
+  - {type: feed, path: ../public/drug-approvals.json, title: "FDA novel drug approvals"}

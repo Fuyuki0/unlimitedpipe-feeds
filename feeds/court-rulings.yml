@@ -1,0 +1,33 @@
+name: court-rulings
+description: Opinions of the US Supreme Court and the federal courts of appeals (the 1st to 11th circuits, the DC Circuit and the Federal Circuit), from CourtListener.
+sources:
+  - type: rss
+    url:
+      - https://www.courtlistener.com/feed/court/scotus/
+      - https://www.courtlistener.com/feed/court/cadc/
+      - https://www.courtlistener.com/feed/court/cafc/
+      - https://www.courtlistener.com/feed/court/ca1/
+      - https://www.courtlistener.com/feed/court/ca2/
+      - https://www.courtlistener.com/feed/court/ca3/
+      - https://www.courtlistener.com/feed/court/ca4/
+      - https://www.courtlistener.com/feed/court/ca5/
+      - https://www.courtlistener.com/feed/court/ca6/
+      - https://www.courtlistener.com/feed/court/ca7/
+      - https://www.courtlistener.com/feed/court/ca8/
+      - https://www.courtlistener.com/feed/court/ca9/
+      - https://www.courtlistener.com/feed/court/ca10/
+      - https://www.courtlistener.com/feed/court/ca11/
+operators:
+  - type: map
+    assign:
+      - 'court=replace(source_url, "^.*/court/([a-z0-9]+)/?$", "\\1")'
+      - 'court=replace(replace(replace(replace(court, "^scotus$", "Supreme Court"), "^cadc$", "DC Circuit"), "^cafc$", "Federal Circuit"), "^ca(\\d+)$", "\\1th Circuit")'
+      - 'court=replace(replace(replace(court, "^1th", "1st"), "^2th", "2nd"), "^3th", "3rd")'
+      - 'court=replace(court, "^11st", "11th")'
+      - 'title=court + ": " + title'
+  - {type: dedupe, by: [title]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/court-rulings.xml, title: "US Supreme Court and appeals court opinions", max_items: 150}
+  - {type: feed, path: ../public/court-rulings.json, title: "US Supreme Court and appeals court opinions", max_items: 150}

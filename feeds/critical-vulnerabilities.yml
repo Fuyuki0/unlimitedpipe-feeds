@@ -1,0 +1,22 @@
+name: critical-vulnerabilities
+description: New vulnerabilities rated critical (CVSS 9 to 10) in the US National Vulnerability Database, as they are published - exploited or not yet.
+sources:
+  - type: web
+    url: "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=${DAYS_AGO_7}T00:00:00.000&pubEndDate=${TODAY}T23:59:59.999&cvssV3Severity=CRITICAL"
+    records: vulnerabilities
+    timeout: 60
+operators:
+  - type: select
+    fields: [id=cve.id, published=cve.published, text=cve.descriptions.0.value, score=cve.metrics.cvssMetricV31.0.cvssData.baseScore]
+  - type: map
+    assign:
+      - 'title=id + " (critical" + replace(" " + score, "^ $", "") + "): " + replace(text, "^(.{0,140}[^ ]*).*$", "\\1")'
+      - 'summary=text'
+      - 'link="https://nvd.nist.gov/vuln/detail/" + id'
+      - 'published_at=published + "Z"'
+  - {type: select, fields: [title, summary, link, published_at, id]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: id, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/critical-vulnerabilities.xml, title: "Critical vulnerabilities (NVD)", max_items: 150}
+  - {type: feed, path: ../public/critical-vulnerabilities.json, title: "Critical vulnerabilities (NVD)", max_items: 150}

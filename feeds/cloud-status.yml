@@ -1,5 +1,5 @@
 name: cloud-status
-description: New incidents at GitHub, Cloudflare, OpenAI, Anthropic (Claude) and Google Cloud, from their status pages, without scheduled maintenance.
+description: New incidents at GitHub, Cloudflare, OpenAI, Anthropic (Claude), Google Cloud and AWS, from their status pages, without scheduled maintenance.
 sources:
   - type: rss
     url:
@@ -8,11 +8,15 @@ sources:
       - https://status.openai.com/history.rss
       - https://status.anthropic.com/history.rss
       - https://status.cloud.google.com/en/feed.atom
+      - https://status.aws.amazon.com/rss/all.rss
 operators:
   - type: filter
     expr: 'not (summary contains "scheduled maintenance")'
   - type: map
-    assign: ['title=replace(feed.title, "(?i)\\s*(status|service health)\\b.*$", "") + ": " + title']
+    assign:
+      - 'title=replace(replace(feed.title, "(?i)^Amazon Web Services.*$", "AWS"), "(?i)\\s*(status|service health)\\b.*$", "") + ": " + title'
+      # AWS names the region only in the item's id: "...#ec2-us-east-1_1789468030" -> " (us-east-1)"
+      - 'title=title + replace(replace(id, "^https://status\\.aws\\.amazon\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\d+)_\\d+$", " (\\1)"), "^(?! \\().*$", "")'
   - {type: sort, by: [published_at], reverse: true}
   - {type: diff, only: [added], emit_initial: true}
 outputs:

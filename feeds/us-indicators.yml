@@ -1,0 +1,35 @@
+name: us-indicators
+description: US economic indicators as they come out - inflation (CPI and core CPI, a year before), the jobs report (payrolls change, unemployment rate), weekly jobless claims, the Fed funds rate and 30-year mortgage rates - from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.
+sources:
+  - type: web
+    url:
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL&transformation=pc1&cosd=${DAYS_AGO_120}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPILFESL&transformation=pc1&cosd=${DAYS_AGO_120}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=${DAYS_AGO_120}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=${DAYS_AGO_120}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=${DAYS_AGO_30}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS&cosd=${DAYS_AGO_120}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=${DAYS_AGO_30}"
+operators:
+  - type: select
+    fields: [date=observation_date, value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US]
+  - {type: filter, expr: 'value matches "^-?[\\d.]+$"'}   # "." is a period without a value yet
+  - type: map
+    assign:
+      - 'series=replace(source_url, "^.*[?&]id=([A-Z0-9]+).*$", "\\1")'
+      - 'name=replace(replace(replace(replace(series, "^CPIAUCSL$", "US inflation (CPI, a year before)"), "^CPILFESL$", "US core inflation (CPI without food and energy, a year before)"), "^PAYEMS$", "US jobs report: payrolls change"), "^UNRATE$", "US unemployment rate")'
+      - 'name=replace(replace(replace(name, "^ICSA$", "US weekly jobless claims"), "^FEDFUNDS$", "Fed funds rate (effective)"), "^MORTGAGE30US$", "US 30-year mortgage rate")'
+      - 'shown=replace(replace(replace(series, "^(CPIAUCSL|CPILFESL)$", round(value, 2) + "%"), "^PAYEMS$", replace(commas(value * 1000, 0), "^(?!-)", "+") + " jobs"), "^ICSA$", commas(value, 0) + " new claims")'
+      - 'shown=replace(shown, "^(UNRATE|FEDFUNDS|MORTGAGE30US)$", value + "%")'
+      - 'period=replace(replace(replace(series, "^ICSA$", "week ending " + date), "^MORTGAGE30US$", "week of " + date), "^[A-Z0-9]+$", replace(date, "^(\\d{4}-\\d\\d)-01$", "\\1"))'
+      - 'title=name + ": " + shown + " (" + period + ")"'
+      - 'summary=name + " for " + period + ", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice."'
+      - 'link="https://fred.stlouisfed.org/series/" + series'
+      - 'published_at=date + "T12:30:00Z"'
+      - 'key=series + " " + date'
+  - {type: select, fields: [title, summary, link, published_at, key]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: key, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/us-indicators.xml, title: "US economic indicators (FRED)"}
+  - {type: feed, path: ../public/us-indicators.json, title: "US economic indicators (FRED)"}

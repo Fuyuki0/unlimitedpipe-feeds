@@ -1,0 +1,19 @@
+name: eu-laws
+description: New EU laws as published in the Official Journal - regulations, directives and decisions - from EUR-Lex, in English.
+sources:
+  - type: rss
+    url: "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=162"
+operators:
+  - {type: filter, expr: 'title matches "(?i)\\b(regulation|directive|decision)\\b" and not (title matches "(?i)rectificatif|corrigendum|berichtigung")'}
+  - type: map
+    assign:
+      - 'title=replace(title, "^CELEX:[^:]+:\\s*", "")'
+      - 'summary=title'
+      - 'title=replace(title, "^(.{200}[^ ,]*)[ ,].+$", "\\1…")'
+      - 'link=replace(link, "/\\./", "/")'
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: link, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/eu-laws.xml, title: "New EU laws (EUR-Lex)"}
+  - {type: feed, path: ../public/eu-laws.json, title: "New EU laws (EUR-Lex)"}
