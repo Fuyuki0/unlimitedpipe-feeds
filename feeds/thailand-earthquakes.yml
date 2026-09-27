@@ -1,5 +1,5 @@
 name: thailand-earthquakes
-description: Earthquakes in and around Thailand from the Thai Meteorological Department, with magnitude, time and location (แผ่นดินไหวจากกรมอุตุนิยมวิทยา).
+description: Earthquakes in and around Thailand from the Thai Meteorological Department, with magnitude, time and location.
 sources:
   - type: rss
     url: https://earthquake.tmd.go.th/feed/rss_tmd.xml
@@ -7,7 +7,11 @@ operators:
   - type: map
     assign:
       - 'magnitude=replace(summary, "(?s)^.*ขนาด\\s*([\\d.]+).*$", "\\1")'
-      - 'title="M" + magnitude + " " + title'
+      # English first: TMD gives the English name in brackets for places abroad.
+      - 'place=replace(title, "^(?!.*\\()(.*)$", "Thailand: \\1")'
+      - 'place=replace(place, "^.*\\(([^)]*)\\)\\s*$", "\\1")'
+      - 'title="M" + magnitude + " earthquake in " + place'
+      - 'summary=replace(summary, "(?s)^.*?(\\d{4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d).*?Lat\\. ([\\d.]+) , Long\\. ([\\d.]+).*$", "At \\1 Thai time (UTC+7), latitude \\2, longitude \\3, magnitude ") + magnitude'
   - {type: diff, only: [added], emit_initial: true}
 outputs:
   - {type: feed, path: ../public/thailand-earthquakes.xml, title: "Earthquakes around Thailand (TMD)", link: "https://earthquake.tmd.go.th/"}
