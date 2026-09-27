@@ -6,6 +6,12 @@ on:
   schedule:
     - cron: "9-59/15 * * * *"
   workflow_dispatch:
+    inputs:
+      lane:
+        description: "all: every pipeline; express: the express lane, the rest when due"
+        type: choice
+        options: [all, express]
+        default: all
 
 permissions:
   contents: write
@@ -54,11 +60,12 @@ jobs:
           }
           # The express lane runs every time; the rest when it last ran 3600s ago or
           # more (GitHub starts scheduled runs late or not at all when busy), or when this run
-          # was started by hand.
+          # was started by hand with lane "all". An outside timer starts it with lane "express".
           for pipeline in "feeds/activist-stakes.yml" "feeds/business-news.yml" "feeds/cloud-status.yml" "feeds/crypto-hacks.yml" "feeds/disaster-alerts.yml" "feeds/earthquakes.yml" "feeds/exploited-vulnerabilities.yml" "feeds/hurricanes.yml" "feeds/insider-trades.yml" "feeds/rate-decisions.yml" "feeds/sec-company-events.yml" "feeds/sec-cyber-incidents.yml" "feeds/security-news.yml" "feeds/space-weather.yml" "feeds/thailand-earthquakes.yml" "feeds/tsunami-alerts.yml" "feeds/typhoons.yml" "feeds/world-headlines.yml"; do run "$pipeline"; done
           last=$(cat ".unlimitedpipe/state/last-full-run" 2>/dev/null || echo 0)
           age=$(( $(date +%s) - last ))
-          if [ "${{ github.event_name }}" != "schedule" ] || [ "$age" -ge 3300 ]; then
+          event="${{ github.event_name }}" lane="${{ inputs.lane }}"
+          if [ "$event" != schedule ] && [ "$lane" != express ] || [ "$age" -ge 3300 ]; then
             for pipeline in "feeds/africa-news.yml" "feeds/ai-labs.yml" "feeds/ai-news.yml" "feeds/ai-papers.yml" "feeds/ai-releases.yml" "feeds/arxiv-llm.yml" "feeds/australia-news.yml" "feeds/bank-of-thailand.yml" "feeds/central-banks.yml" "feeds/china-news.yml" "feeds/climate-news.yml" "feeds/crypto-big-moves.yml" "feeds/crypto-news.yml" "feeds/crypto-prices.yml" "feeds/crypto-releases.yml" "feeds/data-breaches.yml" "feeds/dev-releases.yml" "feeds/disease-outbreaks.yml" "feeds/europe-health-threats.yml" "feeds/europe-news.yml" "feeds/exchange-listings.yml" "feeds/fda-news.yml" "feeds/food-drug-recalls.yml" "feeds/health-papers.yml" "feeds/hn-top.yml" "feeds/india-news.yml" "feeds/japan-news.yml" "feeds/korea-news.yml" "feeds/latin-america-news.yml" "feeds/lobbying-big-spenders.yml" "feeds/market-prices.yml" "feeds/middle-east-news.yml" "feeds/nasa-image.yml" "feeds/natural-events.yml" "feeds/python-news.yml" "feeds/russia-news.yml" "feeds/rust-news.yml" "feeds/sanctions-actions.yml" "feeds/science-news.yml" "feeds/sec-enforcement.yml" "feeds/sec-ipo-filings.yml" "feeds/sec-press-releases.yml" "feeds/security-advisories.yml" "feeds/show-hn.yml" "feeds/southeast-asia-news.yml" "feeds/space-launches.yml" "feeds/stablecoin-supply.yml" "feeds/taiwan-news.yml" "feeds/tech-news.yml" "feeds/thailand-disasters.yml" "feeds/thailand-news-th.yml" "feeds/thailand-news.yml" "feeds/thailand-weather.yml" "feeds/travel-advisories.yml" "feeds/uk-government.yml" "feeds/un-news.yml" "feeds/us-economy.yml" "feeds/us-justice.yml" "feeds/us-new-rules.yml" "feeds/us-news.yml" "feeds/usd-rates.yml" "feeds/volcanoes.yml" "feeds/world-bank-tenders.yml" "feeds/world-leaders.yml"; do run "$pipeline"; done
             mkdir -p ".unlimitedpipe/state" && date +%s > ".unlimitedpipe/state/last-full-run"
           fi
