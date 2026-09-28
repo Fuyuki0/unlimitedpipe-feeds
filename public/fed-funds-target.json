@@ -1,0 +1,116 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Fed rate decisions (target range, FRED)",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL,DFEDTARU,DFEDTARU&transformation=lin,lin,chg&cosd=2026-09-07,2026-09-07,2026-09-07&coed=2026-09-28,2026-09-28,2026-09-28",
+  "description": "Events collected by UnlimitedPipe 0.10.29",
+  "_unlimitedpipe": {
+    "schema": "unlimitedpipe.event/1",
+    "generator": "UnlimitedPipe 0.10.29"
+  },
+  "items": [
+    {
+      "id": "4f43d5eeef461bcab98f",
+      "title": "Federal Reserve rate decision: raised by 0.25 point, to a 3.75-4.00% target range (effective 2026-09-17)",
+      "content_text": "The FOMC raised its target range for the federal funds rate by 0.25 percentage point, to 3.75% to 4.00%, effective 2026-09-17. From FRED (DFEDTARL, DFEDTARU).",
+      "date_published": "2026-09-17T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4f43d5eeef461bcab98f",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL,DFEDTARU,DFEDTARU&transformation=lin,lin,chg&cosd=2026-09-07,2026-09-07,2026-09-07&coed=2026-09-28,2026-09-28,2026-09-28#2026-09-17",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL,DFEDTARU,DFEDTARU&transformation=lin,lin,chg&cosd=2026-09-07,2026-09-07,2026-09-07&coed=2026-09-28,2026-09-28,2026-09-28",
+          "timestamp": null,
+          "observed_at": "2026-09-28T21:37:13Z",
+          "data": {
+            "change": "added",
+            "label": "Federal Reserve rate decision: raised by 0.25 point, to a 3.75-4.00% target range (effective 2026-09-17)",
+            "item_type": "record",
+            "summary": "added: Federal Reserve rate decision: raised by 0.25 point, to a 3.75-4.00% target range (effective 2026-09-17)",
+            "after": {
+              "title": "Federal Reserve rate decision: raised by 0.25 point, to a 3.75-4.00% target range (effective 2026-09-17)",
+              "summary": "The FOMC raised its target range for the federal funds rate by 0.25 percentage point, to 3.75% to 4.00%, effective 2026-09-17. From FRED (DFEDTARL, DFEDTARU).",
+              "link": "https://fred.stlouisfed.org/series/DFEDTARU",
+              "published_at": "2026-09-17T00:00:00Z",
+              "date": "2026-09-17"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL,DFEDTARU,DFEDTARU&transformation=lin,lin,chg&cosd=2026-09-07,2026-09-07,2026-09-07&coed=2026-09-28,2026-09-28,2026-09-28",
+            "content_type": "application/csv",
+            "elapsed_ms": 474,
+            "not_modified": true,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.29"
+            },
+            {
+              "step": "select",
+              "version": "0.10.29",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "low=DFEDTARL",
+                  "high=DFEDTARU",
+                  "change=DFEDTARU_CHG"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.29",
+              "args": {
+                "expr": "change matches \"^-?[\\\\d.]+$\" and change != \"0.00\" and change != \"-0.00\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.29",
+              "args": {
+                "assign": [
+                  "action=replace(replace(change, \"^-.*$\", \"cut\"), \"^[0-9].*$\", \"raised\")",
+                  "amount=replace(change, \"^-\", \"\")",
+                  "title=\"Federal Reserve rate decision: \" + action + \" by \" + amount + \" point, to a \" + low + \"-\" + high + \"% target range (effective \" + date + \")\"",
+                  "summary=\"The FOMC \" + action + \" its target range for the federal funds rate by \" + amount + \" percentage point, to \" + low + \"% to \" + high + \"%, effective \" + date + \". From FRED (DFEDTARL, DFEDTARU).\"",
+                  "link=\"https://fred.stlouisfed.org/series/DFEDTARU\"",
+                  "published_at=date + \"T00:00:00Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.29",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "date"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.29",
+              "args": {
+                "key": "date",
+                "namespace": "fed-funds-target",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DFEDTARU"
+    }
+  ]
+}

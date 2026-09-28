@@ -1,0 +1,24 @@
+name: fed-funds-target
+description: Each Federal Reserve rate decision that changes its target for the federal funds rate - cut or raised, by how much, and the new target range, effective from when - from FRED (Federal Reserve Bank of St. Louis). Public data.
+group: "Money, economy and government"
+sources:
+  - type: web
+    # the target range's bounds, and the upper bound's change from the day before
+    url: "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL,DFEDTARU,DFEDTARU&transformation=lin,lin,chg&cosd=${DAYS_AGO_21},${DAYS_AGO_21},${DAYS_AGO_21}&coed=${TODAY},${TODAY},${TODAY}"
+operators:
+  - type: select
+    fields: [date=observation_date, low=DFEDTARL, high=DFEDTARU, change=DFEDTARU_CHG]
+  - {type: filter, expr: 'change matches "^-?[\\d.]+$" and change != "0.00" and change != "-0.00"'}
+  - type: map
+    assign:
+      - 'action=replace(replace(change, "^-.*$", "cut"), "^[0-9].*$", "raised")'
+      - 'amount=replace(change, "^-", "")'
+      - 'title="Federal Reserve rate decision: " + action + " by " + amount + " point, to a " + low + "-" + high + "% target range (effective " + date + ")"'
+      - 'summary="The FOMC " + action + " its target range for the federal funds rate by " + amount + " percentage point, to " + low + "% to " + high + "%, effective " + date + ". From FRED (DFEDTARL, DFEDTARU)."'
+      - 'link="https://fred.stlouisfed.org/series/DFEDTARU"'
+      - 'published_at=date + "T00:00:00Z"'
+  - {type: select, fields: [title, summary, link, published_at, date]}
+  - {type: diff, key: date, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/fed-funds-target.xml, title: "Fed rate decisions (target range, FRED)"}
+  - {type: feed, path: ../public/fed-funds-target.json, title: "Fed rate decisions (target range, FRED)"}
