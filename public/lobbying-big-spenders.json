@@ -2,12 +2,105 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US lobbying: $1M+ reports",
   "home_page_url": "https://lda.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.12",
+  "description": "Events collected by UnlimitedPipe 0.10.19",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.12"
+    "generator": "UnlimitedPipe 0.10.19"
   },
   "items": [
+    {
+      "id": "74938d6c5d87d3d0b19c",
+      "title": "Friends Committee on National Legislation: $1M on lobbying, 1st Quarter 2026",
+      "content_text": "1st Quarter - Amendment filed by Friends Committee on National Legislation.",
+      "date_published": "2026-09-28T14:41:16Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "74938d6c5d87d3d0b19c",
+          "source": "web",
+          "type": "change",
+          "key": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25#a77ed87d-5c62-4211-894d-c9cf9eb51a18",
+          "source_url": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25",
+          "timestamp": null,
+          "observed_at": "2026-09-28T14:55:56Z",
+          "data": {
+            "change": "added",
+            "label": "Friends Committee on National Legislation: $1M on lobbying, 1st Quarter 2026",
+            "item_type": "record",
+            "summary": "added: Friends Committee on National Legislation: $1M on lobbying, 1st Quarter 2026",
+            "after": {
+              "client": "Friends Committee on National Legislation",
+              "registrant": "FRIENDS COMMITTEE ON NATIONAL LEGISLATION",
+              "amount": "1000000.00",
+              "period": "1st Quarter (Jan 1 - Mar 31)",
+              "year": 2026,
+              "kind": "1st Quarter - Amendment",
+              "link": "https://lda.gov/filings/public/filing/a77ed87d-5c62-4211-894d-c9cf9eb51a18/print/",
+              "published_at": "2026-09-28T10:41:16-04:00",
+              "filing_uuid": "a77ed87d-5c62-4211-894d-c9cf9eb51a18",
+              "title": "Friends Committee on National Legislation: $1M on lobbying, 1st Quarter 2026",
+              "summary": "1st Quarter - Amendment filed by Friends Committee on National Legislation."
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25",
+            "content_type": "application/json",
+            "elapsed_ms": 1074,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.19"
+            },
+            {
+              "step": "select",
+              "version": "0.10.19",
+              "args": {
+                "fields": [
+                  "client=client.name",
+                  "registrant=registrant.name",
+                  "amount=income|expenses",
+                  "period=filing_period_display",
+                  "year=filing_year",
+                  "kind=filing_type_display",
+                  "link=filing_document_url",
+                  "published_at=dt_posted",
+                  "filing_uuid"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.19",
+              "args": {
+                "assign": [
+                  "client=readable(client)",
+                  "title=client + \": $\" + short(amount) + \" on lobbying, \" + replace(period, \" \\\\(.*\\\\)$\", \"\") + \" \" + year",
+                  "summary=kind + \" filed by \" + readable(registrant) + \".\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.19",
+              "args": {
+                "key": "filing_uuid",
+                "namespace": "lobbying-big-spenders",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://lda.gov/filings/public/filing/a77ed87d-5c62-4211-894d-c9cf9eb51a18/print/"
+    },
     {
       "id": "f8cd48520fee9efd2bb0",
       "title": "ASSOCIATION OF AMERICAN RAILROADS: $1.4M on lobbying, 2nd Quarter 2026",
