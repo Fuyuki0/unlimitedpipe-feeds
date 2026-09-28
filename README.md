@@ -189,7 +189,20 @@ explains how, in four steps.
 ## History and offline
 
 Every run also appends new items to a monthly archive (`archive/2026-09.jsonl`), so you can
-search further back than the latest items: `unlimited search sanctions --since 2026-08`.
+search further back than the latest items. The archive also holds history filled in from the
+sources themselves with `unlimited backfill`, about 157,000 items:
+
+| Feed | History from |
+| --- | --- |
+| us-indicators (inflation, jobs, unemployment, claims, Fed rate, mortgages), us-new-rules, disease-outbreaks | 2000 |
+| earthquakes (M4.5+), critical-vulnerabilities, market-prices, sec-ipo-filings | 2015-2016 |
+| exploited-vulnerabilities | 2021 (the catalog's start) |
+| drug-approvals | 2022 |
+| sec-cyber-incidents | December 2023 (the rule's start) |
+| data-breaches, crypto-hacks | their whole lists |
+
+A question that names a year or a month reads it by itself:
+`unlimited ask "strongest earthquake in Japan in 2024?"`, `unlimited search sanctions --since 2026-08`.
 
 The whole catalog works without the internet too:
 
