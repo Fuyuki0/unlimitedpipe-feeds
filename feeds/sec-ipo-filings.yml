@@ -1,26 +1,13 @@
 name: sec-ipo-filings
-description: Companies filing to go public in the US (new SEC S-1 and F-1 registrations of companies without a stock ticker yet; amendments and already-listed companies left out), from EDGAR full-text search.
+description: Companies filing to go public in the US (new SEC S-1 and F-1 registrations by companies that had filed no annual or quarterly report yet; amendments, public companies and life insurers' annuities left out), from EDGAR.
 sources:
-  - type: web
-    url:
-      - "https://efts.sec.gov/LATEST/search-index?forms=S-1&dateRange=custom&startdt=${DAYS_AGO_7}&enddt=${TODAY}"
-      - "https://efts.sec.gov/LATEST/search-index?forms=F-1&dateRange=custom&startdt=${DAYS_AGO_7}&enddt=${TODAY}"
-    user_agent: "UnlimitedPipe ${SEC_CONTACT}"
-    records: hits.hits
+  - type: sec
+    resource: ipo-filings
+    contact: ${SEC_CONTACT}   # the SEC asks automated readers for a contact email
+    since: ${DAYS_AGO_7}
+    until: ${TODAY}
 operators:
-  - type: select
-    fields: [id=_id, form=_source.form, name=_source.display_names.0, cik=_source.ciks.0, published_at=_source.file_date, place=_source.biz_locations.0]
-  # a new registration (not an amendment) by a company with no ticker yet: "Acme Inc.  (CIK 0002084031)"
-  - {type: filter, expr: 'form in ["S-1", "F-1"] and not (name matches "\\)\\s+\\(CIK")'}
-  - type: map
-    assign:
-      - 'company=replace(replace(replace(name, "\\s*\\(CIK \\d+\\)$", ""), "\\s*/\\s*[A-Z]{2}\\s*/?\\s*$", ""), "\\s+", " ")'
-      - 'title=company + " filed to go public (" + form + ")"'
-      - 'accession=replace(id, ":.*$", "")'
-      - 'link="https://www.sec.gov/Archives/edgar/data/" + replace(cik, "^0+", "") + "/" + replace(accession, "-", "") + "/" + accession + "-index.htm"'
-      - 'summary="Registration statement filed " + published_at + default(" by a company based in " + place, "") + "."'
-  - {type: dedupe, by: [accession]}
-  - {type: sort, by: [published_at], reverse: true}
+  - {type: sort, by: [filed_at], reverse: true}
   - {type: diff, key: accession, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/sec-ipo-filings.xml, title: IPO filings (SEC S-1 and F-1), link: "https://www.sec.gov/edgar/search/"}

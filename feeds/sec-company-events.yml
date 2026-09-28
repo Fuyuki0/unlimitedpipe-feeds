@@ -1,31 +1,13 @@
 name: sec-company-events
 description: Major company events from SEC 8-K filings as they are filed - bankruptcies, cyberattacks, completed acquisitions, layoffs, delistings, auditor changes, restatements and changes of control.
 sources:
-  - type: rss
-    url:
-      - "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&count=100&output=atom"
-      - "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&count=100&start=100&output=atom"
-    user_agent: "UnlimitedPipe ${SEC_CONTACT}"   # the SEC asks automated readers for a contact email
+  - type: sec
+    resource: company-events
+    contact: ${SEC_CONTACT}   # the SEC asks automated readers for a contact email
+    since: ${DAYS_AGO_7}   # a period in the past reads EDGAR's full-text search (unlimited backfill)
+    until: ${TODAY}
 operators:
-  - type: filter
-    expr: 'summary matches "Item (1\\.03|1\\.05|2\\.01|2\\.05|2\\.06|3\\.01|4\\.01|4\\.02|5\\.01):"'
-  - type: map
-    assign:
-      - 'company=replace(title, "^8-K(/A)? - (.*?) \\(\\d+\\) \\(Filer\\)$", "\\2")'
-      - 'event=replace(summary, "(?s)^.*?Item (1\\.03|1\\.05|2\\.01|2\\.05|2\\.06|3\\.01|4\\.01|4\\.02|5\\.01):.*$", "\\1")'
-      - 'event=replace(event, "^1\\.03$", "bankruptcy or receivership")'
-      - 'event=replace(event, "^1\\.05$", "cybersecurity incident")'
-      - 'event=replace(event, "^2\\.01$", "completed an acquisition or sale of assets")'
-      - 'event=replace(event, "^2\\.05$", "layoffs or exit costs")'
-      - 'event=replace(event, "^2\\.06$", "material impairment")'
-      - 'event=replace(event, "^3\\.01$", "delisting notice or listing transfer")'
-      - 'event=replace(event, "^4\\.01$", "auditor change")'
-      - 'event=replace(event, "^4\\.02$", "past financial statements can no longer be relied on")'
-      - 'event=replace(event, "^5\\.01$", "change in control")'
-      - 'title=company + ": " + event'
-      - 'summary=replace(summary, "^Filed: \\S+ AccNo: \\S+ Size: \\S+ \\S+\\s*", "")'
-  - {type: dedupe, by: [link]}
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: diff, key: accession, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/sec-company-events.xml, title: Major company events (SEC 8-K), link: "https://www.sec.gov/edgar/search/", max_items: 200}
   - {type: feed, path: ../public/sec-company-events.json, title: Major company events (SEC 8-K), link: "https://www.sec.gov/edgar/search/", max_items: 200}

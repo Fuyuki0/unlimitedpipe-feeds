@@ -2,8 +2,10 @@ name: lobbying-big-spenders
 description: US lobbying reports of $1 million or more, as they are filed with Congress - who is paying to influence Washington, and how much.
 sources:
   - type: web
-    url: "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&page_size=50"
+    url: "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=${DAYS_AGO_14}&filing_dt_posted_before=${TOMORROW}&page_size=25"
     records: results
+    next_page: next   # 25 a page
+    pages: 12
 operators:
   - type: select
     fields: [client=client.name, registrant=registrant.name, amount=income|expenses, period=filing_period_display, year=filing_year, kind=filing_type_display, link=filing_document_url, published_at=dt_posted, filing_uuid]
@@ -11,7 +13,7 @@ operators:
     assign:
       - 'title=client + ": $" + short(amount) + " on lobbying, " + replace(period, " \\(.*\\)$", "") + " " + year'
       - 'summary=kind + " filed by " + registrant + "."'
-  - {type: diff, key: filing_uuid, only: [added], emit_initial: true}
+  - {type: diff, key: filing_uuid, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/lobbying-big-spenders.xml, title: "US lobbying: $1M+ reports", link: "https://lda.gov/"}
   - {type: feed, path: ../public/lobbying-big-spenders.json, title: "US lobbying: $1M+ reports", link: "https://lda.gov/"}

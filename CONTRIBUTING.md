@@ -36,6 +36,17 @@ Every feed here is one pipeline file in [`feeds/`](feeds). To add one:
   is worth a look.
 - **Labeled.** When a feed merges sources, say which outlet each item comes from, and mark
   state media as such.
+- **Able to reach back, when the source can.** If the source takes a date range, ask it for
+  one with `${DAYS_AGO_7}` and `${TODAY}` (or `${TOMORROW}` when the end date is not
+  included, `${YEAR}` for a page per year) instead of "the latest 50". The feed works the
+  same, and its history can then be filled in:
+
+  ```bash
+  unlimited backfill feeds/my-feed.yml --from 2020 --dry-run   # how many past items
+  ```
+
+  A maintainer runs the backfill after merging. APIs that answer a page at a time are read
+  with `next_page` (the JSON field with the next page's address) and `pages`.
 
 Not sure? [Request a feed](../../issues/new?template=feed-request.yml) instead and describe
 what you would like to follow.
