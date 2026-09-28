@@ -14,10 +14,10 @@ operators:
   - type: map
     assign:
       - 'moved=replace(replace(short(change), "^(-?)", "\\1$"), "^\\$", "+$")'
-      - 'title=symbol + " supply " + moved + " in a day, now $" + short(supply)'
+      - 'title=symbol + " " + replace(replace(moved, "^\\+\\$", "minted $"), "^-\\$", "burned $") + " in a day, supply now $" + short(supply)'
       - 'summary=name + " (" + symbol + "): " + moved + " in 24 hours; week before: $" + short(circulatingPrevWeek.peggedUSD) + "."'
       - 'link="https://defillama.com/stablecoin/" + gecko_id'
-      - 'day_key=symbol + " " + round(circulatingPrevDay.peggedUSD)'   # changes once a day
+      - 'day_key=symbol + " ${TODAY}"'   # one move a coin a day, not one each run
     drop: [chainCirculating, chains, circulatingPrevMonth]
   - {type: diff, key: day_key, only: [added], emit_initial: true}
 outputs:

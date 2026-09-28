@@ -13,9 +13,9 @@ operators:
       - 'outlet=replace(outlet, "^bbci\\.co\\.uk$", "BBC Middle East")'
       - 'outlet=replace(outlet, "^middleeasteye\\.net$", "Middle East Eye")'
       - 'title=outlet + ": " + title'
-  - {type: dedupe, by: [link]}
+  - {type: dedupe, by: [title]}   # Middle East Eye posts a story twice: live blog and article
   - {type: sort, by: [published_at], reverse: true}
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: diff, key: title, only: [added], emit_initial: true, namespace: middle-east-news-by-title}
 outputs:
   - {type: feed, path: ../public/middle-east-news.xml, title: "Middle East news (BBC, Middle East Eye)", max_items: 150}
   - {type: feed, path: ../public/middle-east-news.json, title: "Middle East news (BBC, Middle East Eye)", max_items: 150}

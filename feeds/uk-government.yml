@@ -7,8 +7,8 @@ sources:
       - "https://www.gov.uk/search/news-and-communications.atom"
 operators:
   - {type: sort, by: [published_at], reverse: true}
-  - {type: dedupe, by: [link]}
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: dedupe, by: [title]}   # GOV.UK republishes a story at "...--2"
+  - {type: diff, key: title, only: [added], emit_initial: true, namespace: uk-government-by-title}
 outputs:
   - {type: feed, path: ../public/uk-government.xml, title: "UK government news (GOV.UK)", link: "https://www.gov.uk/search/news-and-communications"}
   - {type: feed, path: ../public/uk-government.json, title: "UK government news (GOV.UK)", link: "https://www.gov.uk/search/news-and-communications"}

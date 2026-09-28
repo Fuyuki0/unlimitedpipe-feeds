@@ -11,7 +11,8 @@ operators:
       - 'title=replace(title, "^Summary for (.+?) \\((\\w+)/.*$", "\\1 (\\2)") + ", advisory " + replace(published_at, "^\\d{4}-\\d\\d-(\\d\\d)T(\\d\\d):(\\d\\d).*$", "\\1/\\2\\3Z")'
       - 'summary=replace(summary, "(?s)^\\.\\.\\.(.+?)\\.\\.\\.\\s*", "\\1. ")'
   - {type: sort, by: [published_at], reverse: true}
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: dedupe, by: [title]}   # NHC lists an advisory under its page and the site's home
+  - {type: diff, key: title, only: [added], emit_initial: true, namespace: hurricanes-by-title}
 outputs:
   - {type: feed, path: ../public/hurricanes.xml, title: Hurricanes and tropical storms (NHC), link: "https://www.nhc.noaa.gov/"}
   - {type: feed, path: ../public/hurricanes.json, title: Hurricanes and tropical storms (NHC), link: "https://www.nhc.noaa.gov/"}
