@@ -9,6 +9,107 @@
   },
   "items": [
     {
+      "id": "849bbd88d156424a74fa",
+      "title": "Tropical Storm Rachel (EP3), advisory 28/2347Z",
+      "content_text": "RACHEL SLIGHTLY STRONGER. As of 6:00 PM CST Mon Sep 28 the center of Rachel was located near 14.3, -102.5 with movement WNW at 10 mph. The minimum central pressure was 997 mb with maximum sustained winds of about 60 mph.",
+      "date_published": "2026-09-28T23:47:30Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "849bbd88d156424a74fa",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-ep.xml#Tropical Storm Rachel (EP3), advisory 28/2347Z",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-28T23:48:36Z",
+          "data": {
+            "change": "added",
+            "label": "Tropical Storm Rachel (EP3), advisory 28/2347Z",
+            "item_type": "entry",
+            "summary": "added: Tropical Storm Rachel (EP3), advisory 28/2347Z",
+            "after": {
+              "title": "Tropical Storm Rachel (EP3), advisory 28/2347Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/282347.shtml",
+              "id": "summary-ep182026-202609282347",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-28T23:47:30Z",
+              "updated_at": "2026-09-28T23:47:30Z",
+              "summary": "RACHEL SLIGHTLY STRONGER. As of 6:00 PM CST Mon Sep 28 the center of Rachel was located near 14.3, -102.5 with movement WNW at 10 mph. The minimum central pressure was 997 mb with maximum sustained winds of about 60 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 17,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.29"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.29",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.29",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.29",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.29",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.29",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/282347.shtml"
+    },
+    {
       "id": "cd28969f7605d64e4373",
       "title": "Hurricane Polo (EP2), advisory 28/2337Z",
       "content_text": "POLO NEARING LANDFALL IN BAJA CALIFORNIA SUR. ...LIFE-THREATENING WINDS AND FLASH FLOODING ONGOING... As of 5:00 PM MST Mon Sep 28 the center of Polo was located near 25.5, -112.8 with movement NE at 12 mph. The minimum central pressure was 963 mb with maximum sustained winds of about 115 mph.",
