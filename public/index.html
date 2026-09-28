@@ -702,6 +702,9 @@
     </div>
     <script>
       // Searches feeds.json in the browser: no server, no tracking.
+      // The live data asks the server each time whether it changed (GitHub Pages lets browsers
+      // keep it 10 minutes otherwise); an unchanged file costs a 304.
+      const FRESH = { cache: "no-cache" };
       const q = document.getElementById("q"), list = document.getElementById("results"),
         status = document.getElementById("status");
       let catalog = null, response = null;
@@ -713,7 +716,7 @@
       const day = (iso) => (iso || "").slice(0, 10);
       async function load() {
         if (!catalog) {
-          response = await fetch("feeds.json");
+          response = await fetch("feeds.json", FRESH);
           catalog = await response.json();
         }
       }
@@ -768,7 +771,7 @@
             : Math.round(minutes / 60) + " h ago";
         }
         if (!catalog.archive) return;
-        return fetch(catalog.archive).then((r) => r.json()).then((index) => {
+        return fetch(catalog.archive, FRESH).then((r) => r.json()).then((index) => {
           const total = index.months.reduce((n, m) => n + (m.items || 0), 0);
           const months = index.months.map((m) => m.month).sort();
           const stat = document.getElementById("stat-archive");
@@ -823,7 +826,7 @@
       async function searchArchive() {
         const base = catalog.archive.replace(/[^/]*$/, "");
         if (!months) {
-          const index = await (await fetch(catalog.archive)).json();
+          const index = await (await fetch(catalog.archive, FRESH)).json();
           entries = index.months;
           months = entries.map((m) => m.month);
           if (Array.isArray(index.shards)) shards = new Set(index.shards);

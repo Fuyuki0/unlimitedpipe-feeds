@@ -34,52 +34,67 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: pip install "unlimitedpipe==0.10.25"
+      - run: pip install "unlimitedpipe==0.10.27"
       - name: Run the pipelines
         env:
           UNLIMITEDPIPE_STATE_DIR: .unlimitedpipe/state
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEC_CONTACT: ${{ secrets.SEC_CONTACT }}
         run: |
-          ok=0
+          results="$RUNNER_TEMP/unlimitedpipe-results"
           run() {
+            log="$RUNNER_TEMP/$(basename "$1").log"
             set +e
-            unlimited run "$1"
+            unlimited run "$1" > "$log" 2>&1
             code=$?
             set -e
-            echo "$code $1" >> "$RUNNER_TEMP/unlimitedpipe-results"
-            if [ "$code" -eq 0 ]; then
-              ok=$((ok + 1))
-            elif [ "$code" -eq 1 ]; then
-              ok=$((ok + 1))
+            echo "$code $1" >> "$results"
+            { echo "::group::$1 (exit $code)"; cat "$log"; echo "::endgroup::"; }
+            if [ "$code" -eq 1 ]; then
               echo "::warning::$1: some sources failed; publishing the rest"
-            else
+            elif [ "$code" -gt 1 ]; then
               echo "::error::$1 failed (exit $code); publishing the others"
             fi
+          }
+          # Pipelines read different sources, so they run side by side, 6 at a time:
+          # a lane takes as long as its slowest source, not the sum of them all.
+          each() {
+            for pipeline in "$@"; do
+              run "$pipeline" &
+              while [ "$(jobs -rp | wc -l)" -ge 6 ]; do wait -n; done
+            done
+            wait
           }
           # The express lane runs every time; the rest when it last ran 3600s ago or
           # more (GitHub starts scheduled runs late or not at all when busy), or when this run
           # was started by hand with lane "all". An outside timer starts it with lane "express".
-          for pipeline in "feeds/activist-stakes.yml" "feeds/business-news.yml" "feeds/cloud-status.yml" "feeds/critical-vulnerabilities.yml" "feeds/crypto-hacks.yml" "feeds/disaster-alerts.yml" "feeds/earthquakes.yml" "feeds/exploited-vulnerabilities.yml" "feeds/hurricanes.yml" "feeds/insider-trades.yml" "feeds/rate-decisions.yml" "feeds/sec-company-events.yml" "feeds/sec-cyber-incidents.yml" "feeds/security-news.yml" "feeds/space-weather.yml" "feeds/thailand-earthquakes.yml" "feeds/tsunami-alerts.yml" "feeds/typhoons.yml" "feeds/us-indicators.yml" "feeds/world-headlines.yml"; do run "$pipeline"; done
+          each "feeds/activist-stakes.yml" "feeds/business-news.yml" "feeds/cloud-status.yml" "feeds/critical-vulnerabilities.yml" "feeds/crypto-hacks.yml" "feeds/disaster-alerts.yml" "feeds/earthquakes.yml" "feeds/exploited-vulnerabilities.yml" "feeds/hurricanes.yml" "feeds/insider-trades.yml" "feeds/rate-decisions.yml" "feeds/sec-company-events.yml" "feeds/sec-cyber-incidents.yml" "feeds/security-news.yml" "feeds/space-weather.yml" "feeds/thailand-earthquakes.yml" "feeds/tsunami-alerts.yml" "feeds/typhoons.yml" "feeds/us-indicators.yml" "feeds/world-headlines.yml"
           last=$(cat ".unlimitedpipe/state/last-full-run" 2>/dev/null || echo 0)
           age=$(( $(date +%s) - last ))
           event="${{ github.event_name }}" lane="${{ inputs.lane }}"
           if [ "$event" != schedule ] && [ "$lane" != express ] || [ "$age" -ge 3300 ]; then
             pip install "playwright>=1.45" && python -m playwright install --with-deps chromium
-            for pipeline in "feeds/africa-news.yml" "feeds/ai-labs.yml" "feeds/ai-news.yml" "feeds/ai-papers.yml" "feeds/ai-releases.yml" "feeds/arxiv-llm.yml" "feeds/australia-news.yml" "feeds/bank-of-thailand.yml" "feeds/central-banks.yml" "feeds/china-news.yml" "feeds/climate-news.yml" "feeds/court-rulings.yml" "feeds/crypto-big-moves.yml" "feeds/crypto-news.yml" "feeds/crypto-prices.yml" "feeds/crypto-releases.yml" "feeds/data-breaches.yml" "feeds/dev-releases.yml" "feeds/disease-outbreaks.yml" "feeds/drug-approvals.yml" "feeds/eu-laws.yml" "feeds/europe-health-threats.yml" "feeds/europe-news.yml" "feeds/exchange-listings.yml" "feeds/fda-news.yml" "feeds/fda-recalls.yml" "feeds/food-drug-recalls.yml" "feeds/health-papers.yml" "feeds/hn-top.yml" "feeds/india-news.yml" "feeds/japan-news.yml" "feeds/korea-news.yml" "feeds/latin-america-news.yml" "feeds/lobbying-big-spenders.yml" "feeds/market-prices.yml" "feeds/middle-east-news.yml" "feeds/nasa-image.yml" "feeds/natural-events.yml" "feeds/python-news.yml" "feeds/russia-news.yml" "feeds/rust-news.yml" "feeds/sanctions-actions.yml" "feeds/science-news.yml" "feeds/sec-enforcement.yml" "feeds/sec-ipo-filings.yml" "feeds/sec-press-releases.yml" "feeds/security-advisories.yml" "feeds/show-hn.yml" "feeds/southeast-asia-news.yml" "feeds/space-launches.yml" "feeds/stablecoin-supply.yml" "feeds/taiwan-news.yml" "feeds/tech-news.yml" "feeds/thailand-disasters.yml" "feeds/thailand-news-th.yml" "feeds/thailand-news.yml" "feeds/thailand-weather.yml" "feeds/travel-advisories.yml" "feeds/travel-health-notices.yml" "feeds/uk-government.yml" "feeds/un-news.yml" "feeds/us-economy.yml" "feeds/us-justice.yml" "feeds/us-new-rules.yml" "feeds/us-news.yml" "feeds/usd-rates.yml" "feeds/volcanoes.yml" "feeds/world-bank-tenders.yml" "feeds/world-leaders.yml"; do run "$pipeline"; done
+            each "feeds/africa-news.yml" "feeds/ai-labs.yml" "feeds/ai-news.yml" "feeds/ai-papers.yml" "feeds/ai-releases.yml" "feeds/arxiv-llm.yml" "feeds/australia-news.yml" "feeds/bank-of-thailand.yml" "feeds/central-banks.yml" "feeds/china-news.yml" "feeds/climate-news.yml" "feeds/court-rulings.yml" "feeds/crypto-big-moves.yml" "feeds/crypto-news.yml" "feeds/crypto-prices.yml" "feeds/crypto-releases.yml" "feeds/data-breaches.yml" "feeds/dev-releases.yml" "feeds/disease-outbreaks.yml" "feeds/drug-approvals.yml" "feeds/eu-laws.yml" "feeds/europe-health-threats.yml" "feeds/europe-news.yml" "feeds/exchange-listings.yml" "feeds/fda-news.yml" "feeds/fda-recalls.yml" "feeds/food-drug-recalls.yml" "feeds/health-papers.yml" "feeds/hn-top.yml" "feeds/india-news.yml" "feeds/japan-news.yml" "feeds/korea-news.yml" "feeds/latin-america-news.yml" "feeds/lobbying-big-spenders.yml" "feeds/market-prices.yml" "feeds/middle-east-news.yml" "feeds/nasa-image.yml" "feeds/natural-events.yml" "feeds/python-news.yml" "feeds/russia-news.yml" "feeds/rust-news.yml" "feeds/sanctions-actions.yml" "feeds/science-news.yml" "feeds/sec-enforcement.yml" "feeds/sec-ipo-filings.yml" "feeds/sec-press-releases.yml" "feeds/security-advisories.yml" "feeds/show-hn.yml" "feeds/southeast-asia-news.yml" "feeds/space-launches.yml" "feeds/stablecoin-supply.yml" "feeds/taiwan-news.yml" "feeds/tech-news.yml" "feeds/thailand-disasters.yml" "feeds/thailand-news-th.yml" "feeds/thailand-news.yml" "feeds/thailand-weather.yml" "feeds/travel-advisories.yml" "feeds/travel-health-notices.yml" "feeds/uk-government.yml" "feeds/un-news.yml" "feeds/us-economy.yml" "feeds/us-justice.yml" "feeds/us-new-rules.yml" "feeds/us-news.yml" "feeds/usd-rates.yml" "feeds/volcanoes.yml" "feeds/world-bank-tenders.yml" "feeds/world-leaders.yml"
             mkdir -p ".unlimitedpipe/state" && date +%s > ".unlimitedpipe/state/last-full-run"
           fi
-          [ "$ok" -gt 0 ]  # fail only when nothing could run
+          # fail only when nothing could run
+          [ "$(awk '$1 <= 1' "$results" 2>/dev/null | wc -l)" -gt 0 ]
       - name: Index the feeds for search
         run: >-
           unlimited catalog --results "$RUNNER_TEMP/unlimitedpipe-results" "feeds/activist-stakes.yml" "feeds/africa-news.yml" "feeds/ai-labs.yml" "feeds/ai-news.yml" "feeds/ai-papers.yml" "feeds/ai-releases.yml" "feeds/arxiv-llm.yml" "feeds/australia-news.yml" "feeds/bank-of-thailand.yml" "feeds/business-news.yml" "feeds/central-banks.yml" "feeds/china-news.yml" "feeds/climate-news.yml" "feeds/cloud-status.yml" "feeds/court-rulings.yml" "feeds/critical-vulnerabilities.yml" "feeds/crypto-big-moves.yml" "feeds/crypto-hacks.yml" "feeds/crypto-news.yml" "feeds/crypto-prices.yml" "feeds/crypto-releases.yml" "feeds/data-breaches.yml" "feeds/dev-releases.yml" "feeds/disaster-alerts.yml" "feeds/disease-outbreaks.yml" "feeds/drug-approvals.yml" "feeds/earthquakes.yml" "feeds/eu-laws.yml" "feeds/europe-health-threats.yml" "feeds/europe-news.yml" "feeds/exchange-listings.yml" "feeds/exploited-vulnerabilities.yml" "feeds/fda-news.yml" "feeds/fda-recalls.yml" "feeds/food-drug-recalls.yml" "feeds/health-papers.yml" "feeds/hn-top.yml" "feeds/hurricanes.yml" "feeds/india-news.yml" "feeds/insider-trades.yml" "feeds/japan-news.yml" "feeds/korea-news.yml" "feeds/latin-america-news.yml" "feeds/lobbying-big-spenders.yml" "feeds/market-prices.yml" "feeds/middle-east-news.yml" "feeds/nasa-image.yml" "feeds/natural-events.yml" "feeds/python-news.yml" "feeds/rate-decisions.yml" "feeds/russia-news.yml" "feeds/rust-news.yml" "feeds/sanctions-actions.yml" "feeds/science-news.yml" "feeds/sec-company-events.yml" "feeds/sec-cyber-incidents.yml" "feeds/sec-enforcement.yml" "feeds/sec-ipo-filings.yml" "feeds/sec-press-releases.yml" "feeds/security-advisories.yml" "feeds/security-news.yml" "feeds/show-hn.yml" "feeds/southeast-asia-news.yml" "feeds/space-launches.yml" "feeds/space-weather.yml" "feeds/stablecoin-supply.yml" "feeds/taiwan-news.yml" "feeds/tech-news.yml" "feeds/thailand-disasters.yml" "feeds/thailand-earthquakes.yml" "feeds/thailand-news-th.yml" "feeds/thailand-news.yml" "feeds/thailand-weather.yml" "feeds/travel-advisories.yml" "feeds/travel-health-notices.yml" "feeds/tsunami-alerts.yml" "feeds/typhoons.yml" "feeds/uk-government.yml" "feeds/un-news.yml" "feeds/us-economy.yml" "feeds/us-indicators.yml" "feeds/us-justice.yml" "feeds/us-new-rules.yml" "feeds/us-news.yml" "feeds/usd-rates.yml" "feeds/volcanoes.yml" "feeds/world-bank-tenders.yml" "feeds/world-headlines.yml" "feeds/world-leaders.yml"
           || echo "::warning::could not update public/feeds.json"
       - name: Save outputs and state
+        id: save
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "public"
           if [ -d ".unlimitedpipe/state" ]; then git add ".unlimitedpipe/state"; fi
+          if git diff --cached --quiet -- "public"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"  # nothing new to publish
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update feeds"
           for attempt in 1 2 3; do
@@ -88,11 +103,15 @@ jobs:
           done
           exit 1
       - uses: actions/upload-pages-artifact@v5
+        if: steps.save.outputs.changed == 'true'
         with:
           path: "public"
+    outputs:
+      changed: ${{ steps.save.outputs.changed }}
 
   deploy:
     needs: run
+    if: needs.run.outputs.changed == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
