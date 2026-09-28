@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "7e75a9c834ab6d84cdfd",
+      "title": "Tropical Storm Rachel (EP3), advisory 28/1125Z",
+      "content_text": "RACHEL EXPECTED TO BECOME A HURRICANE LATER THIS WEEK. As of 6:00 AM CST Mon Sep 28 the center of Rachel was located near 13.4, -100.9 with movement WNW at 8 mph. The minimum central pressure was 1001 mb with maximum sustained winds of about 45 mph.",
+      "date_published": "2026-09-28T11:25:16Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7e75a9c834ab6d84cdfd",
+          "source": "rss",
+          "type": "change",
+          "key": "summary-ep182026-202609281125",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-28T11:26:38Z",
+          "data": {
+            "change": "added",
+            "label": "Tropical Storm Rachel (EP3), advisory 28/1125Z",
+            "item_type": "entry",
+            "summary": "added: Tropical Storm Rachel (EP3), advisory 28/1125Z",
+            "after": {
+              "title": "Tropical Storm Rachel (EP3), advisory 28/1125Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/514339.shtml",
+              "id": "summary-ep182026-202609281125",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-28T11:25:16Z",
+              "updated_at": "2026-09-28T11:25:16Z",
+              "summary": "RACHEL EXPECTED TO BECOME A HURRICANE LATER THIS WEEK. As of 6:00 AM CST Mon Sep 28 the center of Rachel was located near 13.4, -100.9 with movement WNW at 8 mph. The minimum central pressure was 1001 mb with maximum sustained winds of about 45 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 5,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.16"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.16",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.16",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.16",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.16",
+              "args": {
+                "namespace": "hurricanes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/514339.shtml"
+    },
+    {
       "id": "4c063a19701b9e88483a",
       "title": "Hurricane Polo (EP2), advisory 28/0852Z",
       "content_text": "LIFE-THREATENING WINDS AND FLASH FLOODS EXPECTED OVER PORTIONS OF BAJA CALIFORNIA SUR AND SONORA TODAY AND TUESDAY. ...CONDITIONS EXPECTED TO BEGIN DETERIORATING THIS MORNING IN BAJA CALIFORNIA SUR... As of 2:00 AM MST Mon Sep 28 the center of Polo was located near 23.6, -113.8 with movement NNE at 10 mph. The minimum central pressure was 958 mb with maximum sustained winds of about 115 mph.",
