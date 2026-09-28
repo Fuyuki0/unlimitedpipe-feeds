@@ -3,495 +3,717 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>UnlimitedPipe feeds</title>
+    <meta name="description" content="Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source.">
+    <link rel="alternate" type="application/json" href="feeds.json" title="Feed catalog">
     <style>
-      body { font: 16px/1.5 system-ui, sans-serif; max-width: 44rem; margin: 3rem auto; }
-      body { padding: 0 1rem; color: #1a1a1a; }
-      section { border-top: 1px solid #ddd; padding-top: .5rem; }
-      h2 { font-size: 1.1rem; margin-bottom: .2rem; }
-      section p { margin: .2rem 0; }
-      code { background: #f3f3f3; padding: 0 .3rem; }
-      #q { width: 100%; font: inherit; padding: .5rem .7rem; border: 1px solid #bbb;
-            border-radius: 6px; box-sizing: border-box; }
-      #results { list-style: none; padding: 0; }
-      #results li { margin: .6rem 0; }
-      #results small, .muted { color: #666; }
-      .warn { color: #a33; }
+      :root { --bg: #f6f7f9; --card: #ffffff; --ink: #15181d; --muted: #5a6270;
+        --line: #e2e5ea; --accent: #0f766e; --accent-ink: #ffffff; --live: #b42318;
+        --pill: #eef1f4; color-scheme: light; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) { --bg: #0e1116; --card: #161a21; --ink: #e7e9ee;
+          --muted: #9aa3b2; --line: #262c36; --accent: #2dd4bf; --accent-ink: #062521;
+          --live: #f97066; --pill: #1f2530; color-scheme: dark; }
+      }
+      :root[data-theme="dark"] { --bg: #0e1116; --card: #161a21; --ink: #e7e9ee;
+        --muted: #9aa3b2; --line: #262c36; --accent: #2dd4bf; --accent-ink: #062521;
+        --live: #f97066; --pill: #1f2530; color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink);
+        font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        padding-inline: 16px; }
+      a { color: var(--accent); }
+      .wrap { max-width: 72rem; margin: 0 auto; }
+      .top { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; align-items: center;
+        justify-content: space-between; padding-block: 1rem;
+        border-bottom: 1px solid var(--line); }
+      .brand { font-weight: 700; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+      .top nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
+      .top nav a { color: var(--muted); text-decoration: none; }
+      .top nav a:hover { color: var(--ink); }
+      .hero { padding-block: 2.5rem 1.5rem; max-width: 46rem; }
+      h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 .75rem;
+        letter-spacing: -.02em; text-wrap: balance; }
+      .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.25rem; }
+      .stats { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; list-style: none;
+        padding: 0; margin: 0 0 1.5rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .stats b { color: var(--ink); font-size: 1.15rem; }
+      #q { width: 100%; font: inherit; font-size: 1.05rem; padding: .8rem 1rem;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--card);
+        color: var(--ink); }
+      #q:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      #status { color: var(--muted); font-size: .9rem; margin: .5rem 0 0; }
+      #status:empty, #results:empty { display: none; }
+      #results { list-style: none; padding: 0; margin: .5rem 0 0; }
+      #results li { padding: .55rem 0; border-bottom: 1px solid var(--line); }
+      #results small { display: block; color: var(--muted); }
+      .toc { display: flex; flex-wrap: wrap; gap: .5rem; padding-block: .5rem 0; }
+      .toc a { background: var(--pill); color: var(--ink); text-decoration: none;
+        padding: .3rem .75rem; border-radius: 999px; font-size: .9rem; }
+      .group { padding-block: 2rem .5rem; }
+      .group h2 { font-size: 1.25rem; margin: 0 0 1rem; letter-spacing: -.01em; }
+      .grid { display: grid; gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+        padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+      .card h3 { font-size: 1.02rem; margin: 0; display: flex; gap: .5rem; align-items: baseline;
+        justify-content: space-between; }
+      .live { color: var(--live); font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+        text-transform: uppercase; white-space: nowrap; }
+      .desc { color: var(--muted); font-size: .93rem; margin: 0; }
+      .latest { font-size: .9rem; margin: 0; overflow-wrap: anywhere; }
+      .latest:empty { display: none; }
+      .latest::before { content: "Latest"; display: block; color: var(--muted); font-size: .7rem;
+        font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+      .latest a { color: var(--ink); text-decoration: none; }
+      .latest a:hover { text-decoration: underline; }
+      .latest span { color: var(--muted); }
+      .card footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: .4rem;
+        align-items: center; font-size: .85rem; }
+      .pill { background: var(--pill); color: var(--ink); text-decoration: none;
+        padding: .15rem .6rem; border-radius: 6px; font-weight: 600; font-size: .8rem; }
+      .warn { color: var(--live); }
+      .use { display: grid; gap: 1rem 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+        padding-block: 2.5rem; border-top: 1px solid var(--line); margin-top: 2rem; }
+      .use h2 { font-size: 1rem; margin: 0 0 .4rem; }
+      .use p { margin: 0; color: var(--muted); font-size: .93rem; }
+      code { background: var(--pill); padding: .05rem .35rem; border-radius: 4px;
+        font-size: .88em; }
+      .foot { color: var(--muted); font-size: .85rem; padding-block: 1.5rem 3rem;
+        border-top: 1px solid var(--line); }
     </style>
   </head>
   <body>
-    <h1>UnlimitedPipe feeds</h1>
-    <p>Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source.</p>
-    <p>89 feeds, refreshed by a GitHub Actions workflow scheduled every
-    1h, and its express lane (activist-stakes, business-news, cloud-status, critical-vulnerabilities, crypto-hacks, disaster-alerts, earthquakes, exploited-vulnerabilities, hurricanes, insider-trades, rate-decisions, sec-company-events, sec-cyber-incidents, security-news, space-weather, thailand-earthquakes, tsunami-alerts, typhoons, us-indicators, world-headlines) every 15m (GitHub starts scheduled runs when it has room, so often
-    less often). Subscribe to any feed in a feed reader (XML), or read it as data
-    (JSON). From a terminal: <code>pip install unlimitedpipe</code>, then
-    <code>unlimited search WORDS</code> or <code>unlimited ask "QUESTION"</code>.</p>
-    <input id="q" type="search" placeholder="Search every feed, e.g. flood, bankruptcy, Bangkok"
-      autocomplete="off" aria-label="Search every feed">
-    <p id="status" class="muted"></p>
-    <ul id="results"></ul>
-    <section id="feed-activist-stakes">
-      <h2>activist-stakes</h2>
-      <p>Investors disclosing a new stake of 5% or more in a US public company (SEC Schedule 13D) - often activists or would-be buyers - as soon as they file.</p>
-      <p><a href="activist-stakes.xml">XML</a> · <a href="activist-stakes.json">JSON</a></p>
-    </section>
-    <section id="feed-africa-news">
-      <h2>africa-news</h2>
-      <p>Africa news from BBC Africa and Africanews, merged, newest first.</p>
-      <p><a href="africa-news.xml">XML</a> · <a href="africa-news.json">JSON</a></p>
-    </section>
-    <section id="feed-ai-labs">
-      <h2>ai-labs</h2>
-      <p>Announcements from OpenAI, Google DeepMind and Hugging Face, in one feed.</p>
-      <p><a href="ai-labs.xml">XML</a> · <a href="ai-labs.json">JSON</a></p>
-    </section>
-    <section id="feed-ai-news">
-      <h2>ai-news</h2>
-      <p>AI and LLM stories from the Hacker News front page and Lobsters, matched on headlines.</p>
-      <p><a href="ai-news.xml">XML</a> · <a href="ai-news.json">JSON</a></p>
-    </section>
-    <section id="feed-ai-papers">
-      <h2>ai-papers</h2>
-      <p>Hugging Face Daily Papers, the AI research papers the community highlights each day.</p>
-      <p><a href="ai-papers.xml">XML</a> · <a href="ai-papers.json">JSON</a></p>
-    </section>
-    <section id="feed-ai-releases">
-      <h2>ai-releases</h2>
-      <p>New releases of popular open-source AI tools (Ollama, llama.cpp, vLLM, Transformers, LangChain, ComfyUI, Open WebUI), from GitHub&#x27;s API.</p>
-      <p><a href="ai-releases.xml">XML</a> · <a href="ai-releases.json">JSON</a></p>
-    </section>
-    <section id="feed-arxiv-llm">
-      <h2>arxiv-llm</h2>
-      <p>New arXiv papers (cs.CL, cs.AI) about language models and agents, matched on titles.</p>
-      <p><a href="arxiv-llm.xml">XML</a> · <a href="arxiv-llm.json">JSON</a></p>
-    </section>
-    <section id="feed-australia-news">
-      <h2>australia-news</h2>
-      <p>Australia news from ABC News, the public broadcaster.</p>
-      <p><a href="australia-news.xml">XML</a> · <a href="australia-news.json">JSON</a></p>
-    </section>
-    <section id="feed-bank-of-thailand">
-      <h2>bank-of-thailand</h2>
-      <p>Press releases from the Bank of Thailand (ธนาคารแห่งประเทศไทย) - monetary policy, the economy, banknotes and financial rules. Its news list only appears with JavaScript, so this feed renders the page in a headless browser.</p>
-      <p><a href="bank-of-thailand.xml">XML</a> · <a href="bank-of-thailand.json">JSON</a></p>
-    </section>
-    <section id="feed-business-news">
-      <h2>business-news</h2>
-      <p>Business and markets news from CNBC and MarketWatch, merged - companies, earnings, markets and the economy.</p>
-      <p><a href="business-news.xml">XML</a> · <a href="business-news.json">JSON</a></p>
-    </section>
-    <section id="feed-central-banks">
-      <h2>central-banks</h2>
-      <p>Press releases of the Federal Reserve, the European Central Bank, the Bank of Japan, the Bank of England and the Reserve Bank of India, without routine market operations.</p>
-      <p><a href="central-banks.xml">XML</a> · <a href="central-banks.json">JSON</a></p>
-    </section>
-    <section id="feed-china-news">
-      <h2>china-news</h2>
-      <p>China news in English from the South China Morning Post (Hong Kong) and CGTN (Chinese state media), labeled by outlet.</p>
-      <p><a href="china-news.xml">XML</a> · <a href="china-news.json">JSON</a></p>
-    </section>
-    <section id="feed-climate-news">
-      <h2>climate-news</h2>
-      <p>Climate and energy stories from BBC, NPR and Al Jazeera.</p>
-      <p><a href="climate-news.xml">XML</a> · <a href="climate-news.json">JSON</a></p>
-    </section>
-    <section id="feed-cloud-status">
-      <h2>cloud-status</h2>
-      <p>New incidents at GitHub, Cloudflare, OpenAI, Anthropic (Claude), Google Cloud and AWS, from their status pages, without scheduled maintenance.</p>
-      <p><a href="cloud-status.xml">XML</a> · <a href="cloud-status.json">JSON</a></p>
-    </section>
-    <section id="feed-court-rulings">
-      <h2>court-rulings</h2>
-      <p>Opinions of the US Supreme Court and the federal courts of appeals (the 1st to 11th circuits, the DC Circuit and the Federal Circuit), from CourtListener.</p>
-      <p><a href="court-rulings.xml">XML</a> · <a href="court-rulings.json">JSON</a></p>
-    </section>
-    <section id="feed-critical-vulnerabilities">
-      <h2>critical-vulnerabilities</h2>
-      <p>New vulnerabilities rated critical (CVSS 9 to 10) in the US National Vulnerability Database, as they are published - exploited or not yet.</p>
-      <p><a href="critical-vulnerabilities.xml">XML</a> · <a href="critical-vulnerabilities.json">JSON</a></p>
-    </section>
-    <section id="feed-crypto-big-moves">
-      <h2>crypto-big-moves</h2>
-      <p>Large cryptocurrencies (about 45 of the biggest, stablecoins left out) whose price moved 10% or more in 24 hours, once per coin per day, from DefiLlama. Data, not investment advice.</p>
-      <p><a href="crypto-big-moves.xml">XML</a> · <a href="crypto-big-moves.json">JSON</a></p>
-    </section>
-    <section id="feed-crypto-hacks">
-      <h2>crypto-hacks</h2>
-      <p>Crypto hacks and exploits with the amount lost, how it happened and the chains involved, from DefiLlama&#x27;s public hacks database.</p>
-      <p><a href="crypto-hacks.xml">XML</a> · <a href="crypto-hacks.json">JSON</a></p>
-    </section>
-    <section id="feed-crypto-news">
-      <h2>crypto-news</h2>
-      <p>Crypto news from CoinDesk, Cointelegraph and Decrypt, merged, newest first.</p>
-      <p><a href="crypto-news.xml">XML</a> · <a href="crypto-news.json">JSON</a></p>
-    </section>
-    <section id="feed-crypto-prices">
-      <h2>crypto-prices</h2>
-      <p>Prices of the largest cryptocurrencies (Bitcoin, Ethereum, XRP, BNB, Solana, Dogecoin, Tron, Cardano) twice a day, in US dollars, from DefiLlama&#x27;s open price API. Data, not investment advice.</p>
-      <p><a href="crypto-prices.xml">XML</a> · <a href="crypto-prices.json">JSON</a></p>
-    </section>
-    <section id="feed-crypto-releases">
-      <h2>crypto-releases</h2>
-      <p>New releases of the software that runs the big networks - Bitcoin Core, Lightning (lnd), Ethereum&#x27;s Geth and Lighthouse clients, and Solana&#x27;s Agave validator - from GitHub&#x27;s API.</p>
-      <p><a href="crypto-releases.xml">XML</a> · <a href="crypto-releases.json">JSON</a></p>
-    </section>
-    <section id="feed-data-breaches">
-      <h2>data-breaches</h2>
-      <p>Data breaches as they are added to Have I Been Pwned, with how many accounts and what data leaked (verified breaches only; data from haveibeenpwned.com, CC BY 4.0).</p>
-      <p><a href="data-breaches.xml">XML</a> · <a href="data-breaches.json">JSON</a></p>
-    </section>
-    <section id="feed-dev-releases">
-      <h2>dev-releases</h2>
-      <p>New releases of everyday developer tools (uv, Ruff, Node.js, Deno, Bun, VS Code, Rust, TypeScript), from GitHub&#x27;s API.</p>
-      <p><a href="dev-releases.xml">XML</a> · <a href="dev-releases.json">JSON</a></p>
-    </section>
-    <section id="feed-disaster-alerts">
-      <h2>disaster-alerts</h2>
-      <p>Orange and red alerts from GDACS, the UN and EU Global Disaster Alert and Coordination System - earthquakes, cyclones, floods, volcanoes, droughts and wildfires with a significant expected impact.</p>
-      <p><a href="disaster-alerts.xml">XML</a> · <a href="disaster-alerts.json">JSON</a></p>
-    </section>
-    <section id="feed-disease-outbreaks">
-      <h2>disease-outbreaks</h2>
-      <p>World Health Organization Disease Outbreak News - confirmed outbreaks of Ebola, cholera, avian flu, mpox and more, with WHO&#x27;s assessment.</p>
-      <p><a href="disease-outbreaks.xml">XML</a> · <a href="disease-outbreaks.json">JSON</a></p>
-    </section>
-    <section id="feed-drug-approvals">
-      <h2>drug-approvals</h2>
-      <p>New drugs the US FDA approved for the first time (novel drug approvals), with what each is approved for.</p>
-      <p><a href="drug-approvals.xml">XML</a> · <a href="drug-approvals.json">JSON</a></p>
-    </section>
-    <section id="feed-earthquakes">
-      <h2>earthquakes</h2>
-      <p>Earthquakes of magnitude 4.5 and above worldwide, from the US Geological Survey.</p>
-      <p><a href="earthquakes.xml">XML</a> · <a href="earthquakes.json">JSON</a></p>
-    </section>
-    <section id="feed-eu-laws">
-      <h2>eu-laws</h2>
-      <p>New EU laws as published in the Official Journal - regulations, directives and decisions - from EUR-Lex, in English.</p>
-      <p><a href="eu-laws.xml">XML</a> · <a href="eu-laws.json">JSON</a></p>
-    </section>
-    <section id="feed-europe-health-threats">
-      <h2>europe-health-threats</h2>
-      <p>Communicable disease threats in Europe and worldwide from the European Centre for Disease Prevention and Control (ECDC): outbreaks, risk assessments and epidemiological updates.</p>
-      <p><a href="europe-health-threats.xml">XML</a> · <a href="europe-health-threats.json">JSON</a></p>
-    </section>
-    <section id="feed-europe-news">
-      <h2>europe-news</h2>
-      <p>European news from POLITICO Europe and Euronews, merged, newest first.</p>
-      <p><a href="europe-news.xml">XML</a> · <a href="europe-news.json">JSON</a></p>
-    </section>
-    <section id="feed-exchange-listings">
-      <h2>exchange-listings</h2>
-      <p>New and removed trading pairs on Coinbase, Binance, OKX and Upbit, read from each exchange&#x27;s official market list. Data, not investment advice.</p>
-      <p><a href="exchange-listings.xml">XML</a> · <a href="exchange-listings.json">JSON</a></p>
-    </section>
-    <section id="feed-exploited-vulnerabilities">
-      <h2>exploited-vulnerabilities</h2>
-      <p>Vulnerabilities newly added to CISA&#x27;s Known Exploited Vulnerabilities catalog, the ones attackers are using now.</p>
-      <p><a href="exploited-vulnerabilities.xml">XML</a> · <a href="exploited-vulnerabilities.json">JSON</a></p>
-    </section>
-    <section id="feed-fda-news">
-      <h2>fda-news</h2>
-      <p>US Food and Drug Administration press releases: drug and device approvals, safety warnings, recalls and enforcement.</p>
-      <p><a href="fda-news.xml">XML</a> · <a href="fda-news.json">JSON</a></p>
-    </section>
-    <section id="feed-fda-recalls">
-      <h2>fda-recalls</h2>
-      <p>Class I recalls - the most serious, where a product could cause serious harm or death - of food, drugs and medical devices, from the FDA&#x27;s weekly enforcement reports (openFDA). Data, not medical advice.</p>
-      <p><a href="fda-recalls.xml">XML</a> · <a href="fda-recalls.json">JSON</a></p>
-    </section>
-    <section id="feed-food-drug-recalls">
-      <h2>food-drug-recalls</h2>
-      <p>US food, drug and medical device recalls and safety alerts from the Food and Drug Administration.</p>
-      <p><a href="food-drug-recalls.xml">XML</a> · <a href="food-drug-recalls.json">JSON</a></p>
-    </section>
-    <section id="feed-health-papers">
-      <h2>health-papers</h2>
-      <p>New medical and health research preprints on medRxiv, across all fields (not yet peer reviewed).</p>
-      <p><a href="health-papers.xml">XML</a> · <a href="health-papers.json">JSON</a></p>
-    </section>
-    <section id="feed-hn-top">
-      <h2>hn-top</h2>
-      <p>Hacker News stories that reached 300 points, the biggest discussions of the day, from the official Hacker News search API.</p>
-      <p><a href="hn-top.xml">XML</a> · <a href="hn-top.json">JSON</a></p>
-    </section>
-    <section id="feed-hurricanes">
-      <h2>hurricanes</h2>
-      <p>Hurricanes and tropical storms in the Atlantic and eastern Pacific - each new advisory summary from the US National Hurricane Center.</p>
-      <p><a href="hurricanes.xml">XML</a> · <a href="hurricanes.json">JSON</a></p>
-    </section>
-    <section id="feed-india-news">
-      <h2>india-news</h2>
-      <p>India news in English from The Hindu and NDTV, merged, newest first.</p>
-      <p><a href="india-news.xml">XML</a> · <a href="india-news.json">JSON</a></p>
-    </section>
-    <section id="feed-insider-trades">
-      <h2>insider-trades</h2>
-      <p>Insider purchases and sales worth $100K or more at US public companies, as they are filed with the SEC (Form 4) - who, their role, shares, price and total value.</p>
-      <p><a href="insider-trades.xml">XML</a> · <a href="insider-trades.json">JSON</a></p>
-    </section>
-    <section id="feed-japan-news">
-      <h2>japan-news</h2>
-      <p>Japan news in English from The Japan Times, The Mainichi and Japan Today, merged, newest first.</p>
-      <p><a href="japan-news.xml">XML</a> · <a href="japan-news.json">JSON</a></p>
-    </section>
-    <section id="feed-korea-news">
-      <h2>korea-news</h2>
-      <p>South Korea news in English from Yonhap, the national news agency.</p>
-      <p><a href="korea-news.xml">XML</a> · <a href="korea-news.json">JSON</a></p>
-    </section>
-    <section id="feed-latin-america-news">
-      <h2>latin-america-news</h2>
-      <p>Latin America news from BBC Latin America and MercoPress, merged, newest first.</p>
-      <p><a href="latin-america-news.xml">XML</a> · <a href="latin-america-news.json">JSON</a></p>
-    </section>
-    <section id="feed-lobbying-big-spenders">
-      <h2>lobbying-big-spenders</h2>
-      <p>US lobbying reports of $1 million or more, as they are filed with Congress - who is paying to influence Washington, and how much.</p>
-      <p><a href="lobbying-big-spenders.xml">XML</a> · <a href="lobbying-big-spenders.json">JSON</a></p>
-    </section>
-    <section id="feed-market-prices">
-      <h2>market-prices</h2>
-      <p>Daily closes of the S&amp;P 500, Nasdaq Composite, Dow Jones, Nikkei 225 and VIX, the US 10-year Treasury yield and WTI crude oil, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.</p>
-      <p><a href="market-prices.xml">XML</a> · <a href="market-prices.json">JSON</a></p>
-    </section>
-    <section id="feed-middle-east-news">
-      <h2>middle-east-news</h2>
-      <p>Middle East news from BBC Middle East and Middle East Eye, merged, newest first.</p>
-      <p><a href="middle-east-news.xml">XML</a> · <a href="middle-east-news.json">JSON</a></p>
-    </section>
-    <section id="feed-nasa-image">
-      <h2>nasa-image</h2>
-      <p>NASA&#x27;s Image of the Day.</p>
-      <p><a href="nasa-image.xml">XML</a> · <a href="nasa-image.json">JSON</a></p>
-    </section>
-    <section id="feed-natural-events">
-      <h2>natural-events</h2>
-      <p>Natural events happening now, tracked by NASA EONET: wildfires, severe storms, volcanoes, floods, icebergs and more, each with the agency that reported it.</p>
-      <p><a href="natural-events.xml">XML</a> · <a href="natural-events.json">JSON</a></p>
-    </section>
-    <section id="feed-python-news">
-      <h2>python-news</h2>
-      <p>Python release announcements (Python Insider) and new PEPs.</p>
-      <p><a href="python-news.xml">XML</a> · <a href="python-news.json">JSON</a></p>
-    </section>
-    <section id="feed-rate-decisions">
-      <h2>rate-decisions</h2>
-      <p>Interest rate decisions of the Federal Reserve, the European Central Bank, the Bank of England, the Bank of Japan, the Bank of Canada, the Reserve Bank of Australia and the Reserve Bank of India.</p>
-      <p><a href="rate-decisions.xml">XML</a> · <a href="rate-decisions.json">JSON</a></p>
-    </section>
-    <section id="feed-russia-news">
-      <h2>russia-news</h2>
-      <p>Russia news in English from TASS (Russian state media), Meduza and The Moscow Times (independent, in exile), labeled by outlet.</p>
-      <p><a href="russia-news.xml">XML</a> · <a href="russia-news.json">JSON</a></p>
-    </section>
-    <section id="feed-rust-news">
-      <h2>rust-news</h2>
-      <p>The official Rust blog.</p>
-      <p><a href="rust-news.xml">XML</a> · <a href="rust-news.json">JSON</a></p>
-    </section>
-    <section id="feed-sanctions-actions">
-      <h2>sanctions-actions</h2>
-      <p>New US sanctions actions from the Treasury&#x27;s Office of Foreign Assets Control (OFAC) - designations, removals and general licenses.</p>
-      <p><a href="sanctions-actions.xml">XML</a> · <a href="sanctions-actions.json">JSON</a></p>
-    </section>
-    <section id="feed-science-news">
-      <h2>science-news</h2>
-      <p>Science news from Nature, New Scientist and ScienceDaily: discoveries, research policy and the people behind them.</p>
-      <p><a href="science-news.xml">XML</a> · <a href="science-news.json">JSON</a></p>
-    </section>
-    <section id="feed-sec-company-events">
-      <h2>sec-company-events</h2>
-      <p>Major company events from SEC 8-K filings as they are filed - bankruptcies, cyberattacks, completed acquisitions, layoffs, delistings, auditor changes, restatements and changes of control.</p>
-      <p><a href="sec-company-events.xml">XML</a> · <a href="sec-company-events.json">JSON</a></p>
-    </section>
-    <section id="feed-sec-cyber-incidents">
-      <h2>sec-cyber-incidents</h2>
-      <p>Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05), from EDGAR full-text search of the last 30 days.</p>
-      <p><a href="sec-cyber-incidents.xml">XML</a> · <a href="sec-cyber-incidents.json">JSON</a></p>
-    </section>
-    <section id="feed-sec-enforcement">
-      <h2>sec-enforcement</h2>
-      <p>SEC litigation releases: civil lawsuits the SEC files in federal court for fraud and other securities violations.</p>
-      <p><a href="sec-enforcement.xml">XML</a> · <a href="sec-enforcement.json">JSON</a></p>
-    </section>
-    <section id="feed-sec-ipo-filings">
-      <h2>sec-ipo-filings</h2>
-      <p>Companies filing to go public in the US (new SEC S-1 and F-1 registrations by companies that had filed no annual or quarterly report yet; amendments, public companies and life insurers&#x27; annuities left out), from EDGAR.</p>
-      <p><a href="sec-ipo-filings.xml">XML</a> · <a href="sec-ipo-filings.json">JSON</a></p>
-    </section>
-    <section id="feed-sec-press-releases">
-      <h2>sec-press-releases</h2>
-      <p>Press releases from the US Securities and Exchange Commission: enforcement actions, new rules, charges and settlements.</p>
-      <p><a href="sec-press-releases.xml">XML</a> · <a href="sec-press-releases.json">JSON</a></p>
-    </section>
-    <section id="feed-security-advisories">
-      <h2>security-advisories</h2>
-      <p>Critical security advisories and alerts from CERT-EU, JPCERT/CC (Japan) and the Canadian Centre for Cyber Security, labeled by agency; routine vendor patch notices left out.</p>
-      <p><a href="security-advisories.xml">XML</a> · <a href="security-advisories.json">JSON</a></p>
-    </section>
-    <section id="feed-security-news">
-      <h2>security-news</h2>
-      <p>Security news from Krebs on Security, BleepingComputer, The Hacker News and Schneier on Security, merged.</p>
-      <p><a href="security-news.xml">XML</a> · <a href="security-news.json">JSON</a></p>
-    </section>
-    <section id="feed-show-hn">
-      <h2>show-hn</h2>
-      <p>Show HN projects that reached 100 points, from the official Hacker News search API.</p>
-      <p><a href="show-hn.xml">XML</a> · <a href="show-hn.json">JSON</a></p>
-    </section>
-    <section id="feed-southeast-asia-news">
-      <h2>southeast-asia-news</h2>
-      <p>Southeast Asia news in English: Vietnam (VnExpress International), the Philippines (Rappler), Singapore and the region (CNA) and Indonesia (Antara), merged, newest first.</p>
-      <p><a href="southeast-asia-news.xml">XML</a> · <a href="southeast-asia-news.json">JSON</a></p>
-    </section>
-    <section id="feed-space-launches">
-      <h2>space-launches</h2>
-      <p>Rocket launches worldwide as soon as they are scheduled, from The Space Devs&#x27; Launch Library 2.</p>
-      <p><a href="space-launches.xml">XML</a> · <a href="space-launches.json">JSON</a></p>
-    </section>
-    <section id="feed-space-weather">
-      <h2>space-weather</h2>
-      <p>Solar storms from NOAA&#x27;s Space Weather Prediction Center - geomagnetic storms (G), solar radiation storms (S) and radio blackouts (R) that can disturb power grids, GPS, radio and satellites - with the expected impacts.</p>
-      <p><a href="space-weather.xml">XML</a> · <a href="space-weather.json">JSON</a></p>
-    </section>
-    <section id="feed-stablecoin-supply">
-      <h2>stablecoin-supply</h2>
-      <p>Big daily moves in the supply of the largest stablecoins (USDT, USDC and others over $1B) - $100M or more minted or burned in a day, from DefiLlama. Data, not investment advice.</p>
-      <p><a href="stablecoin-supply.xml">XML</a> · <a href="stablecoin-supply.json">JSON</a></p>
-    </section>
-    <section id="feed-taiwan-news">
-      <h2>taiwan-news</h2>
-      <p>Taiwan news in English from the Taipei Times.</p>
-      <p><a href="taiwan-news.xml">XML</a> · <a href="taiwan-news.json">JSON</a></p>
-    </section>
-    <section id="feed-tech-news">
-      <h2>tech-news</h2>
-      <p>Technology news from The Verge, Ars Technica and TechCrunch, merged - companies, products, AI and the internet.</p>
-      <p><a href="tech-news.xml">XML</a> · <a href="tech-news.json">JSON</a></p>
-    </section>
-    <section id="feed-thailand-disasters">
-      <h2>thailand-disasters</h2>
-      <p>Every GDACS disaster alert (any level) that mentions Thailand or its neighbours Myanmar, Laos, Cambodia and Malaysia - floods, storms and earthquakes.</p>
-      <p><a href="thailand-disasters.xml">XML</a> · <a href="thailand-disasters.json">JSON</a></p>
-    </section>
-    <section id="feed-thailand-earthquakes">
-      <h2>thailand-earthquakes</h2>
-      <p>Earthquakes in and around Thailand from the Thai Meteorological Department, with magnitude, time and location.</p>
-      <p><a href="thailand-earthquakes.xml">XML</a> · <a href="thailand-earthquakes.json">JSON</a></p>
-    </section>
-    <section id="feed-thailand-news-th">
-      <h2>thailand-news-th</h2>
-      <p>ข่าวไทยจากมติชนออนไลน์และประชาชาติธุรกิจ เรียงข่าวล่าสุดก่อน (Thai-language news from Matichon and Prachachat).</p>
-      <p><a href="thailand-news-th.xml">XML</a> · <a href="thailand-news-th.json">JSON</a></p>
-    </section>
-    <section id="feed-thailand-news">
-      <h2>thailand-news</h2>
-      <p>English-language Thailand news from Khaosod English, Thai Enquirer and Prachatai English.</p>
-      <p><a href="thailand-news.xml">XML</a> · <a href="thailand-news.json">JSON</a></p>
-    </section>
-    <section id="feed-thailand-weather">
-      <h2>thailand-weather</h2>
-      <p>Weather now and for the next 6 hours in Bangkok, Chiang Mai, Phuket, Pattaya, Khon Kaen and Hat Yai, twice a day (พยากรณ์อากาศ). Data from MET Norway (CC BY 4.0).</p>
-      <p><a href="thailand-weather.xml">XML</a> · <a href="thailand-weather.json">JSON</a></p>
-    </section>
-    <section id="feed-travel-advisories">
-      <h2>travel-advisories</h2>
-      <p>Travel warnings: new and updated advice for travellers from the US State Department (levels 1 to 4) and the UK Foreign Office, per country.</p>
-      <p><a href="travel-advisories.xml">XML</a> · <a href="travel-advisories.json">JSON</a></p>
-    </section>
-    <section id="feed-travel-health-notices">
-      <h2>travel-health-notices</h2>
-      <p>CDC travel health notices - disease outbreaks and health risks for travelers, by country, with their level from 1 (usual precautions) to 4 (avoid nonessential travel).</p>
-      <p><a href="travel-health-notices.xml">XML</a> · <a href="travel-health-notices.json">JSON</a></p>
-    </section>
-    <section id="feed-tsunami-alerts">
-      <h2>tsunami-alerts</h2>
-      <p>Tsunami messages from the US Tsunami Warning Centers (Pacific and Alaska), from information bulletins to warnings, with the earthquake behind each.</p>
-      <p><a href="tsunami-alerts.xml">XML</a> · <a href="tsunami-alerts.json">JSON</a></p>
-    </section>
-    <section id="feed-typhoons">
-      <h2>typhoons</h2>
-      <p>Typhoon and tropical cyclone warnings for the western Pacific, Indian Ocean and southern hemisphere from the Joint Typhoon Warning Center - each new warning.</p>
-      <p><a href="typhoons.xml">XML</a> · <a href="typhoons.json">JSON</a></p>
-    </section>
-    <section id="feed-uk-government">
-      <h2>uk-government</h2>
-      <p>UK government news and announcements from GOV.UK: policy, ministers, departments and public services.</p>
-      <p><a href="uk-government.xml">XML</a> · <a href="uk-government.json">JSON</a></p>
-    </section>
-    <section id="feed-un-news">
-      <h2>un-news</h2>
-      <p>United Nations news: the Secretary-General, the Security Council, peace, humanitarian crises, climate and human rights, from UN News.</p>
-      <p><a href="un-news.xml">XML</a> · <a href="un-news.json">JSON</a></p>
-    </section>
-    <section id="feed-us-economy">
-      <h2>us-economy</h2>
-      <p>US economic data releases from the Bureau of Economic Analysis (GDP, income and spending, trade), the Census Bureau (retail sales, housing, orders) and weekly jobless claims from the Department of Labor.</p>
-      <p><a href="us-economy.xml">XML</a> · <a href="us-economy.json">JSON</a></p>
-    </section>
-    <section id="feed-us-indicators">
-      <h2>us-indicators</h2>
-      <p>US economic indicators as they come out - inflation (CPI and core CPI, a year before), the jobs report (payrolls change, unemployment rate), weekly jobless claims, the Fed funds rate and 30-year mortgage rates - from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.</p>
-      <p><a href="us-indicators.xml">XML</a> · <a href="us-indicators.json">JSON</a></p>
-    </section>
-    <section id="feed-us-justice">
-      <h2>us-justice</h2>
-      <p>US Department of Justice press releases: indictments, convictions, sentences and settlements, from national cases to US attorneys&#x27; offices.</p>
-      <p><a href="us-justice.xml">XML</a> · <a href="us-justice.json">JSON</a></p>
-    </section>
-    <section id="feed-us-new-rules">
-      <h2>us-new-rules</h2>
-      <p>Significant new US federal rules as they are published in the Federal Register, with the agency behind each.</p>
-      <p><a href="us-new-rules.xml">XML</a> · <a href="us-new-rules.json">JSON</a></p>
-    </section>
-    <section id="feed-us-news">
-      <h2>us-news</h2>
-      <p>US politics and national news from NPR and PBS NewsHour, merged, newest first.</p>
-      <p><a href="us-news.xml">XML</a> · <a href="us-news.json">JSON</a></p>
-    </section>
-    <section id="feed-usd-rates">
-      <h2>usd-rates</h2>
-      <p>The US dollar against the baht, yen, yuan, rupee and euro once a day, from the European Central Bank&#x27;s reference rates (via the Frankfurter API).</p>
-      <p><a href="usd-rates.xml">XML</a> · <a href="usd-rates.json">JSON</a></p>
-    </section>
-    <section id="feed-volcanoes">
-      <h2>volcanoes</h2>
-      <p>The Smithsonian Global Volcanism Program&#x27;s weekly reports of volcanic activity worldwide.</p>
-      <p><a href="volcanoes.xml">XML</a> · <a href="volcanoes.json">JSON</a></p>
-    </section>
-    <section id="feed-world-bank-tenders">
-      <h2>world-bank-tenders</h2>
-      <p>New tenders in World Bank-financed projects worldwide - invitations for bids and requests for expressions of interest - with the country, what is bought and the deadline.</p>
-      <p><a href="world-bank-tenders.xml">XML</a> · <a href="world-bank-tenders.json">JSON</a></p>
-    </section>
-    <section id="feed-world-headlines">
-      <h2>world-headlines</h2>
-      <p>World headlines from BBC, NPR and Al Jazeera, merged, newest first.</p>
-      <p><a href="world-headlines.xml">XML</a> · <a href="world-headlines.json">JSON</a></p>
-    </section>
-    <section id="feed-world-leaders">
-      <h2>world-leaders</h2>
-      <p>Official announcements of the White House, the Kremlin and the European Commission, labeled by source.</p>
-      <p><a href="world-leaders.xml">XML</a> · <a href="world-leaders.json">JSON</a></p>
-    </section>
-    <p>Built with <a href="https://github.com/Fuyuki0/unlimitedpipe">UnlimitedPipe</a>.
-    Make your own: <code>pip install unlimitedpipe</code>, then <code>unlimited publish</code>.</p>
+    <div class="wrap">
+    <header class="top"><a class="brand" href="./">UnlimitedPipe feeds</a><nav><a href="https://huggingface.co/datasets/unlimitedpipe/feed-history">Dataset</a><a href="https://github.com/Fuyuki0/unlimitedpipe-feeds">Feeds on GitHub</a><a href="https://github.com/Fuyuki0/unlimitedpipe">UnlimitedPipe</a></nav></header>
+    <section class="hero">
+      <h1>UnlimitedPipe feeds</h1>
+      <p class="lede">Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source.</p>
+      <ul class="stats">
+        <li><b>89</b> feeds</li><li><b>20</b> live feeds</li>
+        <li><b id="stat-archive">…</b> records<span id="stat-since"></span></li>
+        <li>updated <b id="stat-updated">…</b></li>
+      </ul>
+      <input id="q" type="search" placeholder="Search the latest items: flood, bankruptcy, Bangkok…"
+        autocomplete="off" aria-label="Search every feed">
+      <p id="status"></p>
+      <ul id="results"></ul>
+    </section>
+    <nav class="toc" aria-label="Topics"><a href="#money-economy-and-government">Money, economy and government</a><a href="#security">Security</a><a href="#disasters-and-health">Disasters and health</a><a href="#ai">AI</a><a href="#developers">Developers</a><a href="#crypto">Crypto</a><a href="#science-and-space">Science and space</a><a href="#world-and-regions">World and regions</a><a href="#countries">Countries</a></nav>
+    <section class="group" id="money-economy-and-government">
+      <h2>Money, economy and government</h2>
+      <div class="grid">
+        <article class="card" id="feed-activist-stakes">
+          <h3>New 5%+ stakes (SEC Schedule 13D)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Investors disclosing a new stake of 5% or more in a US public company (SEC Schedule 13D) - often activists or would-be buyers - as soon as they file.</p>
+          <p class="latest" data-latest="activist-stakes"></p>
+          <footer><a class="pill" href="activist-stakes.xml">RSS</a><a class="pill" href="activist-stakes.json">JSON</a><span data-health="activist-stakes"></span></footer>
+        </article>
+        <article class="card" id="feed-business-news">
+          <h3>Business news<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Business and markets news from CNBC and MarketWatch, merged - companies, earnings, markets and the economy.</p>
+          <p class="latest" data-latest="business-news"></p>
+          <footer><a class="pill" href="business-news.xml">RSS</a><a class="pill" href="business-news.json">JSON</a><span data-health="business-news"></span></footer>
+        </article>
+        <article class="card" id="feed-central-banks">
+          <h3>Central banks (Fed, ECB, BoJ, BoE, RBI)</h3>
+          <p class="desc">Press releases of the Federal Reserve, the European Central Bank, the Bank of Japan, the Bank of England and the Reserve Bank of India, without routine market operations.</p>
+          <p class="latest" data-latest="central-banks"></p>
+          <footer><a class="pill" href="central-banks.xml">RSS</a><a class="pill" href="central-banks.json">JSON</a><span data-health="central-banks"></span></footer>
+        </article>
+        <article class="card" id="feed-court-rulings">
+          <h3>US Supreme Court and appeals court opinions</h3>
+          <p class="desc">Opinions of the US Supreme Court and the federal courts of appeals (the 1st to 11th circuits, the DC Circuit and the Federal Circuit), from CourtListener.</p>
+          <p class="latest" data-latest="court-rulings"></p>
+          <footer><a class="pill" href="court-rulings.xml">RSS</a><a class="pill" href="court-rulings.json">JSON</a><span data-health="court-rulings"></span></footer>
+        </article>
+        <article class="card" id="feed-eu-laws">
+          <h3>New EU laws (EUR-Lex)</h3>
+          <p class="desc">New EU laws as published in the Official Journal - regulations, directives and decisions - from EUR-Lex, in English.</p>
+          <p class="latest" data-latest="eu-laws"></p>
+          <footer><a class="pill" href="eu-laws.xml">RSS</a><a class="pill" href="eu-laws.json">JSON</a><span data-health="eu-laws"></span></footer>
+        </article>
+        <article class="card" id="feed-insider-trades">
+          <h3>Insider trades, $100K+ (SEC Form 4)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Insider purchases and sales worth $100K or more at US public companies, as they are filed with the SEC (Form 4) - who, their role, shares, price and total value.</p>
+          <p class="latest" data-latest="insider-trades"></p>
+          <footer><a class="pill" href="insider-trades.xml">RSS</a><a class="pill" href="insider-trades.json">JSON</a><span data-health="insider-trades"></span></footer>
+        </article>
+        <article class="card" id="feed-lobbying-big-spenders">
+          <h3>US lobbying: $1M+ reports</h3>
+          <p class="desc">US lobbying reports of $1 million or more, as they are filed with Congress - who is paying to influence Washington, and how much.</p>
+          <p class="latest" data-latest="lobbying-big-spenders"></p>
+          <footer><a class="pill" href="lobbying-big-spenders.xml">RSS</a><a class="pill" href="lobbying-big-spenders.json">JSON</a><span data-health="lobbying-big-spenders"></span></footer>
+        </article>
+        <article class="card" id="feed-market-prices">
+          <h3>Market prices: indices, yields, oil (FRED)</h3>
+          <p class="desc">Daily closes of the S&amp;P 500, Nasdaq Composite, Dow Jones, Nikkei 225 and VIX, the US 10-year Treasury yield and WTI crude oil, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.</p>
+          <p class="latest" data-latest="market-prices"></p>
+          <footer><a class="pill" href="market-prices.xml">RSS</a><a class="pill" href="market-prices.json">JSON</a><span data-health="market-prices"></span></footer>
+        </article>
+        <article class="card" id="feed-rate-decisions">
+          <h3>Central bank interest rate decisions<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Interest rate decisions of the Federal Reserve, the European Central Bank, the Bank of England, the Bank of Japan, the Bank of Canada, the Reserve Bank of Australia and the Reserve Bank of India.</p>
+          <p class="latest" data-latest="rate-decisions"></p>
+          <footer><a class="pill" href="rate-decisions.xml">RSS</a><a class="pill" href="rate-decisions.json">JSON</a><span data-health="rate-decisions"></span></footer>
+        </article>
+        <article class="card" id="feed-sanctions-actions">
+          <h3>US sanctions actions (OFAC)</h3>
+          <p class="desc">New US sanctions actions from the Treasury&#x27;s Office of Foreign Assets Control (OFAC) - designations, removals and general licenses.</p>
+          <p class="latest" data-latest="sanctions-actions"></p>
+          <footer><a class="pill" href="sanctions-actions.xml">RSS</a><a class="pill" href="sanctions-actions.json">JSON</a><span data-health="sanctions-actions"></span></footer>
+        </article>
+        <article class="card" id="feed-sec-company-events">
+          <h3>Major company events (SEC 8-K)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Major company events from SEC 8-K filings as they are filed - bankruptcies, cyberattacks, completed acquisitions, layoffs, delistings, auditor changes, restatements and changes of control.</p>
+          <p class="latest" data-latest="sec-company-events"></p>
+          <footer><a class="pill" href="sec-company-events.xml">RSS</a><a class="pill" href="sec-company-events.json">JSON</a><span data-health="sec-company-events"></span></footer>
+        </article>
+        <article class="card" id="feed-sec-enforcement">
+          <h3>SEC litigation releases</h3>
+          <p class="desc">SEC litigation releases: civil lawsuits the SEC files in federal court for fraud and other securities violations.</p>
+          <p class="latest" data-latest="sec-enforcement"></p>
+          <footer><a class="pill" href="sec-enforcement.xml">RSS</a><a class="pill" href="sec-enforcement.json">JSON</a><span data-health="sec-enforcement"></span></footer>
+        </article>
+        <article class="card" id="feed-sec-ipo-filings">
+          <h3>IPO filings (SEC S-1 and F-1)</h3>
+          <p class="desc">Companies filing to go public in the US (new SEC S-1 and F-1 registrations by companies that had filed no annual or quarterly report yet; amendments, public companies and life insurers&#x27; annuities left out), from EDGAR.</p>
+          <p class="latest" data-latest="sec-ipo-filings"></p>
+          <footer><a class="pill" href="sec-ipo-filings.xml">RSS</a><a class="pill" href="sec-ipo-filings.json">JSON</a><span data-health="sec-ipo-filings"></span></footer>
+        </article>
+        <article class="card" id="feed-sec-press-releases">
+          <h3>SEC press releases</h3>
+          <p class="desc">Press releases from the US Securities and Exchange Commission: enforcement actions, new rules, charges and settlements.</p>
+          <p class="latest" data-latest="sec-press-releases"></p>
+          <footer><a class="pill" href="sec-press-releases.xml">RSS</a><a class="pill" href="sec-press-releases.json">JSON</a><span data-health="sec-press-releases"></span></footer>
+        </article>
+        <article class="card" id="feed-uk-government">
+          <h3>UK government news (GOV.UK)</h3>
+          <p class="desc">UK government news and announcements from GOV.UK: policy, ministers, departments and public services.</p>
+          <p class="latest" data-latest="uk-government"></p>
+          <footer><a class="pill" href="uk-government.xml">RSS</a><a class="pill" href="uk-government.json">JSON</a><span data-health="uk-government"></span></footer>
+        </article>
+        <article class="card" id="feed-un-news">
+          <h3>UN News</h3>
+          <p class="desc">United Nations news: the Secretary-General, the Security Council, peace, humanitarian crises, climate and human rights, from UN News.</p>
+          <p class="latest" data-latest="un-news"></p>
+          <footer><a class="pill" href="un-news.xml">RSS</a><a class="pill" href="un-news.json">JSON</a><span data-health="un-news"></span></footer>
+        </article>
+        <article class="card" id="feed-us-economy">
+          <h3>US economic data releases</h3>
+          <p class="desc">US economic data releases from the Bureau of Economic Analysis (GDP, income and spending, trade), the Census Bureau (retail sales, housing, orders) and weekly jobless claims from the Department of Labor.</p>
+          <p class="latest" data-latest="us-economy"></p>
+          <footer><a class="pill" href="us-economy.xml">RSS</a><a class="pill" href="us-economy.json">JSON</a><span data-health="us-economy"></span></footer>
+        </article>
+        <article class="card" id="feed-us-indicators">
+          <h3>US economic indicators (FRED)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">US economic indicators as they come out - inflation (CPI and core CPI, a year before), the jobs report (payrolls change, unemployment rate), weekly jobless claims, the Fed funds rate and 30-year mortgage rates - from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.</p>
+          <p class="latest" data-latest="us-indicators"></p>
+          <footer><a class="pill" href="us-indicators.xml">RSS</a><a class="pill" href="us-indicators.json">JSON</a><span data-health="us-indicators"></span></footer>
+        </article>
+        <article class="card" id="feed-us-justice">
+          <h3>US Justice Department press releases</h3>
+          <p class="desc">US Department of Justice press releases: indictments, convictions, sentences and settlements, from national cases to US attorneys&#x27; offices.</p>
+          <p class="latest" data-latest="us-justice"></p>
+          <footer><a class="pill" href="us-justice.xml">RSS</a><a class="pill" href="us-justice.json">JSON</a><span data-health="us-justice"></span></footer>
+        </article>
+        <article class="card" id="feed-us-new-rules">
+          <h3>Significant new US federal rules</h3>
+          <p class="desc">Significant new US federal rules as they are published in the Federal Register, with the agency behind each.</p>
+          <p class="latest" data-latest="us-new-rules"></p>
+          <footer><a class="pill" href="us-new-rules.xml">RSS</a><a class="pill" href="us-new-rules.json">JSON</a><span data-health="us-new-rules"></span></footer>
+        </article>
+        <article class="card" id="feed-usd-rates">
+          <h3>US dollar exchange rates (ECB reference rates)</h3>
+          <p class="desc">The US dollar against the baht, yen, yuan, rupee and euro once a day, from the European Central Bank&#x27;s reference rates (via the Frankfurter API).</p>
+          <p class="latest" data-latest="usd-rates"></p>
+          <footer><a class="pill" href="usd-rates.xml">RSS</a><a class="pill" href="usd-rates.json">JSON</a><span data-health="usd-rates"></span></footer>
+        </article>
+        <article class="card" id="feed-world-bank-tenders">
+          <h3>World Bank project tenders</h3>
+          <p class="desc">New tenders in World Bank-financed projects worldwide - invitations for bids and requests for expressions of interest - with the country, what is bought and the deadline.</p>
+          <p class="latest" data-latest="world-bank-tenders"></p>
+          <footer><a class="pill" href="world-bank-tenders.xml">RSS</a><a class="pill" href="world-bank-tenders.json">JSON</a><span data-health="world-bank-tenders"></span></footer>
+        </article>
+        <article class="card" id="feed-world-leaders">
+          <h3>World leaders&#x27; announcements (White House, Kremlin, European Commission)</h3>
+          <p class="desc">Official announcements of the White House, the Kremlin and the European Commission, labeled by source.</p>
+          <p class="latest" data-latest="world-leaders"></p>
+          <footer><a class="pill" href="world-leaders.xml">RSS</a><a class="pill" href="world-leaders.json">JSON</a><span data-health="world-leaders"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="security">
+      <h2>Security</h2>
+      <div class="grid">
+        <article class="card" id="feed-critical-vulnerabilities">
+          <h3>Critical vulnerabilities (NVD)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">New vulnerabilities rated critical (CVSS 9 to 10) in the US National Vulnerability Database, as they are published - exploited or not yet.</p>
+          <p class="latest" data-latest="critical-vulnerabilities"></p>
+          <footer><a class="pill" href="critical-vulnerabilities.xml">RSS</a><a class="pill" href="critical-vulnerabilities.json">JSON</a><span data-health="critical-vulnerabilities"></span></footer>
+        </article>
+        <article class="card" id="feed-data-breaches">
+          <h3>Data breaches (Have I Been Pwned)</h3>
+          <p class="desc">Data breaches as they are added to Have I Been Pwned, with how many accounts and what data leaked (verified breaches only; data from haveibeenpwned.com, CC BY 4.0).</p>
+          <p class="latest" data-latest="data-breaches"></p>
+          <footer><a class="pill" href="data-breaches.xml">RSS</a><a class="pill" href="data-breaches.json">JSON</a><span data-health="data-breaches"></span></footer>
+        </article>
+        <article class="card" id="feed-exploited-vulnerabilities">
+          <h3>Newly exploited vulnerabilities (CISA KEV)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Vulnerabilities newly added to CISA&#x27;s Known Exploited Vulnerabilities catalog, the ones attackers are using now.</p>
+          <p class="latest" data-latest="exploited-vulnerabilities"></p>
+          <footer><a class="pill" href="exploited-vulnerabilities.xml">RSS</a><a class="pill" href="exploited-vulnerabilities.json">JSON</a><span data-health="exploited-vulnerabilities"></span></footer>
+        </article>
+        <article class="card" id="feed-sec-cyber-incidents">
+          <h3>Cybersecurity incidents disclosed to the SEC<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Public companies disclosing a material cybersecurity incident to the SEC (8-K Item 1.05), from EDGAR full-text search of the last 30 days.</p>
+          <p class="latest" data-latest="sec-cyber-incidents"></p>
+          <footer><a class="pill" href="sec-cyber-incidents.xml">RSS</a><a class="pill" href="sec-cyber-incidents.json">JSON</a><span data-health="sec-cyber-incidents"></span></footer>
+        </article>
+        <article class="card" id="feed-security-advisories">
+          <h3>Security advisories (CERT-EU, JPCERT/CC, Canada)</h3>
+          <p class="desc">Critical security advisories and alerts from CERT-EU, JPCERT/CC (Japan) and the Canadian Centre for Cyber Security, labeled by agency; routine vendor patch notices left out.</p>
+          <p class="latest" data-latest="security-advisories"></p>
+          <footer><a class="pill" href="security-advisories.xml">RSS</a><a class="pill" href="security-advisories.json">JSON</a><span data-health="security-advisories"></span></footer>
+        </article>
+        <article class="card" id="feed-security-news">
+          <h3>Security news<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Security news from Krebs on Security, BleepingComputer, The Hacker News and Schneier on Security, merged.</p>
+          <p class="latest" data-latest="security-news"></p>
+          <footer><a class="pill" href="security-news.xml">RSS</a><a class="pill" href="security-news.json">JSON</a><span data-health="security-news"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="disasters-and-health">
+      <h2>Disasters and health</h2>
+      <div class="grid">
+        <article class="card" id="feed-disaster-alerts">
+          <h3>Disaster alerts, orange and red (GDACS)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Orange and red alerts from GDACS, the UN and EU Global Disaster Alert and Coordination System - earthquakes, cyclones, floods, volcanoes, droughts and wildfires with a significant expected impact.</p>
+          <p class="latest" data-latest="disaster-alerts"></p>
+          <footer><a class="pill" href="disaster-alerts.xml">RSS</a><a class="pill" href="disaster-alerts.json">JSON</a><span data-health="disaster-alerts"></span></footer>
+        </article>
+        <article class="card" id="feed-disease-outbreaks">
+          <h3>Disease outbreak news (WHO)</h3>
+          <p class="desc">World Health Organization Disease Outbreak News - confirmed outbreaks of Ebola, cholera, avian flu, mpox and more, with WHO&#x27;s assessment.</p>
+          <p class="latest" data-latest="disease-outbreaks"></p>
+          <footer><a class="pill" href="disease-outbreaks.xml">RSS</a><a class="pill" href="disease-outbreaks.json">JSON</a><span data-health="disease-outbreaks"></span></footer>
+        </article>
+        <article class="card" id="feed-drug-approvals">
+          <h3>FDA novel drug approvals</h3>
+          <p class="desc">New drugs the US FDA approved for the first time (novel drug approvals), with what each is approved for.</p>
+          <p class="latest" data-latest="drug-approvals"></p>
+          <footer><a class="pill" href="drug-approvals.xml">RSS</a><a class="pill" href="drug-approvals.json">JSON</a><span data-health="drug-approvals"></span></footer>
+        </article>
+        <article class="card" id="feed-earthquakes">
+          <h3>Significant earthquakes (USGS)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Earthquakes of magnitude 4.5 and above worldwide, from the US Geological Survey.</p>
+          <p class="latest" data-latest="earthquakes"></p>
+          <footer><a class="pill" href="earthquakes.xml">RSS</a><a class="pill" href="earthquakes.json">JSON</a><span data-health="earthquakes"></span></footer>
+        </article>
+        <article class="card" id="feed-europe-health-threats">
+          <h3>ECDC: disease threats</h3>
+          <p class="desc">Communicable disease threats in Europe and worldwide from the European Centre for Disease Prevention and Control (ECDC): outbreaks, risk assessments and epidemiological updates.</p>
+          <p class="latest" data-latest="europe-health-threats"></p>
+          <footer><a class="pill" href="europe-health-threats.xml">RSS</a><a class="pill" href="europe-health-threats.json">JSON</a><span data-health="europe-health-threats"></span></footer>
+        </article>
+        <article class="card" id="feed-fda-news">
+          <h3>FDA press releases</h3>
+          <p class="desc">US Food and Drug Administration press releases: drug and device approvals, safety warnings, recalls and enforcement.</p>
+          <p class="latest" data-latest="fda-news"></p>
+          <footer><a class="pill" href="fda-news.xml">RSS</a><a class="pill" href="fda-news.json">JSON</a><span data-health="fda-news"></span></footer>
+        </article>
+        <article class="card" id="feed-fda-recalls">
+          <h3>FDA Class I recalls (food, drugs, devices)</h3>
+          <p class="desc">Class I recalls - the most serious, where a product could cause serious harm or death - of food, drugs and medical devices, from the FDA&#x27;s weekly enforcement reports (openFDA). Data, not medical advice.</p>
+          <p class="latest" data-latest="fda-recalls"></p>
+          <footer><a class="pill" href="fda-recalls.xml">RSS</a><a class="pill" href="fda-recalls.json">JSON</a><span data-health="fda-recalls"></span></footer>
+        </article>
+        <article class="card" id="feed-food-drug-recalls">
+          <h3>Food and drug recalls (FDA)</h3>
+          <p class="desc">US food, drug and medical device recalls and safety alerts from the Food and Drug Administration.</p>
+          <p class="latest" data-latest="food-drug-recalls"></p>
+          <footer><a class="pill" href="food-drug-recalls.xml">RSS</a><a class="pill" href="food-drug-recalls.json">JSON</a><span data-health="food-drug-recalls"></span></footer>
+        </article>
+        <article class="card" id="feed-hurricanes">
+          <h3>Hurricanes and tropical storms (NHC)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Hurricanes and tropical storms in the Atlantic and eastern Pacific - each new advisory summary from the US National Hurricane Center.</p>
+          <p class="latest" data-latest="hurricanes"></p>
+          <footer><a class="pill" href="hurricanes.xml">RSS</a><a class="pill" href="hurricanes.json">JSON</a><span data-health="hurricanes"></span></footer>
+        </article>
+        <article class="card" id="feed-natural-events">
+          <h3>Natural events now (NASA EONET)</h3>
+          <p class="desc">Natural events happening now, tracked by NASA EONET: wildfires, severe storms, volcanoes, floods, icebergs and more, each with the agency that reported it.</p>
+          <p class="latest" data-latest="natural-events"></p>
+          <footer><a class="pill" href="natural-events.xml">RSS</a><a class="pill" href="natural-events.json">JSON</a><span data-health="natural-events"></span></footer>
+        </article>
+        <article class="card" id="feed-travel-health-notices">
+          <h3>CDC travel health notices</h3>
+          <p class="desc">CDC travel health notices - disease outbreaks and health risks for travelers, by country, with their level from 1 (usual precautions) to 4 (avoid nonessential travel).</p>
+          <p class="latest" data-latest="travel-health-notices"></p>
+          <footer><a class="pill" href="travel-health-notices.xml">RSS</a><a class="pill" href="travel-health-notices.json">JSON</a><span data-health="travel-health-notices"></span></footer>
+        </article>
+        <article class="card" id="feed-tsunami-alerts">
+          <h3>Tsunami messages (US Tsunami Warning Centers)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Tsunami messages from the US Tsunami Warning Centers (Pacific and Alaska), from information bulletins to warnings, with the earthquake behind each.</p>
+          <p class="latest" data-latest="tsunami-alerts"></p>
+          <footer><a class="pill" href="tsunami-alerts.xml">RSS</a><a class="pill" href="tsunami-alerts.json">JSON</a><span data-health="tsunami-alerts"></span></footer>
+        </article>
+        <article class="card" id="feed-typhoons">
+          <h3>Typhoon warnings (JTWC)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Typhoon and tropical cyclone warnings for the western Pacific, Indian Ocean and southern hemisphere from the Joint Typhoon Warning Center - each new warning.</p>
+          <p class="latest" data-latest="typhoons"></p>
+          <footer><a class="pill" href="typhoons.xml">RSS</a><a class="pill" href="typhoons.json">JSON</a><span data-health="typhoons"></span></footer>
+        </article>
+        <article class="card" id="feed-volcanoes">
+          <h3>Volcanic activity (Smithsonian weekly reports)</h3>
+          <p class="desc">The Smithsonian Global Volcanism Program&#x27;s weekly reports of volcanic activity worldwide.</p>
+          <p class="latest" data-latest="volcanoes"></p>
+          <footer><a class="pill" href="volcanoes.xml">RSS</a><a class="pill" href="volcanoes.json">JSON</a><span data-health="volcanoes"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="ai">
+      <h2>AI</h2>
+      <div class="grid">
+        <article class="card" id="feed-ai-labs">
+          <h3>AI lab announcements</h3>
+          <p class="desc">Announcements from OpenAI, Google DeepMind and Hugging Face, in one feed.</p>
+          <p class="latest" data-latest="ai-labs"></p>
+          <footer><a class="pill" href="ai-labs.xml">RSS</a><a class="pill" href="ai-labs.json">JSON</a><span data-health="ai-labs"></span></footer>
+        </article>
+        <article class="card" id="feed-ai-news">
+          <h3>AI news from Hacker News and Lobsters</h3>
+          <p class="desc">AI and LLM stories from the Hacker News front page and Lobsters, matched on headlines.</p>
+          <p class="latest" data-latest="ai-news"></p>
+          <footer><a class="pill" href="ai-news.xml">RSS</a><a class="pill" href="ai-news.json">JSON</a><span data-health="ai-news"></span></footer>
+        </article>
+        <article class="card" id="feed-ai-papers">
+          <h3>Hugging Face Daily Papers</h3>
+          <p class="desc">Hugging Face Daily Papers, the AI research papers the community highlights each day.</p>
+          <p class="latest" data-latest="ai-papers"></p>
+          <footer><a class="pill" href="ai-papers.xml">RSS</a><a class="pill" href="ai-papers.json">JSON</a><span data-health="ai-papers"></span></footer>
+        </article>
+        <article class="card" id="feed-ai-releases">
+          <h3>Open-source AI tool releases</h3>
+          <p class="desc">New releases of popular open-source AI tools (Ollama, llama.cpp, vLLM, Transformers, LangChain, ComfyUI, Open WebUI), from GitHub&#x27;s API.</p>
+          <p class="latest" data-latest="ai-releases"></p>
+          <footer><a class="pill" href="ai-releases.xml">RSS</a><a class="pill" href="ai-releases.json">JSON</a><span data-health="ai-releases"></span></footer>
+        </article>
+        <article class="card" id="feed-arxiv-llm">
+          <h3>arXiv papers on language models and agents</h3>
+          <p class="desc">New arXiv papers (cs.CL, cs.AI) about language models and agents, matched on titles.</p>
+          <p class="latest" data-latest="arxiv-llm"></p>
+          <footer><a class="pill" href="arxiv-llm.xml">RSS</a><a class="pill" href="arxiv-llm.json">JSON</a><span data-health="arxiv-llm"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="developers">
+      <h2>Developers</h2>
+      <div class="grid">
+        <article class="card" id="feed-cloud-status">
+          <h3>Cloud and AI service incidents<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">New incidents at GitHub, Cloudflare, OpenAI, Anthropic (Claude), Google Cloud and AWS, from their status pages, without scheduled maintenance.</p>
+          <p class="latest" data-latest="cloud-status"></p>
+          <footer><a class="pill" href="cloud-status.xml">RSS</a><a class="pill" href="cloud-status.json">JSON</a><span data-health="cloud-status"></span></footer>
+        </article>
+        <article class="card" id="feed-dev-releases">
+          <h3>Developer tool releases</h3>
+          <p class="desc">New releases of everyday developer tools (uv, Ruff, Node.js, Deno, Bun, VS Code, Rust, TypeScript), from GitHub&#x27;s API.</p>
+          <p class="latest" data-latest="dev-releases"></p>
+          <footer><a class="pill" href="dev-releases.xml">RSS</a><a class="pill" href="dev-releases.json">JSON</a><span data-health="dev-releases"></span></footer>
+        </article>
+        <article class="card" id="feed-hn-top">
+          <h3>Hacker News (300+ points)</h3>
+          <p class="desc">Hacker News stories that reached 300 points, the biggest discussions of the day, from the official Hacker News search API.</p>
+          <p class="latest" data-latest="hn-top"></p>
+          <footer><a class="pill" href="hn-top.xml">RSS</a><a class="pill" href="hn-top.json">JSON</a><span data-health="hn-top"></span></footer>
+        </article>
+        <article class="card" id="feed-python-news">
+          <h3>Python news and PEPs</h3>
+          <p class="desc">Python release announcements (Python Insider) and new PEPs.</p>
+          <p class="latest" data-latest="python-news"></p>
+          <footer><a class="pill" href="python-news.xml">RSS</a><a class="pill" href="python-news.json">JSON</a><span data-health="python-news"></span></footer>
+        </article>
+        <article class="card" id="feed-rust-news">
+          <h3>Rust blog</h3>
+          <p class="desc">The official Rust blog.</p>
+          <p class="latest" data-latest="rust-news"></p>
+          <footer><a class="pill" href="rust-news.xml">RSS</a><a class="pill" href="rust-news.json">JSON</a><span data-health="rust-news"></span></footer>
+        </article>
+        <article class="card" id="feed-show-hn">
+          <h3>Show HN (100+ points)</h3>
+          <p class="desc">Show HN projects that reached 100 points, from the official Hacker News search API.</p>
+          <p class="latest" data-latest="show-hn"></p>
+          <footer><a class="pill" href="show-hn.xml">RSS</a><a class="pill" href="show-hn.json">JSON</a><span data-health="show-hn"></span></footer>
+        </article>
+        <article class="card" id="feed-tech-news">
+          <h3>Tech news</h3>
+          <p class="desc">Technology news from The Verge, Ars Technica and TechCrunch, merged - companies, products, AI and the internet.</p>
+          <p class="latest" data-latest="tech-news"></p>
+          <footer><a class="pill" href="tech-news.xml">RSS</a><a class="pill" href="tech-news.json">JSON</a><span data-health="tech-news"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="crypto">
+      <h2>Crypto</h2>
+      <div class="grid">
+        <article class="card" id="feed-crypto-big-moves">
+          <h3>Crypto: 10%+ moves in 24 hours (DefiLlama)</h3>
+          <p class="desc">Large cryptocurrencies (about 45 of the biggest, stablecoins left out) whose price moved 10% or more in 24 hours, once per coin per day, from DefiLlama. Data, not investment advice.</p>
+          <p class="latest" data-latest="crypto-big-moves"></p>
+          <footer><a class="pill" href="crypto-big-moves.xml">RSS</a><a class="pill" href="crypto-big-moves.json">JSON</a><span data-health="crypto-big-moves"></span></footer>
+        </article>
+        <article class="card" id="feed-crypto-hacks">
+          <h3>Crypto hacks and exploits<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Crypto hacks and exploits with the amount lost, how it happened and the chains involved, from DefiLlama&#x27;s public hacks database.</p>
+          <p class="latest" data-latest="crypto-hacks"></p>
+          <footer><a class="pill" href="crypto-hacks.xml">RSS</a><a class="pill" href="crypto-hacks.json">JSON</a><span data-health="crypto-hacks"></span></footer>
+        </article>
+        <article class="card" id="feed-crypto-news">
+          <h3>Crypto news (CoinDesk, Cointelegraph, Decrypt)</h3>
+          <p class="desc">Crypto news from CoinDesk, Cointelegraph and Decrypt, merged, newest first.</p>
+          <p class="latest" data-latest="crypto-news"></p>
+          <footer><a class="pill" href="crypto-news.xml">RSS</a><a class="pill" href="crypto-news.json">JSON</a><span data-health="crypto-news"></span></footer>
+        </article>
+        <article class="card" id="feed-crypto-prices">
+          <h3>Crypto prices, twice a day (DefiLlama)</h3>
+          <p class="desc">Prices of the largest cryptocurrencies (Bitcoin, Ethereum, XRP, BNB, Solana, Dogecoin, Tron, Cardano) twice a day, in US dollars, from DefiLlama&#x27;s open price API. Data, not investment advice.</p>
+          <p class="latest" data-latest="crypto-prices"></p>
+          <footer><a class="pill" href="crypto-prices.xml">RSS</a><a class="pill" href="crypto-prices.json">JSON</a><span data-health="crypto-prices"></span></footer>
+        </article>
+        <article class="card" id="feed-crypto-releases">
+          <h3>Blockchain client releases</h3>
+          <p class="desc">New releases of the software that runs the big networks - Bitcoin Core, Lightning (lnd), Ethereum&#x27;s Geth and Lighthouse clients, and Solana&#x27;s Agave validator - from GitHub&#x27;s API.</p>
+          <p class="latest" data-latest="crypto-releases"></p>
+          <footer><a class="pill" href="crypto-releases.xml">RSS</a><a class="pill" href="crypto-releases.json">JSON</a><span data-health="crypto-releases"></span></footer>
+        </article>
+        <article class="card" id="feed-exchange-listings">
+          <h3>New listings: Coinbase, Binance, OKX, Upbit</h3>
+          <p class="desc">New and removed trading pairs on Coinbase, Binance, OKX and Upbit, read from each exchange&#x27;s official market list. Data, not investment advice.</p>
+          <p class="latest" data-latest="exchange-listings"></p>
+          <footer><a class="pill" href="exchange-listings.xml">RSS</a><a class="pill" href="exchange-listings.json">JSON</a><span data-health="exchange-listings"></span></footer>
+        </article>
+        <article class="card" id="feed-stablecoin-supply">
+          <h3>Stablecoin supply moves (DefiLlama)</h3>
+          <p class="desc">Big daily moves in the supply of the largest stablecoins (USDT, USDC and others over $1B) - $100M or more minted or burned in a day, from DefiLlama. Data, not investment advice.</p>
+          <p class="latest" data-latest="stablecoin-supply"></p>
+          <footer><a class="pill" href="stablecoin-supply.xml">RSS</a><a class="pill" href="stablecoin-supply.json">JSON</a><span data-health="stablecoin-supply"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="science-and-space">
+      <h2>Science and space</h2>
+      <div class="grid">
+        <article class="card" id="feed-health-papers">
+          <h3>medRxiv: new health research</h3>
+          <p class="desc">New medical and health research preprints on medRxiv, across all fields (not yet peer reviewed).</p>
+          <p class="latest" data-latest="health-papers"></p>
+          <footer><a class="pill" href="health-papers.xml">RSS</a><a class="pill" href="health-papers.json">JSON</a><span data-health="health-papers"></span></footer>
+        </article>
+        <article class="card" id="feed-nasa-image">
+          <h3>NASA Image of the Day</h3>
+          <p class="desc">NASA&#x27;s Image of the Day.</p>
+          <p class="latest" data-latest="nasa-image"></p>
+          <footer><a class="pill" href="nasa-image.xml">RSS</a><a class="pill" href="nasa-image.json">JSON</a><span data-health="nasa-image"></span></footer>
+        </article>
+        <article class="card" id="feed-science-news">
+          <h3>Science news (Nature, New Scientist, ScienceDaily)</h3>
+          <p class="desc">Science news from Nature, New Scientist and ScienceDaily: discoveries, research policy and the people behind them.</p>
+          <p class="latest" data-latest="science-news"></p>
+          <footer><a class="pill" href="science-news.xml">RSS</a><a class="pill" href="science-news.json">JSON</a><span data-health="science-news"></span></footer>
+        </article>
+        <article class="card" id="feed-space-launches">
+          <h3>Rocket launches</h3>
+          <p class="desc">Rocket launches worldwide as soon as they are scheduled, from The Space Devs&#x27; Launch Library 2.</p>
+          <p class="latest" data-latest="space-launches"></p>
+          <footer><a class="pill" href="space-launches.xml">RSS</a><a class="pill" href="space-launches.json">JSON</a><span data-health="space-launches"></span></footer>
+        </article>
+        <article class="card" id="feed-space-weather">
+          <h3>Space weather: solar storms (NOAA SWPC)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Solar storms from NOAA&#x27;s Space Weather Prediction Center - geomagnetic storms (G), solar radiation storms (S) and radio blackouts (R) that can disturb power grids, GPS, radio and satellites - with the expected impacts.</p>
+          <p class="latest" data-latest="space-weather"></p>
+          <footer><a class="pill" href="space-weather.xml">RSS</a><a class="pill" href="space-weather.json">JSON</a><span data-health="space-weather"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="world-and-regions">
+      <h2>World and regions</h2>
+      <div class="grid">
+        <article class="card" id="feed-africa-news">
+          <h3>Africa news (BBC, Africanews)</h3>
+          <p class="desc">Africa news from BBC Africa and Africanews, merged, newest first.</p>
+          <p class="latest" data-latest="africa-news"></p>
+          <footer><a class="pill" href="africa-news.xml">RSS</a><a class="pill" href="africa-news.json">JSON</a><span data-health="africa-news"></span></footer>
+        </article>
+        <article class="card" id="feed-climate-news">
+          <h3>Climate and energy news</h3>
+          <p class="desc">Climate and energy stories from BBC, NPR and Al Jazeera.</p>
+          <p class="latest" data-latest="climate-news"></p>
+          <footer><a class="pill" href="climate-news.xml">RSS</a><a class="pill" href="climate-news.json">JSON</a><span data-health="climate-news"></span></footer>
+        </article>
+        <article class="card" id="feed-latin-america-news">
+          <h3>Latin America news (BBC, MercoPress)</h3>
+          <p class="desc">Latin America news from BBC Latin America and MercoPress, merged, newest first.</p>
+          <p class="latest" data-latest="latin-america-news"></p>
+          <footer><a class="pill" href="latin-america-news.xml">RSS</a><a class="pill" href="latin-america-news.json">JSON</a><span data-health="latin-america-news"></span></footer>
+        </article>
+        <article class="card" id="feed-middle-east-news">
+          <h3>Middle East news (BBC, Middle East Eye)</h3>
+          <p class="desc">Middle East news from BBC Middle East and Middle East Eye, merged, newest first.</p>
+          <p class="latest" data-latest="middle-east-news"></p>
+          <footer><a class="pill" href="middle-east-news.xml">RSS</a><a class="pill" href="middle-east-news.json">JSON</a><span data-health="middle-east-news"></span></footer>
+        </article>
+        <article class="card" id="feed-southeast-asia-news">
+          <h3>Southeast Asia news (VnExpress, Rappler, CNA, Antara)</h3>
+          <p class="desc">Southeast Asia news in English: Vietnam (VnExpress International), the Philippines (Rappler), Singapore and the region (CNA) and Indonesia (Antara), merged, newest first.</p>
+          <p class="latest" data-latest="southeast-asia-news"></p>
+          <footer><a class="pill" href="southeast-asia-news.xml">RSS</a><a class="pill" href="southeast-asia-news.json">JSON</a><span data-health="southeast-asia-news"></span></footer>
+        </article>
+        <article class="card" id="feed-travel-advisories">
+          <h3>Travel advisories (US State Department, UK FCDO)</h3>
+          <p class="desc">Travel warnings: new and updated advice for travellers from the US State Department (levels 1 to 4) and the UK Foreign Office, per country.</p>
+          <p class="latest" data-latest="travel-advisories"></p>
+          <footer><a class="pill" href="travel-advisories.xml">RSS</a><a class="pill" href="travel-advisories.json">JSON</a><span data-health="travel-advisories"></span></footer>
+        </article>
+        <article class="card" id="feed-world-headlines">
+          <h3>World headlines (BBC, NPR, Al Jazeera)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">World headlines from BBC, NPR and Al Jazeera, merged, newest first.</p>
+          <p class="latest" data-latest="world-headlines"></p>
+          <footer><a class="pill" href="world-headlines.xml">RSS</a><a class="pill" href="world-headlines.json">JSON</a><span data-health="world-headlines"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="group" id="countries">
+      <h2>Countries</h2>
+      <div class="grid">
+        <article class="card" id="feed-australia-news">
+          <h3>Australia news (ABC)</h3>
+          <p class="desc">Australia news from ABC News, the public broadcaster.</p>
+          <p class="latest" data-latest="australia-news"></p>
+          <footer><a class="pill" href="australia-news.xml">RSS</a><a class="pill" href="australia-news.json">JSON</a><span data-health="australia-news"></span></footer>
+        </article>
+        <article class="card" id="feed-bank-of-thailand">
+          <h3>Bank of Thailand press releases</h3>
+          <p class="desc">Press releases from the Bank of Thailand (ธนาคารแห่งประเทศไทย) - monetary policy, the economy, banknotes and financial rules. Its news list only appears with JavaScript, so this feed renders the page in a headless browser.</p>
+          <p class="latest" data-latest="bank-of-thailand"></p>
+          <footer><a class="pill" href="bank-of-thailand.xml">RSS</a><a class="pill" href="bank-of-thailand.json">JSON</a><span data-health="bank-of-thailand"></span></footer>
+        </article>
+        <article class="card" id="feed-china-news">
+          <h3>China news (SCMP, CGTN)</h3>
+          <p class="desc">China news in English from the South China Morning Post (Hong Kong) and CGTN (Chinese state media), labeled by outlet.</p>
+          <p class="latest" data-latest="china-news"></p>
+          <footer><a class="pill" href="china-news.xml">RSS</a><a class="pill" href="china-news.json">JSON</a><span data-health="china-news"></span></footer>
+        </article>
+        <article class="card" id="feed-europe-news">
+          <h3>Europe news (POLITICO Europe, Euronews)</h3>
+          <p class="desc">European news from POLITICO Europe and Euronews, merged, newest first.</p>
+          <p class="latest" data-latest="europe-news"></p>
+          <footer><a class="pill" href="europe-news.xml">RSS</a><a class="pill" href="europe-news.json">JSON</a><span data-health="europe-news"></span></footer>
+        </article>
+        <article class="card" id="feed-india-news">
+          <h3>India news (The Hindu, NDTV)</h3>
+          <p class="desc">India news in English from The Hindu and NDTV, merged, newest first.</p>
+          <p class="latest" data-latest="india-news"></p>
+          <footer><a class="pill" href="india-news.xml">RSS</a><a class="pill" href="india-news.json">JSON</a><span data-health="india-news"></span></footer>
+        </article>
+        <article class="card" id="feed-japan-news">
+          <h3>Japan news (Japan Times, Mainichi, Japan Today)</h3>
+          <p class="desc">Japan news in English from The Japan Times, The Mainichi and Japan Today, merged, newest first.</p>
+          <p class="latest" data-latest="japan-news"></p>
+          <footer><a class="pill" href="japan-news.xml">RSS</a><a class="pill" href="japan-news.json">JSON</a><span data-health="japan-news"></span></footer>
+        </article>
+        <article class="card" id="feed-korea-news">
+          <h3>Korea news (Yonhap)</h3>
+          <p class="desc">South Korea news in English from Yonhap, the national news agency.</p>
+          <p class="latest" data-latest="korea-news"></p>
+          <footer><a class="pill" href="korea-news.xml">RSS</a><a class="pill" href="korea-news.json">JSON</a><span data-health="korea-news"></span></footer>
+        </article>
+        <article class="card" id="feed-russia-news">
+          <h3>Russia news (TASS, Meduza, Moscow Times)</h3>
+          <p class="desc">Russia news in English from TASS (Russian state media), Meduza and The Moscow Times (independent, in exile), labeled by outlet.</p>
+          <p class="latest" data-latest="russia-news"></p>
+          <footer><a class="pill" href="russia-news.xml">RSS</a><a class="pill" href="russia-news.json">JSON</a><span data-health="russia-news"></span></footer>
+        </article>
+        <article class="card" id="feed-taiwan-news">
+          <h3>Taiwan news (Taipei Times)</h3>
+          <p class="desc">Taiwan news in English from the Taipei Times.</p>
+          <p class="latest" data-latest="taiwan-news"></p>
+          <footer><a class="pill" href="taiwan-news.xml">RSS</a><a class="pill" href="taiwan-news.json">JSON</a><span data-health="taiwan-news"></span></footer>
+        </article>
+        <article class="card" id="feed-thailand-disasters">
+          <h3>Disaster alerts for Thailand and neighbours (GDACS)</h3>
+          <p class="desc">Every GDACS disaster alert (any level) that mentions Thailand or its neighbours Myanmar, Laos, Cambodia and Malaysia - floods, storms and earthquakes.</p>
+          <p class="latest" data-latest="thailand-disasters"></p>
+          <footer><a class="pill" href="thailand-disasters.xml">RSS</a><a class="pill" href="thailand-disasters.json">JSON</a><span data-health="thailand-disasters"></span></footer>
+        </article>
+        <article class="card" id="feed-thailand-earthquakes">
+          <h3>Earthquakes around Thailand (TMD)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <p class="desc">Earthquakes in and around Thailand from the Thai Meteorological Department, with magnitude, time and location.</p>
+          <p class="latest" data-latest="thailand-earthquakes"></p>
+          <footer><a class="pill" href="thailand-earthquakes.xml">RSS</a><a class="pill" href="thailand-earthquakes.json">JSON</a><span data-health="thailand-earthquakes"></span></footer>
+        </article>
+        <article class="card" id="feed-thailand-news-th">
+          <h3>ข่าวไทย (มติชน, ประชาชาติธุรกิจ)</h3>
+          <p class="desc">ข่าวไทยจากมติชนออนไลน์และประชาชาติธุรกิจ เรียงข่าวล่าสุดก่อน (Thai-language news from Matichon and Prachachat).</p>
+          <p class="latest" data-latest="thailand-news-th"></p>
+          <footer><a class="pill" href="thailand-news-th.xml">RSS</a><a class="pill" href="thailand-news-th.json">JSON</a><span data-health="thailand-news-th"></span></footer>
+        </article>
+        <article class="card" id="feed-thailand-news">
+          <h3>Thailand news in English</h3>
+          <p class="desc">English-language Thailand news from Khaosod English, Thai Enquirer and Prachatai English.</p>
+          <p class="latest" data-latest="thailand-news"></p>
+          <footer><a class="pill" href="thailand-news.xml">RSS</a><a class="pill" href="thailand-news.json">JSON</a><span data-health="thailand-news"></span></footer>
+        </article>
+        <article class="card" id="feed-thailand-weather">
+          <h3>Thailand weather (MET Norway)</h3>
+          <p class="desc">Weather now and for the next 6 hours in Bangkok, Chiang Mai, Phuket, Pattaya, Khon Kaen and Hat Yai, twice a day (พยากรณ์อากาศ). Data from MET Norway (CC BY 4.0).</p>
+          <p class="latest" data-latest="thailand-weather"></p>
+          <footer><a class="pill" href="thailand-weather.xml">RSS</a><a class="pill" href="thailand-weather.json">JSON</a><span data-health="thailand-weather"></span></footer>
+        </article>
+        <article class="card" id="feed-us-news">
+          <h3>US news (NPR, PBS NewsHour)</h3>
+          <p class="desc">US politics and national news from NPR and PBS NewsHour, merged, newest first.</p>
+          <p class="latest" data-latest="us-news"></p>
+          <footer><a class="pill" href="us-news.xml">RSS</a><a class="pill" href="us-news.json">JSON</a><span data-health="us-news"></span></footer>
+        </article>
+      </div>
+    </section>
+    <section class="use">
+      <div><h2>Subscribe</h2><p>Every feed is RSS for any feed reader and JSON for code.
+        Each item links to the record it comes from.</p></div>
+      <div><h2>Search and ask</h2><p><code>pip install unlimitedpipe</code>, then
+        <code>unlimited search WORDS</code> or <code>unlimited ask "QUESTION"</code>, with a
+        local model and every answer cited.</p></div>
+      <div><h2>History</h2><p>Every item goes into a monthly archive,
+        <a href="archive/index.json">archive/index.json</a>, so questions about a year or a
+        month reach back. Runs every 1h (live feeds: 15m).</p></div>
+    </section>
+    <footer class="foot">Built with <a href="https://github.com/Fuyuki0/unlimitedpipe">UnlimitedPipe</a>,
+      open source: no server, no account, no tracking. Items come from public records and news,
+      each with a link to its source; nothing here is investment, legal or medical advice.</footer>
+    </div>
     <script>
       // Searches feeds.json in the browser: no server, no tracking.
       const q = document.getElementById("q"), list = document.getElementById("results"),
         status = document.getElementById("status");
-      let catalog = null;
+      let catalog = null, response = null;
       const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       // Words match at the start of a word; scripts without spaces (Thai) match anywhere.
       const word = (w) => /^[\x00-\x7f]+$/.test(w)
         ? new RegExp("(^|[^\\p{L}\\p{N}_])" + escape(w), "iu")
         : new RegExp(escape(w), "i");
+      const day = (iso) => (iso || "").slice(0, 10);
       async function load() {
-        if (!catalog) catalog = await (await fetch("feeds.json")).json();
+        if (!catalog) {
+          response = await fetch("feeds.json");
+          catalog = await response.json();
+        }
       }
+      const names = () => Object.fromEntries(catalog.feeds.map((f) => [f.name,
+        f.title || f.name.replaceAll("-", " ")]));
       function show() {
         const words = q.value.trim().split(/\s+/).filter(Boolean).map(word);
         list.replaceChildren();
@@ -500,33 +722,56 @@
           catalog.feeds.map((f) => [f.name, f.name.replaceAll("-", " ")]));
         const hits = catalog.items.filter((i) => words.every((w) => w.test(
           (i.title || "") + " " + (i.summary || "") + " " + (about[i.feed] || "")))).slice(0, 50);
-        status.textContent = hits.length ? hits.length + " result(s)" : "Nothing matches.";
+        status.textContent = hits.length ? hits.length + " result(s) among the latest items"
+          : "Nothing among the latest items matches.";
+        const title = names();
         for (const i of hits) {
           const li = document.createElement("li"), a = document.createElement("a");
           a.href = i.link || "#"; a.textContent = i.title || i.link; a.rel = "noopener";
           const meta = document.createElement("small");
-          meta.textContent = "  " + i.feed + (i.date ? " · " + i.date.slice(0, 10) : "");
+          meta.textContent = (title[i.feed] || i.feed) + (i.date ? " · " + day(i.date) : "");
           li.append(a, meta);
-          if (i.summary) {
-            const p = document.createElement("div");
-            p.className = "muted"; p.textContent = i.summary.slice(0, 200); li.append(p);
-          }
           list.append(li);
         }
       }
-      // Say which feeds are failing, and how fresh each one is.
+      // Each feed's latest item and health, how fresh the catalog is, how far back it goes.
       load().then(() => {
-        for (const f of catalog.feeds) {
-          const section = document.getElementById("feed-" + f.name), h = f.health;
-          if (!section || !h) continue;
-          const note = document.createElement("p");
-          note.className = h.status === "ok" ? "muted" : "warn";
-          const latest = h.latest ? "latest item " + h.latest.slice(0, 10) : "no items yet";
-          note.textContent = h.status === "ok" ? latest
-            : (h.status === "partial" ? "⚠ some sources failing" : "⚠ failing")
-              + " since " + h.since.slice(0, 16).replace("T", " ") + " UTC · " + latest;
-          section.append(note);
+        const seen = new Set();
+        for (const i of catalog.items) {
+          if (seen.has(i.feed)) continue;
+          seen.add(i.feed);
+          const slot = document.querySelector('[data-latest="' + i.feed + '"]');
+          if (!slot) continue;
+          const a = document.createElement("a");
+          a.href = i.link || "#"; a.textContent = i.title || i.link; a.rel = "noopener";
+          const when = document.createElement("span");
+          when.textContent = " · " + day(i.date);
+          slot.replaceChildren(a, when);
         }
+        for (const f of catalog.feeds) {
+          const note = document.querySelector('[data-health="' + f.name + '"]'), h = f.health;
+          if (!note || !h || h.status === "ok") continue;
+          note.textContent = (h.status === "partial" ? "some sources failing" : "failing")
+            + " since " + day(h.since);
+          note.classList.add("warn");
+        }
+        const modified = response && response.headers.get("last-modified");
+        const updated = document.getElementById("stat-updated");
+        if (modified && updated) {
+          const minutes = Math.max(0, Math.round((Date.now() - Date.parse(modified)) / 60000));
+          updated.textContent = minutes < 1 ? "just now" : minutes < 60 ? minutes + " min ago"
+            : Math.round(minutes / 60) + " h ago";
+        }
+        if (!catalog.archive) return;
+        return fetch(catalog.archive).then((r) => r.json()).then((index) => {
+          const total = index.months.reduce((n, m) => n + (m.items || 0), 0);
+          const months = index.months.map((m) => m.month).sort();
+          const stat = document.getElementById("stat-archive");
+          if (stat && total) {
+            stat.textContent = total.toLocaleString("en-US");
+            document.getElementById("stat-since").textContent = " since " + months[0].slice(0, 4);
+          }
+        });
       }).catch(() => {});
       q.addEventListener("input", () => load().then(show).catch(() => {
         status.textContent = "Search starts working after the next run writes feeds.json.";
