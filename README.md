@@ -2,7 +2,7 @@
 
 89 free feeds, served by GitHub Pages. 20 time-sensitive ones (disasters, security incidents,
 critical vulnerabilities, SEC filings, rate decisions, economic data, top headlines) are in an
-express lane started every 5 minutes; the rest refresh about every 3 hours.
+express lane that runs about every 2 minutes; the rest refresh every hour.
 No server, no database, no account. Each feed is one short YAML file, built with
 [UnlimitedPipe](https://github.com/Fuyuki0/unlimitedpipe).
 
