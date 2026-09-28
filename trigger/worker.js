@@ -1,4 +1,4 @@
-// Starts the feeds workflow every 5 minutes with lane "express": the time-sensitive feeds
+// Starts the feeds workflow every minute with lane "express": the time-sensitive feeds
 // every time, the rest when an hour has passed. GitHub's own schedule starts runs late, or
 // not at all when it is busy.
 //
