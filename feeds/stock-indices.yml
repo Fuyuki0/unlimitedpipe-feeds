@@ -1,0 +1,34 @@
+name: stock-indices
+description: The latest close of the S&P 500, Dow Jones, Nasdaq Composite, Nikkei 225 and VIX, as FRED shows them. Their owners (S&P Dow Jones Indices, Nasdaq, Nikkei, Cboe) do not allow republishing their history, so this feed keeps only the latest values and links to FRED for the rest. Data, not investment advice.
+group: "Money, economy and government"
+# The latest value only: never kept in the archive, and the feed files hold the last few closes.
+archive: false
+sources:
+  - type: web
+    url:
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=${DAYS_AGO_7}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=${DAYS_AGO_7}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=${DAYS_AGO_7}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NIKKEI225&cosd=${DAYS_AGO_7}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=${DAYS_AGO_7}&coed=${TODAY}"
+operators:
+  - type: select
+    fields: [date=observation_date, value=SP500|DJIA|NASDAQCOM|NIKKEI225|VIXCLS]
+  - {type: filter, expr: 'value matches "^[\\d.]+$" and value != "."'}   # "." is a day without a close
+  - type: map
+    assign:
+      - 'series=replace(source_url, "^.*[?&]id=([A-Z0-9]+).*$", "\\1")'
+      - 'name=replace(replace(replace(replace(series, "^SP500$", "S&P 500"), "^NASDAQCOM$", "Nasdaq Composite"), "^DJIA$", "Dow Jones Industrial Average"), "^NIKKEI225$", "Nikkei 225")'
+      - 'name=replace(name, "^VIXCLS$", "VIX volatility index")'
+      - 'owner=replace(replace(replace(replace(replace(series, "^SP500$", "S&P Dow Jones Indices"), "^DJIA$", "S&P Dow Jones Indices"), "^NASDAQCOM$", "Nasdaq, Inc."), "^NIKKEI225$", "Nikkei Inc."), "^VIXCLS$", "Cboe Global Markets")'
+      - 'title=name + ": " + commas(value, 2) + " on " + date'
+      - 'summary="Latest close of the " + name + " (" + date + "), © " + owner + ", as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice."'
+      - 'link="https://fred.stlouisfed.org/series/" + series'
+      - 'published_at=date + "T21:00:00Z"'
+      - 'day=series + " " + date'
+  - {type: select, fields: [title, summary, link, published_at, day]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: day, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/stock-indices.xml, title: "Stock indices, latest close (via FRED)", max_items: 10}
+  - {type: feed, path: ../public/stock-indices.json, title: "Stock indices, latest close (via FRED)", max_items: 10}
