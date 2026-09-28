@@ -2,12 +2,105 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US lobbying: $1M+ reports",
   "home_page_url": "https://lda.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.19",
+  "description": "Events collected by UnlimitedPipe 0.10.25",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.19"
+    "generator": "UnlimitedPipe 0.10.25"
   },
   "items": [
+    {
+      "id": "c9a8ef5a7c322ac64065",
+      "title": "Eastman Chemical Company: $1.1M on lobbying, 2nd Quarter 2025",
+      "content_text": "2nd Quarter - Amendment filed by Eastman Chemical Company.",
+      "date_published": "2026-09-28T19:10:49Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c9a8ef5a7c322ac64065",
+          "source": "web",
+          "type": "change",
+          "key": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25#1eb7df47-bc88-4c29-aaf3-b4511399ddc4",
+          "source_url": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25",
+          "timestamp": null,
+          "observed_at": "2026-09-28T20:00:32Z",
+          "data": {
+            "change": "added",
+            "label": "Eastman Chemical Company: $1.1M on lobbying, 2nd Quarter 2025",
+            "item_type": "record",
+            "summary": "added: Eastman Chemical Company: $1.1M on lobbying, 2nd Quarter 2025",
+            "after": {
+              "client": "Eastman Chemical Company",
+              "registrant": "EASTMAN CHEMICAL COMPANY",
+              "amount": "1096000.00",
+              "period": "2nd Quarter (Apr 1 - June 30)",
+              "year": 2025,
+              "kind": "2nd Quarter - Amendment",
+              "link": "https://lda.gov/filings/public/filing/1eb7df47-bc88-4c29-aaf3-b4511399ddc4/print/",
+              "published_at": "2026-09-28T15:10:49-04:00",
+              "filing_uuid": "1eb7df47-bc88-4c29-aaf3-b4511399ddc4",
+              "title": "Eastman Chemical Company: $1.1M on lobbying, 2nd Quarter 2025",
+              "summary": "2nd Quarter - Amendment filed by Eastman Chemical Company."
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://lda.gov/api/v1/filings/?ordering=-dt_posted&filing_amount_reported_min=1000000&filing_dt_posted_after=2026-09-14&filing_dt_posted_before=2026-09-29&page_size=25",
+            "content_type": "application/json",
+            "elapsed_ms": 886,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.25"
+            },
+            {
+              "step": "select",
+              "version": "0.10.25",
+              "args": {
+                "fields": [
+                  "client=client.name",
+                  "registrant=registrant.name",
+                  "amount=income|expenses",
+                  "period=filing_period_display",
+                  "year=filing_year",
+                  "kind=filing_type_display",
+                  "link=filing_document_url",
+                  "published_at=dt_posted",
+                  "filing_uuid"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.25",
+              "args": {
+                "assign": [
+                  "client=readable(client)",
+                  "title=client + \": $\" + short(amount) + \" on lobbying, \" + replace(period, \" \\\\(.*\\\\)$\", \"\") + \" \" + year",
+                  "summary=kind + \" filed by \" + readable(registrant) + \".\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.25",
+              "args": {
+                "key": "filing_uuid",
+                "namespace": "lobbying-big-spenders",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://lda.gov/filings/public/filing/1eb7df47-bc88-4c29-aaf3-b4511399ddc4/print/"
+    },
     {
       "id": "74938d6c5d87d3d0b19c",
       "title": "Friends Committee on National Legislation: $1M on lobbying, 1st Quarter 2026",

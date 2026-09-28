@@ -2,12 +2,118 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Travel advisories (US State Department, UK FCDO)",
   "home_page_url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-  "description": "Events collected by UnlimitedPipe 0.10.21",
+  "description": "Events collected by UnlimitedPipe 0.10.25",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.21"
+    "generator": "UnlimitedPipe 0.10.25"
   },
   "items": [
+    {
+      "id": "e790c557013f7cc3487c",
+      "title": "UK travel advice for Mexico",
+      "content_text": "Hurricane Polo will impact Baja California Sur on 28 September and is forecast to continue into Sinaloa and Sonora states.",
+      "date_published": "2026-09-28T19:33:06Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e790c557013f7cc3487c",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.gov.uk/foreign-travel-advice.atom#UK travel advice for Mexico 2026-09-28T19:33:06Z",
+          "source_url": "https://www.gov.uk/foreign-travel-advice.atom",
+          "timestamp": null,
+          "observed_at": "2026-09-28T20:01:47Z",
+          "data": {
+            "change": "added",
+            "label": "UK travel advice for Mexico",
+            "item_type": "entry",
+            "summary": "added: UK travel advice for Mexico",
+            "after": {
+              "title": "UK travel advice for Mexico",
+              "link": "https://www.gov.uk/foreign-travel-advice/mexico",
+              "id": "https://www.gov.uk/foreign-travel-advice/mexico#2026-09-28T20:33:06+01:00",
+              "author": null,
+              "published_at": "2026-09-28T19:33:06Z",
+              "updated_at": "2026-09-28T19:33:06Z",
+              "summary": "Hurricane Polo will impact Baja California Sur on 28 September and is forecast to continue into Sinaloa and Sonora states.",
+              "categories": [],
+              "feed": {
+                "title": "Travel Advice Summary",
+                "url": "https://www.gov.uk/foreign-travel-advice",
+                "feed_url": "https://www.gov.uk/foreign-travel-advice.atom"
+              },
+              "issuer": "UK",
+              "version": "UK travel advice for Mexico 2026-09-28T19:33:06Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.gov.uk/foreign-travel-advice.atom",
+            "elapsed_ms": 51,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.25"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.25",
+              "args": {
+                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.25",
+              "args": {
+                "assign": [
+                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
+                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
+                  "title=issuer + \" travel advice for \" + title",
+                  "version=title + \" \" + published_at"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.25",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.25",
+              "args": {
+                "by": [
+                  "version"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.25",
+              "args": {
+                "key": "version",
+                "namespace": "travel-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.gov.uk/foreign-travel-advice/mexico"
+    },
     {
       "id": "e7b74e232d1a4dc14d2f",
       "title": "US travel advice for North Macedonia: Level 1: Exercise Normal Precautions",
@@ -11363,121 +11469,6 @@
       "tags": [
         "Level 1: Exercise Normal Precautions",
         "IC",
-        "advisory"
-      ]
-    },
-    {
-      "id": "19fe8e3e7984bc98817a",
-      "title": "US travel advice for Burkina Faso: Level 4: Do Not Travel",
-      "content_text": "Do not travel to Burkina Faso for any reason due to crime , kidnapping , terrorism , and health .\nDo not travel to Burkina Faso for any reason.\nU.S. government employee travel restrictions\nU.S. government employees working in Burkina Faso are not allowed to travel outside of Ouagadougou due to safety risks. Personnel are discouraged from nighttime travel to the Balkiui and Rayongo (also known as Dayongo) neighborhoods of Ouagadougou’s Arrondissement 11.\nAmericans in Burkina Faso are strongly…",
-      "date_published": "2026-05-04T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "19fe8e3e7984bc98817a",
-          "source": "rss",
-          "type": "change",
-          "key": "https://travel.state.gov/_res/rss/TAsTWs.xml#US travel advice for Burkina Faso: Level 4: Do Not Travel 2026-05-04T00:00:00Z",
-          "source_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-28T03:49:47Z",
-          "data": {
-            "change": "added",
-            "label": "US travel advice for Burkina Faso: Level 4: Do Not Travel",
-            "item_type": "entry",
-            "summary": "added: US travel advice for Burkina Faso: Level 4: Do Not Travel",
-            "after": {
-              "title": "US travel advice for Burkina Faso: Level 4: Do Not Travel",
-              "link": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.bfa.html",
-              "id": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.bfa.html",
-              "author": null,
-              "published_at": "2026-05-04T00:00:00Z",
-              "updated_at": "2026-05-04T00:00:00Z",
-              "summary": "Do not travel to Burkina Faso for any reason due to crime , kidnapping , terrorism , and health .\nDo not travel to Burkina Faso for any reason.\nU.S. government employee travel restrictions\nU.S. government employees working in Burkina Faso are not allowed to travel outside of Ouagadougou due to safety risks. Personnel are discouraged from nighttime travel to the Balkiui and Rayongo (also known as Dayongo) neighborhoods of Ouagadougou’s Arrondissement 11.\nAmericans in Burkina Faso are strongly advised to take the same precautions.\nCrime\nState of Emergency\nViolent crime is common throughout Burkina Faso. Crimes include kidnapping, assault, armed robbery, home invasion, and carjacking especially during local holidays and seasonal events.\nRoadblocks, including those set up by armed groups, occur throughout the country. In urban areas, police checkpoints may also be present, particularly at night. In addition, highways across the country are frequently the scene of attacks on government, civilian, and commercial targets.\nLocal authorities may not recognize travelers with dual nationality. Your U.S. nationality may not be recognized if you are also a national of Burkina Faso. Review our information on Dual Nationality.\nThe Government of Burkina Faso has declared a state of emergency in the following territories:\nThe entire Sahel and East regions\nThe provinces of Kossi and Sourou (Boucle de Mouhoun region)\nThe province of Kenedougou (Hauts Bassins region)\nThe province of Loroum (North region)\nThe province of Koulpelogo (Center-East region)\nKidnapping\nThe threat of kidnapping of Westerners by criminal or terrorist groups remains high throughout the region in Burkina Faso. This includes Ouagadougou and especially in the Sahel and East Regions. Extortion and kidnapping for ransom are big sources of financing for terrorist and criminal groups.\nTerrorism\nThere is risk of terrorist violence, including terrorist attacks and other activity in Burkina Faso. Visit the U.S. Department",
-              "categories": [
-                "Level 4: Do Not Travel",
-                "UV",
-                "advisory"
-              ],
-              "feed": {
-                "title": "travel.state.gov: Travel Advisories",
-                "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-                "feed_url": "https://travel.state.gov/_res/rss/TAsTWs.xml"
-              },
-              "issuer": "US",
-              "version": "US travel advice for Burkina Faso: Level 4: Do Not Travel 2026-05-04T00:00:00Z"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-            "elapsed_ms": 154,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.12"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.12",
-              "args": {
-                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.12",
-              "args": {
-                "assign": [
-                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
-                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
-                  "title=issuer + \" travel advice for \" + title",
-                  "version=title + \" \" + published_at"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "version"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.12",
-              "args": {
-                "key": "version",
-                "namespace": "travel-advisories",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.bfa.html",
-      "tags": [
-        "Level 4: Do Not Travel",
-        "UV",
         "advisory"
       ]
     }
