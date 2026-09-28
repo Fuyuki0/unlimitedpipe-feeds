@@ -1,13 +1,129 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Market prices: indices, yields, oil (FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NIKKEI225&cosd=2026-09-18&coed=2026-09-28",
-  "description": "Events collected by UnlimitedPipe 0.10.16",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-18&coed=2026-09-28",
+  "description": "Events collected by UnlimitedPipe 0.10.28",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.16"
+    "generator": "UnlimitedPipe 0.10.28"
   },
   "items": [
+    {
+      "id": "1c76f326a91397bd6283",
+      "title": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-25T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1c76f326a91397bd6283",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-18&coed=2026-09-28#DGS10 2026-09-25",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-18&coed=2026-09-28",
+          "timestamp": null,
+          "observed_at": "2026-09-28T20:58:11Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.17% on 2026-09-25",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-25T21:00:00Z",
+              "day": "DGS10 2026-09-25"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-18&coed=2026-09-28",
+            "content_type": "application/csv",
+            "elapsed_ms": 342,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.28"
+            },
+            {
+              "step": "select",
+              "version": "0.10.28",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=SP500|NASDAQCOM|DJIA|NIKKEI225|VIXCLS|DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.28",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.28",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
+                  "name=replace(replace(replace(name, \"^VIXCLS$\", \"VIX volatility index\"), \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^[A-Z0-9]+$\", commas(value, 2))",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.28",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.28",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.28",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
     {
       "id": "590b886b18d86163eb9a",
       "title": "Nikkei 225: 65,877.62 on 2026-09-28",
@@ -11491,122 +11607,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/NASDAQCOM"
-    },
-    {
-      "id": "e27c619d8512a2f3b624",
-      "title": "Dow Jones Industrial Average: 51,682.64 on 2026-09-18",
-      "content_text": "Close of the Dow Jones Industrial Average on 2026-09-18, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-09-18T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "e27c619d8512a2f3b624",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2026-09-17#DJIA 2026-09-18",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2026-09-17",
-          "timestamp": null,
-          "observed_at": "2026-09-27T13:29:47Z",
-          "data": {
-            "change": "added",
-            "label": "Dow Jones Industrial Average: 51,682.64 on 2026-09-18",
-            "item_type": "record",
-            "summary": "added: Dow Jones Industrial Average: 51,682.64 on 2026-09-18",
-            "after": {
-              "title": "Dow Jones Industrial Average: 51,682.64 on 2026-09-18",
-              "summary": "Close of the Dow Jones Industrial Average on 2026-09-18, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DJIA",
-              "published_at": "2026-09-18T21:00:00Z",
-              "day": "DJIA 2026-09-18"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2026-09-17",
-            "content_type": "application/csv",
-            "elapsed_ms": 247,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.5"
-            },
-            {
-              "step": "select",
-              "version": "0.10.5",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=SP500|NASDAQCOM|DJIA|NIKKEI225|VIXCLS|DGS10|DCOILWTICO"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.5",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.5",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
-                  "name=replace(replace(replace(name, \"^VIXCLS$\", \"VIX volatility index\"), \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
-                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^[A-Z0-9]+$\", commas(value, 2))",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.5",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.5",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.5",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DJIA"
     }
   ]
 }
