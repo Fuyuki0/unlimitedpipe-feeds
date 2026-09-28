@@ -17,20 +17,10 @@ sources:
       - https://www.courtlistener.com/feed/court/ca9/
       - https://www.courtlistener.com/feed/court/ca10/
       - https://www.courtlistener.com/feed/court/ca11/
-  # The Supreme Court's opinions by date too, so the feed can be backfilled (the RSS lists
-  # hold only the latest); an opinion in both is kept once.
-  - type: web
-    url: "https://www.courtlistener.com/api/rest/v4/search/?type=o&court=scotus&filed_after=${DAYS_AGO_14}&filed_before=${TODAY}&order_by=dateFiled+desc"
-    records: results
-    next_page: next   # 20 a page
-    pages: 10
 operators:
   - type: map
     assign:
-      - 'title=default(title, caseName)'
-      - 'link=default(link, "https://www.courtlistener.com" + absolute_url)'
-      - 'published_at=default(published_at, dateFiled)'
-      - 'court=replace(replace(source_url, "^.*[?&]court=([a-z0-9]+).*$", "\\1"), "^.*/court/([a-z0-9]+)/?$", "\\1")'
+      - 'court=replace(source_url, "^.*/court/([a-z0-9]+)/?$", "\\1")'
       - 'court=replace(replace(replace(replace(court, "^scotus$", "Supreme Court"), "^cadc$", "DC Circuit"), "^cafc$", "Federal Circuit"), "^ca(\\d+)$", "\\1th Circuit")'
       - 'court=replace(replace(replace(court, "^1th", "1st"), "^2th", "2nd"), "^3th", "3rd")'
       - 'court=replace(court, "^11st", "11th")'
