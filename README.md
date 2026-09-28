@@ -1,6 +1,6 @@
 # UnlimitedPipe feeds
 
-88 free feeds, served by GitHub Pages. 20 time-sensitive ones (disasters, security incidents,
+89 free feeds, served by GitHub Pages. 20 time-sensitive ones (disasters, security incidents,
 critical vulnerabilities, SEC filings, rate decisions, economic data, top headlines) are in an
 express lane started every 5 minutes; the rest refresh about every 3 hours.
 No server, no database, no account. Each feed is one short YAML file, built with
@@ -140,6 +140,7 @@ Each feed labels items by outlet; state media is marked as such.
 | [disease-outbreaks](https://feeds.daemonfill.dev/disease-outbreaks.xml) | WHO Disease Outbreak News: Ebola, cholera, avian flu, mpox and more |
 | [travel-health-notices](https://feeds.daemonfill.dev/travel-health-notices.xml) | CDC travel health notices: outbreaks and health risks for travelers by country, levels 1 to 4 |
 | [food-drug-recalls](https://feeds.daemonfill.dev/food-drug-recalls.xml) | US food, drug and medical device recalls (FDA) |
+| [fda-recalls](https://feeds.daemonfill.dev/fda-recalls.xml) | Class I recalls of food, drugs and medical devices, the most serious, from the FDA's enforcement reports (history since 2012) |
 | [drug-approvals](https://feeds.daemonfill.dev/drug-approvals.xml) | New drugs the FDA approved for the first time, with what each is approved for |
 | [europe-health-threats](https://feeds.daemonfill.dev/europe-health-threats.xml) | Disease threats and outbreak assessments from the European CDC (ECDC) |
 | [fda-news](https://feeds.daemonfill.dev/fda-news.xml) | FDA press releases: approvals, safety warnings, enforcement |

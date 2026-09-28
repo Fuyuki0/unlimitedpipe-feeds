@@ -1,0 +1,26 @@
+name: fda-recalls
+description: Class I recalls - the most serious, where a product could cause serious harm or death - of food, drugs and medical devices, from the FDA's weekly enforcement reports (openFDA). Data, not medical advice.
+sources:
+  - type: web
+    url:
+      - "https://api.fda.gov/food/enforcement.json?search=report_date:[${DAYS_AGO_21}+TO+${TODAY}]+AND+classification:%22Class+I%22&limit=1000"
+      - "https://api.fda.gov/drug/enforcement.json?search=report_date:[${DAYS_AGO_21}+TO+${TODAY}]+AND+classification:%22Class+I%22&limit=1000"
+      - "https://api.fda.gov/device/enforcement.json?search=report_date:[${DAYS_AGO_21}+TO+${TODAY}]+AND+classification:%22Class+I%22&limit=1000"
+    records: results
+operators:
+  - type: map
+    assign:
+      - 'kind=replace(source_url, "^https://api\\.fda\\.gov/(food|drug|device)/.*$", "\\1")'
+      - 'firm=replace(trim(recalling_firm), "\\s*(,?\\s*(Inc|LLC|Corp|Co|Ltd)\\.?|dba)$", "")'
+      - 'product=replace(replace(trim(product_description), "\\s+", " "), "^(.{0,70}[^ ,;]*).*$", "\\1")'
+      - 'reason=replace(replace(replace(trim(reason_for_recall), "\\s+", " "), "^(.{0,90}[^ ,;]*).*$", "\\1"), "[.;,:]+$", "")'
+      - 'title=firm + " recalls " + product + ": " + lower(reason) + " (Class I, " + kind + ")"'
+      - 'summary=replace(trim(reason_for_recall), "\\s+", " ") + " Product: " + replace(trim(product_description), "\\s+", " ") + " Status: " + status + "."'
+      - 'published_at=replace(report_date, "^(\\d{4})(\\d\\d)(\\d\\d)$", "\\1-\\2-\\3")'
+      - 'link="https://api.fda.gov/" + kind + "/enforcement.json?search=recall_number:%22" + recall_number + "%22"'
+  - {type: select, fields: [title, summary, link, published_at, recall_number]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: recall_number, only: [added], emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/fda-recalls.xml, title: "FDA Class I recalls (food, drugs, devices)", link: "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"}
+  - {type: feed, path: ../public/fda-recalls.json, title: "FDA Class I recalls (food, drugs, devices)", link: "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"}
