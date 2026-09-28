@@ -2,12 +2,98 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Earthquakes around Thailand (TMD)",
   "home_page_url": "https://earthquake.tmd.go.th/",
-  "description": "Events collected by UnlimitedPipe 0.10.16",
+  "description": "Events collected by UnlimitedPipe 0.10.19",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.16"
+    "generator": "UnlimitedPipe 0.10.19"
   },
   "items": [
+    {
+      "id": "aeed5ec1fcdd9baed3a7",
+      "title": "M4.4 earthquake in Northern Sumatra, Indonesia",
+      "content_text": "At 2026-09-28 21:43:14 Thai time (UTC+7), latitude 5.418, longitude 94.768, magnitude 4.4",
+      "date_published": "2026-09-28T14:59:58Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "aeed5ec1fcdd9baed3a7",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17142",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-28T15:01:30Z",
+          "data": {
+            "change": "added",
+            "label": "M4.4 earthquake in Northern Sumatra, Indonesia",
+            "item_type": "entry",
+            "summary": "added: M4.4 earthquake in Northern Sumatra, Indonesia",
+            "after": {
+              "title": "M4.4 earthquake in Northern Sumatra, Indonesia",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17142",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17142",
+              "author": null,
+              "published_at": "2026-09-28T14:59:58Z",
+              "updated_at": "2026-09-28T14:59:58Z",
+              "summary": "At 2026-09-28 21:43:14 Thai time (UTC+7), latitude 5.418, longitude 94.768, magnitude 4.4",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "4.4",
+              "place": "Northern Sumatra, Indonesia"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1459,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.19"
+            },
+            {
+              "step": "map",
+              "version": "0.10.19",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.19",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.19",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17142"
+    },
     {
       "id": "2987f55ec07af92536af",
       "title": "M2.7 earthquake in Vietnam",
