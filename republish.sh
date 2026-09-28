@@ -4,7 +4,7 @@
 set -eu
 cd "$(dirname "$0")"
 express="earthquakes tsunami-alerts disaster-alerts hurricanes typhoons space-weather
-  thailand-earthquakes exploited-vulnerabilities critical-vulnerabilities security-news cloud-status crypto-hacks
+  thailand-earthquakes exploited-vulnerabilities security-news cloud-status crypto-hacks
   sec-cyber-incidents activist-stakes sec-company-events insider-trades rate-decisions
   world-headlines business-news us-indicators"
 flags=""
@@ -19,5 +19,6 @@ unlimited publish feeds/*.yml --force --install "unlimitedpipe==$version" $flags
   --link "Dataset=https://huggingface.co/datasets/unlimitedpipe/feed-history" \
   --link "Feeds on GitHub=https://github.com/Fuyuki0/unlimitedpipe-feeds" \
   --link "UnlimitedPipe=https://github.com/Fuyuki0/unlimitedpipe" \
+  --live "https://daemonfill.dev/live/feeds.json" \
   --about "Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source."
 echo "Now commit .github/workflows/unlimitedpipe-feeds.yml, public/index.html and public/feeds.json."

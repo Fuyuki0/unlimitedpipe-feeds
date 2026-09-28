@@ -96,7 +96,7 @@
       <h1>UnlimitedPipe feeds</h1>
       <p class="lede">Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source.</p>
       <ul class="stats">
-        <li><b>89</b> feeds</li><li><b>20</b> live feeds</li>
+        <li><b>89</b> feeds</li><li><b>19</b> live feeds</li>
         <li><b id="stat-archive">…</b> records<span id="stat-since"></span></li>
         <li>updated <b id="stat-updated">…</b></li>
       </ul>
@@ -254,7 +254,7 @@
       <h2>Security</h2>
       <div class="grid">
         <article class="card" id="feed-critical-vulnerabilities">
-          <h3>Critical vulnerabilities (NVD)<span class="live" title="Refreshed in the express lane">Live</span></h3>
+          <h3>Critical vulnerabilities (NVD)</h3>
           <p class="desc">New vulnerabilities rated critical (CVSS 9 to 10) in the US National Vulnerability Database, as they are published - exploited or not yet.</p>
           <p class="latest" data-latest="critical-vulnerabilities"></p>
           <footer><a class="pill" href="critical-vulnerabilities.xml">RSS</a><a class="pill" href="critical-vulnerabilities.json">JSON</a><span data-health="critical-vulnerabilities"></span></footer>
@@ -718,7 +718,21 @@
         if (!catalog) {
           response = await fetch("feeds.json", FRESH);
           catalog = await response.json();
+          if (catalog.live) await withLive();
         }
+      }
+      // A live copy of the time-sensitive feeds, polled every minute on a server: its newer
+      // items are merged in when it answers within 3 seconds.
+      async function withLive() {
+        try {
+          const live = await fetch(catalog.live,
+            { cache: "no-cache", signal: AbortSignal.timeout(3000) }).then((r) => r.json());
+          const key = (i) => i.feed + "\n" + i.link + "\n" + (i.title || "").toLowerCase();
+          const seen = new Set(catalog.items.map(key));
+          const newer = (live.items || []).filter((i) => !seen.has(key(i)));
+          catalog.items = newer.concat(catalog.items)
+            .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+        } catch (e) { /* the catalog as GitHub serves it */ }
       }
       const names = () => Object.fromEntries(catalog.feeds.map((f) => [f.name,
         f.title || f.name.replaceAll("-", " ")]));
