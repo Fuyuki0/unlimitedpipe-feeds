@@ -20,7 +20,9 @@ operators:
       - 'exchange=replace(replace(replace(replace(exchange, "^coinbase$", "Coinbase"), "^binance$", "Binance"), "^okx$", "OKX"), "^upbit$", "Upbit")'
       - 'title=exchange + " lists " + name + " (" + pair + ")"'
       - "published_at=date(listed_at)"
-  - {type: diff, key: pair, only: [added, removed]}   # the first run only records what is listed today
+  - {type: map, assign: ['listing=exchange + " " + pair']}   # BTC-USD is on Coinbase and OKX both
+  # The first run only records what is listed today; a state of its own since the key changed.
+  - {type: diff, key: listing, only: [added, removed], namespace: exchange-listings-by-exchange}
 outputs:
   - {type: feed, path: ../public/exchange-listings.xml, title: "New listings: Coinbase, Binance, OKX, Upbit"}
   - {type: feed, path: ../public/exchange-listings.json, title: "New listings: Coinbase, Binance, OKX, Upbit"}
