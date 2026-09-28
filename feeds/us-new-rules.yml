@@ -7,9 +7,9 @@ sources:
 operators:
   - type: map
     assign:
-      - 'title=agencies.0.name + ": " + title'
+      - 'summary=default(abstract, title)'
+      - 'title=agencies.0.name + ": " + replace(title, "^(.{140}[^ ,;]*)[ ,;].+$", "\\1…")'
       - "link=html_url"
-      - "summary=abstract"
       - "published_at=publication_date"
     drop: [excerpts, pdf_url, public_inspection_pdf_url]
   - {type: diff, key: document_number, only: [added], emit_initial: true}

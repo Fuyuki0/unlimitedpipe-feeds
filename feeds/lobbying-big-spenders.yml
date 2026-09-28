@@ -11,8 +11,9 @@ operators:
     fields: [client=client.name, registrant=registrant.name, amount=income|expenses, period=filing_period_display, year=filing_year, kind=filing_type_display, link=filing_document_url, published_at=dt_posted, filing_uuid]
   - type: map
     assign:
+      - 'client=readable(client)'
       - 'title=client + ": $" + short(amount) + " on lobbying, " + replace(period, " \\(.*\\)$", "") + " " + year'
-      - 'summary=kind + " filed by " + registrant + "."'
+      - 'summary=kind + " filed by " + readable(registrant) + "."'
   - {type: diff, key: filing_uuid, only: [added], emit_initial: true, remember: true}
 outputs:
   - {type: feed, path: ../public/lobbying-big-spenders.xml, title: "US lobbying: $1M+ reports", link: "https://lda.gov/"}

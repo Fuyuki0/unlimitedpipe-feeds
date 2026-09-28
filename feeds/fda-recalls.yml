@@ -12,9 +12,9 @@ operators:
   - type: map
     assign:
       - 'kind=replace(source_url, "^https://api\\.fda\\.gov/(food|drug|device)/.*$", "\\1")'
-      - 'firm=replace(trim(recalling_firm), "\\s*(,?\\s*(Inc|LLC|Corp|Co|Ltd)\\.?|dba)$", "")'
-      - 'product=replace(replace(trim(product_description), "\\s+", " "), "^(.{0,70}[^ ,;]*).*$", "\\1")'
-      - 'reason=replace(replace(replace(trim(reason_for_recall), "\\s+", " "), "^(.{0,90}[^ ,;]*).*$", "\\1"), "[.;,:]+$", "")'
+      - 'firm=readable(replace(trim(recalling_firm), "\\s*(,?\\s*(Inc|LLC|Corp|Co|Ltd)\\.?|dba)$", ""))'
+      - 'product=replace(replace(trim(product_description), "\\s+", " "), "^(.{0,45}[^ ,;]*).*$", "\\1")'
+      - 'reason=replace(replace(replace(trim(reason_for_recall), "\\s+", " "), "^(.{0,60}[^ ,;]*).*$", "\\1"), "[.;,:]+$", "")'
       - 'title=firm + " recalls " + product + ": " + lower(reason) + " (Class I, " + kind + ")"'
       - 'summary=replace(trim(reason_for_recall), "\\s+", " ") + " Product: " + replace(trim(product_description), "\\s+", " ") + " Status: " + status + "."'
       - 'published_at=replace(report_date, "^(\\d{4})(\\d\\d)(\\d\\d)$", "\\1-\\2-\\3")'
