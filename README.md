@@ -191,16 +191,25 @@ explains how, in four steps.
 
 Every run also appends new items to a monthly archive (`archive/2026-09.jsonl`), so you can
 search further back than the latest items. The archive also holds history filled in from the
-sources themselves with `unlimited backfill`, about 157,000 items:
+sources themselves with `unlimited backfill`, about 300,000 items:
 
 | Feed | History from |
 | --- | --- |
-| us-indicators (inflation, jobs, unemployment, claims, Fed rate, mortgages), us-new-rules, disease-outbreaks | 2000 |
-| earthquakes (M4.5+), critical-vulnerabilities, market-prices, sec-ipo-filings | 2015-2016 |
+| us-indicators (inflation, jobs, unemployment, claims, Fed rate, mortgages), us-new-rules | 2000 |
+| disease-outbreaks (WHO) | 2004 |
+| fda-recalls (Class I) | 2012 |
+| activist-stakes, lobbying-big-spenders, sec-ipo-filings | 2015 |
+| earthquakes (M4.5+), critical-vulnerabilities, market-prices | 2016 |
+| sec-company-events | 2018 |
+| court-rulings (Supreme Court, with each holding) | 2017 term |
 | exploited-vulnerabilities | 2021 (the catalog's start) |
 | drug-approvals | 2022 |
 | sec-cyber-incidents | December 2023 (the rule's start) |
+| insider-trades ($100K+ buys and sales) | April 2024 (the SEC's quarterly data sets) |
 | data-breaches, crypto-hacks | their whole lists |
+
+The public part of it, with insider trades back to 2006, is also a dataset:
+[unlimitedpipe/feed-history](https://huggingface.co/datasets/unlimitedpipe/feed-history).
 
 A question that names a year or a month reads it by itself:
 `unlimited ask "strongest earthquake in Japan in 2024?"`, `unlimited search sanctions --since 2026-08`.
