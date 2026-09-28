@@ -2,12 +2,103 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Hurricanes and tropical storms (NHC)",
   "home_page_url": "https://www.nhc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.8",
+  "description": "Events collected by UnlimitedPipe 0.10.9",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.8"
+    "generator": "UnlimitedPipe 0.10.9"
   },
   "items": [
+    {
+      "id": "2c4f3903442656c55272",
+      "title": "Hurricane Nolo (EP2), advisory 28/0231Z",
+      "content_text": "NOLO STRENGTHENS INTO A CATEGORY 4 HURRICANE. As of 5:00 PM HST Sun Sep 27 the center of Nolo was located near 16.3, -160.3 with movement WNW at 12 mph. The minimum central pressure was 939 mb with maximum sustained winds of about 145 mph.",
+      "date_published": "2026-09-28T02:31:08Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2c4f3903442656c55272",
+          "source": "rss",
+          "type": "change",
+          "key": "summary-ep172026-202609280231",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-28T02:31:39Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane Nolo (EP2), advisory 28/0231Z",
+            "item_type": "entry",
+            "summary": "added: Hurricane Nolo (EP2), advisory 28/0231Z",
+            "after": {
+              "title": "Hurricane Nolo (EP2), advisory 28/0231Z",
+              "link": "https://www.nhc.noaa.gov",
+              "id": "summary-ep172026-202609280231",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-28T02:31:08Z",
+              "updated_at": "2026-09-28T02:31:08Z",
+              "summary": "NOLO STRENGTHENS INTO A CATEGORY 4 HURRICANE. As of 5:00 PM HST Sun Sep 27 the center of Nolo was located near 16.3, -160.3 with movement WNW at 12 mph. The minimum central pressure was 939 mb with maximum sustained winds of about 145 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 6,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.9"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.9",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.9",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.9",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.9",
+              "args": {
+                "namespace": "hurricanes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov"
+    },
     {
       "id": "d7811a6b18387a376984",
       "title": "Hurricane Polo (EP2), advisory 27/2354Z",
