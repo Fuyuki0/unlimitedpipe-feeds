@@ -2,12 +2,105 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "FDA novel drug approvals",
   "home_page_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
-  "description": "Events collected by UnlimitedPipe 0.10.7",
+  "description": "Events collected by UnlimitedPipe 0.10.29",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.7"
+    "generator": "UnlimitedPipe 0.10.29"
   },
   "items": [
+    {
+      "id": "29044f8cc5233380cb2a",
+      "title": "FDA approves Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency",
+      "content_text": "Novel drug approval of 9/28/2026: Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency.",
+      "date_published": "2026-09-28T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "29044f8cc5233380cb2a",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026#Emcitate",
+          "source_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+          "timestamp": null,
+          "observed_at": "2026-09-28T22:55:22Z",
+          "data": {
+            "change": "added",
+            "label": "FDA approves Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency",
+            "item_type": "record",
+            "summary": "added: FDA approves Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency",
+            "after": {
+              "title": "FDA approves Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency",
+              "summary": "Novel drug approval of 9/28/2026: Emcitate (tiratricol) to treat peripheral thyrotoxicosis in patients with MCT8 deficiency.",
+              "link": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+              "published_at": "2026-09-28T00:00:00Z",
+              "drug": "Emcitate"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+            "content_type": "text/html",
+            "elapsed_ms": 64,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.29"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.29",
+              "args": {
+                "expr": "name != \"\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.29",
+              "args": {
+                "assign": [
+                  "use=replace(replace(trim(use), \"^To (adults|patients|pediatric)\", \"for \\\\1\"), \"^To \", \"to \")",
+                  "title=\"FDA approves \" + trim(name) + \" (\" + trim(ingredient) + \") \" + replace(use, \"^(.{150}[^ ,]*)[ ,].+$\", \"\\\\1…\")",
+                  "summary=\"Novel drug approval of \" + trim(approved) + \": \" + trim(name) + \" (\" + trim(ingredient) + \") \" + use + \".\"",
+                  "published_at=date(replace(replace(replace(trim(approved), \"^(\\\\d)/\", \"0\\\\1/\"), \"/(\\\\d)/\", \"/0\\\\1/\"), \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\"))",
+                  "link=\"https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-\" + replace(published_at, \"-.*$\", \"\")",
+                  "drug=trim(name)"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.29",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "drug"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.29",
+              "args": {
+                "key": "drug",
+                "namespace": "drug-approvals",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
+    },
     {
       "id": "f3f2db50f295e4620b81",
       "title": "FDA approves Atebrioz (zilurgisertib) to reduce the volume of total new heterotopic ossification in adults and pediatric patients 12 years and older with fibrodysplasia ossificans progressiva",
