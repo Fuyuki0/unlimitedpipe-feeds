@@ -2,12 +2,108 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Natural events now (NASA EONET)",
   "home_page_url": "https://eonet.gsfc.nasa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.9.1",
+  "description": "Events collected by UnlimitedPipe 0.10.12",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.9.1"
+    "generator": "UnlimitedPipe 0.10.12"
   },
   "items": [
+    {
+      "id": "a7b01867be28fcd6ded7",
+      "title": "Severe Storms: Tropical Storm Rachel",
+      "content_text": "Reported by JTWC, first seen 2026-09-27. Tracked by NASA EONET.",
+      "date_published": "2026-09-27T18:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a7b01867be28fcd6ded7",
+          "source": "web",
+          "type": "change",
+          "key": "https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=14#EONET_24875",
+          "source_url": "https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=14",
+          "timestamp": null,
+          "observed_at": "2026-09-28T03:48:40Z",
+          "data": {
+            "change": "added",
+            "label": "Severe Storms: Tropical Storm Rachel",
+            "item_type": "record",
+            "summary": "added: Severe Storms: Tropical Storm Rachel",
+            "after": {
+              "title": "Severe Storms: Tropical Storm Rachel",
+              "summary": "Reported by JTWC, first seen 2026-09-27. Tracked by NASA EONET.",
+              "link": "https://www.metoc.navy.mil/jtwc/products/ep1826.tcw",
+              "published_at": "2026-09-27T18:00:00Z",
+              "id": "EONET_24875",
+              "kind": "Severe Storms"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=14",
+            "content_type": "application/rss+xml",
+            "elapsed_ms": 344,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.12"
+            },
+            {
+              "step": "map",
+              "version": "0.10.12",
+              "args": {
+                "assign": [
+                  "kind=categories.0.title",
+                  "title=kind + \": \" + title",
+                  "summary=\"Reported by \" + sources.0.id + \", first seen \" + replace(\"\" + geometry.0.date, \"T.*$\", \"\") + \". Tracked by NASA EONET.\"",
+                  "published_at=geometry.0.date",
+                  "link=sources.0.url"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.12",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id",
+                  "kind"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.12",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.12",
+              "args": {
+                "key": "id",
+                "namespace": "natural-events",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.metoc.navy.mil/jtwc/products/ep1826.tcw"
+    },
     {
       "id": "21e6dbebbb5ae00cf76e",
       "title": "Sea and Lake Ice: Iceberg A85",

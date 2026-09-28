@@ -2,12 +2,124 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Stablecoin supply moves (DefiLlama)",
   "home_page_url": "https://defillama.com/stablecoins",
-  "description": "Events collected by UnlimitedPipe 0.10.9",
+  "description": "Events collected by UnlimitedPipe 0.10.12",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.9"
+    "generator": "UnlimitedPipe 0.10.12"
   },
   "items": [
+    {
+      "id": "e2bf6c346a7d7b676ec5",
+      "title": "USDC supply -$118.9M in a day, now $75.3B",
+      "content_text": "USD Coin (USDC): -$118.9M in 24 hours; week before: $74.4B.",
+      "date_published": "2026-09-28T03:49:31Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e2bf6c346a7d7b676ec5",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDC 75413532969",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-09-28T03:49:31Z",
+          "data": {
+            "change": "added",
+            "label": "USDC supply -$118.9M in a day, now $75.3B",
+            "item_type": "record",
+            "summary": "added: USDC supply -$118.9M in a day, now $75.3B",
+            "after": {
+              "id": "2",
+              "name": "USD Coin",
+              "symbol": "USDC",
+              "gecko_id": "usd-coin",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 75294643388.44304
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 75413532968.83981
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 74433069059.82904
+              },
+              "price": 0.9998542722682636,
+              "supply": 75294643388.44304,
+              "change": -118889580.39677429,
+              "moved": "-$118.9M",
+              "title": "USDC supply -$118.9M in a day, now $75.3B",
+              "summary": "USD Coin (USDC): -$118.9M in 24 hours; week before: $74.4B.",
+              "link": "https://defillama.com/stablecoin/usd-coin",
+              "day_key": "USDC 75413532969"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 60,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.12"
+            },
+            {
+              "step": "map",
+              "version": "0.10.12",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.12",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.12",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" supply \" + moved + \" in a day, now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" \" + round(circulatingPrevDay.peggedUSD)"
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.12",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/usd-coin"
+    },
     {
       "id": "9e99f739a96446a0ca5f",
       "title": "USDC supply -$191.2M in a day, now $75.2B",
