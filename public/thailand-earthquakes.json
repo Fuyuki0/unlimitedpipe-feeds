@@ -2,12 +2,98 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Earthquakes around Thailand (TMD)",
   "home_page_url": "https://earthquake.tmd.go.th/",
-  "description": "Events collected by UnlimitedPipe 0.10.19",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.19"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "a38258ea9f157a6d2ae3",
+      "title": "M3.7 earthquake in Myanmar",
+      "content_text": "At 2026-09-29 14:27:06 Thai time (UTC+7), latitude 21.790, longitude 96.279, magnitude 3.7",
+      "date_published": "2026-09-29T07:36:27Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a38258ea9f157a6d2ae3",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17143",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T07:36:40Z",
+          "data": {
+            "change": "added",
+            "label": "M3.7 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M3.7 earthquake in Myanmar",
+            "after": {
+              "title": "M3.7 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17143",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17143",
+              "author": null,
+              "published_at": "2026-09-29T07:36:27Z",
+              "updated_at": "2026-09-29T07:36:27Z",
+              "summary": "At 2026-09-29 14:27:06 Thai time (UTC+7), latitude 21.790, longitude 96.279, magnitude 3.7",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.7",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1877,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17143"
+    },
     {
       "id": "aeed5ec1fcdd9baed3a7",
       "title": "M4.4 earthquake in Northern Sumatra, Indonesia",
