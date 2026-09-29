@@ -1,13 +1,107 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "New listings: Coinbase, Binance, OKX, Upbit",
-  "home_page_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+  "home_page_url": "https://api.exchange.coinbase.com/products",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "0fefaf35fe970e51d8e3",
+      "title": "Coinbase lists CT (CT/USD)",
+      "content_text": "pair CT/USD · quote USD · exchange Coinbase · listing Coinbase CT/USD",
+      "date_published": "2026-09-29T18:55:42Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0fefaf35fe970e51d8e3",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.exchange.coinbase.com/products#Coinbase CT/USD",
+          "source_url": "https://api.exchange.coinbase.com/products",
+          "timestamp": null,
+          "observed_at": "2026-09-29T18:55:42Z",
+          "data": {
+            "change": "added",
+            "label": "Coinbase lists CT (CT/USD)",
+            "item_type": "record",
+            "summary": "added: Coinbase lists CT (CT/USD)",
+            "after": {
+              "pair": "CT/USD",
+              "name": "CT",
+              "quote": "USD",
+              "listed_at": null,
+              "exchange": "Coinbase",
+              "title": "Coinbase lists CT (CT/USD)",
+              "published_at": null,
+              "listing": "Coinbase CT/USD"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.exchange.coinbase.com/products",
+            "content_type": "application/json",
+            "elapsed_ms": 29,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.exchange.coinbase.com/products"
+    },
     {
       "id": "a8147151033ce6002c30",
       "title": "OKX lists (USDC-PLN)",
