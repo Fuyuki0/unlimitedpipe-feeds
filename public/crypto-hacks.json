@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "7c00fd9f517f78fef795",
+      "title": "Fake GIWA Bridge: $2.1M lost (social engineering)",
+      "content_text": "Impersonation Scam. Target: DeFi Protocol.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7c00fd9f517f78fef795",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Fake GIWA Bridge 1790467200",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-09-29T16:10:53Z",
+          "data": {
+            "change": "added",
+            "label": "Fake GIWA Bridge: $2.1M lost (social engineering)",
+            "item_type": "record",
+            "summary": "added: Fake GIWA Bridge: $2.1M lost (social engineering)",
+            "after": {
+              "title": "Fake GIWA Bridge: $2.1M lost (social engineering)",
+              "summary": "Impersonation Scam. Target: DeFi Protocol.",
+              "published_at": "2026-09-27T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Fake GIWA Bridge 1790467200",
+              "chain": [
+                "Ethereum"
+              ],
+              "amount": 2080000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 43,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.32",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=technique + \". Target: \" + targetType + \".\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "064ca6dfe9fc95c04943",
       "title": "PacaSwap DEX: $90.8K lost (token & share accounting)",
       "content_text": "Arithmetic Error. Target: DeFi Protocol.",
