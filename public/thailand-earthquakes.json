@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "9472fc6c01db2a98fa96",
+      "title": "M3.2 earthquake in Myanmar",
+      "content_text": "At 2026-09-29 23:50:08 Thai time (UTC+7), latitude 21.931, longitude 96.286, magnitude 3.2",
+      "date_published": "2026-09-29T16:58:02Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9472fc6c01db2a98fa96",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17145",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T16:58:08Z",
+          "data": {
+            "change": "added",
+            "label": "M3.2 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M3.2 earthquake in Myanmar",
+            "after": {
+              "title": "M3.2 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17145",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17145",
+              "author": null,
+              "published_at": "2026-09-29T16:58:02Z",
+              "updated_at": "2026-09-29T16:58:02Z",
+              "summary": "At 2026-09-29 23:50:08 Thai time (UTC+7), latitude 21.931, longitude 96.286, magnitude 3.2",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.2",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1807,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17145"
+    },
+    {
       "id": "854fff0d25d1a3eda80b",
       "title": "M1.4 earthquake in Tambon Long Khot, Amphoe Phrao, ChiangMai",
       "content_text": "At 2026-09-29 19:08:28 Thai time (UTC+7), latitude 19.103, longitude 99.279, magnitude 1.4",
