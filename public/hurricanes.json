@@ -9,6 +9,107 @@
   },
   "items": [
     {
+      "id": "95bfc138bc7321cb20f5",
+      "title": "Tropical Storm Rachel (EP3), advisory 29/0845Z",
+      "content_text": "RACHEL EXPECTED TO BECOME A HURRICANE DURING THE NEXT DAY OR SO. As of 3:00 AM CST Tue Sep 29 the center of Rachel was located near 14.7, -104.3 with movement WNW at 12 mph. The minimum central pressure was 992 mb with maximum sustained winds of about 60 mph.",
+      "date_published": "2026-09-29T08:45:31Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "95bfc138bc7321cb20f5",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-ep.xml#Tropical Storm Rachel (EP3), advisory 29/0845Z",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T08:46:23Z",
+          "data": {
+            "change": "added",
+            "label": "Tropical Storm Rachel (EP3), advisory 29/0845Z",
+            "item_type": "entry",
+            "summary": "added: Tropical Storm Rachel (EP3), advisory 29/0845Z",
+            "after": {
+              "title": "Tropical Storm Rachel (EP3), advisory 29/0845Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/468595.shtml",
+              "id": "summary-ep182026-202609290845",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-29T08:45:31Z",
+              "updated_at": "2026-09-29T08:45:31Z",
+              "summary": "RACHEL EXPECTED TO BECOME A HURRICANE DURING THE NEXT DAY OR SO. As of 3:00 AM CST Tue Sep 29 the center of Rachel was located near 14.7, -104.3 with movement WNW at 12 mph. The minimum central pressure was 992 mb with maximum sustained winds of about 60 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 16,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/468595.shtml"
+    },
+    {
       "id": "43e8a727406149597854",
       "title": "Tropical Storm Hanna (AT3), advisory 29/0839Z",
       "content_text": "HANNA HOLDS STEADY WHILE MAINTAINING AN EAST-SOUTHEAST TRACK. As of 5:00 AM AST Tue Sep 29 the center of Hanna was located near 35.2, -46.2 with movement ESE at 15 mph. The minimum central pressure was 1002 mb with maximum sustained winds of about 45 mph.",
