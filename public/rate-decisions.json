@@ -1,13 +1,116 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central bank interest rate decisions",
-  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
-  "description": "Events collected by UnlimitedPipe 0.10.4",
+  "home_page_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.4"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "7ad6e5eb80f4f5090daf",
+      "title": "Reserve Bank of Australia rate decision: Statement by the Monetary Policy Board: Monetary Policy Decision",
+      "content_text": "At its meeting today, the Board decided to increase the cash rate target by 25 basis points to 4.60 per cent.",
+      "date_published": "2026-09-29T04:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7ad6e5eb80f4f5090daf",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.rba.gov.au/media-releases/2026/mr-26-27.html",
+          "source_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T04:31:04Z",
+          "data": {
+            "change": "added",
+            "label": "Reserve Bank of Australia rate decision: Statement by the Monetary Policy Board: Monetary Policy Decision",
+            "item_type": "entry",
+            "summary": "added: Reserve Bank of Australia rate decision: Statement by the Monetary Policy Board: Monetary Policy Decision",
+            "after": {
+              "title": "Reserve Bank of Australia rate decision: Statement by the Monetary Policy Board: Monetary Policy Decision",
+              "link": "https://www.rba.gov.au/media-releases/2026/mr-26-27.html",
+              "id": "https://www.rba.gov.au/media-releases/2026/mr-26-27.html",
+              "author": null,
+              "published_at": "2026-09-29T04:30:00Z",
+              "updated_at": "2026-09-29T04:30:00Z",
+              "summary": "At its meeting today, the Board decided to increase the cash rate target by 25 basis points to 4.60 per cent.",
+              "categories": [],
+              "feed": {
+                "title": "Reserve Bank of Australia | Media Releases",
+                "url": "https://www.rba.gov.au/rss/index.html",
+                "feed_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"
+              },
+              "bank": "Reserve Bank of Australia"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+            "elapsed_ms": 495,
+            "not_modified": false,
+            "method": "rss10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "title matches \"(?i)FOMC statement|monetary policy decision|bank rate|statement on monetary policy|policy (interest )?rate|monetary policy statement|resolution of the monetary policy committee|changes to the (key )?(interest )?rates\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "bank=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "bank=replace(replace(replace(replace(bank, \"^federalreserve\\\\.gov$\", \"Federal Reserve\"), \"^ecb\\\\.europa\\\\.eu$\", \"ECB\"), \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\"), \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "bank=replace(replace(replace(bank, \"^bankofcanada\\\\.ca$\", \"Bank of Canada\"), \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\"), \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=bank + \" rate decision: \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "rate-decisions",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.rba.gov.au/media-releases/2026/mr-26-27.html"
+    },
     {
       "id": "e782e743134f669dd6ca",
       "title": "Bank of England rate decision: Bank rate maintained at 3.75% - September 2026 Monetary Policy Summary and Minutes",
