@@ -1,13 +1,295 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "New listings: Coinbase, Binance, OKX, Upbit",
-  "home_page_url": "https://api.upbit.com/v1/market/all",
-  "description": "Events collected by UnlimitedPipe 0.10.16",
+  "home_page_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.16"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "a8147151033ce6002c30",
+      "title": "OKX lists (USDC-PLN)",
+      "content_text": "pair USDC-PLN · listed_at 1790744400000 · exchange OKX · published_at 2026-09-30T05:00:00Z",
+      "date_published": "2026-09-30T05:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a8147151033ce6002c30",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX USDC-PLN",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-29T07:29:54Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (USDC-PLN)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (USDC-PLN)",
+            "after": {
+              "pair": "USDC-PLN",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790744400000",
+              "exchange": "OKX",
+              "title": "OKX lists  (USDC-PLN)",
+              "published_at": "2026-09-30T05:00:00Z",
+              "listing": "OKX USDC-PLN"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 436,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
+    {
+      "id": "29757291b29e73cb3b5d",
+      "title": "OKX lists (BTC-PLN)",
+      "content_text": "pair BTC-PLN · listed_at 1790751600000 · exchange OKX · published_at 2026-09-30T07:00:00Z",
+      "date_published": "2026-09-30T07:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "29757291b29e73cb3b5d",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX BTC-PLN",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-29T07:29:54Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (BTC-PLN)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (BTC-PLN)",
+            "after": {
+              "pair": "BTC-PLN",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790751600000",
+              "exchange": "OKX",
+              "title": "OKX lists  (BTC-PLN)",
+              "published_at": "2026-09-30T07:00:00Z",
+              "listing": "OKX BTC-PLN"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 436,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
+    {
+      "id": "e18b8bbaf8c6b2744ba2",
+      "title": "OKX lists (ETH-PLN)",
+      "content_text": "pair ETH-PLN · listed_at 1790751600000 · exchange OKX · published_at 2026-09-30T07:00:00Z",
+      "date_published": "2026-09-30T07:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e18b8bbaf8c6b2744ba2",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX ETH-PLN",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-29T07:29:54Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (ETH-PLN)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (ETH-PLN)",
+            "after": {
+              "pair": "ETH-PLN",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790751600000",
+              "exchange": "OKX",
+              "title": "OKX lists  (ETH-PLN)",
+              "published_at": "2026-09-30T07:00:00Z",
+              "listing": "OKX ETH-PLN"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 436,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
     {
       "id": "fe0a4107465bc5f5ec5e",
       "title": "Upbit lists Cash Cat (BTC-CASHCAT)",
