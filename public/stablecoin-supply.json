@@ -9,6 +9,118 @@
   },
   "items": [
     {
+      "id": "14f7e13d1c4b05d72021",
+      "title": "USDT minted $105.8M in a day, supply now $183.9B",
+      "content_text": "Tether (USDT): +$105.8M in 24 hours; week before: $183.5B.",
+      "date_published": "2026-09-29T15:07:32Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "14f7e13d1c4b05d72021",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDT 2026-09-29",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-09-29T15:07:32Z",
+          "data": {
+            "change": "added",
+            "label": "USDT minted $105.8M in a day, supply now $183.9B",
+            "item_type": "record",
+            "summary": "added: USDT minted $105.8M in a day, supply now $183.9B",
+            "after": {
+              "id": "1",
+              "name": "Tether",
+              "symbol": "USDT",
+              "gecko_id": "tether",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 183857455708.19382
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 183751699769.132
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 183496652333.547
+              },
+              "price": 0.9998016766811437,
+              "supply": 183857455708.19382,
+              "change": 105755939.06182861,
+              "moved": "+$105.8M",
+              "title": "USDT minted $105.8M in a day, supply now $183.9B",
+              "summary": "Tether (USDT): +$105.8M in 24 hours; week before: $183.5B.",
+              "link": "https://defillama.com/stablecoin/tether",
+              "day_key": "USDT 2026-09-29"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 56,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-09-29\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/tether"
+    },
+    {
       "id": "8b8af36a6107908b09fa",
       "title": "USDGO burned $148M in a day, supply now $1.3B",
       "content_text": "USDGO (USDGO): -$148M in 24 hours; week before: $1.4B.",
