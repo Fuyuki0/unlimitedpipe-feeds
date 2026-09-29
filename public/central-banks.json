@@ -1,13 +1,124 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "f5078589cebc3adef559",
+      "title": "Federal Reserve: Agencies publish resolution plan feedback letters for 15 banking organizations",
+      "content_text": "Agencies publish resolution plan feedback letters for 15 banking organizations",
+      "date_published": "2026-09-29T20:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f5078589cebc3adef559",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260929a.htm",
+          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T20:53:59Z",
+          "data": {
+            "change": "added",
+            "label": "Federal Reserve: Agencies publish resolution plan feedback letters for 15 banking organizations",
+            "item_type": "entry",
+            "summary": "added: Federal Reserve: Agencies publish resolution plan feedback letters for 15 banking organizations",
+            "after": {
+              "title": "Federal Reserve: Agencies publish resolution plan feedback letters for 15 banking organizations",
+              "link": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260929a.htm",
+              "id": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260929a.htm",
+              "author": null,
+              "published_at": "2026-09-29T20:00:00Z",
+              "updated_at": "2026-09-29T20:00:00Z",
+              "summary": "Agencies publish resolution plan feedback letters for 15 banking organizations",
+              "categories": [
+                "Banking and Consumer Regulatory Policy"
+              ],
+              "feed": {
+                "title": "FRB: Press Release - All Releases",
+                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
+                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
+              },
+              "outlet": "Federal Reserve"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+            "elapsed_ms": 79,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260929a.htm",
+      "tags": [
+        "Banking and Consumer Regulatory Policy"
+      ]
+    },
     {
       "id": "1756fdec68f5569830a8",
       "title": "Reserve Bank of India: RBI to conduct Overnight Variable Rate Reverse Repo (VRRR) auction under LAF on September 30, 2026",
