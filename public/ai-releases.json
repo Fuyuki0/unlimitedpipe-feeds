@@ -9,6 +9,88 @@
   },
   "items": [
     {
+      "id": "a9c19c5ae1ee5987f574",
+      "title": "ollama/ollama v0.35.0",
+      "content_text": "Decision models\nOllama now supports decision models through /v1/systemone, based on TypeSafe’s Jev API.\nDecision models return choices, probabilities, and scores instead of text. Use them for tasks such as ticket triage, model routing, and content classification.\nAvailable models:\nNimble from Bespoke Labs\nTev1 from Together AI\nsh\nollama pull nimble\nSend context and one or more questions:\nsh\ncurl http://localhost:11434/v1/systemone \\\n-H 'Content-Type: application/json' \\\n-d '{\n\"model\"…",
+      "date_published": "2026-09-28T21:23:22Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a9c19c5ae1ee5987f574",
+          "source": "github",
+          "type": "change",
+          "key": "https://github.com/ollama/ollama/releases/tag/v0.35.0",
+          "source_url": "https://api.github.com/repos/ollama/ollama/releases",
+          "timestamp": null,
+          "observed_at": "2026-09-29T02:44:06Z",
+          "data": {
+            "change": "added",
+            "label": "ollama/ollama v0.35.0",
+            "item_type": "release",
+            "summary": "added: ollama/ollama v0.35.0",
+            "after": {
+              "repo": "ollama/ollama",
+              "title": "ollama/ollama v0.35.0",
+              "tag": "v0.35.0",
+              "url": "https://github.com/ollama/ollama/releases/tag/v0.35.0",
+              "published_at": "2026-09-28T21:23:22Z",
+              "prerelease": true,
+              "author": "github-actions[bot]",
+              "summary": "Decision models\nOllama now supports decision models through /v1/systemone, based on TypeSafe’s Jev API.\nDecision models return choices, probabilities, and scores instead of text. Use them for tasks such as ticket triage, model routing, and content classification.\nAvailable models:\nNimble from Bespoke Labs\nTev1 from Together AI\nsh\nollama pull nimble\nSend context and one or more questions:\nsh\ncurl http://localhost:11434/v1/systemone \\\n-H 'Content-Type: application/json' \\\n-d '{\n\"model\": \"nimble\",\n\"state\": \"Our checkout has returned 500 errors since 9am.\",\n\"questions\": {\n\"label\": {\n\"type\": \"choice\",\n\"instructions\": \"Which label fits this ticket?\",\n\"criteria\": {\n\"billing\": \"Payments and refunds\",\n\"bug\": \"Software errors\",\n\"account\": \"Login and account access\"\n}\n}\n}\n}'\nExample response:\njson\n{\n\"model\": \"nimble\",\n\"answers\": {\n\"label\": {\n\"type\": \"choice\",\n\"choice\": \"bug\",\n\"probabilities\": {\n\"billing\": 0.0125,\n\"bug\": 0.9781,\n\"account\": 0.0093\n},\n\"confidence\": 0.8906\n}\n},\n\"usage\": {\n\"inputtokens\": 174,\n\"outputtokens\": 1\n}\n}\nThe API supports three question types:\nchoice: Select an option and return probabilities for each.\nnoul: Return the probability that a condition is true.\nscore: Return a score across an ordered set of criteria\nWhat's Changed\nSettings now opens without waiting for model discovery.\nFixed the macOS update menu and icon not reflecting an available update at startup.\nFixed stalled MLX model downloads hanging indefinitely.\nRequests containing the deprecated typicalp parameter now log a warning instead of failing.\nFull Changelog: https://github.com/ollama/ollama/compare/v0.34.4...v0.35.0",
+              "assets": 17
+            }
+          },
+          "metadata": {
+            "method": "github-api"
+          },
+          "provenance": [
+            {
+              "step": "github",
+              "version": "0.10.29"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.29",
+              "args": {
+                "expr": "not (tag matches \"^b[0-9]+$\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.29",
+              "args": {
+                "assign": [
+                  "title=repo + \" \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.29",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.29",
+              "args": {
+                "namespace": "ai-releases",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://github.com/ollama/ollama/releases/tag/v0.35.0"
+    },
+    {
       "id": "f091c0dc826fd654a4ce",
       "title": "ollama/ollama v0.35.0",
       "content_text": "What's Changed\napp: sync macOS update menu and icon at startup by @hoyyeva in https://github.com/ollama/ollama/pull/18622\napp: defer Settings model discovery by @ParthSareen in https://github.com/ollama/ollama/pull/18598\napp: isolate cloud-setting tests from Windows user config by @drifkin in https://github.com/ollama/ollama/pull/18626\napi: deprecate typicalp by @dhiltgen in https://github.com/ollama/ollama/pull/18627\nbench: use HumanEval patch prompts by @dhiltgen in…",
