@@ -2,12 +2,113 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Hurricanes and tropical storms (NHC)",
   "home_page_url": "https://www.nhc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.29",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.29"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "f14e494774bae9e5f634",
+      "title": "Hurricane Polo (EP2), advisory 29/0545Z",
+      "content_text": "POLO ABOUT TO MAKE LANDFALL IN BAJA CALIFORNIA SUR. ...LIFE-THREATENING WINDS AND FLASH FLOODING ONGOING... As of 8:00 PM MST Mon Sep 28 the center of Polo was located near 25.9, -112.5 with movement NE at 13 mph. The minimum central pressure was 963 mb with maximum sustained winds of about 115 mph.",
+      "date_published": "2026-09-29T05:45:28Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f14e494774bae9e5f634",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-ep.xml#Hurricane Polo (EP2), advisory 29/0545Z",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T05:46:27Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane Polo (EP2), advisory 29/0545Z",
+            "item_type": "entry",
+            "summary": "added: Hurricane Polo (EP2), advisory 29/0545Z",
+            "after": {
+              "title": "Hurricane Polo (EP2), advisory 29/0545Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/290233.shtml",
+              "id": "summary-ep172026-202609290545",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-29T05:45:28Z",
+              "updated_at": "2026-09-29T05:45:28Z",
+              "summary": "POLO ABOUT TO MAKE LANDFALL IN BAJA CALIFORNIA SUR. ...LIFE-THREATENING WINDS AND FLASH FLOODING ONGOING... As of 8:00 PM MST Mon Sep 28 the center of Polo was located near 25.9, -112.5 with movement NE at 13 mph. The minimum central pressure was 963 mb with maximum sustained winds of about 115 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 6,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/290233.shtml"
+    },
     {
       "id": "8149811d296ea0c1b524",
       "title": "Tropical Storm Rachel (EP3), advisory 29/0249Z",
