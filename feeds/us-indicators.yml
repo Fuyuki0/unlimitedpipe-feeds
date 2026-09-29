@@ -1,5 +1,5 @@
 name: us-indicators
-description: US economic indicators as they come out - inflation (CPI and core CPI, a year before), the jobs report (payrolls change, unemployment rate), weekly jobless claims, the Fed funds rate and 30-year mortgage rates - from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.
+description: US economic indicators as they come out - inflation (CPI and core CPI, a year before), the jobs report (payrolls change, unemployment rate), weekly jobless claims, the Fed funds rate, 30-year mortgage rates and the price of regular gasoline (EIA) - from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.
 group: "Money, economy and government"
 sources:
   - type: web
@@ -11,18 +11,21 @@ sources:
       - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=${DAYS_AGO_30}&coed=${TODAY}"
       - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS&cosd=${DAYS_AGO_120}&coed=${TODAY}"
       - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=${DAYS_AGO_30}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=${DAYS_AGO_30}&coed=${TODAY}"
 operators:
   - type: select
-    fields: [date=observation_date, value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US]
+    fields: [date=observation_date, value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW]
   - {type: filter, expr: 'value matches "^-?[\\d.]+$"'}   # "." is a period without a value yet
   - type: map
     assign:
       - 'series=replace(source_url, "^.*[?&]id=([A-Z0-9]+).*$", "\\1")'
       - 'name=replace(replace(replace(replace(series, "^CPIAUCSL$", "US inflation (CPI, a year before)"), "^CPILFESL$", "US core inflation (CPI without food and energy, a year before)"), "^PAYEMS$", "US jobs report: payrolls change"), "^UNRATE$", "US unemployment rate")'
       - 'name=replace(replace(replace(name, "^ICSA$", "US weekly jobless claims"), "^FEDFUNDS$", "Fed funds rate (effective)"), "^MORTGAGE30US$", "US 30-year mortgage rate")'
+      - 'name=replace(name, "^GASREGW$", "US regular gasoline price")'
       - 'shown=replace(replace(replace(series, "^(CPIAUCSL|CPILFESL)$", round(value, 2) + "%"), "^PAYEMS$", replace(commas(value * 1000, 0), "^(?!-)", "+") + " jobs"), "^ICSA$", commas(value, 0) + " new claims")'
       - 'shown=replace(shown, "^(UNRATE|FEDFUNDS|MORTGAGE30US)$", value + "%")'
-      - 'period=replace(replace(replace(series, "^ICSA$", "week ending " + date), "^MORTGAGE30US$", "week of " + date), "^[A-Z0-9]+$", replace(date, "^(\\d{4}-\\d\\d)-01$", "\\1"))'
+      - 'shown=replace(shown, "^GASREGW$", "$" + value + " a gallon")'
+      - 'period=replace(replace(replace(series, "^ICSA$", "week ending " + date), "^(MORTGAGE30US|GASREGW)$", "week of " + date), "^[A-Z0-9]+$", replace(date, "^(\\d{4}-\\d\\d)-01$", "\\1"))'
       - 'title=name + ": " + shown + " (" + period + ")"'
       - 'summary=name + " for " + period + ", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice."'
       - 'link="https://fred.stlouisfed.org/series/" + series'

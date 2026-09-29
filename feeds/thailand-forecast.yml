@@ -1,0 +1,38 @@
+name: thailand-forecast
+description: "Tomorrow's weather in Bangkok, Chiang Mai, Phuket, Pattaya, Khon Kaen and Hat Yai: morning (07-13) and afternoon (13-19), with temperatures, rain and sky (พยากรณ์อากาศพรุ่งนี้). Data from MET Norway (CC BY 4.0)."
+group: Countries
+# a forecast is not a record: the latest ones are listed, none archived
+archive: false
+sources:
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50"}
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98"}
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39"}
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88"}
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83"}
+  - {type: web, records: properties.timeseries, url: "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47"}
+operators:
+  # the forecasts for 07:00 and 13:00 Bangkok time tomorrow, each for the six hours after it
+  - {type: filter, expr: 'time == "${TOMORROW}T00:00:00Z" or time == "${TOMORROW}T06:00:00Z"'}
+  - type: map
+    assign:
+      - 'city=replace(source_url, "^.*lat=([\\d.]+)&.*$", "\\1")'
+      - 'city=replace(city, "^13\\.75$", "Bangkok")'
+      - 'city=replace(city, "^18\\.79$", "Chiang Mai")'
+      - 'city=replace(city, "^7\\.88$", "Phuket")'
+      - 'city=replace(city, "^12\\.93$", "Pattaya")'
+      - 'city=replace(city, "^16\\.43$", "Khon Kaen")'
+      - 'city=replace(city, "^7\\.01$", "Hat Yai")'
+      - 'part=replace(replace(time, "^.*T00:.*$", "morning"), "^.*T06:.*$", "afternoon")'
+      - 'sky=replace(data.data.next_6_hours.summary.symbol_code, "_(day|night|polartwilight)$", "")'
+      - 'sky=replace(replace(replace(sky, "andthunder$", " and thunder"), "showers", " showers"), "^(light|heavy)", "\\1 ")'
+      - 'sky=replace(replace(sky, "^clearsky$", "clear sky"), "^partlycloudy$", "partly cloudy")'
+      - 'title=city + " tomorrow " + part + " (${TOMORROW}): " + sky + ", " + round(data.data.next_6_hours.details.air_temperature_min) + "–" + round(data.data.next_6_hours.details.air_temperature_max) + "°C"'
+      - 'summary=city + ", " + part + " of ${TOMORROW}: " + sky + ", " + round(data.data.next_6_hours.details.air_temperature_min) + "–" + round(data.data.next_6_hours.details.air_temperature_max) + "°C, " + data.data.next_6_hours.details.precipitation_amount + " mm of rain. Forecast by MET Norway (CC BY 4.0)."'
+      - 'published_at="${TODAY}T00:00:00Z"'
+      - 'link="https://www.yr.no/en/forecast/daily-table/" + replace(source_url, "^.*lat=([\\d.]+)&lon=([\\d.]+).*$", "\\1,\\2")'
+      - 'day=city + " " + time'
+  - {type: select, fields: [title, summary, published_at, link, day]}
+  - {type: diff, key: day, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/thailand-forecast.xml, title: "Thailand weather tomorrow (MET Norway)", link: "https://www.yr.no/", max_items: 60}
+  - {type: feed, path: ../public/thailand-forecast.json, title: "Thailand weather tomorrow (MET Norway)", link: "https://www.yr.no/", max_items: 60}

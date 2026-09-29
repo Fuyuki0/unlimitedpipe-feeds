@@ -1,0 +1,19 @@
+name: vehicle-recalls
+description: US vehicle and equipment safety recalls as NHTSA receives them - the maker, what is wrong, and how many vehicles may be affected - from the Department of Transportation's open data (public domain).
+group: "Disasters and health"
+sources:
+  - type: web
+    url: "https://data.transportation.gov/resource/6axg-epim.json?$order=report_received_date%20DESC&$limit=100"
+operators:
+  - type: map
+    assign:
+      - 'title=manufacturer + ": " + subject + default(" (" + commas(potentially_affected, 0) + " affected)", "")'
+      - "summary=defect_summary"
+      - "link=recall_link.url"
+      - 'published_at=report_received_date + "Z"'
+      - "recall=nhtsa_id"
+  - {type: select, fields: [title, summary, link, published_at, recall]}
+  - {type: diff, key: recall, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/vehicle-recalls.xml, title: "US vehicle recalls (NHTSA)", link: "https://www.nhtsa.gov/recalls"}
+  - {type: feed, path: ../public/vehicle-recalls.json, title: "US vehicle recalls (NHTSA)", link: "https://www.nhtsa.gov/recalls"}

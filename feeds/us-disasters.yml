@@ -1,0 +1,22 @@
+name: us-disasters
+description: US federal disaster declarations as FEMA makes them - major disasters, emergencies and fire management - with the state and the kind of incident (hurricane, flood, fire, storm), from OpenFEMA (public domain).
+group: "Disasters and health"
+sources:
+  - type: web
+    url: "https://www.fema.gov/api/open/v1/FemaWebDisasterDeclarations?$orderby=declarationDate%20desc&$top=50"
+    records: FemaWebDisasterDeclarations
+operators:
+  - type: map
+    assign:
+      - 'kind=replace(replace(declarationType, "^Major Disaster$", "Major disaster"), "^Fire Management$", "Fire management")'
+      - 'code=replace(replace(replace(declarationType, "^Major Disaster$", "DR"), "^Emergency$", "EM"), "^Fire Management$", "FM")'
+      - 'title=kind + " declared: " + readable(disasterName) + ", " + stateName + " (" + code + "-" + disasterNumber + ")"'
+      - 'summary="FEMA " + lower(kind) + " declaration for " + stateName + " (" + lower(incidentType) + "), declared " + replace(declarationDate, "T.*$", "") + "."'
+      - 'link="https://www.fema.gov/disaster/" + disasterNumber'
+      - "published_at=declarationDate"
+      - "number=disasterNumber"
+  - {type: select, fields: [title, summary, link, published_at, number]}
+  - {type: diff, key: number, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-disasters.xml, title: "US disaster declarations (FEMA)", link: "https://www.fema.gov/disaster/declarations"}
+  - {type: feed, path: ../public/us-disasters.json, title: "US disaster declarations (FEMA)", link: "https://www.fema.gov/disaster/declarations"}

@@ -1,0 +1,20 @@
+name: product-recalls
+description: US consumer product recalls as the Consumer Product Safety Commission announces them - toys, helmets, heaters, furniture, batteries, e-bikes - with the hazard, from CPSC's recalls API (public domain).
+group: "Disasters and health"
+sources:
+  - type: web
+    url: "https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallDateStart=${DAYS_AGO_30}&RecallDateEnd=${TODAY}"
+operators:
+  - type: map
+    assign:
+      - "title=Title"
+      - "link=URL"
+      - 'summary=default(Hazards.0.Name, "") + " " + default("Units: " + Products.0.NumberOfUnits + ".", "")'
+      - 'published_at=RecallDate + "Z"'
+      - "recall=RecallNumber"
+  - {type: select, fields: [title, summary, link, published_at, recall]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: recall, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/product-recalls.xml, title: "US product recalls (CPSC)", link: "https://www.cpsc.gov/Recalls"}
+  - {type: feed, path: ../public/product-recalls.json, title: "US product recalls (CPSC)", link: "https://www.cpsc.gov/Recalls"}
