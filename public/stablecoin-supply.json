@@ -2,12 +2,124 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Stablecoin supply moves (DefiLlama)",
   "home_page_url": "https://defillama.com/stablecoins",
-  "description": "Events collected by UnlimitedPipe 0.10.29",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.29"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "8b8af36a6107908b09fa",
+      "title": "USDGO burned $148M in a day, supply now $1.3B",
+      "content_text": "USDGO (USDGO): -$148M in 24 hours; week before: $1.4B.",
+      "date_published": "2026-09-29T10:22:43Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8b8af36a6107908b09fa",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDGO 2026-09-29",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-09-29T10:22:43Z",
+          "data": {
+            "change": "added",
+            "label": "USDGO burned $148M in a day, supply now $1.3B",
+            "item_type": "record",
+            "summary": "added: USDGO burned $148M in a day, supply now $1.3B",
+            "after": {
+              "id": "347",
+              "name": "USDGO",
+              "symbol": "USDGO",
+              "gecko_id": "usdgo",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 1259774052.5979125
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 1407770476.8174765
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 1403774506.1340415
+              },
+              "price": 0.9999926635222706,
+              "supply": 1259774052.5979125,
+              "change": -147996424.21956396,
+              "moved": "-$148M",
+              "title": "USDGO burned $148M in a day, supply now $1.3B",
+              "summary": "USDGO (USDGO): -$148M in 24 hours; week before: $1.4B.",
+              "link": "https://defillama.com/stablecoin/usdgo",
+              "day_key": "USDGO 2026-09-29"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 50,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-09-29\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/usdgo"
+    },
     {
       "id": "428b8b367047a0547752",
       "title": "USDC burned $540.9M in a day, supply now $74.9B",

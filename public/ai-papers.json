@@ -9,6 +9,332 @@
   },
   "items": [
     {
+      "id": "aa8501d093e408383eab",
+      "title": "G^2PTQ: Improving LLM Post-Training Quantization with Generalized Gradient Compensation",
+      "content_text": "Post-training quantization (PTQ) is a practical approach to reducing the memory and computational footprint of large language models (LLMs) without retraining. GPTQ-based methods have become the de facto standard, yet they suffer from two complementary limitations. Methods with local, layer-wise objectives lack global supervision; while methods with global objectives fix their Hessian estimates at the start and ignore first-order gradients, so their guidance grows stale as quantization…",
+      "date_published": "2026-09-29T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "aa8501d093e408383eab",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.31009",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-09-29T10:22:18Z",
+          "data": {
+            "change": "added",
+            "label": "G^2PTQ: Improving LLM Post-Training Quantization with Generalized Gradient Compensation",
+            "item_type": "record",
+            "summary": "added: G^2PTQ: Improving LLM Post-Training Quantization with Generalized Gradient Compensation",
+            "after": {
+              "title": "G^2PTQ: Improving LLM Post-Training Quantization with Generalized Gradient Compensation",
+              "summary": "Post-training quantization (PTQ) is a practical approach to reducing the memory and computational footprint of large language models (LLMs) without retraining. GPTQ-based methods have become the de facto standard, yet they suffer from two complementary limitations. Methods with local, layer-wise objectives lack global supervision; while methods with global objectives fix their Hessian estimates at the start and ignore first-order gradients, so their guidance grows stale as quantization proceeds. This paper presents G^2PTQ, a unified PTQ framework with Generalized Gradient Compensation that integrates both first- and second-order information under a globally supervised, block-wise optimization objective. By refreshing gradient and Hessian estimates before quantizing each Transformer block, G^2PTQ avoids the staleness of prior global methods. Furthermore, to stabilize the exact first-order compensation, we introduce a trust-region scaling mechanism that dynamically bounds the gradient step to prevent exploding weight updates. Finally, we derive efficient implementations for block-wise Hessian approximation and exact gradient compensation. Experimental results on various model families and bit-widths demonstrate that G^2PTQ enables better alignment with the full-precision model, outperforming state-of-the-art baselines. Code is available at: https://github.com/G2PTQ/G2PTQ.",
+              "link": "https://huggingface.co/papers/2609.31009",
+              "published_at": "2026-09-29T00:00:00.000Z",
+              "upvotes": 1
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.31009"
+    },
+    {
+      "id": "94f57cf7d828b34141ee",
+      "title": "Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+      "content_text": "Reinforcement learning (RL) for code agents often uses executable tests to provide binary rewards. With these rewards, Group Relative Policy Optimization (GRPO) assigns identical advantages to test-passing trajectories within each rollout group, overlooking differences in implementation quality and adherence to task requirements. This leaves the policy without a learning signal that favors clean, targeted implementations over those containing unnecessary or out-of-scope changes. We introduce…",
+      "date_published": "2026-09-29T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "94f57cf7d828b34141ee",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.32577",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-09-29T10:22:18Z",
+          "data": {
+            "change": "added",
+            "label": "Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+            "item_type": "record",
+            "summary": "added: Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+            "after": {
+              "title": "Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+              "summary": "Reinforcement learning (RL) for code agents often uses executable tests to provide binary rewards. With these rewards, Group Relative Policy Optimization (GRPO) assigns identical advantages to test-passing trajectories within each rollout group, overlooking differences in implementation quality and adherence to task requirements. This leaves the policy without a learning signal that favors clean, targeted implementations over those containing unnecessary or out-of-scope changes. We introduce GAGAR, a framework for quality-aware credit redistribution in code agent RL. Built on dynamic sampling that retains groups containing both passing and failing trajectories, GAGAR places all trajectories from each group in a shared workspace, where an SFT-trained agentic grader jointly inspects them and ranks the test-passing candidates. Based on this ranking, we downweight lower-ranked trajectories and proportionally rescale the advantages of all test-passing trajectories to restore their original sum. This sum-preserving redistribution retains the relative weights established by quality-based downweighting while shifting credit toward higher-quality implementations. We evaluate GAGAR at industrial scale using pre-RL SFT checkpoints of MiMo-V2.6-Flash (310B total parameters) and MiMo-V2.6-Pro (1.02T total parameters). Controlled code-only Flash experiments show improved code agent performance, reduced trajectory-length growth, and more stable training. We further apply GAGAR in large-scale mixed-task RL with both Flash and Pro. Our results support combining test-based verification with groupwise agentic grading to improve the quality and stability of code agent RL.",
+              "organization": {
+                "_id": "680cb4c37f289defb2210940",
+                "name": "XiaomiMiMo",
+                "fullname": "Xiaomi MiMo",
+                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/680cb7d1233834890a64acee/5w_4aLfF-7MAyaIPOV498.jpeg"
+              },
+              "link": "https://huggingface.co/papers/2609.32577",
+              "published_at": "2026-09-29T00:00:00.000Z",
+              "upvotes": 5
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.32577"
+    },
+    {
+      "id": "8a0cf4b1af8c4293fa11",
+      "title": "Relic: From Multi-Agent Collaboration to Persistent Organizational Capability",
+      "content_text": "Multiple agents may often conflict in an organization: for example, one coding agent changes an interface in a repository, but another continues to develop on the old version where existing tests become stale. A conversation can resolve the episode, but when the participants change, what makes the lesson continue to govern the team? We introduce Relic, which turns recurring collaboration failures into organization-owned, executable protocols. Members reflect on visible work, propose rules, and…",
+      "date_published": "2026-09-29T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8a0cf4b1af8c4293fa11",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.32965",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-09-29T10:22:18Z",
+          "data": {
+            "change": "added",
+            "label": "Relic: From Multi-Agent Collaboration to Persistent Organizational Capability",
+            "item_type": "record",
+            "summary": "added: Relic: From Multi-Agent Collaboration to Persistent Organizational Capability",
+            "after": {
+              "title": "Relic: From Multi-Agent Collaboration to Persistent Organizational Capability",
+              "summary": "Multiple agents may often conflict in an organization: for example, one coding agent changes an interface in a repository, but another continues to develop on the old version where existing tests become stale. A conversation can resolve the episode, but when the participants change, what makes the lesson continue to govern the team? We introduce Relic, which turns recurring collaboration failures into organization-owned, executable protocols. Members reflect on visible work, propose rules, and govern their adoption. Adopted protocols bind triggers, responsibilities, required evidence, and execution consequences to the runtime, while remaining open to revision and retirement. In one traced case, repeated integration friction produces an interface-review rule that governs later pull requests and is revised as work continues. Across 360 controlled runs over ten software workloads and three models, Relic raises complete-contract delivery from 14.06% to 19.76% (+5.71 percentage points) over a matched structured team without the protocol lifecycle, improving all four verified production endpoints in every model stratum. Under fresh-member transfer, behavioral correctness is 25.4% with no inherited protocol, 34.6% with the same rules provided as readable text, and 41.2% with executable bindings, a +6.5-point advantage over text alone. On the full CooperBench benchmark, after excluding broken benchmark pairs, Relic achieves 367/477 (76.9%), establishing the best reported result among peer-structured systems. On the fixed 48-pair same-model subset, Relic also exceeds Solo (29/48 vs. 26/48), reversing the coordination loss exhibited by the official peer baseline. Together, these results show how collaboration experience can become persistent organizational state that remains useful beyond the members who created it.",
+              "mediaUrls": [
+                "https://cdn-uploads.huggingface.co/production/uploads/658ed326a6567cb93c252413/bbv-ta2GVtZAScM1331B9.png"
+              ],
+              "organization": {
+                "_id": "66423b11d48363a46da212d5",
+                "name": "ulab-ai",
+                "fullname": "ulab",
+                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/636453547cf2c0b4f0a3ee1e/1LWAEA38-w18rFfkl-ef8.png"
+              },
+              "link": "https://huggingface.co/papers/2609.32965",
+              "published_at": "2026-09-29T00:00:00.000Z",
+              "upvotes": 3
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.32965"
+    },
+    {
+      "id": "6c49754b18e2902d2f9b",
+      "title": "Nereus: Adaptive Parallelism for LLM Post-Training",
+      "content_text": "Reinforcement learning (RL) post-training for large language models (LLMs) coordinates multiple models across generation, inference, and training on GPU clusters. Several factors may change during a run, including resource availability, sequence length, memory pressure, and stage bottlenecks. As a consequence, an execution plan that was initially suitable can then become slow or even infeasible over time. However, adapting a job whose models share GPUs entails significant challenges: deciding…",
+      "date_published": "2026-09-29T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6c49754b18e2902d2f9b",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.34645",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-09-29T10:22:18Z",
+          "data": {
+            "change": "added",
+            "label": "Nereus: Adaptive Parallelism for LLM Post-Training",
+            "item_type": "record",
+            "summary": "added: Nereus: Adaptive Parallelism for LLM Post-Training",
+            "after": {
+              "title": "Nereus: Adaptive Parallelism for LLM Post-Training",
+              "summary": "Reinforcement learning (RL) post-training for large language models (LLMs) coordinates multiple models across generation, inference, and training on GPU clusters. Several factors may change during a run, including resource availability, sequence length, memory pressure, and stage bottlenecks. As a consequence, an execution plan that was initially suitable can then become slow or even infeasible over time. However, adapting a job whose models share GPUs entails significant challenges: deciding whether a new plan is worth the transition cost, reusing the job's distributed state, and coordinating GPU transfers across models and stages.\n  Nereus targets these challenges as a cost-aware runtime that adapts RL post-training jobs into efficient execution plans. Its low-overhead controller selects a memory-feasible global plan and admits the transition using a cost model calibrated against the running job. To estimate and execute a transition, Nereus represents the distributed state of each replica of a model-stage (one model in one stage) as an Elastic Model Unit. It then employs a global transition graph to order the transformations and GPU transfers of these units. In a trace built from real data, online TP/PP adaptation reduces average step latency by 27.7% relative to the initial fixed TP/PP layout with DP scaling. In a 1,000-step run reaching 1,024 GPUs, six transitions consume 0.079% of total run time. Nereus improves end-to-end 8B PPO throughput by 2.14--7.27times over OpenRLHF and by 1.10--1.47times over Verl across diverse clusters.",
+              "mediaUrls": [
+                "https://cdn-uploads.huggingface.co/production/uploads/661d8018ba7a3d451862aff2/wdku9cCpmVr5eP_LgTDHZ.png"
+              ],
+              "link": "https://huggingface.co/papers/2609.34645",
+              "published_at": "2026-09-29T00:00:00.000Z",
+              "upvotes": 2
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.34645"
+    },
+    {
       "id": "22bc9ebcca4dcd120ab2",
       "title": "FlowTool: Controlling Tool Parameter in Image Retouching via Flow Matching",
       "content_text": "Tool-based image editing (image retouching) is commonly formulated with autoregressive multimodal large language models (MLLMs) that sequentially generate reasoning, tool selections, and parameter values. In this work, we present a novel approach to tool-based image editing by framing the task as a flow matching problem. We introduce FlowTool, a framework that directly models the distribution of high-quality tool parameters conditioned on the input image and user instruction using conditional…",
@@ -11898,342 +12224,6 @@
         }
       },
       "url": "https://huggingface.co/papers/2609.27901"
-    },
-    {
-      "id": "bb9b5e98593ccea3404e",
-      "title": "PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
-      "content_text": "Robotic bin packing requires long-horizon sequential decision-making, as each object placement affects the available space for subsequent packing. Existing methods primarily rely on hand-crafted geometric heuristics that optimize predefined objectives or reinforcement learning policies learned through trial and error over predefined training configurations. Despite recent advances in multimodal large language models (MLLMs) for this task, their potential for closed-loop sequential decisions…",
-      "date_published": "2026-09-24T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "bb9b5e98593ccea3404e",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.23784",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-09-24T17:26:00Z",
-          "data": {
-            "change": "added",
-            "label": "PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
-            "item_type": "record",
-            "summary": "added: PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
-            "after": {
-              "title": "PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
-              "summary": "Robotic bin packing requires long-horizon sequential decision-making, as each object placement affects the available space for subsequent packing. Existing methods primarily rely on hand-crafted geometric heuristics that optimize predefined objectives or reinforcement learning policies learned through trial and error over predefined training configurations. Despite recent advances in multimodal large language models (MLLMs) for this task, their potential for closed-loop sequential decisions across heterogeneous packing configurations remains underexplored. To address this gap, we introduce PackLab, a comprehensive framework for developing, training, and evaluating MLLMs for closed-loop robotic bin packing. PackLab-Suite provides a physics-based simulation platform for scalable generation of diverse training packing trajectories and evaluation of their physical outcomes. PackLab-VLM is a packing-specialized MLLM that understands the evolving object and container states to jointly select objects and predict placements in a closed-loop manner. PackLab-Bench provides standardized packing scenarios at multiple difficulty levels for systematic evaluation. Extensive experiments demonstrate that, on average, PackLab-VLM outperforms conventional packing heuristics, traditional reinforcement learning methods, and general-purpose MLLMs across object sets and container configurations, highlighting the potential of MLLMs for long-horizon robotic packing. The code, model, dataset, and benchmark are available at https://github.com/Correr-Zhou/PackLab .",
-              "organization": {
-                "_id": "6390c6fdd00f25601f445cd4",
-                "name": "CUHK-CSE",
-                "fullname": "The Chinese University of Hong Kong",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/621f2eb36e152b56a7cf0248/o8RRAczRjfNEzq70GzUwQ.png"
-              },
-              "link": "https://huggingface.co/papers/2609.23784",
-              "published_at": "2026-09-24T00:00:00.000Z",
-              "upvotes": 10
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 95,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.1"
-            },
-            {
-              "step": "map",
-              "version": "0.3.1",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.1",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.23784"
-    },
-    {
-      "id": "6b5bbdb16532b2c4d826",
-      "title": "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
-      "content_text": "Spatial reasoning is essential for vision-language models (VLMs) to understand and act in the physical world. Reasoning in dynamic environments requires VLMs to perceive local state transitions caused by object motion and viewpoint changes and integrate them over long trajectories to maintain an updated spatial state, yet existing VLMs remain limited in both capabilities. Current spatial training primarily focuses on static questions about object attributes and spatial relations, providing…",
-      "date_published": "2026-09-24T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "6b5bbdb16532b2c4d826",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.23038",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-09-24T17:26:00Z",
-          "data": {
-            "change": "added",
-            "label": "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
-            "item_type": "record",
-            "summary": "added: Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
-            "after": {
-              "title": "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
-              "summary": "Spatial reasoning is essential for vision-language models (VLMs) to understand and act in the physical world. Reasoning in dynamic environments requires VLMs to perceive local state transitions caused by object motion and viewpoint changes and integrate them over long trajectories to maintain an updated spatial state, yet existing VLMs remain limited in both capabilities. Current spatial training primarily focuses on static questions about object attributes and spatial relations, providing limited direct supervision for state transitions; in contrast, interaction trajectories naturally connect a preceding observation, an action, and a subsequent observation, offering direct supervision for local state transitions, while complete trajectories reveal dependencies among consecutive transitions. We therefore introduce Spatial-Interactor, a framework that trains VLMs to model physical-world state transitions through interaction, organizing this learning process into a three-level curriculum covering L1 passive world-state transitions, L2 active self-state transitions, and L3 long-horizon interaction trajectories. Accordingly, we construct the Learning from Spatial Interaction dataset (LSI-108K) from simulated and real interaction trajectories, with tasks aligned with the objective of each level. Our two-stage training strategy applies Supervised Fine-Tuning (SFT) to L1 and L2 for local transition modeling, and On-Policy Distillation (OPD) then uses privileged self-distillation: a teacher branch given segment-level transition descriptions supervises the student's on-policy CoT, helping the student learn to integrate consecutive transitions over L3 long trajectories. Experiments across multiple VLMs and spatial benchmarks show consistent gains in local transition modeling and long-horizon integration.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/6485bd278d14bcd5cdbb7c8d/K30KQ07efNPAFm5NdC0Zo.mp4",
-                "https://cdn-uploads.huggingface.co/production/uploads/6485bd278d14bcd5cdbb7c8d/XK9xxF0BXC3zbdDSO8OOs.mp4"
-              ],
-              "organization": {
-                "_id": "696461ab2d94e9a07cdb8efd",
-                "name": "OmniAI-ZJU",
-                "fullname": "ZJU-OmniAI",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/65f2595830354d0ee043b25a/eEeRdHlGyJ148JQ6BAJ4O.png"
-              },
-              "link": "https://huggingface.co/papers/2609.23038",
-              "published_at": "2026-09-24T00:00:00.000Z",
-              "upvotes": 43
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 95,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.1"
-            },
-            {
-              "step": "map",
-              "version": "0.3.1",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.1",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.23038"
-    },
-    {
-      "id": "6df826a50581a19e0556",
-      "title": "HappyWorld-Bench",
-      "content_text": "Evaluating world models requires assessing both the quality of the worlds they generate and their consistency and responsiveness under exploration, interaction, and modification. We introduce HappyWorld-Bench, a comprehensive benchmark that evaluates whether generated worlds remain reliable as agents interact with them. Our design is built on a hierarchical capability framework of six world capabilities (W1-W6), from generative construction to unified world modeling, instantiated across three…",
-      "date_published": "2026-09-24T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "6df826a50581a19e0556",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.24308",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-09-24T17:26:00Z",
-          "data": {
-            "change": "added",
-            "label": "HappyWorld-Bench",
-            "item_type": "record",
-            "summary": "added: HappyWorld-Bench",
-            "after": {
-              "title": "HappyWorld-Bench",
-              "summary": "Evaluating world models requires assessing both the quality of the worlds they generate and their consistency and responsiveness under exploration, interaction, and modification. We introduce HappyWorld-Bench, a comprehensive benchmark that evaluates whether generated worlds remain reliable as agents interact with them. Our design is built on a hierarchical capability framework of six world capabilities (W1-W6), from generative construction to unified world modeling, instantiated across three independent evaluation tracks: video world models, spatial world models, and embodied world models. HappyWorld-Bench comprises 1,138 video prompts, 300 spatial scenes, and 254 embodied test cases. Across all three tracks, we build and operate HappyWorld-Arena to organize human A/B comparisons and derive model-level Elo ratings, which complement newly designed automated metrics that capture behavioral correctness. We evaluate 14 video world models, 9 spatial systems, and 8 embodied candidates under this unified framework. Results reveal remaining reliability gaps across all three tracks: video models exhibit reduced consistency during extended rollouts and revisits, spatial models achieve at best 70.14% placement accuracy and 73.33% edit execution, and embodied models struggle to preserve state across multi-step actions and respond precisely to altered action conditions and physical rules. These findings highlight the need to evaluate world models not only by visual quality, but also by state consistency and the correctness of their responses to actions and interventions.",
-              "organization": {
-                "_id": "68be41370a3fcebdcad6516a",
-                "name": "alibabagroup",
-                "fullname": "alibaba",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/68be3ab7e52df040b2cf80dc/li4G29u_EGswyTN1Sm_Kq.png"
-              },
-              "link": "https://huggingface.co/papers/2609.24308",
-              "published_at": "2026-09-24T00:00:00.000Z",
-              "upvotes": 39
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 95,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.1"
-            },
-            {
-              "step": "map",
-              "version": "0.3.1",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.1",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.24308"
-    },
-    {
-      "id": "b7f0854233653d140052",
-      "title": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-      "content_text": "Agentic memory systems reuse past experience to improve future performance, yet most existing designs curate memory at write time: once a task is completed, its trajectory is distilled into a fixed artifact, such as a reflection, workflow, skill, or reasoning strategy, that is later retrieved by similarity. This forces the system to decide what is worth remembering before the future query is known, irreversibly discarding information and producing a query-independent summary that must serve…",
-      "date_published": "2026-09-24T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "b7f0854233653d140052",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.27334",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-09-24T17:26:00Z",
-          "data": {
-            "change": "added",
-            "label": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-            "item_type": "record",
-            "summary": "added: Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-            "after": {
-              "title": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-              "summary": "Agentic memory systems reuse past experience to improve future performance, yet most existing designs curate memory at write time: once a task is completed, its trajectory is distilled into a fixed artifact, such as a reflection, workflow, skill, or reasoning strategy, that is later retrieved by similarity. This forces the system to decide what is worth remembering before the future query is known, irreversibly discarding information and producing a query-independent summary that must serve many possible downstream tasks. Learning such a write-time curator is also difficult because the value of a storage decision may only become apparent when a relevant query arrives, potentially many tasks later, creating a long-horizon credit-assignment problem. We instead retain raw trajectories and defer curation until read time, when the current task is known. Given the retrieved traces and the new task, a memory curator synthesizes a compact, task-adaptive payload tailored to the immediate need. Because this payload is consumed on the same task, the curator can be trained directly from immediate task success, avoiding delayed utility signals and the need to artificially group related tasks. Across ALFWorld, WebShop, and τ^2-bench, our Just-in-Time Memory (JitMem) consistently outperforms no-memory agents as well as heuristic and learned write-time memory methods, improving over the strongest baseline by 16.2, 16.3, and 3.9 absolute success-rate points, respectively. Notably, even an untrained curator is already competitive with or surpasses these baselines, showing that task-adaptive read-time curation itself is a major source of the gain; training the curator further compounds the improvement.",
-              "organization": {
-                "_id": "5f6d64475e78cc6b0ed31e4c",
-                "name": "Salesforce",
-                "fullname": "Salesforce AI Research",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1602756670970-noauth.jpeg"
-              },
-              "link": "https://huggingface.co/papers/2609.27334",
-              "published_at": "2026-09-24T00:00:00.000Z",
-              "upvotes": 28
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 95,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.1"
-            },
-            {
-              "step": "map",
-              "version": "0.3.1",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.1",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.27334"
     }
   ]
 }
