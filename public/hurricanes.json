@@ -9,6 +9,107 @@
   },
   "items": [
     {
+      "id": "43e8a727406149597854",
+      "title": "Tropical Storm Hanna (AT3), advisory 29/0839Z",
+      "content_text": "HANNA HOLDS STEADY WHILE MAINTAINING AN EAST-SOUTHEAST TRACK. As of 5:00 AM AST Tue Sep 29 the center of Hanna was located near 35.2, -46.2 with movement ESE at 15 mph. The minimum central pressure was 1002 mb with maximum sustained winds of about 45 mph.",
+      "date_published": "2026-09-29T08:39:04Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "43e8a727406149597854",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-at.xml#Tropical Storm Hanna (AT3), advisory 29/0839Z",
+          "source_url": "https://www.nhc.noaa.gov/index-at.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T08:40:32Z",
+          "data": {
+            "change": "added",
+            "label": "Tropical Storm Hanna (AT3), advisory 29/0839Z",
+            "item_type": "entry",
+            "summary": "added: Tropical Storm Hanna (AT3), advisory 29/0839Z",
+            "after": {
+              "title": "Tropical Storm Hanna (AT3), advisory 29/0839Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT3+shtml/290838.shtml",
+              "id": "summary-al082026-202609290839",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-29T08:39:04Z",
+              "updated_at": "2026-09-29T08:39:04Z",
+              "summary": "HANNA HOLDS STEADY WHILE MAINTAINING AN EAST-SOUTHEAST TRACK. As of 5:00 AM AST Tue Sep 29 the center of Hanna was located near 35.2, -46.2 with movement ESE at 15 mph. The minimum central pressure was 1002 mb with maximum sustained winds of about 45 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Atlantic",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-at.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-at.xml",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT3+shtml/290838.shtml"
+    },
+    {
       "id": "8085f42deedd18b331db",
       "title": "Hurricane Polo (EP2), advisory 29/0553Z",
       "content_text": "POLO MAKES LANDFALL IN BAJA CALIFORNIA SUR JUST SOUTH OF LAS BARRANCAS. ...LIFE-THREATENING WINDS AND FLASH FLOODING ONGOING... As of 11:00 PM MST Mon Sep 28 the center of Polo was located near 25.9, -112.2 with movement NE at 13 mph. The minimum central pressure was 965 mb with maximum sustained winds of about 110 mph.",
