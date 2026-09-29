@@ -1,13 +1,119 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.ecb.europa.eu/rss/press.html",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "808d9c0434c744d3441e",
+      "title": "ECB: ECB amends monetary policy implementation guidelines as part of regular review",
+      "content_text": "ECB: ECB amends monetary policy implementation guidelines as part of regular review",
+      "date_published": "2026-09-29T08:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "808d9c0434c744d3441e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260929~050089e922.en.html",
+          "source_url": "https://www.ecb.europa.eu/rss/press.html",
+          "timestamp": null,
+          "observed_at": "2026-09-29T08:28:46Z",
+          "data": {
+            "change": "added",
+            "label": "ECB: ECB amends monetary policy implementation guidelines as part of regular review",
+            "item_type": "entry",
+            "summary": "added: ECB: ECB amends monetary policy implementation guidelines as part of regular review",
+            "after": {
+              "title": "ECB: ECB amends monetary policy implementation guidelines as part of regular review",
+              "link": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260929~050089e922.en.html",
+              "id": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260929~050089e922.en.html",
+              "author": null,
+              "published_at": "2026-09-29T08:00:00Z",
+              "updated_at": "2026-09-29T08:00:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "ECB - European Central Bank",
+                "url": "https://www.ecb.europa.eu/",
+                "feed_url": "https://www.ecb.europa.eu/rss/press.html"
+              },
+              "outlet": "ECB"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.ecb.europa.eu/rss/press.html",
+            "elapsed_ms": 498,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260929~050089e922.en.html"
+    },
     {
       "id": "e3179e6d4ce6250eaa2f",
       "title": "Reserve Bank of India: Result of the Second Overnight Variable Rate Reverse Repo (VRRR) auction held on September 29, 2026",
