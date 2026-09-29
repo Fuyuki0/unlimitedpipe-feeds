@@ -9,6 +9,107 @@
   },
   "items": [
     {
+      "id": "a29c967a8ac3e09ed279",
+      "title": "Tropical Depression Fay (AT1), advisory 29/1448Z",
+      "content_text": "FAY WEAKENS INTO A DEPRESSION. As of 11:00 AM AST Tue Sep 29 the center of Fay was located near 24.2, -47.3 with movement SW at 12 mph. The minimum central pressure was 1010 mb with maximum sustained winds of about 35 mph.",
+      "date_published": "2026-09-29T14:48:37Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a29c967a8ac3e09ed279",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-at.xml#Tropical Depression Fay (AT1), advisory 29/1448Z",
+          "source_url": "https://www.nhc.noaa.gov/index-at.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-29T14:49:17Z",
+          "data": {
+            "change": "added",
+            "label": "Tropical Depression Fay (AT1), advisory 29/1448Z",
+            "item_type": "entry",
+            "summary": "added: Tropical Depression Fay (AT1), advisory 29/1448Z",
+            "after": {
+              "title": "Tropical Depression Fay (AT1), advisory 29/1448Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT1+shtml/291448.shtml",
+              "id": "summary-al062026-202609291448",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-09-29T14:48:37Z",
+              "updated_at": "2026-09-29T14:48:37Z",
+              "summary": "FAY WEAKENS INTO A DEPRESSION. As of 11:00 AM AST Tue Sep 29 the center of Fay was located near 24.2, -47.3 with movement SW at 12 mph. The minimum central pressure was 1010 mb with maximum sustained winds of about 35 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Atlantic",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-at.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-at.xml",
+            "elapsed_ms": 187,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT1+shtml/291448.shtml"
+    },
+    {
       "id": "e2fc74aeb1350c84a55f",
       "title": "Hurricane Polo (EP2), advisory 29/1446Z",
       "content_text": "POLO ABOUT TO MAKE LANDFALL NEAR GUAYMAS MEXICO. ...CONDITIONS DETERIORATING IN THE LANDFALL AREA... As of 8:00 AM MST Tue Sep 29 the center of Polo was located near 27.8, -110.9 with movement NE at 17 mph. The minimum central pressure was 981 mb with maximum sustained winds of about 75 mph.",
