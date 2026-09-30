@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "eb648067b63a738cdca5",
+      "title": "M4.6 earthquake in Vietnam",
+      "content_text": "At 2026-09-30 08:37:21 Thai time (UTC+7), latitude 14.871, longitude 108.023, magnitude 4.6",
+      "date_published": "2026-09-30T01:47:46Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "eb648067b63a738cdca5",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17146",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-30T01:48:31Z",
+          "data": {
+            "change": "added",
+            "label": "M4.6 earthquake in Vietnam",
+            "item_type": "entry",
+            "summary": "added: M4.6 earthquake in Vietnam",
+            "after": {
+              "title": "M4.6 earthquake in Vietnam",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17146",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17146",
+              "author": null,
+              "published_at": "2026-09-30T01:47:46Z",
+              "updated_at": "2026-09-30T01:47:46Z",
+              "summary": "At 2026-09-30 08:37:21 Thai time (UTC+7), latitude 14.871, longitude 108.023, magnitude 4.6",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "4.6",
+              "place": "Vietnam"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1077,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17146"
+    },
+    {
       "id": "9472fc6c01db2a98fa96",
       "title": "M3.2 earthquake in Myanmar",
       "content_text": "At 2026-09-29 23:50:08 Thai time (UTC+7), latitude 21.931, longitude 96.286, magnitude 3.2",
