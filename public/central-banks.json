@@ -1,13 +1,119 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI)",
-  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
+  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "6021ea18c5a0ec81195f",
+      "title": "Reserve Bank of India: Treasury Bills: Full Auction Result",
+      "content_text": "(Amount in ₹ crore) Auction Results 91-Day 182-Day 364-Day I. Notified Amount 9,000 8,000 7,000 II. Competitive Bids Received (i) Number 63 58 78 (ii) Amount 14,440.500 11,531.500 18,010.000 III. Cut-off price (₹) / Yield 98.6425 97.1139 94.1949 (YTM: 5.5199%) (YTM: 5.9601%) (YTM: 6.1798%) IV. Competitive Bids Accepted (i) Number 49 47 26 (ii) Amount 8,550.000 7,600.000 6,650.000 V. Partial Allotment Percentage of Competitive Bids 94.9500% 85.5294% 35.5714% (3 bids) (1 bid) (1 bid) VI. Weighted…",
+      "date_published": "2026-09-30T11:05:24Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6021ea18c5a0ec81195f",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63696",
+          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-30T11:05:24Z",
+          "data": {
+            "change": "added",
+            "label": "Reserve Bank of India: Treasury Bills: Full Auction Result",
+            "item_type": "entry",
+            "summary": "added: Reserve Bank of India: Treasury Bills: Full Auction Result",
+            "after": {
+              "title": "Reserve Bank of India: Treasury Bills: Full Auction Result",
+              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63696",
+              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63696",
+              "author": null,
+              "published_at": null,
+              "updated_at": null,
+              "summary": "(Amount in ₹ crore) Auction Results 91-Day 182-Day 364-Day I. Notified Amount 9,000 8,000 7,000 II. Competitive Bids Received (i) Number 63 58 78 (ii) Amount 14,440.500 11,531.500 18,010.000 III. Cut-off price (₹) / Yield 98.6425 97.1139 94.1949 (YTM: 5.5199%) (YTM: 5.9601%) (YTM: 6.1798%) IV. Competitive Bids Accepted (i) Number 49 47 26 (ii) Amount 8,550.000 7,600.000 6,650.000 V. Partial Allotment Percentage of Competitive Bids 94.9500% 85.5294% 35.5714% (3 bids) (1 bid) (1 bid) VI. Weighted Average Price (₹)/Yield 98.6497 97.1246 94.2031 (WAY: 5.4902%) (WAY: 5.9373%) (WAY: 6.1705%) VII. Non-Competitive Bids Received (i) Number 4 4 4 (ii) Amount 966.565 909.579 765.550 VIII. Non-Competitive Bids Accepted (i) Number 4 4 4 (ii) Amount 950.000 900.000 750.000 (iii) Partial Allotment Percentage 96.4496 97.6613 95.7461 Ajit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1218",
+              "categories": [],
+              "feed": {
+                "title": "PRESS RELEASES FROM RBI",
+                "url": "http://www.rbi.org.in",
+                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
+              },
+              "outlet": "Reserve Bank of India"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+            "elapsed_ms": 595,
+            "not_modified": true,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63696"
+    },
     {
       "id": "5da0e5a6f4e6fe4fb31d",
       "title": "Bank of England: Financial Policy Committee Record – September 2026",
@@ -15906,112 +16012,6 @@
         }
       },
       "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63673"
-    },
-    {
-      "id": "b172cb29aadbb2e09a05",
-      "title": "Reserve Bank of India: WMA Limit for Government of India for October 2026 – March 2027",
-      "content_text": "The Reserve Bank of India, in consultation with the Government of India, has decided that the limit for Ways and Means Advances (WMA) for the second half of the financial year 2026-27 (October 2026 to March 2027) will be ₹50,000 crore.\nThe Reserve Bank of India may trigger fresh floatation of market loans when the Government of India utilises 75 per cent of the WMA limit.\nThe Reserve Bank of India, in consultation with the Government of India, retains the flexibility to revise the WMA limit at…",
-      "date_published": "2026-09-25T23:49:21Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "b172cb29aadbb2e09a05",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63670",
-          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:49:21Z",
-          "data": {
-            "change": "added",
-            "label": "Reserve Bank of India: WMA Limit for Government of India for October 2026 – March 2027",
-            "item_type": "entry",
-            "summary": "added: Reserve Bank of India: WMA Limit for Government of India for October 2026 – March 2027",
-            "after": {
-              "title": "Reserve Bank of India: WMA Limit for Government of India for October 2026 – March 2027",
-              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63670",
-              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63670",
-              "author": null,
-              "published_at": null,
-              "updated_at": null,
-              "summary": "The Reserve Bank of India, in consultation with the Government of India, has decided that the limit for Ways and Means Advances (WMA) for the second half of the financial year 2026-27 (October 2026 to March 2027) will be ₹50,000 crore.\nThe Reserve Bank of India may trigger fresh floatation of market loans when the Government of India utilises 75 per cent of the WMA limit.\nThe Reserve Bank of India, in consultation with the Government of India, retains the flexibility to revise the WMA limit at any time taking into consideration the prevailing circumstances.\nThe interest rate on WMA/Overdraft will be as under:\nWMA: Repo Rate\nOverdraft: Two percent above the Repo Rate\n(Brij Raj)\nChief General Manager\nPress Release: 2026-2027/1192",
-              "categories": [],
-              "feed": {
-                "title": "PRESS RELEASES FROM RBI",
-                "url": "http://www.rbi.org.in",
-                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
-              },
-              "outlet": "Reserve Bank of India"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-            "elapsed_ms": 1017,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.3.2"
-            },
-            {
-              "step": "filter",
-              "version": "0.3.2",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63670"
     }
   ]
 }
