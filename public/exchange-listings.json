@@ -1,13 +1,389 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "New listings: Coinbase, Binance, OKX, Upbit",
-  "home_page_url": "https://api.exchange.coinbase.com/products",
+  "home_page_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "aa33f9c476444e462ab3",
+      "title": "OKX lists (CT-USDT)",
+      "content_text": "pair CT-USDT · listed_at 1790762400000 · exchange OKX · published_at 2026-09-30T10:00:00Z",
+      "date_published": "2026-09-30T10:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "aa33f9c476444e462ab3",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX CT-USDT",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-30T04:29:36Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (CT-USDT)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (CT-USDT)",
+            "after": {
+              "pair": "CT-USDT",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790762400000",
+              "exchange": "OKX",
+              "title": "OKX lists  (CT-USDT)",
+              "published_at": "2026-09-30T10:00:00Z",
+              "listing": "OKX CT-USDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 243,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
+    {
+      "id": "2569888b2a666482c80c",
+      "title": "OKX lists (CT-USDC)",
+      "content_text": "pair CT-USDC · listed_at 1790766000000 · exchange OKX · published_at 2026-09-30T11:00:00Z",
+      "date_published": "2026-09-30T11:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2569888b2a666482c80c",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX CT-USDC",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-30T04:29:36Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (CT-USDC)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (CT-USDC)",
+            "after": {
+              "pair": "CT-USDC",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790766000000",
+              "exchange": "OKX",
+              "title": "OKX lists  (CT-USDC)",
+              "published_at": "2026-09-30T11:00:00Z",
+              "listing": "OKX CT-USDC"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 243,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
+    {
+      "id": "742e4cd1da1e691443a7",
+      "title": "OKX lists (CT-TRY)",
+      "content_text": "pair CT-TRY · listed_at 1790766000000 · exchange OKX · published_at 2026-09-30T11:00:00Z",
+      "date_published": "2026-09-30T11:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "742e4cd1da1e691443a7",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX CT-TRY",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-30T04:29:36Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (CT-TRY)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (CT-TRY)",
+            "after": {
+              "pair": "CT-TRY",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790766000000",
+              "exchange": "OKX",
+              "title": "OKX lists  (CT-TRY)",
+              "published_at": "2026-09-30T11:00:00Z",
+              "listing": "OKX CT-TRY"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 243,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
+    {
+      "id": "f722a09d13083ddc10c2",
+      "title": "OKX lists (CT-EUR)",
+      "content_text": "pair CT-EUR · listed_at 1790766000000 · exchange OKX · published_at 2026-09-30T11:00:00Z",
+      "date_published": "2026-09-30T11:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f722a09d13083ddc10c2",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX CT-EUR",
+          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+          "timestamp": null,
+          "observed_at": "2026-09-30T04:29:36Z",
+          "data": {
+            "change": "added",
+            "label": "OKX lists  (CT-EUR)",
+            "item_type": "record",
+            "summary": "added: OKX lists  (CT-EUR)",
+            "after": {
+              "pair": "CT-EUR",
+              "name": "",
+              "quote": "",
+              "listed_at": "1790766000000",
+              "exchange": "OKX",
+              "title": "OKX lists  (CT-EUR)",
+              "published_at": "2026-09-30T11:00:00Z",
+              "listing": "OKX CT-EUR"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+            "content_type": "application/json",
+            "elapsed_ms": 243,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
+    },
     {
       "id": "0fefaf35fe970e51d8e3",
       "title": "Coinbase lists CT (CT/USD)",
