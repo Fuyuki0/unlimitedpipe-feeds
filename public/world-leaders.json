@@ -1,13 +1,110 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "World leaders' announcements (White House, Kremlin, European Commission)",
-  "home_page_url": "https://ec.europa.eu/commission/presscorner/api/rss?language=en",
+  "home_page_url": "http://en.kremlin.ru/events/president/news/feed",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "1c2d50c1e7682f2c7246",
+      "title": "Kremlin: Meeting with Governors-Elect",
+      "content_text": "Kremlin: Meeting with Governors-Elect",
+      "date_published": "2026-09-30T13:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1c2d50c1e7682f2c7246",
+          "source": "rss",
+          "type": "change",
+          "key": "http://en.kremlin.ru/events/president/news/80898",
+          "source_url": "http://en.kremlin.ru/events/president/news/feed",
+          "timestamp": null,
+          "observed_at": "2026-09-30T15:54:34Z",
+          "data": {
+            "change": "added",
+            "label": "Kremlin: Meeting with Governors-Elect",
+            "item_type": "entry",
+            "summary": "added: Kremlin: Meeting with Governors-Elect",
+            "after": {
+              "title": "Kremlin: Meeting with Governors-Elect",
+              "link": "http://en.kremlin.ru/events/president/news/80898",
+              "id": "http://en.kremlin.ru/events/president/news/80898",
+              "author": null,
+              "published_at": "2026-09-30T13:00:00Z",
+              "updated_at": "2026-09-30T14:37:17Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Website of the President of Russia: President: News",
+                "url": "http://en.kremlin.ru/events/president/news",
+                "feed_url": "http://en.kremlin.ru/events/president/news/feed"
+              },
+              "outlet": "Kremlin"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "http://en.kremlin.ru/events/president/news/feed",
+            "elapsed_ms": 1335,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^whitehouse\\\\.gov$\", \"White House\")",
+                  "outlet=replace(outlet, \"^en\\\\.kremlin\\\\.ru$\", \"Kremlin\")",
+                  "outlet=replace(outlet, \"^ec\\\\.europa\\\\.eu$\", \"European Commission\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "world-leaders",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://en.kremlin.ru/events/president/news/80898"
+    },
     {
       "id": "1fc1c64acff7026325e5",
       "title": "European Commission: Speech by Commissioner Lahbib on Equality Data",
