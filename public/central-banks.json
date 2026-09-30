@@ -1,13 +1,119 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI)",
-  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "b62a1347e04c8eca0011",
+      "title": "Reserve Bank of India: 91-Day, 182-Day and 364-Day T-Bill Auction Result: Cut-off",
+      "content_text": "T-Bill 91-Day 182-Day 364-Day I. Total Face Value Notified ₹9,000 Crore ₹8,000 Crore ₹7,000 Crore II. Cut-off Price (₹) and Implicit Yield at Cut-Off Price 98.6425\n(YTM: 5.5199%) 97.1139\n(YTM: 5.9601%) 94.1949\n(YTM: 6.1798%) III. Total Face Value Accepted ₹9,000 Crore ₹8,000 Crore ₹7,000 Crore Ajit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1216",
+      "date_published": "2026-09-30T09:10:44Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "b62a1347e04c8eca0011",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63694",
+          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+          "timestamp": null,
+          "observed_at": "2026-09-30T09:10:44Z",
+          "data": {
+            "change": "added",
+            "label": "Reserve Bank of India: 91-Day, 182-Day and 364-Day T-Bill Auction Result: Cut-off",
+            "item_type": "entry",
+            "summary": "added: Reserve Bank of India: 91-Day, 182-Day and 364-Day T-Bill Auction Result: Cut-off",
+            "after": {
+              "title": "Reserve Bank of India: 91-Day, 182-Day and 364-Day T-Bill Auction Result: Cut-off",
+              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63694",
+              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63694",
+              "author": null,
+              "published_at": null,
+              "updated_at": null,
+              "summary": "T-Bill 91-Day 182-Day 364-Day I. Total Face Value Notified ₹9,000 Crore ₹8,000 Crore ₹7,000 Crore II. Cut-off Price (₹) and Implicit Yield at Cut-Off Price 98.6425\n(YTM: 5.5199%) 97.1139\n(YTM: 5.9601%) 94.1949\n(YTM: 6.1798%) III. Total Face Value Accepted ₹9,000 Crore ₹8,000 Crore ₹7,000 Crore Ajit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1216",
+              "categories": [],
+              "feed": {
+                "title": "PRESS RELEASES FROM RBI",
+                "url": "http://www.rbi.org.in",
+                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
+              },
+              "outlet": "Reserve Bank of India"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+            "elapsed_ms": 653,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63694"
+    },
     {
       "id": "6c9bb0eae7e00b71a836",
       "title": "Bank of Japan: Quarterly Schedule of Outright Purchases of Japanese Government Bonds (Competitive Auction Method) (October-December 2026)",
@@ -15906,112 +16012,6 @@
         }
       },
       "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63668"
-    },
-    {
-      "id": "e654818d150e8b18f55d",
-      "title": "Reserve Bank of India: Money Supply for the fortnight ended on September 15, 2026",
-      "content_text": "The Reserve Bank has today released data on Money Supply for the fortnight ended on September 15, 2026.\nAjit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1189",
-      "date_published": "2026-09-25T23:49:21Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "e654818d150e8b18f55d",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63667",
-          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:49:21Z",
-          "data": {
-            "change": "added",
-            "label": "Reserve Bank of India: Money Supply for the fortnight ended on September 15, 2026",
-            "item_type": "entry",
-            "summary": "added: Reserve Bank of India: Money Supply for the fortnight ended on September 15, 2026",
-            "after": {
-              "title": "Reserve Bank of India: Money Supply for the fortnight ended on September 15, 2026",
-              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63667",
-              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63667",
-              "author": null,
-              "published_at": null,
-              "updated_at": null,
-              "summary": "The Reserve Bank has today released data on Money Supply for the fortnight ended on September 15, 2026.\nAjit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1189",
-              "categories": [],
-              "feed": {
-                "title": "PRESS RELEASES FROM RBI",
-                "url": "http://www.rbi.org.in",
-                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
-              },
-              "outlet": "Reserve Bank of India"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-            "elapsed_ms": 1017,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.3.2"
-            },
-            {
-              "step": "filter",
-              "version": "0.3.2",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63667"
     }
   ]
 }
