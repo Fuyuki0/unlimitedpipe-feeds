@@ -2,12 +2,107 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Bank of Thailand press releases",
   "home_page_url": "https://www.bot.or.th/en/news-and-media/news.html",
-  "description": "Events collected by UnlimitedPipe 0.6.0",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.6.0"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "eff534bbe3b526560971",
+      "title": "Press Release on the Economic and Monetary Conditions for August 2026",
+      "content_text": "published_at 2026-09-30",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "eff534bbe3b526560971",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.bot.or.th/en/news-and-media/news.html#https://www.bot.or.th/en/news-and-media/news/news-20260930.html",
+          "source_url": "https://www.bot.or.th/en/news-and-media/news.html",
+          "timestamp": null,
+          "observed_at": "2026-09-30T08:14:34Z",
+          "data": {
+            "change": "added",
+            "label": "Press Release on the Economic and Monetary Conditions for August 2026",
+            "item_type": "link",
+            "summary": "added: Press Release on the Economic and Monetary Conditions for August 2026",
+            "after": {
+              "title": "Press Release on the Economic and Monetary Conditions for August 2026",
+              "link": "https://www.bot.or.th/en/news-and-media/news/news-20260930.html",
+              "published_at": "2026-09-30"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.bot.or.th/en/news-and-media/news.html",
+            "content_type": "text/html",
+            "elapsed_ms": 2957,
+            "not_modified": false,
+            "rendered": true,
+            "method": "html"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "url matches \"/news-and-media/news/news-\\\\d{8}\\\\.html$\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=replace(trim(text), \"\\\\s+\\\\d{1,2} [A-Z][a-z]{2} \\\\d{4}\\\\b.*$\", \"\")",
+                  "link=url",
+                  "published_at=replace(url, \"^.*news-(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)\\\\.html$\", \"\\\\1-\\\\2-\\\\3\")"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "link",
+                  "published_at"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "bank-of-thailand",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.bot.or.th/en/news-and-media/news/news-20260930.html"
+    },
     {
       "id": "22450c38f96a09759779",
       "title": "BOT to Release Previously Issued Commemorative Banknotes Honoring Her Majesty Queen Sirikit The Queen Mother",
