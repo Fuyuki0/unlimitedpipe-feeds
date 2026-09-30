@@ -2,12 +2,138 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Data breaches (Have I Been Pwned)",
   "home_page_url": "https://haveibeenpwned.com/PwnedWebsites",
-  "description": "Events collected by UnlimitedPipe 0.3.2",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.3.2"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "84f28d40176d8ffa63d9",
+      "title": "Medela: 423.9K accounts breached",
+      "content_text": "In September 2026, Swiss medical device company Medela was the target of a ShinyHunters \"pay or leak\" extortion campaign. The data allegedly obtained in the breach was later published publicly and included 424k unique email addresses belonging predominantly to healthcare professionals, Medela staff and leads. The exposed data consisted primarily of corporate contact information, including names, physical addresses and phone numbers, with some records also containing associated support tickets.",
+      "date_published": "2026-09-30T11:48:28Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "84f28d40176d8ffa63d9",
+          "source": "web",
+          "type": "change",
+          "key": "https://haveibeenpwned.com/api/v3/breaches#Medela",
+          "source_url": "https://haveibeenpwned.com/api/v3/breaches",
+          "timestamp": null,
+          "observed_at": "2026-09-30T12:02:21Z",
+          "data": {
+            "change": "added",
+            "label": "Medela: 423.9K accounts breached",
+            "item_type": "record",
+            "summary": "added: Medela: 423.9K accounts breached",
+            "after": {
+              "Name": "Medela",
+              "Domain": "medela.com",
+              "BreachDate": "2026-09-07",
+              "AddedDate": "2026-09-30T11:48:28Z",
+              "ModifiedDate": "2026-09-30T11:48:28Z",
+              "PwnCount": 423947,
+              "Attribution": null,
+              "DisclosureUrl": null,
+              "DataClasses": [
+                "Email addresses",
+                "Employers",
+                "Job titles",
+                "Names",
+                "Phone numbers",
+                "Physical addresses",
+                "Salutations",
+                "Support tickets"
+              ],
+              "IsVerified": true,
+              "IsFabricated": false,
+              "IsSensitive": true,
+              "IsRetired": false,
+              "IsSpamList": false,
+              "IsMalware": false,
+              "IsSubscriptionFree": false,
+              "IsStealerLog": false,
+              "accounts": "423.9K",
+              "title": "Medela: 423.9K accounts breached",
+              "summary": "In September 2026, Swiss medical device company Medela was the target of a ShinyHunters \"pay or leak\" extortion campaign. The data allegedly obtained in the breach was later published publicly and included 424k unique email addresses belonging predominantly to healthcare professionals, Medela staff and leads. The exposed data consisted primarily of corporate contact information, including names, physical addresses and phone numbers, with some records also containing associated support tickets.",
+              "published_at": "2026-09-30T11:48:28Z",
+              "link": "https://haveibeenpwned.com/Breach/Medela"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://haveibeenpwned.com/api/v3/breaches",
+            "content_type": "application/json",
+            "elapsed_ms": 410,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "IsVerified and not IsFabricated and not IsSpamList"
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "AddedDate"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.32",
+              "args": {
+                "count": 30
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "accounts=short(PwnCount)",
+                  "title=Title + \": \" + accounts + \" accounts breached\"",
+                  "summary=replace(Description, \"<[^>]+>\", \"\")",
+                  "published_at=AddedDate",
+                  "link=\"https://haveibeenpwned.com/Breach/\" + Name"
+                ],
+                "drop": [
+                  "Description",
+                  "LogoPath",
+                  "Title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "Name",
+                "namespace": "data-breaches",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://haveibeenpwned.com/Breach/Medela"
+    },
     {
       "id": "f6babcc07b12c1057e44",
       "title": "LimeLeads: 17.8M accounts breached",
