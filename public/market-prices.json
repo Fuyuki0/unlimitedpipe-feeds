@@ -9,6 +9,120 @@
   },
   "items": [
     {
+      "id": "0a29811512b93ee465dd",
+      "title": "US 10-year Treasury yield: 5.29% on 2026-09-30",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-30, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-30T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0a29811512b93ee465dd",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-30",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T20:43:37Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.29% on 2026-09-30",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.29% on 2026-09-30",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.29% on 2026-09-30",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-30, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-30T21:00:00Z",
+              "day": "DGS10 2026-09-30"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 314,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
       "id": "26a64257df033a48fb90",
       "title": "US 10-year Treasury yield: 5.26% on 2026-09-29",
       "content_text": "Close of the US 10-year Treasury yield on 2026-09-29, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
