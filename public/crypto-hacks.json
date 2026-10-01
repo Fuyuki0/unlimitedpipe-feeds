@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "1e138f557d689fe5c784",
+      "title": "SKYDAO: $183.5K lost (protocol logic)",
+      "content_text": "Swap Logic Flaw. Target: DeFi Protocol.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1e138f557d689fe5c784",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#SKYDAO 1790726400",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-10-01T06:54:01Z",
+          "data": {
+            "change": "added",
+            "label": "SKYDAO: $183.5K lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: SKYDAO: $183.5K lost (protocol logic)",
+            "after": {
+              "title": "SKYDAO: $183.5K lost (protocol logic)",
+              "summary": "Swap Logic Flaw. Target: DeFi Protocol.",
+              "published_at": "2026-09-30T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "SKYDAO 1790726400",
+              "chain": [
+                "BSC"
+              ],
+              "amount": 183482.88
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 27,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.32",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=technique + \". Target: \" + targetType + \".\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "7c00fd9f517f78fef795",
       "title": "Fake GIWA Bridge: $2.1M lost (social engineering)",
       "content_text": "Impersonation Scam. Target: DeFi Protocol.",
