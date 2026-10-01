@@ -2,12 +2,76 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Rust blog",
   "home_page_url": "https://blog.rust-lang.org/",
-  "description": "Events collected by UnlimitedPipe 0.3.0",
+  "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.3.0"
+    "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "3261794964fe2d71c46e",
+      "title": "Announcing Rust 1.99.0",
+      "content_text": "The Rust team is happy to announce a new version of Rust, 1.99.0. Rust is a programming language empowering everyone to build reliable and efficient software.\nIf you have a previous version of Rust installed via rustup , you can get 1.99.0 with:\n$ rustup update stable\nIf you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.99.0.\nIf you'd like to help us out by testing future releases, you might consider updating…",
+      "date_published": "2026-10-01T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3261794964fe2d71c46e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/",
+          "source_url": "https://blog.rust-lang.org/feed.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-01T13:01:08Z",
+          "data": {
+            "change": "added",
+            "label": "Announcing Rust 1.99.0",
+            "item_type": "entry",
+            "summary": "added: Announcing Rust 1.99.0",
+            "after": {
+              "title": "Announcing Rust 1.99.0",
+              "link": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/",
+              "id": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/",
+              "author": "The Rust Release Team",
+              "published_at": "2026-10-01T00:00:00Z",
+              "updated_at": "2026-10-01T00:00:00Z",
+              "summary": "The Rust team is happy to announce a new version of Rust, 1.99.0. Rust is a programming language empowering everyone to build reliable and efficient software.\nIf you have a previous version of Rust installed via rustup , you can get 1.99.0 with:\n$ rustup update stable\nIf you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.99.0.\nIf you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel ( rustup default beta ) or the nightly channel ( rustup default nightly ). Please report any bugs you might come across!\nWhat's in 1.99.0 stable\nextern \"C\" variadics\nRust 1.99.0 stabilizes defining C-ABI variadic functions with \"C\" and\n\"C-unwind\" ABIs. Variadic functions defined this way use a variable argument\nlist ( ... ) and accept an arbitrary number of arguments. Rust could already\ncall externally-defined variadic functions (e.g., libc::printf ). With Rust\n1.99, these functions can now be written in Rust itself:\n/// SAFETY: must be called with (at least) 2 i32 arguments.\nunsafe extern \"C\" fn sum(mut args: ...) -> i32 {\n// SAFETY: guaranteed by the caller.\nlet a = unsafe { args.next_arg::<i32>() };\nlet b = unsafe { args.next_arg::<i32>() };\na + b\n}\nfn foo() -> i32 {\nunsafe { sum(0i32, 2i32) }\n}\nThe type of ... is VaList ,\nwhich is ABI-compatible with the C va_list type across targets. What types can be read from a VaList is guarded by the\nVaArgSafe trait.\nFor more details on c-variadic functions, see the\nReference.\nThis release also stabilizes support for defining naked variadic functions with\nnon-\"C\" ABIs, which must be written via inline assembly.\nLayout information from raw pointers\nThis release settles the safety requirements for retrieving the size and\nalignment on raw pointers to both Sized (trivially safe, already possible on\nstable) and non- Sized types.\nThis is done by stabilizing three functions:\nLayout::for_value_raw\nmem::size_of_v",
+              "categories": [],
+              "feed": {
+                "title": "Rust Blog",
+                "url": "https://blog.rust-lang.org/",
+                "feed_url": "https://blog.rust-lang.org/feed.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://blog.rust-lang.org/feed.xml",
+            "elapsed_ms": 132,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "rust-news",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/"
+    },
     {
       "id": "9559d1c91928f8071f8e",
       "title": "Announcing a Maintainer in Residence: Scott Schafer for the Cargo team",
