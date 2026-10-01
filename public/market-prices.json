@@ -1,13 +1,1609 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Treasury yield and oil (FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-20&coed=2026-09-30",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "26a64257df033a48fb90",
+      "title": "US 10-year Treasury yield: 5.26% on 2026-09-29",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-29, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-29T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "26a64257df033a48fb90",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-29",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.26% on 2026-09-29",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.26% on 2026-09-29",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.26% on 2026-09-29",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-29, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-29T21:00:00Z",
+              "day": "DGS10 2026-09-29"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "87065edf5ecae529bfbe",
+      "title": "WTI crude oil: $96.16 a barrel on 2026-09-29",
+      "content_text": "Close of the WTI crude oil on 2026-09-29, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-29T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "87065edf5ecae529bfbe",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-29",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $96.16 a barrel on 2026-09-29",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $96.16 a barrel on 2026-09-29",
+            "after": {
+              "title": "WTI crude oil: $96.16 a barrel on 2026-09-29",
+              "summary": "Close of the WTI crude oil on 2026-09-29, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-29T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-29"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "ab75f22907dfb7f8126f",
+      "title": "US 10-year Treasury yield: 5.24% on 2026-09-28",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-28, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-28T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ab75f22907dfb7f8126f",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-28",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.24% on 2026-09-28",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.24% on 2026-09-28",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.24% on 2026-09-28",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-28, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-28T21:00:00Z",
+              "day": "DGS10 2026-09-28"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "0e91139805fe47c416e7",
+      "title": "WTI crude oil: $99.37 a barrel on 2026-09-28",
+      "content_text": "Close of the WTI crude oil on 2026-09-28, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-28T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0e91139805fe47c416e7",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-28",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $99.37 a barrel on 2026-09-28",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $99.37 a barrel on 2026-09-28",
+            "after": {
+              "title": "WTI crude oil: $99.37 a barrel on 2026-09-28",
+              "summary": "Close of the WTI crude oil on 2026-09-28, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-28T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-28"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "5f6abf53c60541e95746",
+      "title": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-25T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "5f6abf53c60541e95746",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-25",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.17% on 2026-09-25",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.17% on 2026-09-25",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-25T21:00:00Z",
+              "day": "DGS10 2026-09-25"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "b3e1c5de4cadd5a5c4fa",
+      "title": "WTI crude oil: $85.23 a barrel on 2026-09-25",
+      "content_text": "Close of the WTI crude oil on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-25T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "b3e1c5de4cadd5a5c4fa",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-25",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $85.23 a barrel on 2026-09-25",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $85.23 a barrel on 2026-09-25",
+            "after": {
+              "title": "WTI crude oil: $85.23 a barrel on 2026-09-25",
+              "summary": "Close of the WTI crude oil on 2026-09-25, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-25T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-25"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "c2ed4eda238a12fa7abe",
+      "title": "US 10-year Treasury yield: 5.18% on 2026-09-24",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-24, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-24T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c2ed4eda238a12fa7abe",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-24",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.18% on 2026-09-24",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.18% on 2026-09-24",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.18% on 2026-09-24",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-24, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-24T21:00:00Z",
+              "day": "DGS10 2026-09-24"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "f9e14207e320546ba94d",
+      "title": "WTI crude oil: $95.88 a barrel on 2026-09-24",
+      "content_text": "Close of the WTI crude oil on 2026-09-24, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-24T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f9e14207e320546ba94d",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-24",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $95.88 a barrel on 2026-09-24",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $95.88 a barrel on 2026-09-24",
+            "after": {
+              "title": "WTI crude oil: $95.88 a barrel on 2026-09-24",
+              "summary": "Close of the WTI crude oil on 2026-09-24, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-24T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-24"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "f656e070e87a93ac93c0",
+      "title": "US 10-year Treasury yield: 5.11% on 2026-09-23",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-23, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-23T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f656e070e87a93ac93c0",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-23",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 5.11% on 2026-09-23",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 5.11% on 2026-09-23",
+            "after": {
+              "title": "US 10-year Treasury yield: 5.11% on 2026-09-23",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-23, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-23T21:00:00Z",
+              "day": "DGS10 2026-09-23"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "8d94b2ed2b195fd0be1c",
+      "title": "WTI crude oil: $93.38 a barrel on 2026-09-23",
+      "content_text": "Close of the WTI crude oil on 2026-09-23, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-23T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8d94b2ed2b195fd0be1c",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-23",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $93.38 a barrel on 2026-09-23",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $93.38 a barrel on 2026-09-23",
+            "after": {
+              "title": "WTI crude oil: $93.38 a barrel on 2026-09-23",
+              "summary": "Close of the WTI crude oil on 2026-09-23, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-23T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-23"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "67830bbac72990f9bb55",
+      "title": "US 10-year Treasury yield: 4.96% on 2026-09-22",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-22, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-22T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "67830bbac72990f9bb55",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-22",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 4.96% on 2026-09-22",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 4.96% on 2026-09-22",
+            "after": {
+              "title": "US 10-year Treasury yield: 4.96% on 2026-09-22",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-22, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-22T21:00:00Z",
+              "day": "DGS10 2026-09-22"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "8db5b6c029f168d9159b",
+      "title": "WTI crude oil: $96.41 a barrel on 2026-09-22",
+      "content_text": "Close of the WTI crude oil on 2026-09-22, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-22T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8db5b6c029f168d9159b",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-22",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $96.41 a barrel on 2026-09-22",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $96.41 a barrel on 2026-09-22",
+            "after": {
+              "title": "WTI crude oil: $96.41 a barrel on 2026-09-22",
+              "summary": "Close of the WTI crude oil on 2026-09-22, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-22T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-22"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "64186a970428d288a13a",
+      "title": "US 10-year Treasury yield: 4.96% on 2026-09-21",
+      "content_text": "Close of the US 10-year Treasury yield on 2026-09-21, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-21T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "64186a970428d288a13a",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01#DGS10 2026-09-21",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "US 10-year Treasury yield: 4.96% on 2026-09-21",
+            "item_type": "record",
+            "summary": "added: US 10-year Treasury yield: 4.96% on 2026-09-21",
+            "after": {
+              "title": "US 10-year Treasury yield: 4.96% on 2026-09-21",
+              "summary": "Close of the US 10-year Treasury yield on 2026-09-21, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DGS10",
+              "published_at": "2026-09-21T21:00:00Z",
+              "day": "DGS10 2026-09-21"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 352,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "f39adee93191dd034087",
+      "title": "WTI crude oil: $96.97 a barrel on 2026-09-21",
+      "content_text": "Close of the WTI crude oil on 2026-09-21, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-09-21T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f39adee93191dd034087",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01#DCOILWTICO 2026-09-21",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+          "timestamp": null,
+          "observed_at": "2026-10-01T00:35:23Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $96.97 a barrel on 2026-09-21",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $96.97 a barrel on 2026-09-21",
+            "after": {
+              "title": "WTI crude oil: $96.97 a barrel on 2026-09-21",
+              "summary": "Close of the WTI crude oil on 2026-09-21, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-09-21T21:00:00Z",
+              "day": "DCOILWTICO 2026-09-21"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-09-21&coed=2026-10-01",
+            "content_type": "application/csv",
+            "elapsed_ms": 279,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\")",
+                  "shown=replace(replace(series, \"^DGS10$\", value + \"%\"), \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=\"Close of the \" + name + \" on \" + date + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
     {
       "id": "6677a016e0c3b0ab6aa2",
       "title": "US 10-year Treasury yield: 5.26% on 2026-09-29",
