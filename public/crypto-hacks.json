@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "639d64d6dcc2e557e35f",
+      "title": "FH Token: $20K lost (protocol logic)",
+      "content_text": "published_at 2026-08-25T00:00:00Z · amount 20000",
+      "date_published": "2026-08-25T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "639d64d6dcc2e557e35f",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#FH Token 1787616000",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-10-01T18:12:50Z",
+          "data": {
+            "change": "added",
+            "label": "FH Token: $20K lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: FH Token: $20K lost (protocol logic)",
+            "after": {
+              "title": "FH Token: $20K lost (protocol logic)",
+              "summary": "Swap Logic Flaw. Target: Token.",
+              "published_at": "2026-08-25T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "FH Token 1787616000",
+              "chain": [
+                "BSC"
+              ],
+              "amount": 20000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 31,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.32",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=technique + \". Target: \" + targetType + \".\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "eaa3a00ea796b826f144",
       "title": "NEAR Intents: $3.8M lost (bridge & cross-chain)",
       "content_text": "Bridge Logic Flaw. Target: DeFi Protocol.",
@@ -5716,115 +5825,6 @@
                 "Stellar"
               ],
               "amount": 717000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "639d64d6dcc2e557e35f",
-      "title": "FH Token: $20K lost (protocol logic)",
-      "content_text": "published_at 2026-08-25T00:00:00Z · amount 20000",
-      "date_published": "2026-08-25T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "639d64d6dcc2e557e35f",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#FH Token 1787616000",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "FH Token: $20K lost (protocol logic)",
-            "item_type": "record",
-            "summary": "added: FH Token: $20K lost (protocol logic)",
-            "after": {
-              "title": "FH Token: $20K lost (protocol logic)",
-              "summary": "Swap Logic Flaw. Target: Token.",
-              "published_at": "2026-08-25T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "FH Token 1787616000",
-              "chain": [
-                "BSC"
-              ],
-              "amount": 20000
             }
           },
           "metadata": {
