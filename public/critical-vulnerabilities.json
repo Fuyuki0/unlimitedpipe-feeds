@@ -9,6 +9,220 @@
   },
   "items": [
     {
+      "id": "f33034bf40d7cf7e42c2",
+      "title": "CVE-2026-75957 (critical 9.8): The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication",
+      "content_text": "The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication Bypass in all versions up to, and including, 2.15.0 via the `checkout_form` parameter of the `login_customer_after_checkout` function. This is due to the publicly accessible `wu_ajax_nopriv_wu_validate_form` AJAX handler accepting a freely obtainable checkout nonce, and the `checkout_form=wu-finish-checkout` parameter causing `get_validation_rules()` to discard all validation…",
+      "date_published": "2026-10-01T08:16:52Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f33034bf40d7cf7e42c2",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-75957",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-10-01T09:12:43Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-75957 (critical 9.8): The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication",
+            "item_type": "record",
+            "summary": "added: CVE-2026-75957 (critical 9.8): The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication",
+            "after": {
+              "title": "CVE-2026-75957 (critical 9.8): The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication",
+              "summary": "The Ultimate Multisite – WordPress Multisite SaaS & WaaS Platform plugin for WordPress is vulnerable to Authentication Bypass in all versions up to, and including, 2.15.0 via the `checkout_form` parameter of the `login_customer_after_checkout` function. This is due to the publicly accessible `wu_ajax_nopriv_wu_validate_form` AJAX handler accepting a freely obtainable checkout nonce, and the `checkout_form=wu-finish-checkout` parameter causing `get_validation_rules()` to discard all validation rules while `finish_checkout_form_fields()` returns an empty step list — forcing `is_last_step()` to return true and routing the request directly into full order processing — after which `maybe_create_customer()` resolves the attacker-supplied `email_address` to an existing WordPress user ID without any authentication or ownership verification, and `login_customer_after_checkout()` calls `wp_set_auth_cookie()` for that user ID via a passwordless code path. This makes it possible for unauthenticated attackers to log in as any existing WordPress user — including a Network Super Admin — simply by knowing their email address. Exploitation requires that the targeted user account has no pre-existing Ultimate Multisite customer record; accounts such as a Network Super Admin on a fresh Multisite install, or any administrator or editor added before Ultimate Multisite was configured, satisfy this condition and are therefore exploitable.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-75957",
+              "published_at": "2026-10-01T08:16:52.763Z",
+              "id": "CVE-2026-75957"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1300,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-75957"
+    },
+    {
+      "id": "4a1b1b002aad0e2e6748",
+      "title": "CVE-2026-15989 (critical 9.8): The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions",
+      "content_text": "The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 6.3.316. This is due to the Register & Login add-on's before_email_success_msg() function whitelisting the client-submitted 'role' key and copying it into the user-data array that is passed directly to wp_insert_user(), without validating the submitted role against the administrator-configured register_user_role, without an allow-list, and without any…",
+      "date_published": "2026-10-01T08:16:51Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4a1b1b002aad0e2e6748",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-15989",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-10-01T09:12:43Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-15989 (critical 9.8): The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions",
+            "item_type": "record",
+            "summary": "added: CVE-2026-15989 (critical 9.8): The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions",
+            "after": {
+              "title": "CVE-2026-15989 (critical 9.8): The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions",
+              "summary": "The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 6.3.316. This is due to the Register & Login add-on's before_email_success_msg() function whitelisting the client-submitted 'role' key and copying it into the user-data array that is passed directly to wp_insert_user(), without validating the submitted role against the administrator-configured register_user_role, without an allow-list, and without any current_user_can() capability check. This makes it possible for unauthenticated attackers to register a new account with the Administrator role by injecting role=administrator into the data submitted to any published Super Forms registration form (register_login_action='register').",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-15989",
+              "published_at": "2026-10-01T08:16:51.233Z",
+              "id": "CVE-2026-15989"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-24T00:00:00.000&pubEndDate=2026-10-01T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1300,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15989"
+    },
+    {
       "id": "66905d20f81e9983e8ec",
       "title": "CVE-2025-41753 (critical 9.8): The object name of a dynamically created BACnet File Object is interpreted as a file path without sufficient validation.",
       "content_text": "The object name of a dynamically created BACnet File Object is interpreted as a file path without sufficient validation. Because relative paths are not limited to the intended directory, an unauthenticated remote attacker can traverse outside of it and read or overwrite arbitrary files on the device, which may lead to full system compromise.",
@@ -15843,220 +16057,6 @@
         }
       },
       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83660"
-    },
-    {
-      "id": "6aa68f91f485939185b9",
-      "title": "CVE-2026-82443 (critical 9.9): Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged",
-      "content_text": "Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged attacker could exploit this vulnerability to gain elevated access to internal resources. Exploitation of this issue does not require user interaction. Scope is changed.",
-      "date_published": "2026-09-22T18:17:21Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "6aa68f91f485939185b9",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-82443",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-09-28T00:01:36Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-82443 (critical 9.9): Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged",
-            "item_type": "record",
-            "summary": "added: CVE-2026-82443 (critical 9.9): Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged",
-            "after": {
-              "title": "CVE-2026-82443 (critical 9.9): Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged",
-              "summary": "Adobe Campaign Classic (ACC) is affected by a Server-Side Request Forgery (SSRF) vulnerability that could result in privilege escalation. A low-privileged attacker could exploit this vulnerability to gain elevated access to internal resources. Exploitation of this issue does not require user interaction. Scope is changed.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-82443",
-              "published_at": "2026-09-22T18:17:21.790Z",
-              "id": "CVE-2026-82443"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 3570,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.8"
-            },
-            {
-              "step": "select",
-              "version": "0.10.8",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.8",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(text, \"^(.{0,140}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.8",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.8",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.8",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82443"
-    },
-    {
-      "id": "b60a19a9b4cd9ccccddf",
-      "title": "CVE-2026-82009 (critical 9.1): Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability",
-      "content_text": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in arbitrary code execution in the context of the current user. An attacker with high privileges could exploit this vulnerability to execute arbitrary SQL commands. Exploitation of this issue does not require user interaction. Scope is changed.",
-      "date_published": "2026-09-22T18:17:21Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "b60a19a9b4cd9ccccddf",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-82009",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-09-28T00:01:36Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-82009 (critical 9.1): Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability",
-            "item_type": "record",
-            "summary": "added: CVE-2026-82009 (critical 9.1): Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability",
-            "after": {
-              "title": "CVE-2026-82009 (critical 9.1): Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability",
-              "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in arbitrary code execution in the context of the current user. An attacker with high privileges could exploit this vulnerability to execute arbitrary SQL commands. Exploitation of this issue does not require user interaction. Scope is changed.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-82009",
-              "published_at": "2026-09-22T18:17:21.220Z",
-              "id": "CVE-2026-82009"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 3570,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.8"
-            },
-            {
-              "step": "select",
-              "version": "0.10.8",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.8",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(text, \"^(.{0,140}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.8",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.8",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.8",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82009"
     }
   ]
 }
