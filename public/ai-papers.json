@@ -9,6 +9,323 @@
   },
   "items": [
     {
+      "id": "cef72597cf5fa10a451b",
+      "title": "Honeycomb: Constant-Size Scene Memory Representation for Video World Models",
+      "content_text": "Video world models require persistent scene memory to maintain consistency during long-horizon video generation. Existing spatial memories accumulate RGB observations or latent features, increasing storage requirements as generation proceeds. We introduce Honeycomb, a video world model built on HexMemory, our proposed low-rank representation for storing scene features in a fixed-size memory with a total of six spatial and spatiotemporal planes. A feed-forward writer maps each generated chunk…",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cef72597cf5fa10a451b",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.37690",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-10-02T17:38:10Z",
+          "data": {
+            "change": "added",
+            "label": "Honeycomb: Constant-Size Scene Memory Representation for Video World Models",
+            "item_type": "record",
+            "summary": "added: Honeycomb: Constant-Size Scene Memory Representation for Video World Models",
+            "after": {
+              "title": "Honeycomb: Constant-Size Scene Memory Representation for Video World Models",
+              "summary": "Video world models require persistent scene memory to maintain consistency during long-horizon video generation. Existing spatial memories accumulate RGB observations or latent features, increasing storage requirements as generation proceeds. We introduce Honeycomb, a video world model built on HexMemory, our proposed low-rank representation for storing scene features in a fixed-size memory with a total of six spatial and spatiotemporal planes. A feed-forward writer maps each generated chunk into new plane features. As the spatial coverage or temporal range expands, we warp the previous planes while preserving their dimensions, then fuse them with the new features through confidence-weighted pooling and a learned residual correction. A reader retrieves latents from HexMemory to condition subsequent video generation. The writer processes only observations from the new chunk, avoiding per-scene optimization and repeated processing of the full history. Experiments on WorldScore and RealEstate10K demonstrate strong video generation quality and robust revisit consistency while keeping HexMemory feature storage constant throughout generation. Code and additional visualizations are available on our project page at https://jackswl.github.io/honeycomb/.",
+              "link": "https://huggingface.co/papers/2609.37690",
+              "published_at": "2026-10-02T00:00:00.000Z",
+              "upvotes": 1
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 107,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.37690"
+    },
+    {
+      "id": "9cd1e4bd169966493315",
+      "title": "X-Tree: Tokenizing Reusable Experience for Efficient Agent Generalization",
+      "content_text": "Multi-step agents are trained on flat action streams: SFT and RLVR weight every token uniformly and ignore the sub-procedures that recur across tasks, the hierarchy that lets humans plan top-down from reusable routines. This structure sits unused, and flat training uses each scarce trajectory less fully than its content allows. Recent agents do use that structure, but only as LLM-written skills in context, never in the weights, so their gains do not generalize beyond retrieval. We instead…",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9cd1e4bd169966493315",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.32993",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-10-02T17:38:10Z",
+          "data": {
+            "change": "added",
+            "label": "X-Tree: Tokenizing Reusable Experience for Efficient Agent Generalization",
+            "item_type": "record",
+            "summary": "added: X-Tree: Tokenizing Reusable Experience for Efficient Agent Generalization",
+            "after": {
+              "title": "X-Tree: Tokenizing Reusable Experience for Efficient Agent Generalization",
+              "summary": "Multi-step agents are trained on flat action streams: SFT and RLVR weight every token uniformly and ignore the sub-procedures that recur across tasks, the hierarchy that lets humans plan top-down from reusable routines. This structure sits unused, and flat training uses each scarce trajectory less fully than its content allows. Recent agents do use that structure, but only as LLM-written skills in context, never in the weights, so their gains do not generalize beyond retrieval. We instead recover this hierarchy from the data itself and train on it, with no LLM calls. Following text tokenizers, which build a vocabulary by counting alone, we score action spans by reusability and merge canonicalized actions into a reusable eXperience tree (X-Tree). Each X-Tree node captures how a frequent and success-bearing skill is composed from sub-skills, guiding efficient generalization. We integrate X-Tree into three training settings: offline RL, with each node as a training instance; online RLVR, with an adaptive skill bonus; and on-policy self-distillation, with X-Tree as the self-teacher's privileged context. Across WebArena, ScienceWorld, and WebShop at three model scales, X-Tree improves over standard recipes at matched data and budget by up to 4.5% SR on WebArena, 5.8% SR on ScienceWorld and 4.1% success on WebShop. Matched analyses attribute the gains to the X-Tree structure and the three integrations.",
+              "organization": {
+                "_id": "6230c3ced93e84e2338765f3",
+                "name": "UWaterloo",
+                "fullname": "University of Waterloo",
+                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1647363004040-6230c34bacb94a81eec91ed5.png"
+              },
+              "link": "https://huggingface.co/papers/2609.32993",
+              "published_at": "2026-10-02T00:00:00.000Z",
+              "upvotes": 2
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 107,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.32993"
+    },
+    {
+      "id": "4530d8987560529d36f2",
+      "title": "OpenTumorBoard: A Real-World Benchmark of Multidisciplinary Tumor Board Discussion Trajectories",
+      "content_text": "Multidisciplinary tumor boards integrate multimodal clinical observations and longitudinal patient histories through specialist discussions, yet benchmarks rarely capture these real-world trajectories. We introduce OpenTumorBoard, a benchmark with 611 patient cases and 19,157 discussion turns across ten specialist roles, transcribed from 12,534 minutes of publicly available tumor board recordings on YouTube. The benchmark evaluates two settings: SPECIALIST TURN, in which an LLM responds to a…",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4530d8987560529d36f2",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.32810",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-10-02T17:38:10Z",
+          "data": {
+            "change": "added",
+            "label": "OpenTumorBoard: A Real-World Benchmark of Multidisciplinary Tumor Board Discussion Trajectories",
+            "item_type": "record",
+            "summary": "added: OpenTumorBoard: A Real-World Benchmark of Multidisciplinary Tumor Board Discussion Trajectories",
+            "after": {
+              "title": "OpenTumorBoard: A Real-World Benchmark of Multidisciplinary Tumor Board Discussion Trajectories",
+              "summary": "Multidisciplinary tumor boards integrate multimodal clinical observations and longitudinal patient histories through specialist discussions, yet benchmarks rarely capture these real-world trajectories. We introduce OpenTumorBoard, a benchmark with 611 patient cases and 19,157 discussion turns across ten specialist roles, transcribed from 12,534 minutes of publicly available tumor board recordings on YouTube. The benchmark evaluates two settings: SPECIALIST TURN, in which an LLM responds to a clinically significant question posed during a real discussion, and BOARD SIMULATION, in which it generates an entire back-and-forth discussion and reaches a consensus on therapy recommendations, surgical plans, next actions and clinical trial matching. Evaluation of 14 general-purpose frontier and medical LLMs reveals substantial limitations: the best models score 3.43 out of 5 in clinical equivalence to specialist answers and 2.78 out of 5 in alignment with recorded board conclusions. Supervised finetuning and reinforcement learning improve performance on a held-out test set, suggesting that real-world discussion trajectories can support model adaptation. Three M.D. experts review a subset of the benchmark, finding high information coverage and factuality of patient cases and strong fidelity of extracted consensus conclusions. We will release OpenTumorBoard and its automated curation pipeline to support the development and evaluation of LLMs for multidisciplinary, personalized cancer decision-making.",
+              "mediaUrls": [
+                "https://cdn-uploads.huggingface.co/production/uploads/675548e29335fccb30c8dc97/rZO0SIoR90IULIRBZ5luy.webp"
+              ],
+              "link": "https://huggingface.co/papers/2609.32810",
+              "published_at": "2026-10-02T00:00:00.000Z",
+              "upvotes": 4
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 107,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2609.32810"
+    },
+    {
+      "id": "0e4cccf8f664a05422a3",
+      "title": "Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+      "content_text": "Keyword-matching benchmarks can credit small models for tool use they never perform. We document such a false positive in a matched-architecture pair of Spanish security language models and propose a ladder of strict, cheap diagnostics. A 661.6M parameter model (approx. 65% code/technical text; no dedicated SFT) and a 1,109M model (web-heavy multi-phase curriculum; 6B-token tool-SFT) share decoder, tokenizer, and special tokens, scoring almost identically on lenient tool-use metrics (B4: 0.660…",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0e4cccf8f664a05422a3",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2610.02142",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-10-02T17:38:10Z",
+          "data": {
+            "change": "added",
+            "label": "Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+            "item_type": "record",
+            "summary": "added: Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+            "after": {
+              "title": "Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+              "summary": "Keyword-matching benchmarks can credit small models for tool use they never perform. We document such a false positive in a matched-architecture pair of Spanish security language models and propose a ladder of strict, cheap diagnostics. A 661.6M parameter model (approx. 65% code/technical text; no dedicated SFT) and a 1,109M model (web-heavy multi-phase curriculum; 6B-token tool-SFT) share decoder, tokenizer, and special tokens, scoring almost identically on lenient tool-use metrics (B4: 0.660 vs. 0.650).\n  Verbatim-reproduction checks on training examples separate them completely: the 600M emits valid tool calls with generalized arguments on 6/6 examples; the 1B does so on 0/6 across checkpoints. A first-token probe localizes the 1B's failure to a missing prior (prob. 10^{-4}--10^{-5} on <|tool_call|>), which was erased by its web-heavy training phase. A targeted SFT recipe (diverse corpus, 5x higher learning rate, 2,202 steps, ~3.3 GPU-hours) repairs the 1B using three orders of magnitude fewer tokens than the failed phase. On all 269 corpus rows, valid emission rises from 0.100 to 0.959 (600M: 0.926). On 238 unseen prompts, the repaired 1B passes 0.536 vs. the 600M's 0.428 (p = 0.004). Embedding-drift checks show the repair did not move the trigger token's tied embedding (97.7% of the bf16 table remains bit-identical), meaning changes live in the surrounding network.\n  Both models over-trigger, rarely answering negative prompts without a call (0.09 for 600M, 0.17 for repaired 1B). Factorial analyses confirm all repair configurations install the format, though suppression benefits from a diverse corpus remain a hypothesis due to seed sensitivity. This cheap diagnostic ladder costs minutes of CPU time and should gate tool-use claims on small models.",
+              "link": "https://huggingface.co/papers/2610.02142",
+              "published_at": "2026-10-02T00:00:00.000Z",
+              "upvotes": 0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 107,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2610.02142"
+    },
+    {
       "id": "cb77dabaf7d604d22dd2",
       "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
       "content_text": "What makes great scientists great? Even as AI systems start to make progress on open problems, scientists remain far ahead of them at sensing which prior idea, buried in an ever-growing archive of research, a new problem needs. To study this skill, we draw on researchers who know firsthand which earlier work advanced their completed projects, with papers serving as pointers to the ideas within. Using our automated pipeline that makes author annotation scalable, we build ScholarCatalyst by…",
@@ -11968,338 +12285,6 @@
         }
       },
       "url": "https://huggingface.co/papers/2609.40230"
-    },
-    {
-      "id": "55b223519943ed05f2c1",
-      "title": "Physis-Lang: Self-Evolving Language as a Physical Representation for Video World Model",
-      "content_text": "Video world models are expected to predict how the physical world evolves, yet they often produce visually plausible videos that violate basic physical principles. Existing approaches commonly assume that natural language is insufficient to represent the physical knowledge required for reliable generation, and therefore introduce additional visual, latent, numerical, or planning-based signals. We revisit this assumption and introduce Physis-Lang, a self-evolving framework that treats physical…",
-      "date_published": "2026-10-01T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "55b223519943ed05f2c1",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.40358",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-01T03:25:46Z",
-          "data": {
-            "change": "added",
-            "label": "Physis-Lang: Self-Evolving Language as a Physical Representation for Video World Model",
-            "item_type": "record",
-            "summary": "added: Physis-Lang: Self-Evolving Language as a Physical Representation for Video World Model",
-            "after": {
-              "title": "Physis-Lang: Self-Evolving Language as a Physical Representation for Video World Model",
-              "summary": "Video world models are expected to predict how the physical world evolves, yet they often produce visually plausible videos that violate basic physical principles. Existing approaches commonly assume that natural language is insufficient to represent the physical knowledge required for reliable generation, and therefore introduce additional visual, latent, numerical, or planning-based signals. We revisit this assumption and introduce Physis-Lang, a self-evolving framework that treats physical language as a shared and optimizable representation across data curation, model training, and video generation. Physis-Lang represents physical processes through language that describes their relevant entities, causes, interactions, governing principles, temporal evolution, and effects. To improve this representation, we construct PhysCapBench, which decomposes physical processes into atomic assertions and evaluates captions using recall and precision. An agentic loop iteratively analyzes assertion-level errors and refines the instruction used to produce physical captions. Physis-Lang further converts model deficiencies into textual descriptions and uses language-guided retrieval to identify visually diverse videos that cover missing physical processes. Experiments on four widely used physical video benchmarks with Wan and Cosmos backbones demonstrate consistent improvements in physical plausibility. Notably, starting from open-source Cosmos3-Nano backbones, our Physis-Lang-enhanced models surpass the leading proprietary Veo 3.1 model.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/6039478ab3ecf716b1a5fd4d/LwcoIZ7_l6Gb887Scvdk8.mp4"
-              ],
-              "organization": {
-                "_id": "60262b67268c201cdc8b7d43",
-                "name": "nvidia",
-                "fullname": "NVIDIA",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/65df9200dc3292a8983e5017/Vs5FPVCH-VZBipV3qKTuy.png"
-              },
-              "link": "https://huggingface.co/papers/2609.40358",
-              "published_at": "2026-10-01T00:00:00.000Z",
-              "upvotes": 2
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 130,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.40358"
-    },
-    {
-      "id": "eac52be15f32fa374539",
-      "title": "Not Every Token Is Worth Distilling: Selective Supervision for Direct-OPD",
-      "content_text": "Direct On-Policy Distillation (Direct-OPD) transfers reinforcement-learning-induced policy improvements from a small model to a larger student by using the token-level log-ratio between post-RL and pre-RL checkpoints as dense supervision on the student's own rollouts. This transfer rewards the policy shift at every state, yet the log-ratio measures only relative change: it can stay fixed even as the probability mass that both checkpoints assign to the student's candidate tokens vanishes…",
-      "date_published": "2026-10-01T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "eac52be15f32fa374539",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.29142",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-01T03:25:46Z",
-          "data": {
-            "change": "added",
-            "label": "Not Every Token Is Worth Distilling: Selective Supervision for Direct-OPD",
-            "item_type": "record",
-            "summary": "added: Not Every Token Is Worth Distilling: Selective Supervision for Direct-OPD",
-            "after": {
-              "title": "Not Every Token Is Worth Distilling: Selective Supervision for Direct-OPD",
-              "summary": "Direct On-Policy Distillation (Direct-OPD) transfers reinforcement-learning-induced policy improvements from a small model to a larger student by using the token-level log-ratio between post-RL and pre-RL checkpoints as dense supervision on the student's own rollouts. This transfer rewards the policy shift at every state, yet the log-ratio measures only relative change: it can stay fixed even as the probability mass that both checkpoints assign to the student's candidate tokens vanishes. Through an exact construction, we show that the Direct-OPD reward and its update can remain unchanged while the Jensen-Shannon divergence (JSD) and both KL directions between the checkpoints vanish with this mass, and we note that a small JSD bounds how much the teacher's behavior changed. Motivated by this analysis, we propose Selective Supervision for Direct-OPD (S^2D-OPD), which ranks student-sampled states by their teacher-reference JSD and masks Direct-OPD supervision at low-divergence states, retaining only the top 10% of states per response. Across two teacher pairs and four student models ranging from 1.7B to 8B parameters, S^2D-OPD improves held-out accuracy over dense Direct-OPD on AIME and HMMT benchmarks in seven of eight settings and matches it in the eighth, without extra forward passes.",
-              "organization": {
-                "_id": "62c1482aac1b639c2d873235",
-                "name": "ECNU",
-                "fullname": "East China Normal University",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1656834075081-62c14609ac1b639c2d87192c.png"
-              },
-              "link": "https://huggingface.co/papers/2609.29142",
-              "published_at": "2026-10-01T00:00:00.000Z",
-              "upvotes": 1
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 130,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.29142"
-    },
-    {
-      "id": "046ad0107099d8537184",
-      "title": "DC-SAE: Deep Compression Semantic Autoencoder for Faster Diffusion Convergence",
-      "content_text": "High-compression tokenizers are essential for scaling latent image generative models. However, aggressive compression creates a fundamental tradeoff between reconstruction fidelity and generation efficiency: high compression image encoder always increases the learning difficulty of diffusion training, resulting in slow model convergence. Recent representation autoencoders speed up the diffusion training by improving the latent feature's expressive capability by replacing VAE encoders with…",
-      "date_published": "2026-10-01T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "046ad0107099d8537184",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.39222",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-01T03:25:46Z",
-          "data": {
-            "change": "added",
-            "label": "DC-SAE: Deep Compression Semantic Autoencoder for Faster Diffusion Convergence",
-            "item_type": "record",
-            "summary": "added: DC-SAE: Deep Compression Semantic Autoencoder for Faster Diffusion Convergence",
-            "after": {
-              "title": "DC-SAE: Deep Compression Semantic Autoencoder for Faster Diffusion Convergence",
-              "summary": "High-compression tokenizers are essential for scaling latent image generative models. However, aggressive compression creates a fundamental tradeoff between reconstruction fidelity and generation efficiency: high compression image encoder always increases the learning difficulty of diffusion training, resulting in slow model convergence. Recent representation autoencoders speed up the diffusion training by improving the latent feature's expressive capability by replacing VAE encoders with pretrained semantic encoders, yet they are typically limited to moderate compression and lose pixel-level details necessary for faithful reconstruction. To achieve both high compression and fast diffusion training, we propose DC-SAE, a Decoupled Compact Semantic Autoencoder designed for high-compression image generation with accelerated diffusion model convergence. DC-SAE consists of two key components: (1) a macro-level architecture design that leverages semantic encoders to enable higher compression ratios, and (2) a pixel-level encoder that preserves low-level details, ensuring high-fidelity image reconstruction. We empirically demonstrate that DC-SAE performs strongly on image generation tasks, achieving both compact latent representations and efficient training dynamics. Specifically, on the ImageNet dataset with 512 times 512 resolution, DC-SAE achieves 32times spatial compression, with 29.79 PSNR and 3.37 gFID, substantially outperforming the previous state-of-the-art high-compression tokenizer baselines DC-AE by 13.5% and 54.9% on PSNR and gFID, respectively, maintaining comparable throughput and faster diffusion model training convergence. Beyond class-conditional generation, a 1.6B-parameter DiT using DC-SAE achieves 0.84 on GenEval and 86.007 on DPG-Bench for text-to-image generation at 1024times1024 resolution.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/665c91e15b11dca02f0c5891/f4rV0tdgWfc3C3Xl1yS-x.mp4"
-              ],
-              "organization": {
-                "_id": "6953c657d2ff7b60c8527d3c",
-                "name": "DAGroup-PKU",
-                "fullname": "DAGroup-PKU",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/665c91e15b11dca02f0c5891/ek9KGIc02tiFfaYeDfLaU.png"
-              },
-              "link": "https://huggingface.co/papers/2609.39222",
-              "published_at": "2026-10-01T00:00:00.000Z",
-              "upvotes": 2
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 130,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.39222"
-    },
-    {
-      "id": "1c23bf576201f38932bb",
-      "title": "DuoOPD: Learning from Joint Teacher-Student Outcomes for Multi-Task On-Policy Distillation",
-      "content_text": "On-policy distillation (OPD) trains a student on its own responses with token-level feedback from a stronger teacher, yet the teacher can fail on questions the student already answers correctly, and how often each model succeeds varies across tasks. OPD ignores these outcomes and, on average, pushes down even the student's correct responses; gating feedback by student correctness fixes the direction but uses the teacher in the same way whether or not it succeeded. We introduce DuoOPD, in which…",
-      "date_published": "2026-10-01T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "1c23bf576201f38932bb",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.33711",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-01T03:25:46Z",
-          "data": {
-            "change": "added",
-            "label": "DuoOPD: Learning from Joint Teacher-Student Outcomes for Multi-Task On-Policy Distillation",
-            "item_type": "record",
-            "summary": "added: DuoOPD: Learning from Joint Teacher-Student Outcomes for Multi-Task On-Policy Distillation",
-            "after": {
-              "title": "DuoOPD: Learning from Joint Teacher-Student Outcomes for Multi-Task On-Policy Distillation",
-              "summary": "On-policy distillation (OPD) trains a student on its own responses with token-level feedback from a stronger teacher, yet the teacher can fail on questions the student already answers correctly, and how often each model succeeds varies across tasks. OPD ignores these outcomes and, on average, pushes down even the student's correct responses; gating feedback by student correctness fixes the direction but uses the teacher in the same way whether or not it succeeded. We introduce DuoOPD, in which the student's outcome sets the direction of feedback and the joint teacher-student outcome decides how the teacher supports it: when only the teacher succeeds, its verified answer becomes context for scoring the student's failed response, and when only the student succeeds, a weight shared within the task reinforces the whole response. A single rule covers all four outcome combinations without task-specific settings. Across Qwen3 and Llama, DuoOPD outperforms all five baselines in mean macro accuracy, improving over OPD by 2.58 and 5.98 percentage points, and it also leads on two further task mixtures spanning scientific calculation, instruction following, and code generation. Ablations show that outcome-based direction alone stays near the gated baseline, while the joint-outcome designs supply most of the gain.",
-              "link": "https://huggingface.co/papers/2609.33711",
-              "published_at": "2026-10-01T00:00:00.000Z",
-              "upvotes": 3
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 130,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.33711"
     }
   ]
 }
