@@ -1,13 +1,114 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic data releases",
-  "home_page_url": "https://www.dol.gov/rss/releases.xml",
+  "home_page_url": "https://www.census.gov/economic-indicators/indicator.xml",
   "description": "Events collected by UnlimitedPipe 0.10.32",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.32"
   },
   "items": [
+    {
+      "id": "cf60ab81ed8b0c37adbc",
+      "title": "Census Bureau: Manufacturers' Shipments, Inventories, and Orders",
+      "content_text": "New orders for manufactured goods in August, up two consecutive months, increased $0.7 billion or 0.1 percent to $663.5 billion.\nAugust 2026: +0.1° % Change\nJuly 2026 (r): +0.8° % Change",
+      "date_published": "2026-10-02T14:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cf60ab81ed8b0c37adbc",
+          "source": "rss",
+          "type": "change",
+          "key": "mfg_orders",
+          "source_url": "https://www.census.gov/economic-indicators/indicator.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-02T14:45:08Z",
+          "data": {
+            "change": "added",
+            "label": "Census Bureau: Manufacturers' Shipments, Inventories, and Orders",
+            "item_type": "entry",
+            "summary": "added: Census Bureau: Manufacturers' Shipments, Inventories, and Orders",
+            "after": {
+              "title": "Census Bureau: Manufacturers' Shipments, Inventories, and Orders",
+              "link": "https://www.census.gov/manufacturing/m3/",
+              "id": "mfg_orders",
+              "author": null,
+              "published_at": "2026-10-02T14:00:00Z",
+              "updated_at": "2026-10-02T14:00:00Z",
+              "summary": "New orders for manufactured goods in August, up two consecutive months, increased $0.7 billion or 0.1 percent to $663.5 billion.\nAugust 2026: +0.1° % Change\nJuly 2026 (r): +0.8° % Change",
+              "categories": [],
+              "feed": {
+                "title": "U.S. Census Bureau Economic Briefing Room",
+                "url": "https://www.census.gov/economic-indicators/",
+                "feed_url": "https://www.census.gov/economic-indicators/indicator.xml"
+              },
+              "agency": "Census Bureau"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.census.gov/economic-indicators/indicator.xml",
+            "elapsed_ms": 131,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.census.gov/manufacturing/m3/"
+    },
     {
       "id": "c0a08e2e17965a0e1f1f",
       "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
