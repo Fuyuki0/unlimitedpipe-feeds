@@ -9,6 +9,1230 @@
   },
   "items": [
     {
+      "id": "6ccc272f9927640aeced",
+      "title": "Bangkok tomorrow morning (2026-10-03): cloudy, 28–32°C",
+      "content_text": "Bangkok, morning of 2026-10-03: cloudy, 28–32°C, 0.2 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6ccc272f9927640aeced",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50#Bangkok 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:00Z",
+          "data": {
+            "change": "added",
+            "label": "Bangkok tomorrow morning (2026-10-03): cloudy, 28–32°C",
+            "item_type": "record",
+            "summary": "added: Bangkok tomorrow morning (2026-10-03): cloudy, 28–32°C",
+            "after": {
+              "title": "Bangkok tomorrow morning (2026-10-03): cloudy, 28–32°C",
+              "summary": "Bangkok, morning of 2026-10-03: cloudy, 28–32°C, 0.2 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/13.75,100.50",
+              "day": "Bangkok 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/13.75,100.50"
+    },
+    {
+      "id": "51649abc43bf53a018d1",
+      "title": "Bangkok tomorrow afternoon (2026-10-03): rain showers, 28–30°C",
+      "content_text": "Bangkok, afternoon of 2026-10-03: rain showers, 28–30°C, 2.7 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "51649abc43bf53a018d1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50#Bangkok 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:00Z",
+          "data": {
+            "change": "added",
+            "label": "Bangkok tomorrow afternoon (2026-10-03): rain showers, 28–30°C",
+            "item_type": "record",
+            "summary": "added: Bangkok tomorrow afternoon (2026-10-03): rain showers, 28–30°C",
+            "after": {
+              "title": "Bangkok tomorrow afternoon (2026-10-03): rain showers, 28–30°C",
+              "summary": "Bangkok, afternoon of 2026-10-03: rain showers, 28–30°C, 2.7 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/13.75,100.50",
+              "day": "Bangkok 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/13.75,100.50"
+    },
+    {
+      "id": "569473a7a75b5c9da025",
+      "title": "Chiang Mai tomorrow morning (2026-10-03): partly cloudy, 26–31°C",
+      "content_text": "Chiang Mai, morning of 2026-10-03: partly cloudy, 26–31°C, 0.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "569473a7a75b5c9da025",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98#Chiang Mai 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:01Z",
+          "data": {
+            "change": "added",
+            "label": "Chiang Mai tomorrow morning (2026-10-03): partly cloudy, 26–31°C",
+            "item_type": "record",
+            "summary": "added: Chiang Mai tomorrow morning (2026-10-03): partly cloudy, 26–31°C",
+            "after": {
+              "title": "Chiang Mai tomorrow morning (2026-10-03): partly cloudy, 26–31°C",
+              "summary": "Chiang Mai, morning of 2026-10-03: partly cloudy, 26–31°C, 0.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/18.79,98.98",
+              "day": "Chiang Mai 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+            "content_type": "application/json",
+            "elapsed_ms": 209,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/18.79,98.98"
+    },
+    {
+      "id": "e2efe41f2042fd9d3156",
+      "title": "Chiang Mai tomorrow afternoon (2026-10-03): rain showers, 27–30°C",
+      "content_text": "Chiang Mai, afternoon of 2026-10-03: rain showers, 27–30°C, 2.0 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e2efe41f2042fd9d3156",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98#Chiang Mai 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:01Z",
+          "data": {
+            "change": "added",
+            "label": "Chiang Mai tomorrow afternoon (2026-10-03): rain showers, 27–30°C",
+            "item_type": "record",
+            "summary": "added: Chiang Mai tomorrow afternoon (2026-10-03): rain showers, 27–30°C",
+            "after": {
+              "title": "Chiang Mai tomorrow afternoon (2026-10-03): rain showers, 27–30°C",
+              "summary": "Chiang Mai, afternoon of 2026-10-03: rain showers, 27–30°C, 2.0 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/18.79,98.98",
+              "day": "Chiang Mai 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+            "content_type": "application/json",
+            "elapsed_ms": 209,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/18.79,98.98"
+    },
+    {
+      "id": "a8ae183f00b8b0cbc5d5",
+      "title": "Phuket tomorrow morning (2026-10-03): heavy rain, 24–28°C",
+      "content_text": "Phuket, morning of 2026-10-03: heavy rain, 24–28°C, 8.2 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a8ae183f00b8b0cbc5d5",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39#Phuket 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:02Z",
+          "data": {
+            "change": "added",
+            "label": "Phuket tomorrow morning (2026-10-03): heavy rain, 24–28°C",
+            "item_type": "record",
+            "summary": "added: Phuket tomorrow morning (2026-10-03): heavy rain, 24–28°C",
+            "after": {
+              "title": "Phuket tomorrow morning (2026-10-03): heavy rain, 24–28°C",
+              "summary": "Phuket, morning of 2026-10-03: heavy rain, 24–28°C, 8.2 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.88,98.39",
+              "day": "Phuket 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.88,98.39"
+    },
+    {
+      "id": "1aea4a6d07e6aa6e45b0",
+      "title": "Phuket tomorrow afternoon (2026-10-03): rain, 27–28°C",
+      "content_text": "Phuket, afternoon of 2026-10-03: rain, 27–28°C, 1.1 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1aea4a6d07e6aa6e45b0",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39#Phuket 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:02Z",
+          "data": {
+            "change": "added",
+            "label": "Phuket tomorrow afternoon (2026-10-03): rain, 27–28°C",
+            "item_type": "record",
+            "summary": "added: Phuket tomorrow afternoon (2026-10-03): rain, 27–28°C",
+            "after": {
+              "title": "Phuket tomorrow afternoon (2026-10-03): rain, 27–28°C",
+              "summary": "Phuket, afternoon of 2026-10-03: rain, 27–28°C, 1.1 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.88,98.39",
+              "day": "Phuket 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.88,98.39"
+    },
+    {
+      "id": "7e98763e051f2bf68098",
+      "title": "Pattaya tomorrow morning (2026-10-03): rain showers, 28–29°C",
+      "content_text": "Pattaya, morning of 2026-10-03: rain showers, 28–29°C, 1.8 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7e98763e051f2bf68098",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88#Pattaya 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:03Z",
+          "data": {
+            "change": "added",
+            "label": "Pattaya tomorrow morning (2026-10-03): rain showers, 28–29°C",
+            "item_type": "record",
+            "summary": "added: Pattaya tomorrow morning (2026-10-03): rain showers, 28–29°C",
+            "after": {
+              "title": "Pattaya tomorrow morning (2026-10-03): rain showers, 28–29°C",
+              "summary": "Pattaya, morning of 2026-10-03: rain showers, 28–29°C, 1.8 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/12.93,100.88",
+              "day": "Pattaya 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+            "content_type": "application/json",
+            "elapsed_ms": 211,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/12.93,100.88"
+    },
+    {
+      "id": "cf7bc5c3c13f89edf8de",
+      "title": "Pattaya tomorrow afternoon (2026-10-03): light rain, 28–29°C",
+      "content_text": "Pattaya, afternoon of 2026-10-03: light rain, 28–29°C, 0.7 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cf7bc5c3c13f89edf8de",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88#Pattaya 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:03Z",
+          "data": {
+            "change": "added",
+            "label": "Pattaya tomorrow afternoon (2026-10-03): light rain, 28–29°C",
+            "item_type": "record",
+            "summary": "added: Pattaya tomorrow afternoon (2026-10-03): light rain, 28–29°C",
+            "after": {
+              "title": "Pattaya tomorrow afternoon (2026-10-03): light rain, 28–29°C",
+              "summary": "Pattaya, afternoon of 2026-10-03: light rain, 28–29°C, 0.7 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/12.93,100.88",
+              "day": "Pattaya 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+            "content_type": "application/json",
+            "elapsed_ms": 211,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/12.93,100.88"
+    },
+    {
+      "id": "4902c18d21209ff26386",
+      "title": "Khon Kaen tomorrow morning (2026-10-03): partly cloudy, 26–32°C",
+      "content_text": "Khon Kaen, morning of 2026-10-03: partly cloudy, 26–32°C, 0.4 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4902c18d21209ff26386",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83#Khon Kaen 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:04Z",
+          "data": {
+            "change": "added",
+            "label": "Khon Kaen tomorrow morning (2026-10-03): partly cloudy, 26–32°C",
+            "item_type": "record",
+            "summary": "added: Khon Kaen tomorrow morning (2026-10-03): partly cloudy, 26–32°C",
+            "after": {
+              "title": "Khon Kaen tomorrow morning (2026-10-03): partly cloudy, 26–32°C",
+              "summary": "Khon Kaen, morning of 2026-10-03: partly cloudy, 26–32°C, 0.4 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/16.43,102.83",
+              "day": "Khon Kaen 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/16.43,102.83"
+    },
+    {
+      "id": "1b0cdb61565a7b8be021",
+      "title": "Khon Kaen tomorrow afternoon (2026-10-03): rain, 26–32°C",
+      "content_text": "Khon Kaen, afternoon of 2026-10-03: rain, 26–32°C, 3.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1b0cdb61565a7b8be021",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83#Khon Kaen 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:04Z",
+          "data": {
+            "change": "added",
+            "label": "Khon Kaen tomorrow afternoon (2026-10-03): rain, 26–32°C",
+            "item_type": "record",
+            "summary": "added: Khon Kaen tomorrow afternoon (2026-10-03): rain, 26–32°C",
+            "after": {
+              "title": "Khon Kaen tomorrow afternoon (2026-10-03): rain, 26–32°C",
+              "summary": "Khon Kaen, afternoon of 2026-10-03: rain, 26–32°C, 3.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/16.43,102.83",
+              "day": "Khon Kaen 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+            "content_type": "application/json",
+            "elapsed_ms": 201,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/16.43,102.83"
+    },
+    {
+      "id": "0bbfcc0a56dbab849dde",
+      "title": "Hat Yai tomorrow morning (2026-10-03): light rain, 26–30°C",
+      "content_text": "Hat Yai, morning of 2026-10-03: light rain, 26–30°C, 0.6 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0bbfcc0a56dbab849dde",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47#Hat Yai 2026-10-03T00:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:05Z",
+          "data": {
+            "change": "added",
+            "label": "Hat Yai tomorrow morning (2026-10-03): light rain, 26–30°C",
+            "item_type": "record",
+            "summary": "added: Hat Yai tomorrow morning (2026-10-03): light rain, 26–30°C",
+            "after": {
+              "title": "Hat Yai tomorrow morning (2026-10-03): light rain, 26–30°C",
+              "summary": "Hat Yai, morning of 2026-10-03: light rain, 26–30°C, 0.6 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.01,100.47",
+              "day": "Hat Yai 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+            "content_type": "application/json",
+            "elapsed_ms": 209,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.01,100.47"
+    },
+    {
+      "id": "75acf7073a5433c2efc1",
+      "title": "Hat Yai tomorrow afternoon (2026-10-03): heavy rain showers, 25–27°C",
+      "content_text": "Hat Yai, afternoon of 2026-10-03: heavy rain showers, 25–27°C, 7.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "75acf7073a5433c2efc1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47#Hat Yai 2026-10-03T06:00:00Z",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+          "timestamp": null,
+          "observed_at": "2026-10-02T00:30:05Z",
+          "data": {
+            "change": "added",
+            "label": "Hat Yai tomorrow afternoon (2026-10-03): heavy rain showers, 25–27°C",
+            "item_type": "record",
+            "summary": "added: Hat Yai tomorrow afternoon (2026-10-03): heavy rain showers, 25–27°C",
+            "after": {
+              "title": "Hat Yai tomorrow afternoon (2026-10-03): heavy rain showers, 25–27°C",
+              "summary": "Hat Yai, afternoon of 2026-10-03: heavy rain showers, 25–27°C, 7.3 mm of rain. Forecast by MET Norway (CC BY 4.0).",
+              "published_at": "2026-10-02T00:00:00Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.01,100.47",
+              "day": "Hat Yai 2026-10-03T06:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+            "content_type": "application/json",
+            "elapsed_ms": 209,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.32",
+              "args": {
+                "expr": "time == \"2026-10-03T00:00:00Z\" or time == \"2026-10-03T06:00:00Z\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "part=replace(replace(time, \"^.*T00:.*$\", \"morning\"), \"^.*T06:.*$\", \"afternoon\")",
+                  "sky=replace(data.data.next_6_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \" tomorrow \" + part + \" (2026-10-03): \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C\"",
+                  "summary=city + \", \" + part + \" of 2026-10-03: \" + sky + \", \" + round(data.data.next_6_hours.details.air_temperature_min) + \"–\" + round(data.data.next_6_hours.details.air_temperature_max) + \"°C, \" + data.data.next_6_hours.details.precipitation_amount + \" mm of rain. Forecast by MET Norway (CC BY 4.0).\"",
+                  "published_at=\"2026-10-02T00:00:00Z\"",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "day=city + \" \" + time"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "day",
+                "namespace": "thailand-forecast",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.01,100.47"
+    },
+    {
       "id": "1cf87300ad862db745d6",
       "title": "Bangkok tomorrow morning (2026-10-02): partly cloudy, 27–32°C",
       "content_text": "Bangkok, morning of 2026-10-02: partly cloudy, 27–32°C, 0.2 mm of rain. Forecast by MET Norway (CC BY 4.0).",
