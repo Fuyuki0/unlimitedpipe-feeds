@@ -9,6 +9,113 @@
   },
   "items": [
     {
+      "id": "09f71bc93425798165bd",
+      "title": "CVE-2026-97637 (critical 9.8): The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure",
+      "content_text": "The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure in all versions up to, and including, 3.1.2. The vulnerability exists because the required PI-Media/json-api parent plugin caches controller dispatch results in transients keyed solely by URI and query string, ignoring HTTP method and POST body; this causes the `generate_auth_cookie()` endpoint — which embeds a live WordPress `logged_in` cookie produced by…",
+      "date_published": "2026-10-02T08:17:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "09f71bc93425798165bd",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-25T00:00:00.000&pubEndDate=2026-10-02T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-97637",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-25T00:00:00.000&pubEndDate=2026-10-02T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-10-02T09:01:17Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-97637 (critical 9.8): The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure",
+            "item_type": "record",
+            "summary": "added: CVE-2026-97637 (critical 9.8): The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure",
+            "after": {
+              "title": "CVE-2026-97637 (critical 9.8): The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure",
+              "summary": "The JSON API Auth plugin for WordPress is vulnerable to Authentication Bypass via Cached Session Cookie Disclosure in all versions up to, and including, 3.1.2. The vulnerability exists because the required PI-Media/json-api parent plugin caches controller dispatch results in transients keyed solely by URI and query string, ignoring HTTP method and POST body; this causes the `generate_auth_cookie()` endpoint — which embeds a live WordPress `logged_in` cookie produced by `wp_generate_auth_cookie()` directly in its JSON response body — to serve that cached authenticated response to any subsequent unauthenticated GET request to the same URI. This makes it possible for unauthenticated attackers to retrieve a valid Administrator `logged_in` session cookie from the cached response and use it to fully authenticate as the site Administrator, including via the same plugin's `get_currentuserinfo` endpoint and any cookie-authenticated controller action. Exploitation requires the PI-Media/json-api parent plugin to be installed and active with the Auth controller enabled, and a legitimate Administrator must have POSTed to `/api/auth/generate_auth_cookie/` within the preceding 24-hour cache TTL; the nominal HTTPS enforcement gate present in `Auth.php` is trivially bypassed by supplying `insecure=cool` as a request parameter.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-97637",
+              "published_at": "2026-10-02T08:17:05.660Z",
+              "id": "CVE-2026-97637"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-25T00:00:00.000&pubEndDate=2026-10-02T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1161,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.32"
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.32",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.32",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.32",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.32",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-97637"
+    },
+    {
       "id": "b77662b44b44c612f284",
       "title": "CVE-2026-15896 (critical 9.1): The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Directory Traversal in all versions",
       "content_text": "The Super Forms – Drag & Drop Form Builder plugin for WordPress is vulnerable to Directory Traversal in all versions up to, and including, 6.3.316 via the parse_request function. This makes it possible for unauthenticated attackers to read the contents of arbitrary files on the server, which can contain sensitive information. The optional 'file_upload_auth' setting defaults to empty, meaning no authentication is required in the default configuration; enabling this setting mitigates…",
@@ -15950,113 +16057,6 @@
         }
       },
       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101072"
-    },
-    {
-      "id": "79cefc555c254d7e433c",
-      "title": "CVE-2026-88771 (critical 9.8): Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-      "content_text": "Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to an unauthenticated attacker to execute arbitrary commands.",
-      "date_published": "2026-09-27T17:16:56Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "79cefc555c254d7e433c",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-88771",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-09-28T12:27:00Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-88771 (critical 9.8): Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-            "item_type": "record",
-            "summary": "added: CVE-2026-88771 (critical 9.8): Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-            "after": {
-              "title": "CVE-2026-88771 (critical 9.8): Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-              "summary": "Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to an unauthenticated attacker to execute arbitrary commands.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-88771",
-              "published_at": "2026-09-27T17:16:56.260Z",
-              "id": "CVE-2026-88771"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-21T00:00:00.000&pubEndDate=2026-09-28T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 1402,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.16"
-            },
-            {
-              "step": "select",
-              "version": "0.10.16",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.16",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.16",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.16",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.16",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-88771"
     }
   ]
 }
