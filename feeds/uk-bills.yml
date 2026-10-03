@@ -1,0 +1,22 @@
+name: uk-bills
+description: "Bills in the UK Parliament as they move: each new stage (readings, committee, report, Royal Assent) of each bill, with the house it is in, from the UK Parliament's bills service."
+group: Countries
+sources:
+  - type: web
+    url: "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50"
+    records: items
+operators:
+  - {type: filter, expr: 'exists(currentStage.description)'}
+  - type: map
+    assign:
+      - 'stage=currentStage.description'
+      - 'title=shortTitle + ": " + replace(stage, "^Royal Assent$", "Royal Assent, now law") + " (" + default(currentStage.house, currentHouse) + ")"'
+      - 'summary="The " + shortTitle + " reached " + stage + " in the " + default(currentStage.house, currentHouse) + "; it started in the " + originatingHouse + ". UK Parliament bills service."'
+      - 'link="https://bills.parliament.uk/bills/" + billId'
+      - 'published_at=date(lastUpdate)'
+      - 'step="" + billId + " " + currentStage.id'
+  - {type: select, fields: [title, summary, link, published_at, step]}
+  - {type: diff, key: step, only: [added], namespace: uk-bills, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/uk-bills.xml, title: "UK Parliament bills: each new stage", link: "https://bills.parliament.uk/", max_items: 100}
+  - {type: feed, path: ../public/uk-bills.json, title: "UK Parliament bills: each new stage", link: "https://bills.parliament.uk/", max_items: 100}

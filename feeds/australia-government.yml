@@ -1,0 +1,13 @@
+name: australia-government
+description: "Media releases, speeches and press conferences of the Prime Minister of Australia, as published on pm.gov.au."
+group: Countries
+sources:
+  - type: rss
+    url: "https://www.pm.gov.au/rss.xml"
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: australia-government, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/australia-government.xml, title: "Prime Minister of Australia (pm.gov.au)", link: "https://www.pm.gov.au/media", max_items: 100}
+  - {type: feed, path: ../public/australia-government.json, title: "Prime Minister of Australia (pm.gov.au)", link: "https://www.pm.gov.au/media", max_items: 100}

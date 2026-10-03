@@ -1,0 +1,23 @@
+name: stablecoin-depegs
+description: "Dollar stablecoins of $100M or more trading 1% or more below their $1 peg - a sign of trouble at the issuer, a hack or a run - with the price and supply, from DefiLlama. One item a coin a day. Data, not investment advice."
+group: Crypto
+sources:
+  - type: web
+    url: "https://stablecoins.llama.fi/stablecoins?includePrices=true"
+    records: peggedAssets
+operators:
+  - {type: filter, expr: 'pegType == "peggedUSD" and exists(price) and price != null and circulating.peggedUSD >= 100000000 and price <= 0.99'}   # above the peg is how yield-bearing tokens look
+  - type: map
+    assign:
+      - 'off=round(abs(price - 1) * 100, 1)'
+      - 'side=replace(replace("" + (price > 1), "^True$", "above"), "^False$", "below")'
+      - 'title=symbol + " at $" + round(price, 4) + ", " + off + "% " + side + " its $1 peg"'
+      - 'summary=name + " (" + symbol + ") trades at $" + round(price, 4) + ", " + off + "% " + side + " its $1 peg, with $" + short(circulating.peggedUSD) + " in circulation (DefiLlama). Data, not investment advice."'
+      - 'link="https://defillama.com/stablecoin/" + gecko_id'
+      - 'published_at="${TODAY}T00:00:00Z"'
+      - 'day_key=symbol + " ${TODAY}"'
+    drop: [chainCirculating, chains, circulatingPrevMonth, circulatingPrevWeek, circulatingPrevDay]
+  - {type: diff, key: day_key, only: [added], namespace: stablecoin-depegs, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/stablecoin-depegs.xml, title: "Stablecoins off their peg (DefiLlama)", link: "https://defillama.com/stablecoins"}
+  - {type: feed, path: ../public/stablecoin-depegs.json, title: "Stablecoins off their peg (DefiLlama)", link: "https://defillama.com/stablecoins"}

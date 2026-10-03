@@ -1,0 +1,13 @@
+name: canada-government
+description: "News from the Government of Canada - ministers, departments and agencies - as they publish it, from canada.ca's news service."
+group: Countries
+sources:
+  - type: rss
+    url: "https://api.io.canada.ca/io-server/gc/news/en/v2?sort=publishedDate&orderBy=desc&pick=50&format=atom"
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: canada-government, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/canada-government.xml, title: "Government of Canada news (canada.ca)", link: "https://www.canada.ca/en/news.html", max_items: 100}
+  - {type: feed, path: ../public/canada-government.json, title: "Government of Canada news (canada.ca)", link: "https://www.canada.ca/en/news.html", max_items: 100}

@@ -1,0 +1,15 @@
+name: earnings-releases
+description: "Companies releasing quarterly or annual results, as they file them with the SEC (8-K Item 2.02, Results of Operations), within about a minute of EDGAR listing the filing. The link opens the filing with the release."
+group: "Money, economy and government"
+sources:
+  - type: sec
+    resource: company-events
+    item: ["2.02"]
+    contact: ${SEC_CONTACT}   # the SEC asks automated readers for a contact email
+    since: ${DAYS_AGO_7}   # a period in the past reads EDGAR's full-text search (unlimited backfill)
+    until: ${TODAY}
+operators:
+  - {type: diff, key: accession, only: [added], namespace: earnings-releases, emit_initial: true, remember: true}
+outputs:
+  - {type: feed, path: ../public/earnings-releases.xml, title: "Earnings releases (SEC 8-K Item 2.02)", link: "https://www.sec.gov/edgar/search/", max_items: 200}
+  - {type: feed, path: ../public/earnings-releases.json, title: "Earnings releases (SEC 8-K Item 2.02)", link: "https://www.sec.gov/edgar/search/", max_items: 200}

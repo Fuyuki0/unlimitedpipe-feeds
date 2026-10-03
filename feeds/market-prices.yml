@@ -1,22 +1,32 @@
 name: market-prices
-description: Daily closes of the US 10-year Treasury yield (Federal Reserve) and WTI crude oil (EIA), public data from FRED (Federal Reserve Bank of St. Louis), with their history. Stock indices are in stock-indices. Data, not investment advice.
+description: Daily closes of US Treasury yields (3-month, 2-year, 10-year and 30-year, Federal Reserve), WTI crude oil and Henry Hub natural gas (EIA), and the weekly US gasoline price (EIA), public data from FRED (Federal Reserve Bank of St. Louis), with their history. Stock indices are in stock-indices. Data, not investment advice.
 group: "Money, economy and government"
 sources:
   - type: web
     url:
       - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=${DAYS_AGO_10}&coed=${TODAY}"
       - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=${DAYS_AGO_10}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS3MO&cosd=${DAYS_AGO_10}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=${DAYS_AGO_10}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS30&cosd=${DAYS_AGO_10}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=${DAYS_AGO_10}&coed=${TODAY}"
+      - "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=${DAYS_AGO_30}&coed=${TODAY}"
 operators:
   - type: select
-    fields: [date=observation_date, value=DGS10|DCOILWTICO]
+    fields: [date=observation_date, value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1]
   - {type: filter, expr: 'value matches "^[\\d.]+$" and value != "."'}   # "." is a day without a close
   - type: map
     assign:
       - 'series=replace(source_url, "^.*[?&]id=([A-Z0-9]+).*$", "\\1")'
-      - 'name=replace(replace(series, "^DGS10$", "US 10-year Treasury yield"), "^DCOILWTICO$", "WTI crude oil")'
-      - 'shown=replace(replace(series, "^DGS10$", value + "%"), "^DCOILWTICO$", "$" + value + " a barrel")'
+      - 'name=replace(replace(replace(replace(replace(replace(replace(replace(series, "^DGS10$", "US 10-year Treasury yield"), "^DCOILWTICO$", "WTI crude oil"), "^DGS3MO$", "US 3-month Treasury yield"), "^DGS2$", "US 2-year Treasury yield"), "^DGS30$", "US 30-year Treasury yield"), "^DHHNGSP$", "Henry Hub natural gas"), "^GASREGW$", "US regular gasoline, weekly average"), "^WCESTUS1$", "US crude oil inventories (weekly)")'
+      - 'shown=value + "%"'
+      - 'shown=replace(series, "^DCOILWTICO$", "$" + value + " a barrel")'
+      - 'shown=replace(shown, "^DHHNGSP$", "$" + value + " per million Btu")'
+      - 'shown=replace(shown, "^GASREGW$", "$" + value + " a gallon")'
+      - 'shown=replace(shown, "^WCESTUS1$", commas(number(value)) + " thousand barrels")'
+      - 'shown=replace(shown, "^DGS\\w+$", value + "%")'
       - 'title=name + ": " + shown + " on " + date'
-      - 'summary="Close of the " + name + " on " + date + ", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice."'
+      - 'summary=replace(name, "^(.*)$", "The \\1") + " on " + date + ": " + shown + ", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice."'
       - 'link="https://fred.stlouisfed.org/series/" + series'
       - 'published_at=date + "T21:00:00Z"'
       - 'day=series + " " + date'
@@ -24,5 +34,5 @@ operators:
   - {type: sort, by: [published_at], reverse: true}
   - {type: diff, key: day, only: [added], emit_initial: true}
 outputs:
-  - {type: feed, path: ../public/market-prices.xml, title: "Treasury yield and oil (FRED)"}
-  - {type: feed, path: ../public/market-prices.json, title: "Treasury yield and oil (FRED)"}
+  - {type: feed, path: ../public/market-prices.xml, title: "Treasury yields, oil and gas (FRED)"}
+  - {type: feed, path: ../public/market-prices.json, title: "Treasury yields, oil and gas (FRED)"}

@@ -1,0 +1,13 @@
+name: uk-statistics
+description: "New releases of the UK's Office for National Statistics - inflation, GDP, jobs, trade, population and more - as they are published."
+group: Countries
+sources:
+  - type: rss
+    url: "https://www.ons.gov.uk/releasecalendar?rss"
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: uk-statistics, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/uk-statistics.xml, title: "UK statistics releases (ONS)", link: "https://www.ons.gov.uk/releasecalendar", max_items: 100}
+  - {type: feed, path: ../public/uk-statistics.json, title: "UK statistics releases (ONS)", link: "https://www.ons.gov.uk/releasecalendar", max_items: 100}

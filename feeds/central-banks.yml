@@ -1,5 +1,5 @@
 name: central-banks
-description: Press releases of the Federal Reserve, the European Central Bank, the Bank of Japan, the Bank of England and the Reserve Bank of India, without routine market operations.
+description: Press releases of the Federal Reserve, the European Central Bank, the Bank of Japan, the Bank of England, the Reserve Bank of India and the Reserve Bank of Australia, without routine market operations.
 group: "Money, economy and government"
 sources:
   - type: rss
@@ -9,6 +9,7 @@ sources:
       - https://www.boj.or.jp/en/rss/whatsnew.xml
       - https://www.bankofengland.co.uk/rss/news
       - https://www.rbi.org.in/pressreleases_rss.xml
+      - https://www.rba.gov.au/rss/rss-cb-media-releases.xml
 operators:
   - type: filter
     expr: 'not (title matches "(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)")'
@@ -20,10 +21,11 @@ operators:
       - 'outlet=replace(outlet, "^boj\\.or\\.jp$", "Bank of Japan")'
       - 'outlet=replace(outlet, "^bankofengland\\.co\\.uk$", "Bank of England")'
       - 'outlet=replace(outlet, "^rbi\\.org\\.in$", "Reserve Bank of India")'
+      - 'outlet=replace(outlet, "^rba\\.gov\\.au$", "Reserve Bank of Australia")'
       - 'title=outlet + ": " + title'
   - {type: dedupe, by: [link]}
   - {type: sort, by: [published_at], reverse: true}
   - {type: diff, only: [added], emit_initial: true}
 outputs:
-  - {type: feed, path: ../public/central-banks.xml, title: "Central banks (Fed, ECB, BoJ, BoE, RBI)", max_items: 150}
-  - {type: feed, path: ../public/central-banks.json, title: "Central banks (Fed, ECB, BoJ, BoE, RBI)", max_items: 150}
+  - {type: feed, path: ../public/central-banks.xml, title: "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)", max_items: 150}
+  - {type: feed, path: ../public/central-banks.json, title: "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)", max_items: 150}

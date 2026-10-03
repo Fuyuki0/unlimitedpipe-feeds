@@ -1,0 +1,13 @@
+name: singapore-news
+description: "Singapore news from The Straits Times: headlines with a short summary, each linking to the article."
+group: Countries
+sources:
+  - type: rss
+    url: "https://www.straitstimes.com/news/singapore/rss.xml"
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: singapore-news, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/singapore-news.xml, title: "Singapore news (The Straits Times)", link: "https://www.straitstimes.com/singapore", max_items: 100}
+  - {type: feed, path: ../public/singapore-news.json, title: "Singapore news (The Straits Times)", link: "https://www.straitstimes.com/singapore", max_items: 100}

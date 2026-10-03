@@ -1,0 +1,13 @@
+name: nz-government
+description: "Releases of the New Zealand Government - the Prime Minister and ministers - as they publish them, from beehive.govt.nz."
+group: Countries
+sources:
+  - type: rss
+    url: "https://www.beehive.govt.nz/releases/feed"
+operators:
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: nz-government, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/nz-government.xml, title: "New Zealand Government releases (beehive.govt.nz)", link: "https://www.beehive.govt.nz/releases", max_items: 100}
+  - {type: feed, path: ../public/nz-government.json, title: "New Zealand Government releases (beehive.govt.nz)", link: "https://www.beehive.govt.nz/releases", max_items: 100}
