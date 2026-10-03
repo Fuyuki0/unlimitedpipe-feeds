@@ -1,0 +1,11 @@
+name: us-flight-delays
+description: "US airport ground stops, ground delay programs, and departure or arrival delays of 45 minutes or more, with the reason (thunderstorms, wind, runway work) and how long, from the FAA's National Airspace System status, which it updates every minute."
+group: Disasters and health
+archive: false   # the status of the moment; yesterday's stops are not news
+sources:
+  - {type: faa, min_delay: 45}
+operators:
+  - {type: diff, only: [added], namespace: us-flight-delays, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-flight-delays.xml, title: "US airport stops and delays (FAA)", link: "https://nasstatus.faa.gov/", max_items: 100}
+  - {type: feed, path: ../public/us-flight-delays.json, title: "US airport stops and delays (FAA)", link: "https://nasstatus.faa.gov/", max_items: 100}

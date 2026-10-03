@@ -1,0 +1,10 @@
+name: us-grants
+description: "New US federal grants of $100M or more - who received them, from which agency, and what for - biggest first, from USAspending.gov."
+group: "Money, economy and government"
+sources:
+  - {type: usaspending, resource: grants, min_value: 100000000, days: 14}
+operators:
+  - {type: diff, only: [added], namespace: us-grants, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-grants.xml, title: "New US federal grants, $100M+ (USAspending)", link: "https://www.usaspending.gov/search", max_items: 200}
+  - {type: feed, path: ../public/us-grants.json, title: "New US federal grants, $100M+ (USAspending)", link: "https://www.usaspending.gov/search", max_items: 200}
