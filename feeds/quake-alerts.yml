@@ -1,0 +1,11 @@
+name: quake-alerts
+description: "Earthquakes of magnitude 4.5 or more as soon as the first agency reports them - GFZ (Germany) usually within about ten minutes anywhere in the world, JMA (Japan) within two or three minutes for Japan, USGS within minutes in the US - one item per quake, naming every agency that has reported it. The earthquakes feed keeps USGS's reviewed record and its history."
+group: Disasters and health
+archive: false   # the earthquakes feed keeps the history
+sources:
+  - {type: quakes, min_magnitude: 4.5, days: 2}
+operators:
+  - {type: diff, only: [added], namespace: quake-alerts, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/quake-alerts.xml, title: "Earthquakes, first reports (GFZ, JMA, USGS)", link: "https://earthquake.usgs.gov/earthquakes/map/"}
+  - {type: feed, path: ../public/quake-alerts.json, title: "Earthquakes, first reports (GFZ, JMA, USGS)", link: "https://earthquake.usgs.gov/earthquakes/map/"}
