@@ -2,12 +2,102 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Typhoon warnings (JTWC)",
   "home_page_url": "https://www.metoc.navy.mil/jtwc/jtwc.html",
-  "description": "Events collected by UnlimitedPipe 0.10.42",
+  "description": "Events collected by UnlimitedPipe 0.10.46",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.42"
+    "generator": "UnlimitedPipe 0.10.46"
   },
   "items": [
+    {
+      "id": "9566004b2fba512ec0ff",
+      "title": "Hurricane 15E (Nolo) Warning #53 (Central/Eastern Pacific)",
+      "content_text": "Hurricane 15E (Nolo) Warning #53\nIssued at 03/2200Z\nTC Warning Text\nTC Warning Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\nHurricane 18E (Rachel) Warning #26\nIssued at 03/1600Z\nTC Warning Text\nTC Warning Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery",
+      "date_published": "2026-10-03T21:05:03Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9566004b2fba512ec0ff",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss#Hurricane 15E (Nolo) Warning #53",
+          "source_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+          "timestamp": null,
+          "observed_at": "2026-10-03T21:06:18Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane 15E (Nolo) Warning #53 (Central/Eastern Pacific)",
+            "item_type": "entry",
+            "summary": "added: Hurricane 15E (Nolo) Warning #53 (Central/Eastern Pacific)",
+            "after": {
+              "title": "Hurricane 15E (Nolo) Warning #53 (Central/Eastern Pacific)",
+              "link": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+              "id": "https://www.metoc.navy.mil/jtwc/rss/EPAC-CPAC-WARNINGS",
+              "author": "CDO.JTWC.fct@navy.mil (JTWC CDO)",
+              "published_at": "2026-10-03T21:05:03Z",
+              "updated_at": "2026-10-03T21:05:03Z",
+              "summary": "Hurricane 15E (Nolo) Warning #53\nIssued at 03/2200Z\nTC Warning Text\nTC Warning Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\nHurricane 18E (Rachel) Warning #26\nIssued at 03/1600Z\nTC Warning Text\nTC Warning Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery",
+              "categories": [
+                "Central/Eastern Pacific Tropical Systems"
+              ],
+              "feed": {
+                "title": "JTWC TROPICAL CYCLONE INFORMATION FEED",
+                "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+                "feed_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss"
+              },
+              "region": "Central/Eastern Pacific",
+              "warning": "Hurricane 15E (Nolo) Warning #53"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+            "elapsed_ms": 320,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.46"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.46",
+              "args": {
+                "expr": "summary matches \"Warning #\\\\d+\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.46",
+              "args": {
+                "assign": [
+                  "region=replace(title, \"^Current (.+?) Tropical Systems$\", \"\\\\1\")",
+                  "warning=replace(summary, \"(?s)^\\\\s*([^\\\\n]*?Warning #\\\\d+).*$\", \"\\\\1\")",
+                  "title=warning + \" (\" + region + \")\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.46",
+              "args": {
+                "key": "warning",
+                "namespace": "typhoons",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+      "tags": [
+        "Central/Eastern Pacific Tropical Systems"
+      ]
+    },
     {
       "id": "555af76f3add89e54b8f",
       "title": "Typhoon 26W (Choi-wan) Warning #16 (Northwest Pacific/North Indian Ocean*)",
