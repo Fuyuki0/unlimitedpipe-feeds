@@ -2,12 +2,106 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "World Bank project tenders",
   "home_page_url": "https://projects.worldbank.org/en/projects-operations/procurement",
-  "description": "Events collected by UnlimitedPipe 0.10.38",
+  "description": "Events collected by UnlimitedPipe 0.10.40",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.38"
+    "generator": "UnlimitedPipe 0.10.40"
   },
   "items": [
+    {
+      "id": "69f23dfe5c7d0b38823b",
+      "title": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
+      "content_text": "Invitation for Bids for the DRC Girls Learning and Empowerment Project project. Deadline: 2026-11-02.",
+      "date_published": "2026-10-01T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "69f23dfe5c7d0b38823b",
+          "source": "web",
+          "type": "change",
+          "key": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date#OP00472510",
+          "source_url": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date",
+          "timestamp": null,
+          "observed_at": "2026-10-03T17:42:53Z",
+          "data": {
+            "change": "added",
+            "label": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
+            "item_type": "record",
+            "summary": "added: Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
+            "after": {
+              "title": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
+              "summary": "Invitation for Bids for the DRC Girls Learning and Empowerment Project project. Deadline: 2026-11-02.",
+              "link": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00472510",
+              "published_at": "2026-10-01T00:00:00Z",
+              "id": "OP00472510"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date",
+            "content_type": "application/json",
+            "elapsed_ms": 126,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.40"
+            },
+            {
+              "step": "map",
+              "version": "0.10.40",
+              "args": {
+                "assign": [
+                  "what=trim(replace(bid_description, \"\\\\s+\", \" \"))",
+                  "title=project_ctry_name + \": \" + what",
+                  "summary=notice_type + \" for the \" + project_name + \" project. Deadline: \" + replace(\"\" + submission_deadline_date, \"T.*$\", \"\") + \".\"",
+                  "link=\"https://projects.worldbank.org/en/projects-operations/procurement-detail/\" + id",
+                  "published_at=submission_date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.40",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.40",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.40",
+              "args": {
+                "key": "id",
+                "namespace": "world-bank-tenders",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00472510"
+    },
     {
       "id": "6692241e8fdde93b123e",
       "title": "Bangladesh: Construction of Five (05) Storied Poura Market Building at Shobdoldhigi Bazar at Shibganj Pourashava (Bogura) along with electric works, plumbing and sanitary works etc. under Shibganj Pourashava.",
@@ -101,100 +195,6 @@
         }
       },
       "url": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00472393"
-    },
-    {
-      "id": "69f23dfe5c7d0b38823b",
-      "title": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
-      "content_text": "Invitation for Bids for the DRC Girls Learning and Empowerment Project project. Deadline: 2026-11-02.",
-      "date_published": "2026-10-01T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "69f23dfe5c7d0b38823b",
-          "source": "web",
-          "type": "change",
-          "key": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date#OP00472510",
-          "source_url": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date",
-          "timestamp": null,
-          "observed_at": "2026-10-03T15:49:21Z",
-          "data": {
-            "change": "added",
-            "label": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
-            "item_type": "record",
-            "summary": "added: Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
-            "after": {
-              "title": "Congo, Democratic Republic of: Travaux de Construction de trois écoles (Luiza 4) dans la Province de KASAI-CENTRAL",
-              "summary": "Invitation for Bids for the DRC Girls Learning and Empowerment Project project. Deadline: 2026-11-02.",
-              "link": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00472510",
-              "published_at": "2026-10-01T00:00:00Z",
-              "id": "OP00472510"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://search.worldbank.org/api/v2/procnotices?format=json&rows=40&srt=noticedate&order=desc&notice_type_exact=Invitation%20for%20Bids&fl=id,notice_type,noticedate,project_ctry_name,project_name,bid_description,submission_date,submission_deadline_date",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.38"
-            },
-            {
-              "step": "map",
-              "version": "0.10.38",
-              "args": {
-                "assign": [
-                  "what=trim(replace(bid_description, \"\\\\s+\", \" \"))",
-                  "title=project_ctry_name + \": \" + what",
-                  "summary=notice_type + \" for the \" + project_name + \" project. Deadline: \" + replace(\"\" + submission_deadline_date, \"T.*$\", \"\") + \".\"",
-                  "link=\"https://projects.worldbank.org/en/projects-operations/procurement-detail/\" + id",
-                  "published_at=submission_date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.38",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.38",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.38",
-              "args": {
-                "key": "id",
-                "namespace": "world-bank-tenders",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00472510"
     },
     {
       "id": "386c96fe6ace1ad5f680",
