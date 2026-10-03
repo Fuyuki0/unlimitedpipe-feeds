@@ -1,0 +1,12 @@
+name: aave-utilization
+description: "Aave V3 lending markets on Ethereum and Base that are 90% or more borrowed - near 100%, lenders cannot withdraw until borrowers repay, and borrowing costs jump - with the borrowing and lending rates, read from Aave's contracts. One item a market a day. Data, not investment advice."
+group: Crypto
+archive: false   # the state of the moment
+sources:
+  - {type: evm, resource: aave, chain: ethereum, min_utilization: 0.9}
+  - {type: evm, resource: aave, chain: base, min_utilization: 0.9}
+operators:
+  - {type: diff, only: [added], namespace: aave-utilization, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/aave-utilization.xml, title: "Aave markets 90%+ borrowed (Ethereum, Base)", link: "https://app.aave.com/markets/"}
+  - {type: feed, path: ../public/aave-utilization.json, title: "Aave markets 90%+ borrowed (Ethereum, Base)", link: "https://app.aave.com/markets/"}

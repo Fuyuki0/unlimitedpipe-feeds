@@ -1,0 +1,10 @@
+name: uniswap-new-pools
+description: "New Uniswap V2 and V3 pools on Ethereum trading a token against WETH, USDC or USDT, listed once $100K or more of those is in them (most new pools never get any), read from the chain. New tokens are often scams: check the contract. Data, not investment advice."
+group: Crypto
+sources:
+  - {type: evm, resource: new-pools, chain: ethereum, min_value: 100000}
+operators:
+  - {type: diff, only: [added], namespace: uniswap-new-pools, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/uniswap-new-pools.xml, title: "New Uniswap pools with $100K+ (Ethereum)", link: "https://app.uniswap.org/explore/pools", max_items: 200}
+  - {type: feed, path: ../public/uniswap-new-pools.json, title: "New Uniswap pools with $100K+ (Ethereum)", link: "https://app.uniswap.org/explore/pools", max_items: 200}

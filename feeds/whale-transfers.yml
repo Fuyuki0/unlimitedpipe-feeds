@@ -1,0 +1,12 @@
+name: whale-transfers
+description: "Stablecoin transfers of $25M or more on Ethereum (USDT, USDC) and $10M or more on Base (USDC), mints and burns included and flash loans left out, read from the chains, each with its transaction. Addresses are not labeled (whose wallet, which exchange). Data, not investment advice."
+group: Crypto
+sources:
+  - {type: evm, resource: transfers, chain: ethereum, min_value: 25000000}
+  - {type: evm, resource: transfers, chain: base, min_value: 10000000}
+operators:
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: whale-transfers, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/whale-transfers.xml, title: "Stablecoin transfers, $25M+ (Ethereum, Base)", link: "https://etherscan.io/", max_items: 200}
+  - {type: feed, path: ../public/whale-transfers.json, title: "Stablecoin transfers, $25M+ (Ethereum, Base)", link: "https://etherscan.io/", max_items: 200}

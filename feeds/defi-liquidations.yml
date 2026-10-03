@@ -1,0 +1,12 @@
+name: defi-liquidations
+description: "Aave V3 liquidations of $100K or more on Ethereum and Base - a borrower's collateral seized because its value fell - with the debt repaid and the collateral taken, priced by Aave's own oracle, read from the chains. Data, not investment advice."
+group: Crypto
+sources:
+  - {type: evm, resource: liquidations, chain: ethereum, min_value: 100000}
+  - {type: evm, resource: liquidations, chain: base, min_value: 100000}
+operators:
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: defi-liquidations, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/defi-liquidations.xml, title: "Aave liquidations, $100K+ (Ethereum, Base)", link: "https://app.aave.com/", max_items: 200}
+  - {type: feed, path: ../public/defi-liquidations.json, title: "Aave liquidations, $100K+ (Ethereum, Base)", link: "https://app.aave.com/", max_items: 200}
