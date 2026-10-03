@@ -2,12 +2,127 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Travel advisories (US State Department, UK FCDO)",
   "home_page_url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-  "description": "Events collected by UnlimitedPipe 0.10.34",
+  "description": "Events collected by UnlimitedPipe 0.10.38",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.34"
+    "generator": "UnlimitedPipe 0.10.38"
   },
   "items": [
+    {
+      "id": "3ef9ef26022eedb98e89",
+      "title": "US travel advice for Qatar: Level 1: Exercise Normal Precautions",
+      "content_text": "Exercise normal precautionSummary not available",
+      "date_published": "2026-10-03T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3ef9ef26022eedb98e89",
+          "source": "rss",
+          "type": "change",
+          "key": "https://travel.state.gov/_res/rss/TAsTWs.xml#US travel advice for Qatar: Level 1: Exercise Normal Precautions 2026-10-03T00:00:00Z",
+          "source_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-03T08:12:46Z",
+          "data": {
+            "change": "added",
+            "label": "US travel advice for Qatar: Level 1: Exercise Normal Precautions",
+            "item_type": "entry",
+            "summary": "added: US travel advice for Qatar: Level 1: Exercise Normal Precautions",
+            "after": {
+              "title": "US travel advice for Qatar: Level 1: Exercise Normal Precautions",
+              "link": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.qat.html",
+              "id": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.qat.html",
+              "author": null,
+              "published_at": "2026-10-03T00:00:00Z",
+              "updated_at": "2026-10-03T00:00:00Z",
+              "summary": "Exercise normal precautionSummary not available",
+              "categories": [
+                "Level 1: Exercise Normal Precautions",
+                "QA",
+                "advisory"
+              ],
+              "feed": {
+                "title": "travel.state.gov: Travel Advisories",
+                "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
+                "feed_url": "https://travel.state.gov/_res/rss/TAsTWs.xml"
+              },
+              "issuer": "US",
+              "version": "US travel advice for Qatar: Level 1: Exercise Normal Precautions 2026-10-03T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
+            "elapsed_ms": 178,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.38"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.38",
+              "args": {
+                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.38",
+              "args": {
+                "assign": [
+                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
+                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
+                  "title=issuer + \" travel advice for \" + title",
+                  "version=title + \" \" + published_at"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.38",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.38",
+              "args": {
+                "by": [
+                  "version"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.38",
+              "args": {
+                "key": "version",
+                "namespace": "travel-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.qat.html",
+      "tags": [
+        "Level 1: Exercise Normal Precautions",
+        "QA",
+        "advisory"
+      ]
+    },
     {
       "id": "ca25112b8724104bcc30",
       "title": "US travel advice for British Virgin Islands: Level 1: Exercise Normal Precautions",
@@ -11264,121 +11379,6 @@
       "tags": [
         "Level 2: Exercise Increased Caution",
         "KH",
-        "advisory"
-      ]
-    },
-    {
-      "id": "a3ced4e4f2c302713beb",
-      "title": "US travel advice for United Kingdom: Level 2: Exercise Increased Caution",
-      "content_text": "Exercise increased caution in the United Kingdom due to terrorism .\nThere is risk of terrorist violence, including terrorist attacks and other activity in the United Kingdom. Visit the U.S. Department of State's country reports on terrorism to learn more.\nThere is also risk of isolated violence by dissident groups in Northern Ireland. These groups mainly target police and military.\nPetty crime is common, especially in popular tourist locations. Stay aware of your surroundings. Most crimes…",
-      "date_published": "2026-09-09T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "a3ced4e4f2c302713beb",
-          "source": "rss",
-          "type": "change",
-          "key": "https://travel.state.gov/_res/rss/TAsTWs.xml#US travel advice for United Kingdom: Level 2: Exercise Increased Caution 2026-09-09T00:00:00Z",
-          "source_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-28T03:49:47Z",
-          "data": {
-            "change": "added",
-            "label": "US travel advice for United Kingdom: Level 2: Exercise Increased Caution",
-            "item_type": "entry",
-            "summary": "added: US travel advice for United Kingdom: Level 2: Exercise Increased Caution",
-            "after": {
-              "title": "US travel advice for United Kingdom: Level 2: Exercise Increased Caution",
-              "link": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.gbr.html",
-              "id": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.gbr.html",
-              "author": null,
-              "published_at": "2026-09-09T00:00:00Z",
-              "updated_at": "2026-09-09T00:00:00Z",
-              "summary": "Exercise increased caution in the United Kingdom due to terrorism .\nThere is risk of terrorist violence, including terrorist attacks and other activity in the United Kingdom. Visit the U.S. Department of State's country reports on terrorism to learn more.\nThere is also risk of isolated violence by dissident groups in Northern Ireland. These groups mainly target police and military.\nPetty crime is common, especially in popular tourist locations. Stay aware of your surroundings. Most crimes against foreigners are crimes of opportunity, like purse or cellphone snatching and pickpocketing.",
-              "categories": [
-                "Level 2: Exercise Increased Caution",
-                "UK",
-                "advisory"
-              ],
-              "feed": {
-                "title": "travel.state.gov: Travel Advisories",
-                "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-                "feed_url": "https://travel.state.gov/_res/rss/TAsTWs.xml"
-              },
-              "issuer": "US",
-              "version": "US travel advice for United Kingdom: Level 2: Exercise Increased Caution 2026-09-09T00:00:00Z"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-            "elapsed_ms": 154,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.12"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.12",
-              "args": {
-                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.12",
-              "args": {
-                "assign": [
-                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
-                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
-                  "title=issuer + \" travel advice for \" + title",
-                  "version=title + \" \" + published_at"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "version"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.12",
-              "args": {
-                "key": "version",
-                "namespace": "travel-advisories",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.gbr.html",
-      "tags": [
-        "Level 2: Exercise Increased Caution",
-        "UK",
         "advisory"
       ]
     }
