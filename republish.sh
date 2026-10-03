@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 express="earthquakes tsunami-alerts disaster-alerts hurricanes typhoons space-weather
   thailand-earthquakes exploited-vulnerabilities security-news cloud-status crypto-hacks
   sec-cyber-incidents activist-stakes sec-company-events insider-trades rate-decisions
-  world-headlines business-news us-indicators"
+  world-headlines business-news us-indicators us-volcano-alerts"
 flags=""
 for name in $express; do flags="$flags --express $name"; done
 version="$(python3 -c 'import unlimitedpipe; print(unlimitedpipe.__version__)')"

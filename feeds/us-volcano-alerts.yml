@@ -1,0 +1,23 @@
+name: us-volcano-alerts
+description: "Alerts from the USGS volcano observatories (Alaska, Hawaii, the Cascades, California, Yellowstone and the Northern Mariana Islands): volcano activity notices, which are sent when an alert level changes or an eruption starts or stops, plus status reports and information statements. Routine daily and weekly updates are left out."
+group: Disasters and health
+sources:
+  - type: web
+    url: "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices"
+operators:
+  - {type: filter, expr: 'notice_category != "Scheduled Update"'}
+  - type: map
+    assign:
+      - 'kind=replace(replace(replace(notice_type_title, "^VAN/VONA$", "Volcano activity notice"), "^Status Report$", "Status report"), "^Information Statement$", "Information statement")'
+      - 'where=replace(volcanoes, "^\\s*$", obs_fullname)'
+      - 'title=where + ": " + kind + ", " + replace(sent_utc, " .*$", "")'
+      - 'summary=kind + " from the " + obs_fullname + " (USGS)" + replace(" for " + volcanoes, "^ for \\s*$", "") + ", sent " + sent_utc + " UTC."'
+      - 'published_at=replace(sent_utc, " ", "T") + "Z"'
+      - 'link=notice_url'
+      - 'id=notice_identifier'
+  - {type: select, fields: [title, summary, link, published_at, id]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: id, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-volcano-alerts.xml, title: "US volcano alerts (USGS)", link: "https://volcanoes.usgs.gov/hans-public/"}
+  - {type: feed, path: ../public/us-volcano-alerts.json, title: "US volcano alerts (USGS)", link: "https://volcanoes.usgs.gov/hans-public/"}
