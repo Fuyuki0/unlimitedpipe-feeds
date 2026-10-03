@@ -1,0 +1,23 @@
+name: crypto-hack-news
+description: "Crypto hacks, exploits and thefts as the news reports them - usually within the hour, often a day before DefiLlama's hacks list (the crypto-hacks feed) confirms the amount lost - from CoinDesk, Cointelegraph, Decrypt, The Block, rekt.news and security news."
+group: Crypto
+sources:
+  - type: rss
+    url: [https://www.coindesk.com/arc/outboundfeeds/rss/, https://cointelegraph.com/rss, https://decrypt.co/feed, https://www.theblock.co/rss.xml, https://rekt.news/rss/feed.xml, https://www.bleepingcomputer.com/feed/, https://feeds.feedburner.com/TheHackersNews]
+operators:
+  # a theft, in the headline
+  - type: grep
+    regex: true
+    field: [title]
+    patterns: ['\b(hack(s|ed|er|ers)?|exploit(s|ed|er)?|drain(s|ed|er)?|stolen|steal(s|ing)?|heist|breach(ed|es)?|attack(ed|er|ers)?|compromised?|rug ?pull|rekt)\b']
+  # of crypto: every story of the crypto outlets, and security news that says crypto
+  - type: grep
+    regex: true
+    field: [title, summary, feed.url]
+    patterns: ['\b(crypto\w*|bitcoin|btc|ethereum|ether|eth|defi|blockchain|stablecoins?|nfts?|solana|on-?chain|web3|dex|rekt|binance|coinbase|bybit|bitget|coindesk|cointelegraph|decrypt\.co|theblock|rekt\.news)\b']
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], namespace: crypto-hack-news, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/crypto-hack-news.xml, title: "Crypto hacks in the news", link: "https://feeds.daemonfill.dev/", max_items: 100}
+  - {type: feed, path: ../public/crypto-hack-news.json, title: "Crypto hacks in the news", link: "https://feeds.daemonfill.dev/", max_items: 100}
