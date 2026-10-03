@@ -1,0 +1,14 @@
+name: sec-fund-holdings
+description: Quarterly holdings reports of investment managers with $1B or more in US-listed stocks (SEC Form 13F) as they are filed - who, which quarter, how much, how many positions. Most come in the 45 days after a quarter ends.
+group: "Money, economy and government"
+sources:
+  - type: sec
+    resource: fund-holdings
+    contact: ${SEC_CONTACT}   # the SEC asks automated readers for a contact email
+    min_value: 1000000000
+    limit: 400
+operators:
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/sec-fund-holdings.xml, title: "Fund holdings reports, $1B+ (SEC 13F)", link: "https://www.sec.gov/edgar/search/", max_items: 300}
+  - {type: feed, path: ../public/sec-fund-holdings.json, title: "Fund holdings reports, $1B+ (SEC 13F)", link: "https://www.sec.gov/edgar/search/", max_items: 300}

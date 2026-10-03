@@ -1,0 +1,14 @@
+name: sec-private-raises
+description: Money raised privately, $25M or more, as companies and funds file Form D with the SEC - who raised how much, in what business (startups, biotech, venture and private equity funds).
+group: "Money, economy and government"
+sources:
+  - type: sec
+    resource: private-raises
+    contact: ${SEC_CONTACT}   # the SEC asks automated readers for a contact email
+    min_value: 25000000
+    limit: 400
+operators:
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/sec-private-raises.xml, title: "Private raises, $25M+ (SEC Form D)", link: "https://www.sec.gov/edgar/search/"}
+  - {type: feed, path: ../public/sec-private-raises.json, title: "Private raises, $25M+ (SEC Form D)", link: "https://www.sec.gov/edgar/search/"}

@@ -1,0 +1,31 @@
+name: us-new-laws
+description: New US federal laws as Congress enacts them - each bill signed into law (or passed over a veto), with its public law number, from the Library of Congress's congress.gov API (public domain).
+group: "Money, economy and government"
+sources:
+  - type: web
+    # this Congress and the next ones (the 120th starts in January 2027; 404 until then)
+    url:
+      - "https://api.congress.gov/v3/law/119?format=json&limit=50"
+      - "https://api.congress.gov/v3/law/120?format=json&limit=50"
+      - "https://api.congress.gov/v3/law/121?format=json&limit=50"
+    header: ["X-Api-Key: ${CONGRESS_API_KEY}"]
+    records: bills
+    not_found_is_empty: true
+operators:
+  - type: map
+    assign:
+      - 'law=replace(latestAction.text, "^.*No: ([0-9-]+).*$", "\\1")'
+      # 119th, 120th, 121st
+      - 'nth=replace(replace(replace(congress + "th", "^((?:\\d*[02-9])?)1th$", "\\g<1>1st"), "^((?:\\d*[02-9])?)2th$", "\\g<1>2nd"), "^((?:\\d*[02-9])?)3th$", "\\g<1>3rd")'
+      - 'kind=replace(replace(replace(replace(type, "^HR$", "house-bill"), "^S$", "senate-bill"), "^HJRES$", "house-joint-resolution"), "^SJRES$", "senate-joint-resolution")'
+      - 'code=replace(replace(replace(replace(type, "^HR$", "H.R."), "^S$", "S."), "^HJRES$", "H.J.Res."), "^SJRES$", "S.J.Res.")'
+      - 'title="New law: " + title + " (Public Law " + law + ")"'
+      - 'summary=code + " " + number + " of the " + nth + " Congress became Public Law " + law + " on " + latestAction.actionDate + "."'
+      - 'link="https://www.congress.gov/bill/" + nth + "-congress/" + kind + "/" + number'
+      - 'published_at=latestAction.actionDate + "T00:00:00Z"'
+  - {type: select, fields: [title, summary, link, published_at, law]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: law, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-new-laws.xml, title: "New US laws (congress.gov)", link: "https://www.congress.gov/public-laws/119th-congress"}
+  - {type: feed, path: ../public/us-new-laws.json, title: "New US laws (congress.gov)", link: "https://www.congress.gov/public-laws/119th-congress"}
