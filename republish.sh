@@ -20,5 +20,8 @@ unlimited publish feeds/*.yml --force --install "unlimitedpipe==$version" $flags
   --link "Feeds on GitHub=https://github.com/Fuyuki0/unlimitedpipe-feeds" \
   --link "UnlimitedPipe=https://github.com/Fuyuki0/unlimitedpipe" \
   --live "https://daemonfill.dev/live/feeds.json" \
+  --example "earthquake japan 2024" --example "crypto hacks 2022" --example "tsunami" \
+  --example "recall" --example "new law" --example "insider bought" \
+  --example "berkshire hathaway 2025" --example "flood bangkok" \
   --about "Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source."
 echo "Now commit .github/workflows/unlimitedpipe-feeds.yml, public/index.html and public/feeds.json."

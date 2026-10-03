@@ -78,6 +78,11 @@
       .pill { background: var(--pill); color: var(--ink); text-decoration: none;
         padding: .15rem .6rem; border-radius: 6px; font-weight: 600; font-size: .8rem; }
       .warn { color: var(--live); }
+      .try { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+        margin: .6rem 0 0; color: var(--muted); font-size: .88rem; }
+      .try button { font: inherit; font-size: .85rem; color: var(--ink); background: var(--pill);
+        border: 0; border-radius: 999px; padding: .25rem .7rem; cursor: pointer; }
+      .try button:hover { outline: 1px solid var(--accent); }
       .use { display: grid; gap: 1rem 2rem;
         grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
         padding-block: 2.5rem; border-top: 1px solid var(--line); margin-top: 2rem; }
@@ -102,6 +107,7 @@
       </ul>
       <input id="q" type="search" placeholder="Search the latest items: flood, bankruptcy, Bangkok…"
         autocomplete="off" aria-label="Search every feed">
+      <p class="try">Try <button type="button" data-q="earthquake japan 2024">earthquake japan 2024</button><button type="button" data-q="crypto hacks 2022">crypto hacks 2022</button><button type="button" data-q="tsunami">tsunami</button><button type="button" data-q="recall">recall</button><button type="button" data-q="new law">new law</button><button type="button" data-q="insider bought">insider bought</button><button type="button" data-q="berkshire hathaway 2025">berkshire hathaway 2025</button><button type="button" data-q="flood bangkok">flood bangkok</button></p>
       <p id="status"></p>
       <button id="deep" type="button" hidden>Search every past record, not only the latest</button>
       <ul id="results"></ul>
@@ -746,6 +752,9 @@
       <div><h2>Search and ask</h2><p><code>pip install unlimitedpipe</code>, then
         <code>unlimited search WORDS</code> or <code>unlimited ask "QUESTION"</code>, with a
         local model and every answer cited.</p></div>
+      <div><h2>Follow</h2><p><code>unlimited follow earthquake japan --to ntfy:TOPIC</code>
+        sends each new match to your phone (the free ntfy app, no account), or to Telegram,
+        Discord, Slack or any webhook.</p></div>
       <div><h2>History</h2><p>Every item goes into a monthly archive,
         <a href="archive/index.json">archive/index.json</a>, so questions about a year or a
         month reach back. Runs every 1h (live feeds: 15m).</p></div>
@@ -975,6 +984,16 @@
           }
         }
         return found.sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 50);
+      }
+      // "Try" buttons: search for their words; one naming a year searches the archive too.
+      for (const button of document.querySelectorAll(".try button")) {
+        button.addEventListener("click", () => {
+          q.value = button.dataset.q;
+          q.dispatchEvent(new Event("input"));
+          if (/\b(19|20)\d\d\b/.test(q.value) && deep) {
+            load().then(() => deep.click());
+          }
+        });
       }
       if (deep) deep.addEventListener("click", () => {
         deep.hidden = true;
