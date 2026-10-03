@@ -16,6 +16,7 @@ unlimited publish feeds/*.yml --force --install "unlimitedpipe==$version" $flags
   --group "Money, economy and government" --group Security --group "Disasters and health" \
   --group AI --group Developers --group Crypto --group "Science and space" \
   --group "World and regions" --group Countries \
+  --link "Phone alerts=https://ntfy.daemonfill.dev/" \
   --link "Dataset=https://huggingface.co/datasets/unlimitedpipe/feed-history" \
   --link "Feeds on GitHub=https://github.com/Fuyuki0/unlimitedpipe-feeds" \
   --link "UnlimitedPipe=https://github.com/Fuyuki0/unlimitedpipe" \
