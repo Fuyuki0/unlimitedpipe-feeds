@@ -2,12 +2,98 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Earthquakes around Thailand (TMD)",
   "home_page_url": "https://earthquake.tmd.go.th/",
-  "description": "Events collected by UnlimitedPipe 0.10.40",
+  "description": "Events collected by UnlimitedPipe 0.10.42",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.40"
+    "generator": "UnlimitedPipe 0.10.42"
   },
   "items": [
+    {
+      "id": "a3a3547dec79007b6296",
+      "title": "M2.0 earthquake in Tambon Huai Pha, Amphoe MueangMaeHongSon, MaeHongSon",
+      "content_text": "At 2026-10-04 02:53:47 Thai time (UTC+7), latitude 19.493, longitude 97.998, magnitude 2.0",
+      "date_published": "2026-10-03T19:56:34Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a3a3547dec79007b6296",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17165",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-03T19:57:22Z",
+          "data": {
+            "change": "added",
+            "label": "M2.0 earthquake in Tambon Huai Pha, Amphoe MueangMaeHongSon, MaeHongSon",
+            "item_type": "entry",
+            "summary": "added: M2.0 earthquake in Tambon Huai Pha, Amphoe MueangMaeHongSon, MaeHongSon",
+            "after": {
+              "title": "M2.0 earthquake in Tambon Huai Pha, Amphoe MueangMaeHongSon, MaeHongSon",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17165",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17165",
+              "author": null,
+              "published_at": "2026-10-03T19:56:34Z",
+              "updated_at": "2026-10-03T19:56:34Z",
+              "summary": "At 2026-10-04 02:53:47 Thai time (UTC+7), latitude 19.493, longitude 97.998, magnitude 2.0",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "2.0",
+              "place": "Tambon Huai Pha, Amphoe MueangMaeHongSon, MaeHongSon"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1368,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.42"
+            },
+            {
+              "step": "map",
+              "version": "0.10.42",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.42",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.42",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17165"
+    },
     {
       "id": "2745373160a0db729e5d",
       "title": "M4.9 earthquake in Myanmar",
