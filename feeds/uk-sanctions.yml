@@ -1,0 +1,20 @@
+name: uk-sanctions
+description: UK sanctions as the government announces them - new designations, penalties for breaches and OFSI general licences - from GOV.UK (HM Treasury's Office of Financial Sanctions Implementation and the Foreign Office), under the Open Government Licence.
+group: "Money, economy and government"
+sources:
+  - type: rss
+    url:
+      - "https://www.gov.uk/government/organisations/office-of-financial-sanctions-implementation.atom"
+      - "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=foreign-commonwealth-development-office&keywords=sanctions"
+operators:
+  - type: grep
+    patterns: [sanction, sanctions, sanctioned, general licence, penalty, designation, designations, designated, asset freeze]
+    field: [title]
+  - type: map
+    assign: ['title=replace(title, "^Guidance: ", "")']
+  - {type: dedupe, by: [link]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/uk-sanctions.xml, title: "UK sanctions (GOV.UK)", link: "https://www.gov.uk/government/organisations/office-of-financial-sanctions-implementation"}
+  - {type: feed, path: ../public/uk-sanctions.json, title: "UK sanctions (GOV.UK)", link: "https://www.gov.uk/government/organisations/office-of-financial-sanctions-implementation"}

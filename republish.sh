@@ -23,5 +23,5 @@ unlimited publish feeds/*.yml --force --install "unlimitedpipe==$version" $flags
   --example "earthquake japan 2024" --example "crypto hacks 2022" --example "tsunami" \
   --example "vehicle recall" --example "public law" --example "insider bought" \
   --example "berkshire hathaway 2025" --example "flood bangkok" \
-  --about "Free feeds of public records and news: SEC filings and insider trades, sanctions, rate decisions, economic data and market closes, new rules and court rulings, EU laws, drug approvals, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region. Every item links to its source."
+  --about "Free feeds of public records and news: SEC filings, insider trades, fund holdings and private raises, new US laws, election spending, sanctions, rate decisions and economic data, recalls and drug shortages, critical vulnerabilities, disasters and solar storms, disease outbreaks, crypto, business and tech, science, and news from every region, with history back to 1900. Every item links to its source."
 echo "Now commit .github/workflows/unlimitedpipe-feeds.yml, public/index.html and public/feeds.json."

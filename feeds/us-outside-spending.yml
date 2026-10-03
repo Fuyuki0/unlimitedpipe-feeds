@@ -1,0 +1,12 @@
+name: us-outside-spending
+description: What super PACs, parties and other committees report spending for or against US federal candidates, $250K or more at a time (independent expenditures) - who spent how much, for or against whom, for which office - from the Federal Election Commission's daily bulk files. Amounts as filed.
+group: "Money, economy and government"
+sources:
+  - type: fec
+    resource: outside-spending
+    min_value: 250000
+operators:
+  - {type: diff, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/us-outside-spending.xml, title: "Outside spending in US elections, $250K+ (FEC)", link: "https://www.fec.gov/data/independent-expenditures/", max_items: 200}
+  - {type: feed, path: ../public/us-outside-spending.json, title: "Outside spending in US elections, $250K+ (FEC)", link: "https://www.fec.gov/data/independent-expenditures/", max_items: 200}

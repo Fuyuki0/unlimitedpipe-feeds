@@ -1,0 +1,27 @@
+name: drug-shortages
+description: US drug shortages as the FDA posts them - new shortages, shortages resolved, and drugs to be discontinued - one item per drug and status, from the FDA's drug shortage list (openFDA, public domain).
+group: "Disasters and health"
+sources:
+  - type: web
+    url: "https://api.fda.gov/drug/shortages.json?sort=update_date:desc&limit=1000"
+    records: results
+operators:
+  - type: map
+    assign:
+      - 'drug=replace(generic_name, "\\s+", " ")'
+      - 'state=replace(replace(replace(status, "^Current$", "Drug shortage"), "^Resolved$", "Drug shortage resolved"), "^To Be Discontinued$", "To be discontinued")'
+      - 'title=state + ": " + drug'
+      - 'area=default(therapeutic_category.0, "")'
+      - 'first=replace(initial_posting_date, "^(\\d\\d)/(\\d\\d)/(\\d{4})$", "\\3-\\1-\\2")'
+      - 'last=replace(update_date, "^(\\d\\d)/(\\d\\d)/(\\d{4})$", "\\3-\\1-\\2")'
+      - 'summary=state + " for " + drug + replace(", " + area, "^, $", "") + ". First posted " + first + ", last updated " + last + " (FDA drug shortage list)."'
+      # a shortage is dated when it was first posted; a resolution or discontinuation when updated
+      - 'published_at=replace(replace(status, "^Current$", first), "^(Resolved|To Be Discontinued)$", last) + "T00:00:00Z"'
+      - 'link="https://dps.fda.gov/drugshortages"'
+      - 'change=drug + " | " + status'
+  - {type: dedupe, by: [change]}   # one item per drug and status, not one per company
+  - {type: select, fields: [title, summary, link, published_at, change]}
+  - {type: diff, key: change, only: [added], emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/drug-shortages.xml, title: "US drug shortages (FDA)", link: "https://dps.fda.gov/drugshortages", max_items: 100}
+  - {type: feed, path: ../public/drug-shortages.json, title: "US drug shortages (FDA)", link: "https://dps.fda.gov/drugshortages", max_items: 100}
