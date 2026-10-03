@@ -2,12 +2,98 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US disaster declarations (FEMA)",
   "home_page_url": "https://www.fema.gov/disaster/declarations",
-  "description": "Events collected by UnlimitedPipe 0.10.29",
+  "description": "Events collected by UnlimitedPipe 0.10.38",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.29"
+    "generator": "UnlimitedPipe 0.10.38"
   },
   "items": [
+    {
+      "id": "0b82c39be26e4a124c12",
+      "title": "Major disaster declared: Severe Storms, Straight-Line Winds, Tornadoes, Flooding, and Landslides, Ohio (DR-4945)",
+      "content_text": "FEMA major disaster declaration for Ohio (flood), declared 2026-10-02.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0b82c39be26e4a124c12",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.fema.gov/api/open/v1/FemaWebDisasterDeclarations?$orderby=declarationDate%20desc&$top=50#4945",
+          "source_url": "https://www.fema.gov/api/open/v1/FemaWebDisasterDeclarations?$orderby=declarationDate%20desc&$top=50",
+          "timestamp": null,
+          "observed_at": "2026-10-03T12:00:46Z",
+          "data": {
+            "change": "added",
+            "label": "Major disaster declared: Severe Storms, Straight-Line Winds, Tornadoes, Flooding, and Landslides, Ohio (DR-4945)",
+            "item_type": "record",
+            "summary": "added: Major disaster declared: Severe Storms, Straight-Line Winds, Tornadoes, Flooding, and Landslides, Ohio (DR-4945)",
+            "after": {
+              "title": "Major disaster declared: Severe Storms, Straight-Line Winds, Tornadoes, Flooding, and Landslides, Ohio (DR-4945)",
+              "summary": "FEMA major disaster declaration for Ohio (flood), declared 2026-10-02.",
+              "link": "https://www.fema.gov/disaster/4945",
+              "published_at": "2026-10-02T00:00:00.000Z",
+              "number": 4945
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.fema.gov/api/open/v1/FemaWebDisasterDeclarations?$orderby=declarationDate%20desc&$top=50",
+            "content_type": "application/json",
+            "elapsed_ms": 759,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.38"
+            },
+            {
+              "step": "map",
+              "version": "0.10.38",
+              "args": {
+                "assign": [
+                  "kind=replace(replace(declarationType, \"^Major Disaster$\", \"Major disaster\"), \"^Fire Management$\", \"Fire management\")",
+                  "code=replace(replace(replace(declarationType, \"^Major Disaster$\", \"DR\"), \"^Emergency$\", \"EM\"), \"^Fire Management$\", \"FM\")",
+                  "title=kind + \" declared: \" + readable(disasterName) + \", \" + stateName + \" (\" + code + \"-\" + disasterNumber + \")\"",
+                  "summary=\"FEMA \" + lower(kind) + \" declaration for \" + stateName + \" (\" + lower(incidentType) + \"), declared \" + replace(declarationDate, \"T.*$\", \"\") + \".\"",
+                  "link=\"https://www.fema.gov/disaster/\" + disasterNumber",
+                  "published_at=declarationDate",
+                  "number=disasterNumber"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.38",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "number"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.38",
+              "args": {
+                "key": "number",
+                "namespace": "us-disasters",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.fema.gov/disaster/4945"
+    },
     {
       "id": "9627509fb6bb686a0984",
       "title": "Emergency declared: Tropical Storm Nolo, Hawaii (EM-3654)",
