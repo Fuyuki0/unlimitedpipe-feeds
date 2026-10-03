@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
-  "title": "Central banks (Fed, ECB, BoJ, BoE, RBI)",
-  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-  "description": "Events collected by UnlimitedPipe 0.10.32",
+  "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
+  "home_page_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+  "description": "Events collected by UnlimitedPipe 0.10.48",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.32"
+    "generator": "UnlimitedPipe 0.10.48"
   },
   "items": [
+    {
+      "id": "1485654daa6e9c09b697",
+      "title": "Reserve Bank of Australia: Release of Financial Stability Review – October 2026",
+      "content_text": "Media release number 2026-28: The RBA today published its October 2026 Financial Stability Review.",
+      "date_published": "2026-10-01T01:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1485654daa6e9c09b697",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.rba.gov.au/media-releases/2026/mr-26-28.html",
+          "source_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-03T21:30:59Z",
+          "data": {
+            "change": "added",
+            "label": "Reserve Bank of Australia: Release of Financial Stability Review – October 2026",
+            "item_type": "entry",
+            "summary": "added: Reserve Bank of Australia: Release of Financial Stability Review – October 2026",
+            "after": {
+              "title": "Reserve Bank of Australia: Release of Financial Stability Review – October 2026",
+              "link": "https://www.rba.gov.au/media-releases/2026/mr-26-28.html",
+              "id": "https://www.rba.gov.au/media-releases/2026/mr-26-28.html",
+              "author": null,
+              "published_at": "2026-10-01T01:30:00Z",
+              "updated_at": "2026-10-01T01:30:00Z",
+              "summary": "Media release number 2026-28: The RBA today published its October 2026 Financial Stability Review.",
+              "categories": [],
+              "feed": {
+                "title": "Reserve Bank of Australia | Media Releases",
+                "url": "https://www.rba.gov.au/rss/index.html",
+                "feed_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"
+              },
+              "outlet": "Reserve Bank of Australia"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+            "elapsed_ms": 584,
+            "not_modified": true,
+            "method": "rss10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.48"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.48",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.48",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.48",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.48",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.48",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.rba.gov.au/media-releases/2026/mr-26-28.html"
+    },
     {
       "id": "bcad5b82b2983c0d06ad",
       "title": "Federal Reserve: Federal Reserve Board announces approval of application by Fleur Capital Corporation",
@@ -15831,117 +15938,6 @@
         }
       },
       "url": "https://www.bankofengland.co.uk/minutes/2026/september/market-participants-group-meeting-25-september-2026"
-    },
-    {
-      "id": "23177e1091b88e650eed",
-      "title": "Federal Reserve: Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-      "content_text": "Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-      "date_published": "2026-09-24T18:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "23177e1091b88e650eed",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260924a.htm",
-          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:49:21Z",
-          "data": {
-            "change": "added",
-            "label": "Federal Reserve: Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-            "item_type": "entry",
-            "summary": "added: Federal Reserve: Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-            "after": {
-              "title": "Federal Reserve: Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-              "link": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260924a.htm",
-              "id": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260924a.htm",
-              "author": null,
-              "published_at": "2026-09-24T18:30:00Z",
-              "updated_at": "2026-09-24T18:30:00Z",
-              "summary": "Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
-              "categories": [
-                "Banking and Consumer Regulatory Policy"
-              ],
-              "feed": {
-                "title": "FRB: Press Release - All Releases",
-                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
-                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
-              },
-              "outlet": "Federal Reserve"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-            "elapsed_ms": 127,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.3.2"
-            },
-            {
-              "step": "filter",
-              "version": "0.3.2",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260924a.htm",
-      "tags": [
-        "Banking and Consumer Regulatory Policy"
-      ]
     }
   ]
 }
