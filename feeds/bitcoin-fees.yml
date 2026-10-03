@@ -1,0 +1,21 @@
+name: bitcoin-fees
+description: "Bitcoin network fees when they spike: the fee a transaction needs for the next block at 25 sat/vB or more (a busy network, often a sign of a rush on exchanges or a token craze), with the fee for within the hour, from mempool.space. One item a day. Data, not investment advice."
+group: Crypto
+archive: false   # the fee of the moment
+sources:
+  - type: web
+    url: "https://mempool.space/api/v1/fees/recommended"
+operators:
+  - {type: filter, expr: 'fastestFee >= 25'}
+  - type: map
+    assign:
+      - 'title="Bitcoin fees high: " + fastestFee + " sat/vB for the next block, " + hourFee + " within the hour"'
+      - 'summary="A Bitcoin transaction needs about " + fastestFee + " sat/vB to make the next block, " + halfHourFee + " for half an hour and " + hourFee + " for an hour (mempool.space). Data, not investment advice."'
+      - 'link="https://mempool.space/"'
+      - 'published_at="${TODAY}T00:00:00Z"'
+      - 'day="${TODAY}"'
+  - {type: select, fields: [title, summary, link, published_at, day]}
+  - {type: diff, key: day, only: [added], namespace: bitcoin-fees, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/bitcoin-fees.xml, title: "Bitcoin fee spikes (mempool.space)", link: "https://mempool.space/"}
+  - {type: feed, path: ../public/bitcoin-fees.json, title: "Bitcoin fee spikes (mempool.space)", link: "https://mempool.space/"}

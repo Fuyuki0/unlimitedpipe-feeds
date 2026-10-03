@@ -1,0 +1,11 @@
+name: hyperliquid-funding
+description: "Crowded trades on Hyperliquid: perpetual futures whose funding reaches 0.01% an hour either way (about 88% a year), with $50M or more of open interest - who pays whom, the price, open interest and volume - from Hyperliquid's public API. One item a market a day. Data, not investment advice."
+group: Crypto
+archive: false   # funding of the moment
+sources:
+  - {type: hyperliquid, min_funding: 0.0001, min_open_interest: 50000000}
+operators:
+  - {type: diff, only: [added], namespace: hyperliquid-funding, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/hyperliquid-funding.xml, title: "Hyperliquid funding extremes", link: "https://app.hyperliquid.xyz/"}
+  - {type: feed, path: ../public/hyperliquid-funding.json, title: "Hyperliquid funding extremes", link: "https://app.hyperliquid.xyz/"}
