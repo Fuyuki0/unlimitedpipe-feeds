@@ -2,12 +2,113 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Hurricanes and tropical storms (NHC)",
   "home_page_url": "https://www.nhc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.49",
+  "description": "Events collected by UnlimitedPipe 0.10.52",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.49"
+    "generator": "UnlimitedPipe 0.10.52"
   },
   "items": [
+    {
+      "id": "2d80c47a20b208a1cf0b",
+      "title": "Hurricane Rachel (EP3), advisory 04/0833Z",
+      "content_text": "RACHEL STRENGTHENS A LITTLE MORE WHILE IT MOVES WEST-NORTHWESTWARD. As of 2:00 AM MST Sun Oct 04 the center of Rachel was located near 20.2, -113.2 with movement WNW at 5 mph. The minimum central pressure was 968 mb with maximum sustained winds of about 100 mph.",
+      "date_published": "2026-10-04T08:33:44Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2d80c47a20b208a1cf0b",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-ep.xml#Hurricane Rachel (EP3), advisory 04/0833Z",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-04T08:35:58Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane Rachel (EP3), advisory 04/0833Z",
+            "item_type": "entry",
+            "summary": "added: Hurricane Rachel (EP3), advisory 04/0833Z",
+            "after": {
+              "title": "Hurricane Rachel (EP3), advisory 04/0833Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/040833.shtml",
+              "id": "summary-ep182026-202610040833",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-10-04T08:33:44Z",
+              "updated_at": "2026-10-04T08:33:44Z",
+              "summary": "RACHEL STRENGTHENS A LITTLE MORE WHILE IT MOVES WEST-NORTHWESTWARD. As of 2:00 AM MST Sun Oct 04 the center of Rachel was located near 20.2, -113.2 with movement WNW at 5 mph. The minimum central pressure was 968 mb with maximum sustained winds of about 100 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 23,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.52"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.52",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.52",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.52",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.52",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.52",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/040833.shtml"
+    },
     {
       "id": "3a9e8d5ef00180cb3091",
       "title": "Hurricane Rachel (EP3), advisory 04/0252Z",
@@ -9946,97 +10047,6 @@
         }
       },
       "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/281444.shtml"
-    },
-    {
-      "id": "58bacfcfa910afce59d5",
-      "title": "Tropical Depression Fay (AT1), advisory 28/1439Z",
-      "content_text": "FAY MOVING SOUTH-SOUTHWESTWARD OVER THE CENTRAL ATLANTIC. As of 3:00 PM GMT Mon Sep 28 the center of Fay was located near 27.1, -44.6 with movement SSW at 9 mph. The minimum central pressure was 1011 mb with maximum sustained winds of about 35 mph.",
-      "date_published": "2026-09-28T14:39:22Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "58bacfcfa910afce59d5",
-          "source": "rss",
-          "type": "change",
-          "key": "summary-al062026-202609281439",
-          "source_url": "https://www.nhc.noaa.gov/index-at.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-28T14:42:01Z",
-          "data": {
-            "change": "added",
-            "label": "Tropical Depression Fay (AT1), advisory 28/1439Z",
-            "item_type": "entry",
-            "summary": "added: Tropical Depression Fay (AT1), advisory 28/1439Z",
-            "after": {
-              "title": "Tropical Depression Fay (AT1), advisory 28/1439Z",
-              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT1+shtml/281439.shtml",
-              "id": "summary-al062026-202609281439",
-              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
-              "published_at": "2026-09-28T14:39:22Z",
-              "updated_at": "2026-09-28T14:39:22Z",
-              "summary": "FAY MOVING SOUTH-SOUTHWESTWARD OVER THE CENTRAL ATLANTIC. As of 3:00 PM GMT Mon Sep 28 the center of Fay was located near 27.1, -44.6 with movement SSW at 9 mph. The minimum central pressure was 1011 mb with maximum sustained winds of about 35 mph.",
-              "categories": [],
-              "feed": {
-                "title": "NHC Atlantic",
-                "url": "https://www.nhc.noaa.gov/",
-                "feed_url": "https://www.nhc.noaa.gov/index-at.xml"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.nhc.noaa.gov/index-at.xml",
-            "elapsed_ms": 211,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.19"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.19",
-              "args": {
-                "expr": "title startswith \"Summary for \""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.19",
-              "args": {
-                "assign": [
-                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
-                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.19",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.19",
-              "args": {
-                "namespace": "hurricanes",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT1+shtml/281439.shtml"
     }
   ]
 }
