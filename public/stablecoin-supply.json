@@ -2,12 +2,124 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Stablecoin supply moves (DefiLlama)",
   "home_page_url": "https://defillama.com/stablecoins",
-  "description": "Events collected by UnlimitedPipe 0.10.49",
+  "description": "Events collected by UnlimitedPipe 0.10.50",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.49"
+    "generator": "UnlimitedPipe 0.10.50"
   },
   "items": [
+    {
+      "id": "05862e3d32ea493f63ad",
+      "title": "USDf minted $179.9M in a day, supply now $1.6B",
+      "content_text": "Falcon USD (USDf): +$179.9M in 24 hours; week before: $1.2B.",
+      "date_published": "2026-10-04T04:20:01Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "05862e3d32ea493f63ad",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDf 2026-10-04",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-10-04T04:20:01Z",
+          "data": {
+            "change": "added",
+            "label": "USDf minted $179.9M in a day, supply now $1.6B",
+            "item_type": "record",
+            "summary": "added: USDf minted $179.9M in a day, supply now $1.6B",
+            "after": {
+              "id": "246",
+              "name": "Falcon USD",
+              "symbol": "USDf",
+              "gecko_id": "falcon-finance",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "crypto-backed",
+              "circulating": {
+                "peggedUSD": 1619685970.5126686
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 1439825445.9225411
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 1208173129.3641183
+              },
+              "price": 0.9960759711477566,
+              "supply": 1619685970.5126686,
+              "change": 179860524.59012747,
+              "moved": "+$179.9M",
+              "title": "USDf minted $179.9M in a day, supply now $1.6B",
+              "summary": "Falcon USD (USDf): +$179.9M in 24 hours; week before: $1.2B.",
+              "link": "https://defillama.com/stablecoin/falcon-finance",
+              "day_key": "USDf 2026-10-04"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 57,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.50"
+            },
+            {
+              "step": "map",
+              "version": "0.10.50",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.50",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.50",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-10-04\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.50",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/falcon-finance"
+    },
     {
       "id": "b3f6a7f4ffa844781647",
       "title": "USDC minted $157.5M in a day, supply now $74.2B",
