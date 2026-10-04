@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "e0e33913f751987a4dcf",
+      "title": "M3.3 earthquake in Yunnan, China",
+      "content_text": "At 2026-10-04 07:09:43 Thai time (UTC+7), latitude 22.960, longitude 101.605, magnitude 3.3",
+      "date_published": "2026-10-04T00:33:24Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e0e33913f751987a4dcf",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17167",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-04T00:33:53Z",
+          "data": {
+            "change": "added",
+            "label": "M3.3 earthquake in Yunnan, China",
+            "item_type": "entry",
+            "summary": "added: M3.3 earthquake in Yunnan, China",
+            "after": {
+              "title": "M3.3 earthquake in Yunnan, China",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17167",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17167",
+              "author": null,
+              "published_at": "2026-10-04T00:33:24Z",
+              "updated_at": "2026-10-04T00:33:24Z",
+              "summary": "At 2026-10-04 07:09:43 Thai time (UTC+7), latitude 22.960, longitude 101.605, magnitude 3.3",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.3",
+              "place": "Yunnan, China"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1916,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.49"
+            },
+            {
+              "step": "map",
+              "version": "0.10.49",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.49",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.49",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17167"
+    },
+    {
       "id": "1b37d72f00e6d54283c4",
       "title": "M5.7 earthquake in Northern Sumatra, Indonesia",
       "content_text": "At 2026-10-04 06:37:34 Thai time (UTC+7), latitude 4.580, longitude 95.377, magnitude 5.7",
