@@ -1,11 +1,24 @@
 name: volcanoes
-description: The Smithsonian Global Volcanism Program's weekly reports of volcanic activity worldwide.
+description: "Erupting volcanoes in East and Southeast Asia and the western Pacific (Japan, the Philippines, Indonesia, Kamchatka, Papua New Guinea and more): volcanic ash advisories from the Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency), one item per volcano per day. History: significant eruptions worldwide since 1900 (NOAA NCEI). US volcanoes are in us-volcano-alerts."
 group: Disasters and health
 sources:
-  - type: rss
-    url: https://volcano.si.edu/news/WeeklyVolcanoRSS.xml
+  - type: web
+    url: https://www.data.jma.go.jp/vaac/data/vaac_list.html
+    each: "tr.mtx"
+    field: ["stamp=td:nth-of-type(1)", "volcano=td:nth-of-type(3)", "area=td:nth-of-type(4)", "number=td:nth-of-type(5)", "text=td:nth-of-type(6) a@href"]
 operators:
-  - {type: diff, only: [added], emit_initial: true}
+  - {type: filter, expr: 'volcano != "" and stamp matches "^\\d{4}/\\d\\d/\\d\\d \\d\\d:\\d\\d"'}
+  - type: map
+    assign:
+      - 'name=title(lower(trim(volcano)))'
+      - 'place=title(lower(trim(area)))'
+      - 'published_at=replace(trim(stamp), "^(\\d{4})/(\\d\\d)/(\\d\\d) (\\d\\d:\\d\\d:\\d\\d)$", "\\1-\\2-\\3T\\4Z")'
+      - 'title="Volcanic ash from " + name + " (" + place + ") on " + replace(published_at, "T.*$", "")'
+      - 'summary="The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory " + trim(number) + " for " + name + ", " + place + ", at " + replace(published_at, "^(\\d{4}-\\d\\d-\\d\\d)T(\\d\\d:\\d\\d).*$", "\\1 \\2 UTC") + ": ash reported or expected in the air, a hazard to aircraft."'
+      - 'link=default(text, "https://www.data.jma.go.jp/vaac/data/vaac_list.html")'
+      - 'day_key=name + " " + replace(published_at, "T.*$", "")'
+  - {type: select, fields: [title, summary, link, published_at, day_key]}
+  - {type: diff, key: day_key, only: [added], namespace: volcanoes-vaac, emit_initial: true}
 outputs:
-  - {type: feed, path: ../public/volcanoes.xml, title: Volcanic activity (Smithsonian weekly reports), link: "https://volcano.si.edu/"}
-  - {type: feed, path: ../public/volcanoes.json, title: Volcanic activity (Smithsonian weekly reports), link: "https://volcano.si.edu/"}
+  - {type: feed, path: ../public/volcanoes.xml, title: "Volcanic ash advisories (Tokyo VAAC, JMA)", link: "https://www.data.jma.go.jp/vaac/data/vaac_list.html"}
+  - {type: feed, path: ../public/volcanoes.json, title: "Volcanic ash advisories (Tokyo VAAC, JMA)", link: "https://www.data.jma.go.jp/vaac/data/vaac_list.html"}
