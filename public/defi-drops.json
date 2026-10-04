@@ -2,12 +2,103 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "DeFi deposits down 25%+ in a day (DefiLlama)",
   "home_page_url": "https://defillama.com/",
-  "description": "Events collected by UnlimitedPipe 0.10.48",
+  "description": "Events collected by UnlimitedPipe 0.10.49",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.48"
+    "generator": "UnlimitedPipe 0.10.49"
   },
   "items": [
+    {
+      "id": "d156db0674b0f66dfea1",
+      "title": "Balancer V2 TVL down 30% in a day, to $20.8M",
+      "content_text": "Balancer V2 (Dexs) holds $20.8M after a 29.6% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-10-04T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "d156db0674b0f66dfea1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#balancer-v2 2026-10-04",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-10-04T00:23:34Z",
+          "data": {
+            "change": "added",
+            "label": "Balancer V2 TVL down 30% in a day, to $20.8M",
+            "item_type": "record",
+            "summary": "added: Balancer V2 TVL down 30% in a day, to $20.8M",
+            "after": {
+              "title": "Balancer V2 TVL down 30% in a day, to $20.8M",
+              "summary": "Balancer V2 (Dexs) holds $20.8M after a 29.6% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/balancer-v2",
+              "published_at": "2026-10-04T00:00:00Z",
+              "day_key": "balancer-v2 2026-10-04"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 244,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.49"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.49",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.49",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-10-04T00:00:00Z\"",
+                  "day_key=slug + \" 2026-10-04\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.49",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.49",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/balancer-v2"
+    },
     {
       "id": "fcc4da4a62cf99225a13",
       "title": "Kinetiq Earn TVL down 26% in a day, to $41.5M",
