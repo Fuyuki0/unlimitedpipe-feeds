@@ -2,12 +2,127 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Travel advisories (US State Department, UK FCDO)",
   "home_page_url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-  "description": "Events collected by UnlimitedPipe 0.10.38",
+  "description": "Events collected by UnlimitedPipe 0.10.55",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.38"
+    "generator": "UnlimitedPipe 0.10.55"
   },
   "items": [
+    {
+      "id": "f411444ba9ed8f5cc26d",
+      "title": "US travel advice for Curaçao: Level 1: Exercise Normal Precautions",
+      "content_text": "Exercise normal precautionSummary not available",
+      "date_published": "2026-10-04T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f411444ba9ed8f5cc26d",
+          "source": "rss",
+          "type": "change",
+          "key": "https://travel.state.gov/_res/rss/TAsTWs.xml#US travel advice for Curaçao: Level 1: Exercise Normal Precautions 2026-10-04T00:00:00Z",
+          "source_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-04T09:29:42Z",
+          "data": {
+            "change": "added",
+            "label": "US travel advice for Curaçao: Level 1: Exercise Normal Precautions",
+            "item_type": "entry",
+            "summary": "added: US travel advice for Curaçao: Level 1: Exercise Normal Precautions",
+            "after": {
+              "title": "US travel advice for Curaçao: Level 1: Exercise Normal Precautions",
+              "link": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.cuw.html",
+              "id": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.cuw.html",
+              "author": null,
+              "published_at": "2026-10-04T00:00:00Z",
+              "updated_at": "2026-10-04T00:00:00Z",
+              "summary": "Exercise normal precautionSummary not available",
+              "categories": [
+                "Level 1: Exercise Normal Precautions",
+                "UC",
+                "advisory"
+              ],
+              "feed": {
+                "title": "travel.state.gov: Travel Advisories",
+                "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
+                "feed_url": "https://travel.state.gov/_res/rss/TAsTWs.xml"
+              },
+              "issuer": "US",
+              "version": "US travel advice for Curaçao: Level 1: Exercise Normal Precautions 2026-10-04T00:00:00Z"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
+            "elapsed_ms": 133,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.55"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.55",
+              "args": {
+                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.55",
+              "args": {
+                "assign": [
+                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
+                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
+                  "title=issuer + \" travel advice for \" + title",
+                  "version=title + \" \" + published_at"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.55",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.55",
+              "args": {
+                "by": [
+                  "version"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.55",
+              "args": {
+                "key": "version",
+                "namespace": "travel-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.cuw.html",
+      "tags": [
+        "Level 1: Exercise Normal Precautions",
+        "UC",
+        "advisory"
+      ]
+    },
     {
       "id": "c9c791c8332febf36f00",
       "title": "US travel advice for Antigua and Barbuda: Level 1: Exercise Normal Precautions",
@@ -11266,121 +11381,6 @@
         }
       },
       "url": "https://www.gov.uk/foreign-travel-advice/thailand"
-    },
-    {
-      "id": "9b92bc2431cd3ee09917",
-      "title": "US travel advice for Saudi Arabia: Level 3: Reconsider Travel",
-      "content_text": "Reconsider travel to Saudi Arabia due to risk of Iranian drone and missile targeting of American interests, armed conflict, terrorism, exit bans , and local laws regarding social media activity . Some areas have increased risk. Read the entire Travel Advisory.\nU.S. government employee travel restrictions\nAs of August 30, 2026, family members may join U.S. government employees who work in Saudi Arabia.\nU.S. government employees working in Saudi Arabia are not allowed to travel within 20 miles of…",
-      "date_published": "2026-09-15T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "9b92bc2431cd3ee09917",
-          "source": "rss",
-          "type": "change",
-          "key": "https://travel.state.gov/_res/rss/TAsTWs.xml#US travel advice for Saudi Arabia: Level 3: Reconsider Travel 2026-09-15T00:00:00Z",
-          "source_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-28T03:49:47Z",
-          "data": {
-            "change": "added",
-            "label": "US travel advice for Saudi Arabia: Level 3: Reconsider Travel",
-            "item_type": "entry",
-            "summary": "added: US travel advice for Saudi Arabia: Level 3: Reconsider Travel",
-            "after": {
-              "title": "US travel advice for Saudi Arabia: Level 3: Reconsider Travel",
-              "link": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.sau.html",
-              "id": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.sau.html",
-              "author": null,
-              "published_at": "2026-09-15T00:00:00Z",
-              "updated_at": "2026-09-15T00:00:00Z",
-              "summary": "Reconsider travel to Saudi Arabia due to risk of Iranian drone and missile targeting of American interests, armed conflict, terrorism, exit bans , and local laws regarding social media activity . Some areas have increased risk. Read the entire Travel Advisory.\nU.S. government employee travel restrictions\nAs of August 30, 2026, family members may join U.S. government employees who work in Saudi Arabia.\nU.S. government employees working in Saudi Arabia are not allowed to travel within 20 miles of the Yemen border due to safety risks.\nU.S. government employees working in Saudi Arabia are not allowed to travel to Qatif for non-essential travel due to safety risks.\nU.S. government employees working in Saudi Arabia need special authorization to travel to the provinces of Jizan, Asir, Najran, and Qatif due to safety risks.\nArmed conflict\nFollowing the onset of hostilities between the United States and Iran on February 28, 2026, there has been an ongoing threat of drone and missile attacks from Iran. Commercial flights are operational from Saudi Arabia, though they have been significantly disrupted at times.\nTerrorism\nThere is risk of terrorist violence, including terrorist attacks and other activity in Saudi Arabia. Visit the U.S. Department of State’s country reports on terrorism to learn more.\nTerrorism is a concern in Saudi Arabia. Attacks can occur with little or no warning, especially around holidays. They can involve knives, firearms, and vehicles.\nTerrorists may use violence to respond to direct attacks against them or other military operations in the region.\nPotential targets include:\nImportant political, cultural, or religious locations\nPlaces visited by U.S. citizens and other foreigners\nTourist locations and large gatherings\nHotels, and locations where American citizens gather\nTransportation hubs\nMarkets and shopping malls\nEntertainment venues\nGovernment facilities\nMissile and drone attacks from Iran and threats from Houthis in Yemen.\nIran has launched missile a",
-              "categories": [
-                "Level 3: Reconsider Travel",
-                "SA",
-                "advisory"
-              ],
-              "feed": {
-                "title": "travel.state.gov: Travel Advisories",
-                "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html",
-                "feed_url": "https://travel.state.gov/_res/rss/TAsTWs.xml"
-              },
-              "issuer": "US",
-              "version": "US travel advice for Saudi Arabia: Level 3: Reconsider Travel 2026-09-15T00:00:00Z"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://travel.state.gov/_res/rss/TAsTWs.xml",
-            "elapsed_ms": 154,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.12"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.12",
-              "args": {
-                "expr": "source_url contains \"gov.uk\" or link contains \"/tsg_aem/\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.12",
-              "args": {
-                "assign": [
-                  "issuer=replace(replace(source_url, \"^.*state\\\\.gov.*$\", \"US\"), \"^.*gov\\\\.uk.*$\", \"UK\")",
-                  "title=replace(title, \"^(.*?) - (Level \\\\d.*)$\", \"\\\\1: \\\\2\")",
-                  "title=issuer + \" travel advice for \" + title",
-                  "version=title + \" \" + published_at"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.12",
-              "args": {
-                "by": [
-                  "version"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.12",
-              "args": {
-                "key": "version",
-                "namespace": "travel-advisories",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.sau.html",
-      "tags": [
-        "Level 3: Reconsider Travel",
-        "SA",
-        "advisory"
-      ]
     }
   ]
 }
