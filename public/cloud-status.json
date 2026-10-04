@@ -2,12 +2,103 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Cloud and AI service incidents",
   "home_page_url": "https://www.githubstatus.com/",
-  "description": "Events collected by UnlimitedPipe 0.10.32",
+  "description": "Events collected by UnlimitedPipe 0.10.55",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.32"
+    "generator": "UnlimitedPipe 0.10.55"
   },
   "items": [
+    {
+      "id": "c90fb6136c37bafadcee",
+      "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
+      "content_text": "We are investigating elevated packet loss in the EU-SOUTH-2 Region.",
+      "date_published": "2026-10-04T16:14:56Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c90fb6136c37bafadcee",
+          "source": "rss",
+          "type": "change",
+          "key": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791130496",
+          "source_url": "https://status.aws.amazon.com/rss/all.rss",
+          "timestamp": null,
+          "observed_at": "2026-10-04T16:20:28Z",
+          "data": {
+            "change": "added",
+            "label": "AWS: Service impact: Elevated packet loss (eu-south-2)",
+            "item_type": "entry",
+            "summary": "added: AWS: Service impact: Elevated packet loss (eu-south-2)",
+            "after": {
+              "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
+              "link": "https://status.aws.amazon.com/",
+              "id": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791130496",
+              "author": null,
+              "published_at": "2026-10-04T16:14:56Z",
+              "updated_at": "2026-10-04T16:14:56Z",
+              "summary": "We are investigating elevated packet loss in the EU-SOUTH-2 Region.",
+              "categories": [],
+              "feed": {
+                "title": "Amazon Web Services Service Status",
+                "url": "https://status.aws.amazon.com/",
+                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://status.aws.amazon.com/rss/all.rss",
+            "elapsed_ms": 388,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.55"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.55",
+              "args": {
+                "expr": "not (summary contains \"scheduled maintenance\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.55",
+              "args": {
+                "assign": [
+                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
+                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.55",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.55",
+              "args": {
+                "namespace": "cloud-status",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://status.aws.amazon.com/"
+    },
     {
       "id": "7353ec3f14392405c604",
       "title": "OpenAI: Issues with data analysis and file creation in ChatGPT",
@@ -8969,96 +9060,6 @@
         }
       },
       "url": "https://www.githubstatus.com/incidents/zw1hbx2yyhvr"
-    },
-    {
-      "id": "520400b7e63b96dae3cd",
-      "title": "GitHub: Degradation in repos contents API",
-      "content_text": "Sep 4 , 22:23 UTC\nResolved - On September 4, 2026, between approximately 21:45 and 22:07 UTC, some users experienced errors and elevated latency for repository operations. The incident was fully resolved at 22:23 UTC.\nThe cause was a capacity change that spread one of our clusters across additional availability zones; our zone-aware traffic routing kept sending requests to the original zone for performance, overloading a small set of servers while the new capacity sat idle. We resolved the…",
-      "date_published": "2026-09-04T22:23:34Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "520400b7e63b96dae3cd",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.githubstatus.com/incidents/r05vk75c594j",
-          "source_url": "https://www.githubstatus.com/history.rss",
-          "timestamp": null,
-          "observed_at": "2026-09-24T17:26:11Z",
-          "data": {
-            "change": "added",
-            "label": "GitHub: Degradation in repos contents API",
-            "item_type": "entry",
-            "summary": "added: GitHub: Degradation in repos contents API",
-            "after": {
-              "title": "GitHub: Degradation in repos contents API",
-              "link": "https://www.githubstatus.com/incidents/r05vk75c594j",
-              "id": "https://www.githubstatus.com/incidents/r05vk75c594j",
-              "author": null,
-              "published_at": "2026-09-04T22:23:34Z",
-              "updated_at": "2026-09-04T22:23:34Z",
-              "summary": "Sep 4 , 22:23 UTC\nResolved - On September 4, 2026, between approximately 21:45 and 22:07 UTC, some users experienced errors and elevated latency for repository operations. The incident was fully resolved at 22:23 UTC.\nThe cause was a capacity change that spread one of our clusters across additional availability zones; our zone-aware traffic routing kept sending requests to the original zone for performance, overloading a small set of servers while the new capacity sat idle. We resolved the incident by reverting the change and letting traffic rebalance.\nWe are improving per-zone capacity guarantees, cross-zone load-shedding, and pre-production testing of multi-zone changes to prevent recurrence.\nSep 4 , 22:02 UTC\nInvestigating - We are investigating reports of impacted performance for some GitHub services.",
-              "categories": [],
-              "feed": {
-                "title": "GitHub Status - Incident History",
-                "url": "https://www.githubstatus.com",
-                "feed_url": "https://www.githubstatus.com/history.rss"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.githubstatus.com/history.rss",
-            "elapsed_ms": 276,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.3.1"
-            },
-            {
-              "step": "filter",
-              "version": "0.3.1",
-              "args": {
-                "expr": "not (summary contains \"scheduled maintenance\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.1",
-              "args": {
-                "assign": [
-                  "title=replace(feed.title, \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.3.1",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.1",
-              "args": {
-                "namespace": "cloud-status",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.githubstatus.com/incidents/r05vk75c594j"
     }
   ]
 }
