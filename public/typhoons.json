@@ -2,12 +2,102 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Typhoon warnings (JTWC)",
   "home_page_url": "https://www.metoc.navy.mil/jtwc/jtwc.html",
-  "description": "Events collected by UnlimitedPipe 0.10.55",
+  "description": "Events collected by UnlimitedPipe 0.10.58",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.55"
+    "generator": "UnlimitedPipe 0.10.58"
   },
   "items": [
+    {
+      "id": "36b8b9a16c6a91f236c0",
+      "title": "Super Typhoon 26W (Choi-wan) Warning #20 (Northwest Pacific/North Indian Ocean*)",
+      "content_text": "Super Typhoon 26W (Choi-wan) Warning #20\nIssued at 04/2100Z\nTC Warning Text\nTC Warning Graphic\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\nTropical Cyclone Formation Alert WTPN21\nIssued at 04/0900Z\nTCFA Text\nTCFA Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+      "date_published": "2026-10-04T19:50:02Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "36b8b9a16c6a91f236c0",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss#Super Typhoon 26W (Choi-wan) Warning #20",
+          "source_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+          "timestamp": null,
+          "observed_at": "2026-10-04T19:51:55Z",
+          "data": {
+            "change": "added",
+            "label": "Super Typhoon 26W (Choi-wan) Warning #20 (Northwest Pacific/North Indian Ocean*)",
+            "item_type": "entry",
+            "summary": "added: Super Typhoon 26W (Choi-wan) Warning #20 (Northwest Pacific/North Indian Ocean*)",
+            "after": {
+              "title": "Super Typhoon 26W (Choi-wan) Warning #20 (Northwest Pacific/North Indian Ocean*)",
+              "link": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+              "id": "https://www.metoc.navy.mil/jtwc/rss/NWPAC-NIO-WARNINGS",
+              "author": "CDO.JTWC.fct@navy.mil (JTWC CDO)",
+              "published_at": "2026-10-04T19:50:02Z",
+              "updated_at": "2026-10-04T19:50:02Z",
+              "summary": "Super Typhoon 26W (Choi-wan) Warning #20\nIssued at 04/2100Z\nTC Warning Text\nTC Warning Graphic\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\nTropical Cyclone Formation Alert WTPN21\nIssued at 04/0900Z\nTCFA Text\nTCFA Graphic\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+              "categories": [
+                "Northwest Pacific/North Indian Ocean* Tropical Systems"
+              ],
+              "feed": {
+                "title": "JTWC TROPICAL CYCLONE INFORMATION FEED",
+                "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+                "feed_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss"
+              },
+              "region": "Northwest Pacific/North Indian Ocean*",
+              "warning": "Super Typhoon 26W (Choi-wan) Warning #20"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+            "elapsed_ms": 641,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.58"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.58",
+              "args": {
+                "expr": "summary matches \"Warning #\\\\d+\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.58",
+              "args": {
+                "assign": [
+                  "region=replace(title, \"^Current (.+?) Tropical Systems$\", \"\\\\1\")",
+                  "warning=replace(summary, \"(?s)^\\\\s*([^\\\\n]*?Warning #\\\\d+).*$\", \"\\\\1\")",
+                  "title=warning + \" (\" + region + \")\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.58",
+              "args": {
+                "key": "warning",
+                "namespace": "typhoons",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+      "tags": [
+        "Northwest Pacific/North Indian Ocean* Tropical Systems"
+      ]
+    },
     {
       "id": "c4e7a1ae9825c715fe3b",
       "title": "Hurricane 15E (Nolo) Warning #56 (Central/Eastern Pacific)",
