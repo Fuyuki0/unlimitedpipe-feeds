@@ -2,12 +2,98 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Earthquakes around Thailand (TMD)",
   "home_page_url": "https://earthquake.tmd.go.th/",
-  "description": "Events collected by UnlimitedPipe 0.10.49",
+  "description": "Events collected by UnlimitedPipe 0.10.51",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.49"
+    "generator": "UnlimitedPipe 0.10.51"
   },
   "items": [
+    {
+      "id": "1bb4048a21fa7502f7dd",
+      "title": "M4.7 earthquake in Myanmar",
+      "content_text": "At 2026-10-04 12:54:57 Thai time (UTC+7), latitude 21.646, longitude 93.265, magnitude 4.7",
+      "date_published": "2026-10-04T06:02:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1bb4048a21fa7502f7dd",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17168",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-04T06:02:30Z",
+          "data": {
+            "change": "added",
+            "label": "M4.7 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M4.7 earthquake in Myanmar",
+            "after": {
+              "title": "M4.7 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17168",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17168",
+              "author": null,
+              "published_at": "2026-10-04T06:02:00Z",
+              "updated_at": "2026-10-04T06:02:00Z",
+              "summary": "At 2026-10-04 12:54:57 Thai time (UTC+7), latitude 21.646, longitude 93.265, magnitude 4.7",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "4.7",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1341,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.51"
+            },
+            {
+              "step": "map",
+              "version": "0.10.51",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.51",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.51",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17168"
+    },
     {
       "id": "e0e33913f751987a4dcf",
       "title": "M3.3 earthquake in Yunnan, China",
