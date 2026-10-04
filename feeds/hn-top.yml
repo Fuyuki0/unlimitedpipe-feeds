@@ -7,9 +7,12 @@ sources:
     records: hits
 operators:
   - type: map
-    assign: ['hn="https://news.ycombinator.com/item?id=" + objectID']
+    assign:
+      - 'hn="https://news.ycombinator.com/item?id=" + objectID'
+      # as the history says it, so ask ranks the stories by points
+      - 'summary=points + " points and " + default(num_comments, 0) + " comments: " + hn'
   - type: select
-    fields: [title, link=url|hn, hn, published_at=created_at, points, num_comments]
+    fields: [title, summary, link=url|hn, hn, published_at=created_at, points, num_comments]
   - {type: diff, key: hn, only: [added], emit_initial: true}
 outputs:
   - {type: feed, path: ../public/hn-top.xml, title: Hacker News (300+ points), link: https://news.ycombinator.com/}

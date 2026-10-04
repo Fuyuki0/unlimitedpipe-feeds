@@ -20,6 +20,7 @@ operators:
       - 'exchange=replace(source_url, "^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\..*$", "\\1")'
       - 'exchange=replace(replace(replace(replace(exchange, "^coinbase$", "Coinbase"), "^binance$", "Binance"), "^okx$", "OKX"), "^upbit$", "Upbit")'
       - 'title=exchange + " lists " + name + " (" + pair + ")"'
+      - 'summary="A new trading pair on " + exchange + "''s public market list: " + pair + default(", " + name + " against " + quote, "") + ". New tokens are often risky; data, not investment advice."'
       - "published_at=date(listed_at)"
   - {type: map, assign: ['listing=exchange + " " + pair']}   # BTC-USD is on Coinbase and OKX both
   # The first run only records what is listed today; a state of its own since the key changed.
