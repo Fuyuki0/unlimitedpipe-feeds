@@ -2,12 +2,113 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Hurricanes and tropical storms (NHC)",
   "home_page_url": "https://www.nhc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.55",
+  "description": "Events collected by UnlimitedPipe 0.10.59",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.55"
+    "generator": "UnlimitedPipe 0.10.59"
   },
   "items": [
+    {
+      "id": "a96d14f97ea3510c3ffd",
+      "title": "Hurricane Rachel (EP3), advisory 04/2031Z",
+      "content_text": "RACHEL MAINTAINING ITS STRENGTH. As of 2:00 PM MST Sun Oct 04 the center of Rachel was located near 20.1, -114.3 with movement W at 6 mph. The minimum central pressure was 965 mb with maximum sustained winds of about 105 mph.",
+      "date_published": "2026-10-04T20:31:35Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a96d14f97ea3510c3ffd",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.nhc.noaa.gov/index-ep.xml#Hurricane Rachel (EP3), advisory 04/2031Z",
+          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-04T20:32:56Z",
+          "data": {
+            "change": "added",
+            "label": "Hurricane Rachel (EP3), advisory 04/2031Z",
+            "item_type": "entry",
+            "summary": "added: Hurricane Rachel (EP3), advisory 04/2031Z",
+            "after": {
+              "title": "Hurricane Rachel (EP3), advisory 04/2031Z",
+              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/559019.shtml",
+              "id": "summary-ep182026-202610042031",
+              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
+              "published_at": "2026-10-04T20:31:35Z",
+              "updated_at": "2026-10-04T20:31:35Z",
+              "summary": "RACHEL MAINTAINING ITS STRENGTH. As of 2:00 PM MST Sun Oct 04 the center of Rachel was located near 20.1, -114.3 with movement W at 6 mph. The minimum central pressure was 965 mb with maximum sustained winds of about 105 mph.",
+              "categories": [],
+              "feed": {
+                "title": "NHC Eastern North Pacific",
+                "url": "https://www.nhc.noaa.gov/",
+                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
+            "elapsed_ms": 19,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.59"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.59",
+              "args": {
+                "expr": "title startswith \"Summary for \""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.59",
+              "args": {
+                "assign": [
+                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
+                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.59",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.59",
+              "args": {
+                "by": [
+                  "title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.59",
+              "args": {
+                "key": "title",
+                "namespace": "hurricanes-by-title",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP3+shtml/559019.shtml"
+    },
     {
       "id": "09bf3e618ee20bd433e6",
       "title": "Hurricane Rachel (EP3), advisory 04/1434Z",
@@ -9966,97 +10067,6 @@
         }
       },
       "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT3+shtml/281500.shtml"
-    },
-    {
-      "id": "72a48f8dfe65f8e3583d",
-      "title": "Hurricane Polo (EP2), advisory 28/1453Z",
-      "content_text": "POLO STILL A MAJOR HURRICANE AS IT APPROACHES THE BAJA CALIFORNIA PENINSULA. ...CONDITIONS TO SOON DETERIORATE AS LIFE-THREATENING WINDS AND FLASH FLOODS EXPECTED OVER PORTIONS OF BAJA CALIFORNIA SUR AND SONORA TODAY AND TUESDAY... As of 8:00 AM MST Mon Sep 28 the center of Polo was located near 24.2, -113.5 with movement NE at 10 mph. The minimum central pressure was 958 mb with maximum sustained winds of about 115 mph.",
-      "date_published": "2026-09-28T14:53:28Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "72a48f8dfe65f8e3583d",
-          "source": "rss",
-          "type": "change",
-          "key": "summary-ep172026-202609281453",
-          "source_url": "https://www.nhc.noaa.gov/index-ep.xml",
-          "timestamp": null,
-          "observed_at": "2026-09-28T14:59:56Z",
-          "data": {
-            "change": "added",
-            "label": "Hurricane Polo (EP2), advisory 28/1453Z",
-            "item_type": "entry",
-            "summary": "added: Hurricane Polo (EP2), advisory 28/1453Z",
-            "after": {
-              "title": "Hurricane Polo (EP2), advisory 28/1453Z",
-              "link": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/281444.shtml",
-              "id": "summary-ep172026-202609281453",
-              "author": "nhcwebmaster@noaa.gov (NHC Webmaster)",
-              "published_at": "2026-09-28T14:53:28Z",
-              "updated_at": "2026-09-28T14:53:28Z",
-              "summary": "POLO STILL A MAJOR HURRICANE AS IT APPROACHES THE BAJA CALIFORNIA PENINSULA. ...CONDITIONS TO SOON DETERIORATE AS LIFE-THREATENING WINDS AND FLASH FLOODS EXPECTED OVER PORTIONS OF BAJA CALIFORNIA SUR AND SONORA TODAY AND TUESDAY... As of 8:00 AM MST Mon Sep 28 the center of Polo was located near 24.2, -113.5 with movement NE at 10 mph. The minimum central pressure was 958 mb with maximum sustained winds of about 115 mph.",
-              "categories": [],
-              "feed": {
-                "title": "NHC Eastern North Pacific",
-                "url": "https://www.nhc.noaa.gov/",
-                "feed_url": "https://www.nhc.noaa.gov/index-ep.xml"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.nhc.noaa.gov/index-ep.xml",
-            "elapsed_ms": 60,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.19"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.19",
-              "args": {
-                "expr": "title startswith \"Summary for \""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.19",
-              "args": {
-                "assign": [
-                  "title=replace(title, \"^Summary for (.+?) \\\\((\\\\w+)/.*$\", \"\\\\1 (\\\\2)\") + \", advisory \" + replace(published_at, \"^\\\\d{4}-\\\\d\\\\d-(\\\\d\\\\d)T(\\\\d\\\\d):(\\\\d\\\\d).*$\", \"\\\\1/\\\\2\\\\3Z\")",
-                  "summary=replace(summary, \"(?s)^\\\\.\\\\.\\\\.(.+?)\\\\.\\\\.\\\\.\\\\s*\", \"\\\\1. \")"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.19",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.19",
-              "args": {
-                "namespace": "hurricanes",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/281444.shtml"
     }
   ]
 }
