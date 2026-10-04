@@ -2,13 +2,23 @@ name: health-papers
 description: "New medical and health research preprints on medRxiv, across all fields (not yet peer reviewed)."
 group: Science and space
 sources:
-  - type: rss
+  # medRxiv's own API (its RSS host's certificate lapsed on 2026-10-04), 30 papers a page
+  - type: web
     url:
-      - "https://connect.medrxiv.org/medrxiv_xml.php?subject=all"
+      - "https://api.biorxiv.org/details/medrxiv/${DAYS_AGO_2}/${TODAY}/0"
+      - "https://api.biorxiv.org/details/medrxiv/${DAYS_AGO_2}/${TODAY}/30"
+      - "https://api.biorxiv.org/details/medrxiv/${DAYS_AGO_2}/${TODAY}/60"
+      - "https://api.biorxiv.org/details/medrxiv/${DAYS_AGO_2}/${TODAY}/90"
+      - "https://api.biorxiv.org/details/medrxiv/${DAYS_AGO_2}/${TODAY}/120"
+    records: collection
 operators:
+  - {type: filter, expr: 'version == "1"'}   # new papers, not new versions of old ones
   - type: map
     assign:
       - 'title="Preprint: " + title'
+      - 'summary=abstract'
+      - 'link="https://www.medrxiv.org/content/" + doi + "v1?rss=1"'   # as the RSS feed linked them
+      - 'published_at=date + "T00:00:00Z"'
       - 'summary=replace(trim(summary), "^(Background|Objectives?|Introduction|Aims?|Purpose|Importance|Context|Rationale)(?=[A-Z])", "\\1: ")'   # medRxiv drops the break after the heading
   - {type: dedupe, by: [link]}
   - {type: diff, only: [added], emit_initial: true}
