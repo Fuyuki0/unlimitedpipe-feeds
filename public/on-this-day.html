@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>On this day</title>
+    <meta name="description" content="The biggest events of this date in past years, from UnlimitedPipe feeds.">
+    <style>
+      :root { --bg: #f6f7f9; --card: #ffffff; --ink: #15181d; --muted: #5a6270;
+        --line: #e2e5ea; --accent: #0f766e; --accent-ink: #ffffff; --live: #b42318;
+        --pill: #eef1f4; color-scheme: light; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) { --bg: #0e1116; --card: #161a21; --ink: #e7e9ee;
+          --muted: #9aa3b2; --line: #262c36; --accent: #2dd4bf; --accent-ink: #062521;
+          --live: #f97066; --pill: #1f2530; color-scheme: dark; }
+      }
+      :root[data-theme="dark"] { --bg: #0e1116; --card: #161a21; --ink: #e7e9ee;
+        --muted: #9aa3b2; --line: #262c36; --accent: #2dd4bf; --accent-ink: #062521;
+        --live: #f97066; --pill: #1f2530; color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink);
+        font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        padding-inline: 16px; }
+      a { color: var(--accent); }
+      .wrap { max-width: 72rem; margin: 0 auto; }
+      .top { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; align-items: center;
+        justify-content: space-between; padding-block: 1rem;
+        border-bottom: 1px solid var(--line); }
+      .brand { font-weight: 700; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+      .top nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
+      .top nav a { color: var(--muted); text-decoration: none; }
+      .top nav a:hover { color: var(--ink); }
+      .hero { padding-block: 2.5rem 1.5rem; max-width: 46rem; }
+      h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 .75rem;
+        letter-spacing: -.02em; text-wrap: balance; }
+      .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.25rem; }
+      .stats { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; list-style: none;
+        padding: 0; margin: 0 0 1.5rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .stats b { color: var(--ink); font-size: 1.15rem; }
+      #q { width: 100%; font: inherit; font-size: 1.05rem; padding: .8rem 1rem;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--card);
+        color: var(--ink); }
+      #q:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      #status { color: var(--muted); font-size: .9rem; margin: .5rem 0 0; }
+      #status:empty, #results:empty { display: none; }
+      #deep { margin-top: .6rem; font: inherit; font-size: .9rem; font-weight: 600;
+        color: var(--accent-ink); background: var(--accent); border: 0; border-radius: 8px;
+        padding: .45rem .9rem; cursor: pointer; }
+      #deep[hidden] { display: none; }
+      #results { list-style: none; padding: 0; margin: .5rem 0 0; }
+      #results li { padding: .55rem 0; border-bottom: 1px solid var(--line); }
+      #results small { display: block; color: var(--muted); }
+      .toc { display: flex; flex-wrap: wrap; gap: .5rem; padding-block: .5rem 0; }
+      .toc a { background: var(--pill); color: var(--ink); text-decoration: none;
+        padding: .3rem .75rem; border-radius: 999px; font-size: .9rem; }
+      .group { padding-block: 2rem .5rem; }
+      .group h2 { font-size: 1.25rem; margin: 0 0 1rem; letter-spacing: -.01em; }
+      .grid { display: grid; gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+        padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+      .card h3 { font-size: 1.02rem; margin: 0; display: flex; gap: .5rem; align-items: baseline;
+        justify-content: space-between; }
+      .live { color: var(--live); font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+        text-transform: uppercase; white-space: nowrap; }
+      .desc { color: var(--muted); font-size: .93rem; margin: 0; }
+      .latest { font-size: .9rem; margin: 0; overflow-wrap: anywhere; }
+      .latest:empty { display: none; }
+      .latest::before { content: "Latest"; display: block; color: var(--muted); font-size: .7rem;
+        font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+      .latest a { color: var(--ink); text-decoration: none; }
+      .latest a:hover { text-decoration: underline; }
+      .latest span { color: var(--muted); }
+      .card footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: .4rem;
+        align-items: center; font-size: .85rem; }
+      .pill { background: var(--pill); color: var(--ink); text-decoration: none;
+        padding: .15rem .6rem; border-radius: 6px; font-weight: 600; font-size: .8rem; }
+      .warn { color: var(--live); }
+      .try { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+        margin: .6rem 0 0; color: var(--muted); font-size: .88rem; }
+      .try button { font: inherit; font-size: .85rem; color: var(--ink); background: var(--pill);
+        border: 0; border-radius: 999px; padding: .25rem .7rem; cursor: pointer; }
+      .try button:hover { outline: 1px solid var(--accent); }
+      .use { display: grid; gap: 1rem 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+        padding-block: 2.5rem; border-top: 1px solid var(--line); margin-top: 2rem; }
+      .use h2 { font-size: 1rem; margin: 0 0 .4rem; }
+      .use p { margin: 0; color: var(--muted); font-size: .93rem; }
+      code { background: var(--pill); padding: .05rem .35rem; border-radius: 4px;
+        font-size: .88em; }
+      .foot { color: var(--muted); font-size: .85rem; padding-block: 1.5rem 3rem;
+        border-top: 1px solid var(--line); }
+
+      .day { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; }
+      .day button, .day input { font: inherit; padding: .35rem .7rem; border-radius: .5rem;
+        border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+      .year { margin-top: 1.4rem; }
+      .year h2 { font-size: 1.05rem; margin: 0 0 .4rem; }
+      .event { margin: .3rem 0; line-height: 1.45; }
+      .event a { color: var(--ink); }
+      .event small { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+    <header class="top"><a class="brand" href="./">UnlimitedPipe feeds</a>
+      <nav><a href="./">All feeds</a></nav></header>
+    <section class="hero">
+      <h1 id="heading">On this day</h1>
+      <p class="lede">The biggest events of this date in past years: great earthquakes and
+        storms, deadly disasters and conflicts, record hacks, rate decisions. Each links to its
+        source.</p>
+      <div class="day"><button id="prev" type="button">← Day before</button>
+        <input id="pick" type="date" aria-label="Pick a day">
+        <button id="next" type="button">Day after →</button></div>
+      <div id="events"><p>Loading…</p></div>
+    </section>
+    </div>
+    <script>
+      const names = {"world-events": "World", "earthquakes": "Earthquake",
+        "hurricanes": "Hurricane", "typhoons": "Typhoon", "volcanoes": "Eruption",
+        "space-weather": "Solar storm",
+        "crypto-hacks": "Crypto hack", "data-breaches": "Data breach",
+        "fed-funds-target": "Federal Reserve", "hn-top": "Hacker News"};
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August",
+        "September", "October", "November", "December"];
+      const pick = document.getElementById("pick");
+      let shown = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      const label = (feed) =>
+        names[feed] || String(feed || "").replace(/-news$/, "").replace(/-/g, " ");
+      const esc = (t) => String(t ?? "").replace(/[&<>"]/g,
+        (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+      async function show(date) {
+        shown = date;
+        const key = `${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        pick.value = `${date.getFullYear()}-${key}`;
+        document.getElementById("heading").textContent =
+          `On this day: ${date.getDate()} ${months[date.getMonth()]}`;
+        const box = document.getElementById("events");
+        let items = [];
+        try {
+          const answer = await fetch(`on-this-day/${key}.json`);
+          if (answer.ok) items = (await answer.json()).items || [];
+        } catch (e) {}
+        if (!items.length) {
+          box.innerHTML = "<p>Nothing big on this date in the archive yet.</p>";
+          return;
+        }
+        const years = {};
+        for (const item of items) (years[item.date.slice(0, 4)] ||= []).push(item);
+        box.innerHTML = Object.keys(years).sort().reverse().map((year) =>
+          `<div class="year"><h2>${year}</h2>` + years[year].map((i) =>
+            `<p class="event"><small>${esc(label(i.feed))}</small> ` +
+            `<a href="${esc(i.link)}">${esc(i.title)}</a></p>`).join("") + "</div>").join("");
+      }
+      const shift = (days) => {
+        const d = new Date(shown);
+        d.setDate(d.getDate() + days);
+        show(d);
+      };
+      document.getElementById("prev").onclick = () => shift(-1);
+      document.getElementById("next").onclick = () => shift(1);
+      pick.onchange = () => { if (pick.value) show(new Date(pick.value + "T12:00:00")); };
+      const asked = new URLSearchParams(location.search).get("day");
+      const valid = asked && /^\d\d-\d\d$/.test(asked);
+      show(valid ? new Date(`2000-${asked}T12:00:00`) : new Date());
+    </script>
+  </body>
+</html>

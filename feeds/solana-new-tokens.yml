@@ -1,0 +1,21 @@
+name: solana-new-tokens
+description: "New Solana tokens that took off: launched in the last two days, now among the most traded or trending, with $100K or more of liquidity, 1,000 or more holders and minting switched off - with market cap, launchpad and Jupiter's organic score. From Jupiter's public token API. Most new tokens fail; data, not investment advice."
+group: Crypto
+sources:
+  - {type: web, url: "https://lite-api.jup.ag/tokens/v2/toptraded/24h?limit=100"}
+  - {type: web, url: "https://lite-api.jup.ag/tokens/v2/toptrending/1h?limit=100"}
+operators:
+  - {type: filter, expr: 'exists(firstPool.createdAt) and firstPool.createdAt >= "${HOURS_AGO_48}" and liquidity >= 100000 and holderCount >= 1000 and audit.mintAuthorityDisabled == true'}
+  - {type: dedupe, by: [id]}
+  - type: map
+    assign:
+      - 'title="New Solana token " + symbol + " (" + trim(name) + "): $" + short(mcap) + " market cap, $" + short(liquidity) + " liquidity, " + commas(holderCount) + " holders"'
+      - 'summary=trim(name) + " (" + symbol + ") first traded " + replace(firstPool.createdAt, "^(\\d{4}-\\d\\d-\\d\\d)T(\\d\\d:\\d\\d).*$", "\\1 \\2 UTC") + default(" on " + launchpad, "") + "; Jupiter organic score: " + default(organicScoreLabel, "unknown") + "; minting switched off. Mint " + id + ". Most new tokens fail; data, not investment advice."'
+      - 'link="https://jup.ag/tokens/" + id'
+      - 'published_at=firstPool.createdAt'
+  - {type: select, fields: [title, summary, link, published_at, id]}
+  - {type: sort, by: [published_at], reverse: true}
+  - {type: diff, key: id, only: [added], namespace: solana-new-tokens, emit_initial: true}
+outputs:
+  - {type: feed, path: ../public/solana-new-tokens.xml, title: "New Solana tokens taking off (Jupiter)", link: "https://jup.ag/"}
+  - {type: feed, path: ../public/solana-new-tokens.json, title: "New Solana tokens taking off (Jupiter)", link: "https://jup.ag/"}
