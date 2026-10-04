@@ -5,6 +5,7 @@ sources:
   - type: web
     url: "https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallDateStart=${DAYS_AGO_30}&RecallDateEnd=${TODAY}"
 operators:
+  - {type: filter, expr: 'exists(RecallNumber) and RecallNumber != null'}   # the API answers some failures with an error record
   - type: map
     assign:
       - "title=Title"
