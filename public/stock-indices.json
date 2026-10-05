@@ -1,13 +1,128 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Stock indices, latest close (via FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NIKKEI225&cosd=2026-09-28&coed=2026-10-05",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "c279e2e5f667cfbc9442",
+      "title": "VIX volatility index: 15.31 on 2026-10-02",
+      "content_text": "Latest close of the VIX volatility index (2026-10-02), © Cboe Global Markets, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
+      "date_published": "2026-10-02T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c279e2e5f667cfbc9442",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05#VIXCLS 2026-10-02",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05",
+          "timestamp": null,
+          "observed_at": "2026-10-05T14:38:24Z",
+          "data": {
+            "change": "added",
+            "label": "VIX volatility index: 15.31 on 2026-10-02",
+            "item_type": "record",
+            "summary": "added: VIX volatility index: 15.31 on 2026-10-02",
+            "after": {
+              "title": "VIX volatility index: 15.31 on 2026-10-02",
+              "summary": "Latest close of the VIX volatility index (2026-10-02), © Cboe Global Markets, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/VIXCLS",
+              "published_at": "2026-10-02T21:00:00Z",
+              "day": "VIXCLS 2026-10-02"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05",
+            "content_type": "application/csv",
+            "elapsed_ms": 32,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=SP500|DJIA|NASDAQCOM|NIKKEI225|VIXCLS"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
+                  "name=replace(name, \"^VIXCLS$\", \"VIX volatility index\")",
+                  "owner=replace(replace(replace(replace(replace(series, \"^SP500$\", \"S&P Dow Jones Indices\"), \"^DJIA$\", \"S&P Dow Jones Indices\"), \"^NASDAQCOM$\", \"Nasdaq, Inc.\"), \"^NIKKEI225$\", \"Nikkei Inc.\"), \"^VIXCLS$\", \"Cboe Global Markets\")",
+                  "title=name + \": \" + commas(value, 2) + \" on \" + date",
+                  "summary=\"Latest close of the \" + name + \" (\" + date + \"), © \" + owner + \", as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "stock-indices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/VIXCLS"
+    },
     {
       "id": "e1a4faa18616441ebfc2",
       "title": "Nikkei 225: 69,946.86 on 2026-10-05",
@@ -1042,121 +1157,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/NIKKEI225"
-    },
-    {
-      "id": "76d3225a94ed285a46e2",
-      "title": "VIX volatility index: 16.39 on 2026-10-01",
-      "content_text": "Latest close of the VIX volatility index (2026-10-01), © Cboe Global Markets, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
-      "date_published": "2026-10-01T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "76d3225a94ed285a46e2",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05#VIXCLS 2026-10-01",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:48Z",
-          "data": {
-            "change": "added",
-            "label": "VIX volatility index: 16.39 on 2026-10-01",
-            "item_type": "record",
-            "summary": "added: VIX volatility index: 16.39 on 2026-10-01",
-            "after": {
-              "title": "VIX volatility index: 16.39 on 2026-10-01",
-              "summary": "Latest close of the VIX volatility index (2026-10-01), © Cboe Global Markets, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/VIXCLS",
-              "published_at": "2026-10-01T21:00:00Z",
-              "day": "VIXCLS 2026-10-01"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-09-28&coed=2026-10-05",
-            "content_type": "application/csv",
-            "elapsed_ms": 257,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=SP500|DJIA|NASDAQCOM|NIKKEI225|VIXCLS"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
-                  "name=replace(name, \"^VIXCLS$\", \"VIX volatility index\")",
-                  "owner=replace(replace(replace(replace(replace(series, \"^SP500$\", \"S&P Dow Jones Indices\"), \"^DJIA$\", \"S&P Dow Jones Indices\"), \"^NASDAQCOM$\", \"Nasdaq, Inc.\"), \"^NIKKEI225$\", \"Nikkei Inc.\"), \"^VIXCLS$\", \"Cboe Global Markets\")",
-                  "title=name + \": \" + commas(value, 2) + \" on \" + date",
-                  "summary=\"Latest close of the \" + name + \" (\" + date + \"), © \" + owner + \", as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "stock-indices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/VIXCLS"
     }
   ]
 }
