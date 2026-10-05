@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "18befefb23920b6f82a3",
+      "title": "M3.4 earthquake in Vietnam",
+      "content_text": "At 2026-10-06 01:35:31 Thai time (UTC+7), latitude 15.064, longitude 107.826, magnitude 3.4",
+      "date_published": "2026-10-05T18:45:16Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "18befefb23920b6f82a3",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17172",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-10-05T18:47:19Z",
+          "data": {
+            "change": "added",
+            "label": "M3.4 earthquake in Vietnam",
+            "item_type": "entry",
+            "summary": "added: M3.4 earthquake in Vietnam",
+            "after": {
+              "title": "M3.4 earthquake in Vietnam",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17172",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17172",
+              "author": null,
+              "published_at": "2026-10-05T18:45:16Z",
+              "updated_at": "2026-10-05T18:45:16Z",
+              "summary": "At 2026-10-06 01:35:31 Thai time (UTC+7), latitude 15.064, longitude 107.826, magnitude 3.4",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.4",
+              "place": "Vietnam"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1518,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17172"
+    },
+    {
       "id": "6b27abb67e496e037cf3",
       "title": "M4.7 earthquake in Myanmar - China Border Region",
       "content_text": "At 2026-10-05 22:38:59 Thai time (UTC+7), latitude 24.298, longitude 97.605, magnitude 4.7",
