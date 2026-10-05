@@ -2,12 +2,118 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Space weather: solar storms (NOAA SWPC)",
   "home_page_url": "https://www.swpc.noaa.gov/",
-  "description": "Events collected by UnlimitedPipe 0.10.59",
+  "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.59"
+    "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "51837d306cdb735a7008",
+      "title": "Solar storm, geomagnetic storm G1, Minor: ALERT: Geomagnetic K-index of 5",
+      "content_text": "Threshold Reached: 2026 Oct 04 2357 UTC. Area of impact primarily poleward of 60 degrees Geomagnetic Latitude. Induced Currents - Weak power grid fluctuations can occur. Spacecraft - Minor impact on satellite operations possible. Aurora - Aurora may be visible at high latitudes, i.e., northern tier of the U.S. such as northern Michigan and Maine.",
+      "date_published": "2026-10-04T23:57:49Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "51837d306cdb735a7008",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.swpc.noaa.gov/products/alerts.json#ALTK05-2053",
+          "source_url": "https://services.swpc.noaa.gov/products/alerts.json",
+          "timestamp": null,
+          "observed_at": "2026-10-05T00:00:08Z",
+          "data": {
+            "change": "added",
+            "label": "Solar storm, geomagnetic storm G1, Minor: ALERT: Geomagnetic K-index of 5",
+            "item_type": "record",
+            "summary": "added: Solar storm, geomagnetic storm G1, Minor: ALERT: Geomagnetic K-index of 5",
+            "after": {
+              "title": "Solar storm, geomagnetic storm G1, Minor: ALERT: Geomagnetic K-index of 5",
+              "summary": "Threshold Reached: 2026 Oct 04 2357 UTC. Area of impact primarily poleward of 60 degrees Geomagnetic Latitude. Induced Currents - Weak power grid fluctuations can occur. Spacecraft - Minor impact on satellite operations possible. Aurora - Aurora may be visible at high latitudes, i.e., northern tier of the U.S. such as northern Michigan and Maine.",
+              "link": "https://www.swpc.noaa.gov/",
+              "published_at": "2026-10-04T23:57:49Z",
+              "serial": "ALTK05-2053"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.swpc.noaa.gov/products/alerts.json",
+            "content_type": "application/json",
+            "elapsed_ms": 20,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "message matches \"NOAA Scale: [GSR]\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "headline=trim(replace(message, \"(?s)^.*?\\\\n((?:ALERT|WARNING|WATCH|EXTENDED WARNING|SUMMARY|CANCEL \\\\w+)[^\\\\n]*).*$\", \"\\\\1\"))",
+                  "scale=trim(replace(message, \"(?s)^.*?NOAA Scale: ([^\\\\r\\\\n]+).*$\", \"\\\\1\"))",
+                  "kind=replace(replace(replace(scale, \"^G.*$\", \"geomagnetic storm\"), \"^S.*$\", \"solar radiation storm\"), \"^R.*$\", \"radio blackout from a solar flare\")",
+                  "title=\"Solar storm, \" + kind + \" \" + replace(scale, \" - \", \", \") + \": \" + headline",
+                  "when=trim(replace(message, \"(?s)^(?:.*?((?:Valid From|Threshold Reached|Begin Time): [^\\\\r\\\\n]*(?:\\\\s+(?:Valid To|End Time): [^\\\\r\\\\n]*)?))?.*$\", \"\\\\1\"))",
+                  "impacts=trim(replace(replace(message, \"(?s)^(?:.*?Potential Impacts: (.*))?.*$\", \"\\\\1\"), \"\\\\s+\", \" \"))",
+                  "summary=trim(replace(when, \"\\\\s+\", \" \") + \". \" + impacts)",
+                  "published_at=date(issue_datetime)",
+                  "link=\"https://www.swpc.noaa.gov/\"",
+                  "serial=replace(message, \"(?s)^.*?Message Code: (\\\\S+).*?Serial Number: (\\\\d+).*$\", \"\\\\1-\\\\2\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "serial"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "serial",
+                "namespace": "space-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.swpc.noaa.gov/"
+    },
     {
       "id": "7cc48190331623f93ece",
       "title": "Solar storm, geomagnetic storm G2, Moderate: ALERT: Geomagnetic K-index of 6",
