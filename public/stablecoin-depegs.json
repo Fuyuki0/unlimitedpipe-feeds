@@ -9,6 +9,106 @@
   },
   "items": [
     {
+      "id": "d55ccc1bf78e37d2f389",
+      "title": "apxUSD at $0.9864, 1.4% below its $1 peg",
+      "content_text": "apxUSD (apxUSD) trades at $0.9864, 1.4% below its $1 peg, with $310.4M in circulation (DefiLlama). Data, not investment advice.",
+      "date_published": "2026-10-06T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "d55ccc1bf78e37d2f389",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=true#apxUSD 2026-10-06",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+          "timestamp": null,
+          "observed_at": "2026-10-06T07:50:43Z",
+          "data": {
+            "change": "added",
+            "label": "apxUSD at $0.9864, 1.4% below its $1 peg",
+            "item_type": "record",
+            "summary": "added: apxUSD at $0.9864, 1.4% below its $1 peg",
+            "after": {
+              "id": "354",
+              "name": "apxUSD",
+              "symbol": "apxUSD",
+              "gecko_id": "apxusd",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "crypto-backed",
+              "circulating": {
+                "peggedUSD": 310392718.3414325
+              },
+              "price": 0.986362192958169,
+              "off": 1.4,
+              "side": "below",
+              "title": "apxUSD at $0.9864, 1.4% below its $1 peg",
+              "summary": "apxUSD (apxUSD) trades at $0.9864, 1.4% below its $1 peg, with $310.4M in circulation (DefiLlama). Data, not investment advice.",
+              "link": "https://defillama.com/stablecoin/apxusd",
+              "published_at": "2026-10-06T00:00:00Z",
+              "day_key": "apxUSD 2026-10-06"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+            "content_type": "application/json",
+            "elapsed_ms": 45,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "pegType == \"peggedUSD\" and exists(price) and price != null and circulating.peggedUSD >= 100000000 and price <= 0.99"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "off=round(abs(price - 1) * 100, 1)",
+                  "side=replace(replace(\"\" + (price > 1), \"^True$\", \"above\"), \"^False$\", \"below\")",
+                  "title=symbol + \" at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg\"",
+                  "summary=name + \" (\" + symbol + \") trades at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg, with $\" + short(circulating.peggedUSD) + \" in circulation (DefiLlama). Data, not investment advice.\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "published_at=\"2026-10-06T00:00:00Z\"",
+                  "day_key=symbol + \" 2026-10-06\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth",
+                  "circulatingPrevWeek",
+                  "circulatingPrevDay"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-depegs",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/apxusd"
+    },
+    {
       "id": "36ac11fd3db2276f8e77",
       "title": "apxUSD at $0.9868, 1.3% below its $1 peg",
       "content_text": "apxUSD (apxUSD) trades at $0.9868, 1.3% below its $1 peg, with $310.5M in circulation (DefiLlama). Data, not investment advice.",
