@@ -9,6 +9,692 @@
   },
   "items": [
     {
+      "id": "cc096c62c1bd85baa0b3",
+      "title": "WFM Purchasing, LP recalls Fromagerie Coop de Mean Cabricharme and Belgium: undeclared egg allergen (Class I, food)",
+      "content_text": "Undeclared Egg Allergen Product: Fromagerie Coop de Mean Cabricharme and Belgium Cabricharme Shelf life: 30 days, all dates through and including 10/7/2026 Packaging: Plastic wrapped by slice Net Wt.: Various, cut from whole wheel and priced by weight with Whole Foods Market scale label PLUs: 54670, 57953 Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cc096c62c1bd85baa0b3",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#H-1395-2026",
+          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "WFM Purchasing, LP recalls Fromagerie Coop de Mean Cabricharme and Belgium: undeclared egg allergen (Class I, food)",
+            "item_type": "record",
+            "summary": "added: WFM Purchasing, LP recalls Fromagerie Coop de Mean Cabricharme and Belgium: undeclared egg allergen (Class I, food)",
+            "after": {
+              "title": "WFM Purchasing, LP recalls Fromagerie Coop de Mean Cabricharme and Belgium: undeclared egg allergen (Class I, food)",
+              "summary": "Undeclared Egg Allergen Product: Fromagerie Coop de Mean Cabricharme and Belgium Cabricharme Shelf life: 30 days, all dates through and including 10/7/2026 Packaging: Plastic wrapped by slice Net Wt.: Various, cut from whole wheel and priced by weight with Whole Foods Market scale label PLUs: 54670, 57953 Status: Ongoing.",
+              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1395-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "H-1395-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 100,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1395-2026%22"
+    },
+    {
+      "id": "3e6e94e25fe3b89434b7",
+      "title": "Gias Food Inc. recalls Lemon Alfredo Fettuccine packed in a yellow plastic: contamination with listeria monocytogenes (Class I, food)",
+      "content_text": "Contamination with Listeria monocytogenes Product: Lemon Alfredo Fettuccine packed in a yellow plastic sealed bag with pink and black lettering; label reads in part as \"bettergoods Lemon Alfredo Fettuccine, MADE IN ITALY, NET WT 22 OZ, BEST if Used By: SEP 20 2027 L6080C, UPC 194346442706, DISTRIBUTED BY: Walmart Inc., Bentonville, AR 72716 PRODUCT OF ITALY Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3e6e94e25fe3b89434b7",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#H-1396-2026",
+          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "Gias Food Inc. recalls Lemon Alfredo Fettuccine packed in a yellow plastic: contamination with listeria monocytogenes (Class I, food)",
+            "item_type": "record",
+            "summary": "added: Gias Food Inc. recalls Lemon Alfredo Fettuccine packed in a yellow plastic: contamination with listeria monocytogenes (Class I, food)",
+            "after": {
+              "title": "Gias Food Inc. recalls Lemon Alfredo Fettuccine packed in a yellow plastic: contamination with listeria monocytogenes (Class I, food)",
+              "summary": "Contamination with Listeria monocytogenes Product: Lemon Alfredo Fettuccine packed in a yellow plastic sealed bag with pink and black lettering; label reads in part as \"bettergoods Lemon Alfredo Fettuccine, MADE IN ITALY, NET WT 22 OZ, BEST if Used By: SEP 20 2027 L6080C, UPC 194346442706, DISTRIBUTED BY: Walmart Inc., Bentonville, AR 72716 PRODUCT OF ITALY Status: Ongoing.",
+              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1396-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "H-1396-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 100,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1396-2026%22"
+    },
+    {
+      "id": "fceb770e85339df5f515",
+      "title": "Evergreen Fresh Sprouts recalls Evergreen Fresh Sprouts LLC, Broccoli Sprouts: salmonella (Class I, food)",
+      "content_text": "Salmonella Product: Evergreen Fresh Sprouts LLC, Broccoli Sprouts, packaged in clear plastic zip lock bag, net wt. 4oz, UPC 8 38796 00105 1. Firm distributed cases (6/4oz. bags per case) to distributor. Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "fceb770e85339df5f515",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#H-1390-2026",
+          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "Evergreen Fresh Sprouts recalls Evergreen Fresh Sprouts LLC, Broccoli Sprouts: salmonella (Class I, food)",
+            "item_type": "record",
+            "summary": "added: Evergreen Fresh Sprouts recalls Evergreen Fresh Sprouts LLC, Broccoli Sprouts: salmonella (Class I, food)",
+            "after": {
+              "title": "Evergreen Fresh Sprouts recalls Evergreen Fresh Sprouts LLC, Broccoli Sprouts: salmonella (Class I, food)",
+              "summary": "Salmonella Product: Evergreen Fresh Sprouts LLC, Broccoli Sprouts, packaged in clear plastic zip lock bag, net wt. 4oz, UPC 8 38796 00105 1. Firm distributed cases (6/4oz. bags per case) to distributor. Status: Ongoing.",
+              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1390-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "H-1390-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 100,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1390-2026%22"
+    },
+    {
+      "id": "d4329975616a4c4bd029",
+      "title": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Neonatal Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+      "content_text": "Potential to exhibit a loose connection between the flexible tubing and the nasal cannula, during assembly or while in use, which may result in loss of CPAP pressure, possibly reducing the effectiveness of treatment and lead to decreased oxygenation until connection is restored. Product: INCA (Infant Nasal Cannulae Assy) Neonatal Nasal CPAP, Replacement Set. Stay-Flex tubing component. 5 units per box. Model Numbers: 44-0712, 44-0707, 44-0709, 44-0715. Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "d4329975616a4c4bd029",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#Z-3140-2026",
+          "source_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Neonatal Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+            "item_type": "record",
+            "summary": "added: CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Neonatal Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+            "after": {
+              "title": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Neonatal Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+              "summary": "Potential to exhibit a loose connection between the flexible tubing and the nasal cannula, during assembly or while in use, which may result in loss of CPAP pressure, possibly reducing the effectiveness of treatment and lead to decreased oxygenation until connection is restored. Product: INCA (Infant Nasal Cannulae Assy) Neonatal Nasal CPAP, Replacement Set. Stay-Flex tubing component. 5 units per box. Model Numbers: 44-0712, 44-0707, 44-0709, 44-0715. Status: Ongoing.",
+              "link": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3140-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "Z-3140-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 131,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3140-2026%22"
+    },
+    {
+      "id": "ad5669b64cfb689f4c48",
+      "title": "AVID Medical recalls Halyard IV START KIT NON-STERILE; 48 kits per: convenience kits containing bd chloraprep clear - 1 ml applicator (Class I, device)",
+      "content_text": "Convenience kits containing BD ChloraPrep Clear - 1 mL Applicator, which may be contaminated with Aspergillus penicillioides. Product: Halyard IV START KIT NON-STERILE; 48 kits per case. Containing BD ChloraPrep Clear - 1 mL Applicator. Kit Model Number: KRIV26-02. Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ad5669b64cfb689f4c48",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#Z-3194-2026",
+          "source_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "AVID Medical recalls Halyard IV START KIT NON-STERILE; 48 kits per: convenience kits containing bd chloraprep clear - 1 ml applicator (Class I, device)",
+            "item_type": "record",
+            "summary": "added: AVID Medical recalls Halyard IV START KIT NON-STERILE; 48 kits per: convenience kits containing bd chloraprep clear - 1 ml applicator (Class I, device)",
+            "after": {
+              "title": "AVID Medical recalls Halyard IV START KIT NON-STERILE; 48 kits per: convenience kits containing bd chloraprep clear - 1 ml applicator (Class I, device)",
+              "summary": "Convenience kits containing BD ChloraPrep Clear - 1 mL Applicator, which may be contaminated with Aspergillus penicillioides. Product: Halyard IV START KIT NON-STERILE; 48 kits per case. Containing BD ChloraPrep Clear - 1 mL Applicator. Kit Model Number: KRIV26-02. Status: Ongoing.",
+              "link": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3194-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "Z-3194-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 131,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3194-2026%22"
+    },
+    {
+      "id": "3a7d9e9296403d8e9599",
+      "title": "Boston Scientific Corporation recalls Imager II Angiographic Catheters M001314001 IMAGER: tip may fracture or detach, leading to device fragments remaining (Class I, device)",
+      "content_text": "Tip may fracture or detach, leading to device fragments remaining within the patient or migrating through the vasculature. Patient impact may include prolonged procedure or life-threatening embolism. Product: Imager II Angiographic Catheters M001314001 IMAGER II/5/ST/65/038 BX5; M001314011 IMAGER II/5/ST/100/038 BX5; M001314021 IMAGER II/5/ST/65/035 BX 5; M001314031 IMAGER II/5/ST/100/035 BX 5; M001314041 IMAGER II/5/BARNH/100/038 BX5; M001314051 IMAGER II/5/BERN/100/038 BX5; M001314061 IMAGER…",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3a7d9e9296403d8e9599",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#Z-3214-2026",
+          "source_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "Boston Scientific Corporation recalls Imager II Angiographic Catheters M001314001 IMAGER: tip may fracture or detach, leading to device fragments remaining (Class I, device)",
+            "item_type": "record",
+            "summary": "added: Boston Scientific Corporation recalls Imager II Angiographic Catheters M001314001 IMAGER: tip may fracture or detach, leading to device fragments remaining (Class I, device)",
+            "after": {
+              "title": "Boston Scientific Corporation recalls Imager II Angiographic Catheters M001314001 IMAGER: tip may fracture or detach, leading to device fragments remaining (Class I, device)",
+              "summary": "Tip may fracture or detach, leading to device fragments remaining within the patient or migrating through the vasculature. Patient impact may include prolonged procedure or life-threatening embolism. Product: Imager II Angiographic Catheters M001314001 IMAGER II/5/ST/65/038 BX5; M001314011 IMAGER II/5/ST/100/038 BX5; M001314021 IMAGER II/5/ST/65/035 BX 5; M001314031 IMAGER II/5/ST/100/035 BX 5; M001314041 IMAGER II/5/BARNH/100/038 BX5; M001314051 IMAGER II/5/BERN/100/038 BX5; M001314061 IMAGER II/5/BERN/100/035 BX 5; M001314081 IMAGER II/5/BERN/40/038 BX5; M001314101 IMAGER II/5/BERN/65/038 BX5; M001314141 IMAGER II/5/H1/100/038 BX5; M001314151 IMAGER II/5/H1/100/035 BX 5; M001314301 IMAGER II/5/SIM1/65/038 BX5; M001314321 IMAGER II/5/SIM1/100/038 BX5; M001314341 IMAGER II/5/SIM2/100/038 BX5; M001314351 IMAGER II/5/SIM2/100/035 BX 5; M001314361 IMAGER II/5/SIM3/100/038 BX5; M001314521 IMAGER II/5/CHGB/65/038 BX5; M001314581 IMAGER II/5/CONTRA 2/65/038 BX5; M001314621 IMAGER II/5/C1/65/038 BX5; M001314661 00AGER II/5/C2/65/038 BX5; M001314671 IMAGER II/5/C2/65/035 BX 5; M001314761 IMAGER II/5/MIK/65/038 BX5; M001314771 IMAGER II/5/MIK/65/035 BX 5; M001314821 IMAGER II/5/SHK1.0/65/038 BX5; M001314861 IMAGER II/5/RC2/65/038 BX5; M001314881 IMAGER II/5/RDC/65/038 BX5 Status: Ongoing.",
+              "link": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3214-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "Z-3214-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 131,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3214-2026%22"
+    },
+    {
+      "id": "299e10cfc1479733f188",
+      "title": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Infant Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+      "content_text": "Potential to exhibit a loose connection between the flexible tubing and the nasal cannula, during assembly or while in use, which may result in loss of CPAP pressure, possibly reducing the effectiveness of treatment and lead to decreased oxygenation until connection is restored. Product: INCA (Infant Nasal Cannulae Assy) Infant Nasal CPAP, Complete Set. Stay-Flex tubing component. 5 units per box. Model Numbers: 44-2707, 44-2709, 44-2710, 44-2712, 44-2715. Status: Ongoing.",
+      "date_published": "2026-09-30T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "299e10cfc1479733f188",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000#Z-3139-2026",
+          "source_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:52Z",
+          "data": {
+            "change": "added",
+            "label": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Infant Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+            "item_type": "record",
+            "summary": "added: CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Infant Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+            "after": {
+              "title": "CooperSurgical recalls INCA (Infant Nasal Cannulae Assy) Infant Nasal: potential to exhibit a loose connection between the flexible (Class I, device)",
+              "summary": "Potential to exhibit a loose connection between the flexible tubing and the nasal cannula, during assembly or while in use, which may result in loss of CPAP pressure, possibly reducing the effectiveness of treatment and lead to decreased oxygenation until connection is restored. Product: INCA (Infant Nasal Cannulae Assy) Infant Nasal CPAP, Complete Set. Stay-Flex tubing component. 5 units per box. Model Numbers: 44-2707, 44-2709, 44-2710, 44-2712, 44-2715. Status: Ongoing.",
+              "link": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3139-2026%22",
+              "published_at": "2026-09-30",
+              "recall_number": "Z-3139-2026"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/device/enforcement.json?search=report_date:[2026-09-15+TO+2026-10-06]+AND+classification:%22Class+I%22&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 131,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
+                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
+                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
+                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
+                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
+                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
+                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
+                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "recall_number"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "recall_number",
+                "namespace": "fda-recalls",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-3139-2026%22"
+    },
+    {
       "id": "88ff2212a260c5ce5b4a",
       "title": "Everything Sprouts recalls Everything Sprouts Crunchy Protein Sprout Mix: sprouts may be contaminated with stec e. coli and/or salmonella (Class I, food)",
       "content_text": "Sprouts may be contaminated with STEC E. coli and/or Salmonella. Product: Everything Sprouts Crunchy Protein Sprout Mix, containing Alfalfa Fenugreek, Cabbage, Mung, Adzuki, Lentils, Green Pea, Net Wt. 5.0 oz (142 g) UPC 0 87906-01018 7. everythingsprouts.com Status: Ongoing.",
@@ -9121,692 +9807,6 @@
         }
       },
       "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1360-2026%22"
-    },
-    {
-      "id": "9f67bff4be08ffc7eb51",
-      "title": "NatureBest Pre-Cut & Produce LLc recalls HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz: jalapenos have the potential to be contaminated with salmonella (Class I, food)",
-      "content_text": "Jalapenos have the potential to be contaminated with Salmonella Product: HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz PICO DE GALLO-MANGO-6/14oz Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "9f67bff4be08ffc7eb51",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1374-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "NatureBest Pre-Cut & Produce LLc recalls HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz: jalapenos have the potential to be contaminated with salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: NatureBest Pre-Cut & Produce LLc recalls HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz: jalapenos have the potential to be contaminated with salmonella (Class I, food)",
-            "after": {
-              "title": "NatureBest Pre-Cut & Produce LLc recalls HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz: jalapenos have the potential to be contaminated with salmonella (Class I, food)",
-              "summary": "Jalapenos have the potential to be contaminated with Salmonella Product: HEB-PICO-MANGO-12/14oz PICO DE GALLO-MANGO-4/14oz PICO DE GALLO-MANGO-6/14oz Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1374-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1374-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1374-2026%22"
-    },
-    {
-      "id": "289f7bc1f12180bb533d",
-      "title": "Taylor Fresh Foods recalls Pico De Gallo Hot. Ingredients: Tomato, Red Onion: potential contamination with salmonella (Class I, food)",
-      "content_text": "Potential contamination with Salmonella. Product: Pico De Gallo Hot. Ingredients: Tomato, Red Onion, Jalapeno Pepper, Lemon Juice, Cilantro, Salt. Net Wt: 2.5 lbs. Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "289f7bc1f12180bb533d",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1365-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Taylor Fresh Foods recalls Pico De Gallo Hot. Ingredients: Tomato, Red Onion: potential contamination with salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Taylor Fresh Foods recalls Pico De Gallo Hot. Ingredients: Tomato, Red Onion: potential contamination with salmonella (Class I, food)",
-            "after": {
-              "title": "Taylor Fresh Foods recalls Pico De Gallo Hot. Ingredients: Tomato, Red Onion: potential contamination with salmonella (Class I, food)",
-              "summary": "Potential contamination with Salmonella. Product: Pico De Gallo Hot. Ingredients: Tomato, Red Onion, Jalapeno Pepper, Lemon Juice, Cilantro, Salt. Net Wt: 2.5 lbs. Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1365-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1365-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1365-2026%22"
-    },
-    {
-      "id": "2463feb7b4d2c4edce4f",
-      "title": "Taylor Fresh Foods recalls Fresh Pico Tray. Ingredients: Tomato, Yellow Onion: potential contamination with salmonella (Class I, food)",
-      "content_text": "Potential contamination with Salmonella. Product: Fresh Pico Tray. Ingredients: Tomato, Yellow Onion, Jalapeno Pepper, Cilantro. Net Wt: 5 lbs. Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "2463feb7b4d2c4edce4f",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1366-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Taylor Fresh Foods recalls Fresh Pico Tray. Ingredients: Tomato, Yellow Onion: potential contamination with salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Taylor Fresh Foods recalls Fresh Pico Tray. Ingredients: Tomato, Yellow Onion: potential contamination with salmonella (Class I, food)",
-            "after": {
-              "title": "Taylor Fresh Foods recalls Fresh Pico Tray. Ingredients: Tomato, Yellow Onion: potential contamination with salmonella (Class I, food)",
-              "summary": "Potential contamination with Salmonella. Product: Fresh Pico Tray. Ingredients: Tomato, Yellow Onion, Jalapeno Pepper, Cilantro. Net Wt: 5 lbs. Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1366-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1366-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1366-2026%22"
-    },
-    {
-      "id": "2a1420e22b0b6f6115dc",
-      "title": "Taylor Fresh Foods recalls Authentic Guacamole. Ingredients: Guacamole, Pico: potential contamination with salmonella (Class I, food)",
-      "content_text": "Potential contamination with Salmonella. Product: Authentic Guacamole. Ingredients: Guacamole, Pico De Gallo. Spec Sheet: Guacamole (Avocado, Pico De Gallo, Lime Juice, Cumin, Salt, Pepper); Pico De Gallo (Cilantro, Jalapeno Pepper, Tomato, Yellow Onion) Net Wt: 13 oz. Keep Refrigerated. Distributed By: Taylor Farms Inc., Salinas, CA 93902. UPC: 030223073567 Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "2a1420e22b0b6f6115dc",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1352-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Taylor Fresh Foods recalls Authentic Guacamole. Ingredients: Guacamole, Pico: potential contamination with salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Taylor Fresh Foods recalls Authentic Guacamole. Ingredients: Guacamole, Pico: potential contamination with salmonella (Class I, food)",
-            "after": {
-              "title": "Taylor Fresh Foods recalls Authentic Guacamole. Ingredients: Guacamole, Pico: potential contamination with salmonella (Class I, food)",
-              "summary": "Potential contamination with Salmonella. Product: Authentic Guacamole. Ingredients: Guacamole, Pico De Gallo. Spec Sheet: Guacamole (Avocado, Pico De Gallo, Lime Juice, Cumin, Salt, Pepper); Pico De Gallo (Cilantro, Jalapeno Pepper, Tomato, Yellow Onion) Net Wt: 13 oz. Keep Refrigerated. Distributed By: Taylor Farms Inc., Salinas, CA 93902. UPC: 030223073567 Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1352-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1352-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1352-2026%22"
-    },
-    {
-      "id": "7cfc4a185e1a2f45cf8d",
-      "title": "Taylor Fresh Foods recalls Fiesta Salad with Shrimp. Ingredients: Salad (Romaine: potential contamination with salmonella (Class I, food)",
-      "content_text": "Potential contamination with Salmonella. Product: Fiesta Salad with Shrimp. Ingredients: Salad (Romaine Lettuce, Cooked Shrimp *** Pico De Gallo [***Jalapeno Peppers], Fire Roasted Corn, Cooked Black Beans, Lime, Tortilla Strips ***), Creamy Poblano Dressing (***) Net Wt: 11.11 oz. Keep Refrigerated. Dist. & Sold Exclusively By: Trader Joe's Monrovia, CA 91016. UPC: 00818377 Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7cfc4a185e1a2f45cf8d",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1350-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Taylor Fresh Foods recalls Fiesta Salad with Shrimp. Ingredients: Salad (Romaine: potential contamination with salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Taylor Fresh Foods recalls Fiesta Salad with Shrimp. Ingredients: Salad (Romaine: potential contamination with salmonella (Class I, food)",
-            "after": {
-              "title": "Taylor Fresh Foods recalls Fiesta Salad with Shrimp. Ingredients: Salad (Romaine: potential contamination with salmonella (Class I, food)",
-              "summary": "Potential contamination with Salmonella. Product: Fiesta Salad with Shrimp. Ingredients: Salad (Romaine Lettuce, Cooked Shrimp *** Pico De Gallo [***Jalapeno Peppers], Fire Roasted Corn, Cooked Black Beans, Lime, Tortilla Strips ***), Creamy Poblano Dressing (***) Net Wt: 11.11 oz. Keep Refrigerated. Dist. & Sold Exclusively By: Trader Joe's Monrovia, CA 91016. UPC: 00818377 Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1350-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1350-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1350-2026%22"
-    },
-    {
-      "id": "d040b19aacef60c4cc01",
-      "title": "Everything Sprouts recalls Everything Sprouts Zesty Garlic Mix, containing: sprouts may be contaminated with stec e. coli and/or salmonella (Class I, food)",
-      "content_text": "Sprouts may be contaminated with STEC E. coli and/or Salmonella. Product: Everything Sprouts Zesty Garlic Mix, containing Garlic, Onion and Alfalfa Sprouts, Net Wt. 5.0 oz (142 g) UPC 0 87906-00016 7. everythingsprouts.com Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d040b19aacef60c4cc01",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1338-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Everything Sprouts recalls Everything Sprouts Zesty Garlic Mix, containing: sprouts may be contaminated with stec e. coli and/or salmonella (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Everything Sprouts recalls Everything Sprouts Zesty Garlic Mix, containing: sprouts may be contaminated with stec e. coli and/or salmonella (Class I, food)",
-            "after": {
-              "title": "Everything Sprouts recalls Everything Sprouts Zesty Garlic Mix, containing: sprouts may be contaminated with stec e. coli and/or salmonella (Class I, food)",
-              "summary": "Sprouts may be contaminated with STEC E. coli and/or Salmonella. Product: Everything Sprouts Zesty Garlic Mix, containing Garlic, Onion and Alfalfa Sprouts, Net Wt. 5.0 oz (142 g) UPC 0 87906-00016 7. everythingsprouts.com Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1338-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1338-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1338-2026%22"
-    },
-    {
-      "id": "bcabd4d14edd347c270d",
-      "title": "Optimus Inc. d/b/a/ Markys Caviar recalls Mon Sire Brie, soft-ripened French cheese, 1 kg: the firm was notified by their brie cheese supplier that sample (Class I, food)",
-      "content_text": "The firm was notified by their Brie Cheese supplier that sample results revealed the presence of Listeria monocytogenes. Product: Mon Sire Brie, soft-ripened French cheese, 1 kg, packed in carboard carton and wrapped in plastic parchment paper, 2 units each, Keep Refrigerated Status: Ongoing.",
-      "date_published": "2026-09-23T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "bcabd4d14edd347c270d",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000#H-1388-2026",
-          "source_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:37:27Z",
-          "data": {
-            "change": "added",
-            "label": "Optimus Inc. d/b/a/ Markys Caviar recalls Mon Sire Brie, soft-ripened French cheese, 1 kg: the firm was notified by their brie cheese supplier that sample (Class I, food)",
-            "item_type": "record",
-            "summary": "added: Optimus Inc. d/b/a/ Markys Caviar recalls Mon Sire Brie, soft-ripened French cheese, 1 kg: the firm was notified by their brie cheese supplier that sample (Class I, food)",
-            "after": {
-              "title": "Optimus Inc. d/b/a/ Markys Caviar recalls Mon Sire Brie, soft-ripened French cheese, 1 kg: the firm was notified by their brie cheese supplier that sample (Class I, food)",
-              "summary": "The firm was notified by their Brie Cheese supplier that sample results revealed the presence of Listeria monocytogenes. Product: Mon Sire Brie, soft-ripened French cheese, 1 kg, packed in carboard carton and wrapped in plastic parchment paper, 2 units each, Keep Refrigerated Status: Ongoing.",
-              "link": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1388-2026%22",
-              "published_at": "2026-09-23",
-              "recall_number": "H-1388-2026"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.fda.gov/food/enforcement.json?search=report_date:[2026-09-14+TO+2026-10-05]+AND+classification:%22Class+I%22&limit=1000",
-            "content_type": "application/json",
-            "elapsed_ms": 121,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "kind=replace(source_url, \"^https://api\\\\.fda\\\\.gov/(food|drug|device)/.*$\", \"\\\\1\")",
-                  "firm=readable(replace(trim(recalling_firm), \"\\\\s*(,?\\\\s*(Inc|LLC|Corp|Co|Ltd)\\\\.?|dba)$\", \"\"))",
-                  "product=replace(replace(trim(product_description), \"\\\\s+\", \" \"), \"^(.{0,45}[^ ,;]*).*$\", \"\\\\1\")",
-                  "reason=replace(replace(replace(trim(reason_for_recall), \"\\\\s+\", \" \"), \"^(.{0,60}[^ ,;]*).*$\", \"\\\\1\"), \"[.;,:]+$\", \"\")",
-                  "title=firm + \" recalls \" + product + \": \" + lower(reason) + \" (Class I, \" + kind + \")\"",
-                  "summary=replace(trim(reason_for_recall), \"\\\\s+\", \" \") + \" Product: \" + replace(trim(product_description), \"\\\\s+\", \" \") + \" Status: \" + status + \".\"",
-                  "published_at=replace(report_date, \"^(\\\\d{4})(\\\\d\\\\d)(\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3\")",
-                  "link=\"https://api.fda.gov/\" + kind + \"/enforcement.json?search=recall_number:%22\" + recall_number + \"%22\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "recall_number"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "recall_number",
-                "namespace": "fda-recalls",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-1388-2026%22"
     }
   ]
 }

@@ -2,12 +2,110 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US drug shortages (FDA)",
   "home_page_url": "https://dps.fda.gov/drugshortages",
-  "description": "Events collected by UnlimitedPipe 0.10.38",
+  "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
-    "generator": "UnlimitedPipe 0.10.38"
+    "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "c1b34bc2baa14ed9d48f",
+      "title": "To be discontinued: Fluocinonide Ointment",
+      "content_text": "To be discontinued for Fluocinonide Ointment, Dermatology. First posted 2026-10-02, last updated 2026-10-02 (FDA drug shortage list).",
+      "date_published": "2026-10-02T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c1b34bc2baa14ed9d48f",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.fda.gov/drug/shortages.json?sort=update_date:desc&limit=1000#Fluocinonide Ointment | To Be Discontinued",
+          "source_url": "https://api.fda.gov/drug/shortages.json?sort=update_date:desc&limit=1000",
+          "timestamp": null,
+          "observed_at": "2026-10-06T03:52:48Z",
+          "data": {
+            "change": "added",
+            "label": "To be discontinued: Fluocinonide Ointment",
+            "item_type": "record",
+            "summary": "added: To be discontinued: Fluocinonide Ointment",
+            "after": {
+              "title": "To be discontinued: Fluocinonide Ointment",
+              "summary": "To be discontinued for Fluocinonide Ointment, Dermatology. First posted 2026-10-02, last updated 2026-10-02 (FDA drug shortage list).",
+              "link": "https://dps.fda.gov/drugshortages",
+              "published_at": "2026-10-02T00:00:00Z",
+              "change": "Fluocinonide Ointment | To Be Discontinued"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.fda.gov/drug/shortages.json?sort=update_date:desc&limit=1000",
+            "content_type": "application/json",
+            "elapsed_ms": 265,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "drug=replace(generic_name, \"\\\\s+\", \" \")",
+                  "state=replace(replace(replace(status, \"^Current$\", \"Drug shortage\"), \"^Resolved$\", \"Drug shortage resolved\"), \"^To Be Discontinued$\", \"To be discontinued\")",
+                  "title=state + \": \" + drug",
+                  "area=default(therapeutic_category.0, \"\")",
+                  "first=replace(initial_posting_date, \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\")",
+                  "last=replace(update_date, \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\")",
+                  "summary=state + \" for \" + drug + replace(\", \" + area, \"^, $\", \"\") + \". First posted \" + first + \", last updated \" + last + \" (FDA drug shortage list).\"",
+                  "published_at=replace(replace(status, \"^Current$\", first), \"^(Resolved|To Be Discontinued)$\", last) + \"T00:00:00Z\"",
+                  "link=\"https://dps.fda.gov/drugshortages\"",
+                  "change=drug + \" | \" + status"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "change"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "change"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "change",
+                "namespace": "drug-shortages",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://dps.fda.gov/drugshortages"
+    },
     {
       "id": "370f40ff868e053589ed",
       "title": "Drug shortage: Amphetamine Aspartate Monohydrate, Amphetamine Sulfate, Dextroamphetamine Saccharate, Dextroamphetamine Sulfate Tablet",
