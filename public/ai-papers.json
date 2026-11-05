@@ -9,6 +9,249 @@
   },
   "items": [
     {
+      "id": "de1a822197aecfff01b3",
+      "title": "Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention",
+      "content_text": "Sparse attention cuts the cost of long-context inference by making the attention matrix sparse: each query attends only a subset of the sequence, chosen by a fixed pattern or, in recent production LLMs, learned per query. In DeepSeek Sparse Attention (DSA), the attention of DeepSeek-V3.2 and the GLM-5 family, every layer is preceded by a lightning indexer that scores the whole cache and keeps the k=2048 highest-scoring tokens for the layer to attend. At long context this indexer scan, not the…",
+      "date_published": "2026-11-05T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "de1a822197aecfff01b3",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.03768",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-11-05T17:40:29Z",
+          "data": {
+            "change": "added",
+            "label": "Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention",
+            "item_type": "record",
+            "summary": "added: Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention",
+            "after": {
+              "title": "Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention",
+              "summary": "Sparse attention cuts the cost of long-context inference by making the attention matrix sparse: each query attends only a subset of the sequence, chosen by a fixed pattern or, in recent production LLMs, learned per query. In DeepSeek Sparse Attention (DSA), the attention of DeepSeek-V3.2 and the GLM-5 family, every layer is preceded by a lightning indexer that scores the whole cache and keeps the k=2048 highest-scoring tokens for the layer to attend. At long context this indexer scan, not the sparse attention it feeds, is where the decode time goes. But adjacent layers select nearly the same tokens, so a layer can attend the selection of the previous indexer layer instead of its own. This removes the dependency: each indexer then runs concurrently with the attention of its layer. The resulting Multi-layer Indexer (MLI) needs no retraining and no new weights. Its default realization changes no kernel, running inside SGLang's production decode graph; an optional fused decode kernel accelerates it further on DeepSeek-V3.2. MLI composes with IndexCache (the cross-layer reuse GLM-5.2 ships as IndexShare): IndexCache drops the indexer from some layers, and MLI hides the scan on the rest. We serve DeepSeek-V3.2 and GLM-5 under IndexCache's protocol at retentions 1/2 to 1/32 (the fraction of layers that keep an indexer) and contexts 10K to 195K. At equal retention the composition decodes faster than IndexCache: up to 14.5% faster on DeepSeek-V3.2 and 9.8% on GLM-5 at 1/2, and 7.9% and 5.1% at 1/4, largest where IndexCache keeps the most indexers and growing with context. At retention 1/r it is faster still than IndexCache at 1/(2r) while keeping twice the fresh selections: at 128K it reaches 1.32x the unmodified model's decode throughput at 1/4, above IndexCache's 1.28x at 1/8. Its LongBench, RULER and LongBench v2 accuracy stays within a few percentage points of IndexCache's.",
+              "organization": {
+                "_id": "60db8e8014bcc1d453e28d6e",
+                "name": "Writer",
+                "fullname": "Writer",
+                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1625001569797-60db8b5ad8b4797b129145d5.png"
+              },
+              "link": "https://huggingface.co/papers/2611.03768",
+              "published_at": "2026-11-05T00:00:00.000Z",
+              "upvotes": 0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 145,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2611.03768"
+    },
+    {
+      "id": "6a9bce70506960db3052",
+      "title": "Halley: A Predictive Control Plane for Optical AI Data Center Networks",
+      "content_text": "A frontier AI model is trained in an AI data center, on tens of thousands of accelerators joined by a dedicated network, and every training step ends with all of them exchanging data at once. Between racks, that network is optical, and each of its four layers, from lasers to switches, runs a fixed or after-the-fact policy. Lasers sharing an enclosure, cooling, and power can fail together. At a fixed spare ratio, correlated failure provably caps a pool's availability however large it grows. In…",
+      "date_published": "2026-11-05T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6a9bce70506960db3052",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.04408",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-11-05T17:40:29Z",
+          "data": {
+            "change": "added",
+            "label": "Halley: A Predictive Control Plane for Optical AI Data Center Networks",
+            "item_type": "record",
+            "summary": "added: Halley: A Predictive Control Plane for Optical AI Data Center Networks",
+            "after": {
+              "title": "Halley: A Predictive Control Plane for Optical AI Data Center Networks",
+              "summary": "A frontier AI model is trained in an AI data center, on tens of thousands of accelerators joined by a dedicated network, and every training step ends with all of them exchanging data at once. Between racks, that network is optical, and each of its four layers, from lasers to switches, runs a fixed or after-the-fact policy. Lasers sharing an enclosure, cooling, and power can fail together. At a fixed spare ratio, correlated failure provably caps a pool's availability however large it grows. In this paper, we present a comprehensive predictive control plane framework, called Halley, that reads each resource's next state and acts before the failure occurs. It has four components, each carrying a formal guarantee: LightReserve that sizes the laser pool to provide a coverage bound, FoldFit that schedules the switch within 11/9 of the optimal, ThermaLead that holds a microring with one-step-ahead control, and TriageGuard that protects the highest-risk modules first. Halley gives each layer a predictive controller that defers to the deployed policy when unsure. Composed from simulations at that point, effective goodput, the share of ideal throughput kept, rises from 65.2\\% to 76.5\\% if a window that exhausts its spares is lost. If only the dark channels' bandwidth is lost, it reaches 67.4\\%. Per megawatt, that is up to 1.03--1.17 times the training; for the same training, up to 3.3--14.7\\% less data center capacity. Halley's fallback circuits are formally verified and are shown to achieve close timing on a commercial FPGA, and pass a 130~nm signoff.",
+              "link": "https://huggingface.co/papers/2611.04408",
+              "published_at": "2026-11-05T00:00:00.000Z",
+              "upvotes": 8
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 145,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2611.04408"
+    },
+    {
+      "id": "8f5d9d74b2f37ac67c07",
+      "title": "TaoMate-HD: Progressive-Resolution Autoregressive Audio-Video Generation",
+      "content_text": "Streaming digital humans produce detailed video while continuing speech as new text arrives. High-resolution denoising is costly, and text updates can cause repeated or interrupted speech. We present TaoMate-HD, an autoregressive model for high-resolution audio-video streaming. For each short segment, or chunk, two denoising steps establish coarse video structure at low resolution. A final step refines the video to high resolution, with audio generated throughout the same trajectory. Each stage…",
+      "date_published": "2026-11-05T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8f5d9d74b2f37ac67c07",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.03394",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-11-05T17:40:29Z",
+          "data": {
+            "change": "added",
+            "label": "TaoMate-HD: Progressive-Resolution Autoregressive Audio-Video Generation",
+            "item_type": "record",
+            "summary": "added: TaoMate-HD: Progressive-Resolution Autoregressive Audio-Video Generation",
+            "after": {
+              "title": "TaoMate-HD: Progressive-Resolution Autoregressive Audio-Video Generation",
+              "summary": "Streaming digital humans produce detailed video while continuing speech as new text arrives. High-resolution denoising is costly, and text updates can cause repeated or interrupted speech. We present TaoMate-HD, an autoregressive model for high-resolution audio-video streaming. For each short segment, or chunk, two denoising steps establish coarse video structure at low resolution. A final step refines the video to high resolution, with audio generated throughout the same trajectory. Each stage passes its audiovisual predictions to the same stage of the next chunk as history. Across text updates, the model retains this history to infer what has already been spoken. Continuation training utilizes asymmetric text conditioning, with separate text windows for generation and distillation. Experiments show a 1.6x speedup over direct high-resolution generation with the same model and hardware. Optimized stage-parallel deployment provides a further 1.9x overall speedup over serial progressive generation. Our continuation training reduces character error rate by 11.18 percentage points relative to the baseline. The model also supports hour-long audiovisual generation. Our project page is https://taoliveaigc.github.io/TaoMate-HD.",
+              "organization": {
+                "_id": "6a6205cbc80c71fffa0d91c0",
+                "name": "TaoLiveAIGC",
+                "fullname": "TaoLive AIGC",
+                "avatar": "https://www.gravatar.com/avatar/6ad8c78ff1fe4f98ab8ae0c6fe81f1e4?d=retro&size=100"
+              },
+              "link": "https://huggingface.co/papers/2611.03394",
+              "published_at": "2026-11-05T00:00:00.000Z",
+              "upvotes": 1
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 145,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2611.03394"
+    },
+    {
       "id": "49a842fc8b85178e59b1",
       "title": "The SIMPLE Law for Energy Cost of LLM Inference",
       "content_text": "Generative AI is billed per token, yet tokens are not equally expensive. Each token enters the KV-cache and raises the cost of those that follow, so energy grows non-linearly along a sequence whose tokens look identical. No analytical model states what a token costs, and the most accurate SOTA model is a fit, not a law: it absorbs architecture into fitted coefficients, requiring per-LLM fitting. We derive closed-form expressions of the computational and memory-access complexity of LLM inference…",
@@ -12082,264 +12325,6 @@
         }
       },
       "url": "https://huggingface.co/papers/2609.38879"
-    },
-    {
-      "id": "3647f13421327c0e7333",
-      "title": "LexReward: A Taxonomy-Driven Reward Framework for Legal Language Models",
-      "content_text": "Legal language models require reward signals that capture not only answer correctness but also the multidimensional quality of legal responses. Existing reward methods, however, often rely on coarse-grained holistic judgments, providing limited domain specificity and interpretability. We introduce LexReward, a taxonomy-driven framework for legal reward modeling. LexReward characterizes legal response quality along three complementary dimensions: Style, covering lexical and syntactic quality…",
-      "date_published": "2026-10-05T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "3647f13421327c0e7333",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2609.39071",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-05T04:33:57Z",
-          "data": {
-            "change": "added",
-            "label": "LexReward: A Taxonomy-Driven Reward Framework for Legal Language Models",
-            "item_type": "record",
-            "summary": "added: LexReward: A Taxonomy-Driven Reward Framework for Legal Language Models",
-            "after": {
-              "title": "LexReward: A Taxonomy-Driven Reward Framework for Legal Language Models",
-              "summary": "Legal language models require reward signals that capture not only answer correctness but also the multidimensional quality of legal responses. Existing reward methods, however, often rely on coarse-grained holistic judgments, providing limited domain specificity and interpretability. We introduce LexReward, a taxonomy-driven framework for legal reward modeling. LexReward characterizes legal response quality along three complementary dimensions: Style, covering lexical and syntactic quality; Element, assessing legal subjects, facts, statutes, and decisions; and Chain, evaluating the order, completeness, correctness, and non-redundancy of legal reasoning. For each dimension, we develop rubrics that specify evaluation criteria and quality levels. The resulting rewards are used to construct pairwise preference data for Direct Preference Optimization (DPO) and reward-model training. Experiments show that the rubric-based rewards reliably distinguish legal responses of different quality and that DPO training on the preference data improves performance across all three dimensions. The learned reward models, LexRM, also support effective downstream optimization: each dimension-specific reward model improves policy performance in its corresponding dimension through reinforcement learning, without requiring reference answers at reward time. Dimension-wise analyses further support the effectiveness of the proposed taxonomy and reward construction.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/633fc167a18b735c74e47df0/J585-bvLohTpP0XdVE7RO.png"
-              ],
-              "organization": {
-                "_id": "6904703d1c4c3a34bf765739",
-                "name": "TsinghuaNLP",
-                "fullname": "Tsinghua NLP Group",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/60965a5d206218bf2b0e00ae/4_JDQKsQDyLK0oGegQCl7.png"
-              },
-              "link": "https://huggingface.co/papers/2609.39071",
-              "published_at": "2026-10-05T00:00:00.000Z",
-              "upvotes": 2
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 73,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2609.39071"
-    },
-    {
-      "id": "71ace9a86124fdd7e274",
-      "title": "ProAR: Learning Prospective Reasoning with Autoregressive Video Models",
-      "content_text": "Autoregressive (AR) video models excel at causal generation, but their reliance on next-chunk prediction confines them to a short-sighted, reactive paradigm. This limitation is particularly consequential for reasoning-oriented generation, where achieving a target outcome through valid intermediate states matters more than local visual plausibility. To address this challenge, we propose Learning Prospective Reasoning with Autoregressive Video Models (ProAR), a novel framework that transforms…",
-      "date_published": "2026-10-05T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "71ace9a86124fdd7e274",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2610.03664",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-05T04:33:57Z",
-          "data": {
-            "change": "added",
-            "label": "ProAR: Learning Prospective Reasoning with Autoregressive Video Models",
-            "item_type": "record",
-            "summary": "added: ProAR: Learning Prospective Reasoning with Autoregressive Video Models",
-            "after": {
-              "title": "ProAR: Learning Prospective Reasoning with Autoregressive Video Models",
-              "summary": "Autoregressive (AR) video models excel at causal generation, but their reliance on next-chunk prediction confines them to a short-sighted, reactive paradigm. This limitation is particularly consequential for reasoning-oriented generation, where achieving a target outcome through valid intermediate states matters more than local visual plausibility. To address this challenge, we propose Learning Prospective Reasoning with Autoregressive Video Models (ProAR), a novel framework that transforms autoregressive video generation into a goal-oriented reasoning process. ProAR introduces two key components: (1) To anchor generation to the long-range outcome, we integrate goal-frame prediction into the autoregressive loop via an asymmetric attention mask, enabling the predicted goal frame to guide the generation of intermediate states without being disrupted by them. (2) To guide short-range transitions, we introduce future representation self-alignment to encourage current hidden states to anticipate upcoming temporal dynamics. By leveraging teacher-forcing in AR training, we extract clean future representations in a single forward pass and align current representations with them using a lightweight, training-only predictor. Together, these two mechanisms seamlessly combine explicit, sparse target supervision with implicit, dense step-wise guidance, promoting coherent, goal-directed reasoning progress with modest computational cost. Experiments show that ProAR's complementary components consistently improve performance across diverse visual reasoning benchmarks. The framework proves highly training-efficient, surpassing fully trained standard AR baselines using only 25% of the training steps. This paradigm also demonstrates promising applicability to embodied reasoning tasks.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/687912c6333c3bc283c92840/UlR1Lq0ZznxxAmJUBDc4q.jpeg"
-              ],
-              "organization": {
-                "_id": "642bbf2d09d8df6721eeddb5",
-                "name": "ucdavis",
-                "fullname": "UC Davis",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/642bbe935edcc5760cb0daf1/tq05HDRrfpezK0HSMTA_n.jpeg"
-              },
-              "link": "https://huggingface.co/papers/2610.03664",
-              "published_at": "2026-10-05T00:00:00.000Z",
-              "upvotes": 3
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 73,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2610.03664"
-    },
-    {
-      "id": "c67eccc942cfa2e0e3c4",
-      "title": "Looping Beyond Twice: A Scalable Recipe for Looped Mixture-of-Experts",
-      "content_text": "Looped Transformers introduce recurrent depth as a new scaling axis for LLMs: by repeatedly applying shared Transformer blocks, they increase effective depth without increasing parameter count. However, the benefits of looping remain unclear for large MoE LLMs under FLOPs-matched comparisons. The main reason is that the gains from additional iterations diminish quickly and can even turn into degradation, so the extra FLOPs spent on looping yield little substantial improvement. Consequently…",
-      "date_published": "2026-10-05T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "c67eccc942cfa2e0e3c4",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2610.01153",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-10-05T04:33:57Z",
-          "data": {
-            "change": "added",
-            "label": "Looping Beyond Twice: A Scalable Recipe for Looped Mixture-of-Experts",
-            "item_type": "record",
-            "summary": "added: Looping Beyond Twice: A Scalable Recipe for Looped Mixture-of-Experts",
-            "after": {
-              "title": "Looping Beyond Twice: A Scalable Recipe for Looped Mixture-of-Experts",
-              "summary": "Looped Transformers introduce recurrent depth as a new scaling axis for LLMs: by repeatedly applying shared Transformer blocks, they increase effective depth without increasing parameter count. However, the benefits of looping remain unclear for large MoE LLMs under FLOPs-matched comparisons. The main reason is that the gains from additional iterations diminish quickly and can even turn into degradation, so the extra FLOPs spent on looping yield little substantial improvement. Consequently, prior work typically settles on two loops. We identify two main obstacles to scaling looped MoE. First, looping inherits and amplifies the curse of depth: hidden-state variance grows with each iteration as residual updates accumulate, which destabilizes deep recurrence and causes representations to drift. Second, looped MoE suffers from expert selection collapse: routers repeatedly select the same experts across loops, so extra iterations add computation without adding computational diversity. Guided by this diagnosis, we propose LOOM, built on a single principle: each loop should contribute new computation while keeping the recurrent state stable. LOOM stabilizes recurrence by scaling residual updates to bound variance growth and re-injecting the input embedding at every loop, and diversifies it through per-loop routers that engage different experts and a Looping Residual that carries earlier outputs forward. Experiments across 100M-1.7B models show stable scaling to 9-12 loops. Under near-iso-FLOP, the 700M model performs best at 5 loops, reducing perplexity from 18.36 to 16.54 and improving average zero-shot accuracy from 38.84% to 39.53% over the non-looped baseline. Without FLOP matching, the 1.7B model trained on 60B tokens peaks at 9 loops, reducing perplexity from 9.62 to 7.77 and improving average zero-shot accuracy from 42.4% to 47.7%. Code is available https://github.com/hed-ucas/LOOM.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/65b04d2291e63920a7898c9e/6DxzI83QMPWpOAbmq1kDh.gif"
-              ],
-              "organization": {
-                "_id": "638df552a11654155baca408",
-                "name": "Intelligent-Systems",
-                "fullname": "Max Planck Institute for Intelligent Systems",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1670247618868-6183d0b249ef1d984699e4a3.jpeg"
-              },
-              "link": "https://huggingface.co/papers/2610.01153",
-              "published_at": "2026-10-05T00:00:00.000Z",
-              "upvotes": 1
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 73,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2610.01153"
     }
   ]
 }
