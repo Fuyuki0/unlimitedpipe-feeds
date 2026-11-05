@@ -9,6 +9,98 @@
   },
   "items": [
     {
+      "id": "ba38c0105dac69b37bd7",
+      "title": "Fashion Supply Chain (Code and Adjudicator) Bill: 2nd reading (Commons)",
+      "content_text": "The Fashion Supply Chain (Code and Adjudicator) Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+      "date_published": "2026-11-05T11:45:44Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ba38c0105dac69b37bd7",
+          "source": "web",
+          "type": "change",
+          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25633.0",
+          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+          "timestamp": null,
+          "observed_at": "2026-11-05T11:55:50Z",
+          "data": {
+            "change": "added",
+            "label": "Fashion Supply Chain (Code and Adjudicator) Bill: 2nd reading (Commons)",
+            "item_type": "record",
+            "summary": "added: Fashion Supply Chain (Code and Adjudicator) Bill: 2nd reading (Commons)",
+            "after": {
+              "title": "Fashion Supply Chain (Code and Adjudicator) Bill: 2nd reading (Commons)",
+              "summary": "The Fashion Supply Chain (Code and Adjudicator) Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+              "link": "https://bills.parliament.uk/bills/4322",
+              "published_at": "2026-11-05T11:45:44Z",
+              "step": 25633.0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+            "content_type": "application/json",
+            "elapsed_ms": 30,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(currentStage.description)"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "stage=currentStage.description",
+                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
+                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
+                  "link=\"https://bills.parliament.uk/bills/\" + billId",
+                  "published_at=date(lastUpdate)",
+                  "step=\"\" + billId + \" \" + currentStage.id"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "step"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "step",
+                "namespace": "uk-bills",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://bills.parliament.uk/bills/4322"
+    },
+    {
       "id": "4d4dd4c49ccad6c40225",
       "title": "City of London (Markets) Bill: Report stage (Commons)",
       "content_text": "The City of London (Markets) Bill reached Report stage in the Commons; it started in the Commons. UK Parliament bills service.",
