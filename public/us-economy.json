@@ -1,13 +1,114 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic data releases",
-  "home_page_url": "https://apps.bea.gov/rss/rss.xml",
+  "home_page_url": "https://www.dol.gov/rss/releases.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "386c05a51a9be4f66652",
+      "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
+      "content_text": "In the week ending October 31, the advance figure for seasonally adjusted initial claims was 189,000, a decrease of 6,000 from the previous week's revised level. The previous week's level was revised up by 1,000 from 194,000 to 195,000. The 4-week moving average was 194,750, a decrease of 2,250 from the previous week's revised average. The previous week's average was revised up by 250 from 196,750 to 197,000.",
+      "date_published": "2026-11-05T12:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "386c05a51a9be4f66652",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.dol.gov/newsroom/releases/eta/eta20261105",
+          "source_url": "https://www.dol.gov/rss/releases.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-05T19:43:54Z",
+          "data": {
+            "change": "added",
+            "label": "Labor Department: Unemployment Insurance Weekly Claims Report",
+            "item_type": "entry",
+            "summary": "added: Labor Department: Unemployment Insurance Weekly Claims Report",
+            "after": {
+              "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
+              "link": "http://www.dol.gov/newsroom/releases/eta/eta20261105",
+              "id": "http://www.dol.gov/newsroom/releases/eta/eta20261105",
+              "author": "",
+              "published_at": "2026-11-05T12:00:00Z",
+              "updated_at": "2026-11-05T12:00:00Z",
+              "summary": "In the week ending October 31, the advance figure for seasonally adjusted initial claims was 189,000, a decrease of 6,000 from the previous week's revised level. The previous week's level was revised up by 1,000 from 194,000 to 195,000. The 4-week moving average was 194,750, a decrease of 2,250 from the previous week's revised average. The previous week's average was revised up by 250 from 196,750 to 197,000.",
+              "categories": [],
+              "feed": {
+                "title": "DOL News Releases and Briefs",
+                "url": "http://www.dol.gov/",
+                "feed_url": "https://www.dol.gov/rss/releases.xml"
+              },
+              "agency": "Labor Department"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.dol.gov/rss/releases.xml",
+            "elapsed_ms": 89,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.dol.gov/newsroom/releases/eta/eta20261105"
+    },
     {
       "id": "f4b113a3c6aa78f14934",
       "title": "BEA: U.S. International Trade in Goods and Services, September 2026",
