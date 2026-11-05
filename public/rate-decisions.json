@@ -1,13 +1,116 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central bank interest rate decisions",
-  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "4b4a47f3f05707a239f9",
+      "title": "Bank of England rate decision: Bank rate increased to 4% - November 2026 Monetary Policy Summary and Minutes",
+      "content_text": "The Bank of England’s Monetary Policy Committee is responsible for making decisions about Bank Rate.",
+      "date_published": "2026-11-05T12:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4b4a47f3f05707a239f9",
+          "source": "rss",
+          "type": "change",
+          "key": "{E89A63B6-42B4-49CE-ABC6-297BD307E551}",
+          "source_url": "https://www.bankofengland.co.uk/rss/news",
+          "timestamp": null,
+          "observed_at": "2026-11-05T12:01:27Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of England rate decision: Bank rate increased to 4% - November 2026 Monetary Policy Summary and Minutes",
+            "item_type": "entry",
+            "summary": "added: Bank of England rate decision: Bank rate increased to 4% - November 2026 Monetary Policy Summary and Minutes",
+            "after": {
+              "title": "Bank of England rate decision: Bank rate increased to 4% - November 2026 Monetary Policy Summary and Minutes",
+              "link": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+              "id": "{E89A63B6-42B4-49CE-ABC6-297BD307E551}",
+              "author": null,
+              "published_at": "2026-11-05T12:00:00Z",
+              "updated_at": "2026-11-05T12:00:00Z",
+              "summary": "The Bank of England’s Monetary Policy Committee is responsible for making decisions about Bank Rate.",
+              "categories": [],
+              "feed": {
+                "title": "News",
+                "url": "https://www.bankofengland.co.uk/rss/news",
+                "feed_url": "https://www.bankofengland.co.uk/rss/news"
+              },
+              "bank": "Bank of England"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.bankofengland.co.uk/rss/news",
+            "elapsed_ms": 642,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "title matches \"(?i)FOMC statement|monetary policy decision|bank rate|statement on monetary policy|policy (interest )?rate|monetary policy statement|resolution of the monetary policy committee|changes to the (key )?(interest )?rates\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "bank=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "bank=replace(replace(replace(replace(bank, \"^federalreserve\\\\.gov$\", \"Federal Reserve\"), \"^ecb\\\\.europa\\\\.eu$\", \"ECB\"), \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\"), \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "bank=replace(replace(replace(bank, \"^bankofcanada\\\\.ca$\", \"Bank of Canada\"), \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\"), \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "title=bank + \" rate decision: \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "rate-decisions",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026"
+    },
     {
       "id": "ee56ee80191ac182dbbb",
       "title": "Bank of Japan rate decision: Statement on Monetary Policy",
