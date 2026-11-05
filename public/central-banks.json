@@ -1,13 +1,125 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "b30f46f5d2777b153f4e",
+      "title": "Federal Reserve: Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+      "content_text": "Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+      "date_published": "2026-11-05T16:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "b30f46f5d2777b153f4e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261105a.htm",
+          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-05T16:42:55Z",
+          "data": {
+            "change": "added",
+            "label": "Federal Reserve: Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+            "item_type": "entry",
+            "summary": "added: Federal Reserve: Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+            "after": {
+              "title": "Federal Reserve: Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+              "link": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261105a.htm",
+              "id": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261105a.htm",
+              "author": null,
+              "published_at": "2026-11-05T16:00:00Z",
+              "updated_at": "2026-11-05T16:00:00Z",
+              "summary": "Federal Reserve Board announces termination of enforcement action with Allegiant United Holdings, LLC, Nano Financial Holdings, Inc., and Nano Banc",
+              "categories": [
+                "Enforcement Actions"
+              ],
+              "feed": {
+                "title": "FRB: Press Release - All Releases",
+                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
+                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
+              },
+              "outlet": "Federal Reserve"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+            "elapsed_ms": 83,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261105a.htm",
+      "tags": [
+        "Enforcement Actions"
+      ]
+    },
     {
       "id": "ee3edfd3b386dc16c57a",
       "title": "Reserve Bank of India: RBI to conduct 3-day Variable Rate Reverse Repo (VRRR) auction under LAF on November 06, 2026",
@@ -15990,113 +16102,6 @@
         }
       },
       "url": "https://www.boj.or.jp/en/statistics/dl/loan/yaku/yaku2608.pdf"
-    },
-    {
-      "id": "7a8130f275d9a441672a",
-      "title": "Bank of Japan: Tankan (Sept.): Comprehensive Data Set",
-      "content_text": "Bank of Japan: Tankan (Sept.): Comprehensive Data Set",
-      "date_published": "2026-10-01T23:50:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7a8130f275d9a441672a",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.boj.or.jp/en/statistics/tk/tankan09b.htm",
-          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-          "timestamp": null,
-          "observed_at": "2026-10-04T23:50:57Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of Japan: Tankan (Sept.): Comprehensive Data Set",
-            "item_type": "entry",
-            "summary": "added: Bank of Japan: Tankan (Sept.): Comprehensive Data Set",
-            "after": {
-              "title": "Bank of Japan: Tankan (Sept.): Comprehensive Data Set",
-              "link": "https://www.boj.or.jp/en/statistics/tk/tankan09b.htm",
-              "id": "https://www.boj.or.jp/en/statistics/tk/tankan09b.htm",
-              "author": null,
-              "published_at": "2026-10-01T23:50:00Z",
-              "updated_at": "2026-10-01T23:50:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "Bank of Japan：RSS",
-                "url": "https://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
-                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
-              },
-              "outlet": "Bank of Japan"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-            "elapsed_ms": 215,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.boj.or.jp/en/statistics/tk/tankan09b.htm"
     }
   ]
 }
