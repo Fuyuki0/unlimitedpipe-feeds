@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "a851fe821d58ac7ab917",
+      "title": "M3.7 earthquake in Yunnan, China",
+      "content_text": "At 2026-11-05 16:59:32 Thai time (UTC+7), latitude 22.174, longitude 100.960, magnitude 3.7",
+      "date_published": "2026-11-05T10:07:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a851fe821d58ac7ab917",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17375",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-05T10:08:43Z",
+          "data": {
+            "change": "added",
+            "label": "M3.7 earthquake in Yunnan, China",
+            "item_type": "entry",
+            "summary": "added: M3.7 earthquake in Yunnan, China",
+            "after": {
+              "title": "M3.7 earthquake in Yunnan, China",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17375",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17375",
+              "author": null,
+              "published_at": "2026-11-05T10:07:05Z",
+              "updated_at": "2026-11-05T10:07:05Z",
+              "summary": "At 2026-11-05 16:59:32 Thai time (UTC+7), latitude 22.174, longitude 100.960, magnitude 3.7",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.7",
+              "place": "Yunnan, China"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1509,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17375"
+    },
+    {
       "id": "f75820ddc13d75da5721",
       "title": "M1.9 earthquake in Tambon Kuan, Amphoe Pong, Phayao",
       "content_text": "At 2026-11-05 15:22:18 Thai time (UTC+7), latitude 19.113, longitude 100.311, magnitude 1.9",
