@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "3b99a6fe8bdfd9798c6c",
+      "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-05",
+      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/369 for Sheveluch, Russia, at 2026-11-05 15:37 UTC: ash reported or expected in the air, a hazard to aircraft.",
+      "date_published": "2026-11-05T15:37:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3b99a6fe8bdfd9798c6c",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sheveluch 2026-11-05",
+          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+          "timestamp": null,
+          "observed_at": "2026-11-05T15:46:11Z",
+          "data": {
+            "change": "added",
+            "label": "Volcanic ash from Sheveluch (Russia) on 2026-11-05",
+            "item_type": "record",
+            "summary": "added: Volcanic ash from Sheveluch (Russia) on 2026-11-05",
+            "after": {
+              "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-05",
+              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/369 for Sheveluch, Russia, at 2026-11-05 15:37 UTC: ash reported or expected in the air, a hazard to aircraft.",
+              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261105_30027000_0369_Text.html",
+              "published_at": "2026-11-05T15:37:00Z",
+              "day_key": "Sheveluch 2026-11-05"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+            "content_type": "text/html",
+            "elapsed_ms": 190,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "name=title(lower(trim(volcano)))",
+                  "place=title(lower(trim(area)))",
+                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
+                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
+                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
+                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
+                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "volcanoes-vaac",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261105_30027000_0369_Text.html"
+    },
+    {
       "id": "cf0c441a9371d4dd6e35",
       "title": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-11-05",
       "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/347 for Sakurajima (Aira Caldera), Japan, at 2026-11-05 13:35 UTC: ash reported or expected in the air, a hazard to aircraft.",
@@ -9092,70 +9185,6 @@
               "published_at": "2026-09-24T11:03:38Z",
               "updated_at": "2026-09-24T11:03:38Z",
               "summary": "The Servicio Nacional de Geología y Minería (SERNAGEOMIN) and the Servicio Geológico Minero Argentino (SEGEMAR) reported that at around 1410 on 18 September a dense ash plume rose 380 m above Nevados de Chillán?s summit and drifted SSE. On 22 September SERNAGEOMIN reported that seismicity indicated eruptive activity; weather conditions prevented views of the summit, though tephra deposits on the flanks were visible. A long-period earthquake associated with fluid movement was recorded on 23 September, but weather conditions again prevented visual observations of the summit. The Alert Level remained at Yellow (the second lowest level on a four-color scale) and the public was warned that an eruption may impact areas within 1 km of the active crater. The Sistema y Servicio Nacional de Prevención y Repuesta Ante Desastres (SENAPRED) maintained an ?Early Preventive Alert? for Pinto and Coihueco.\nSources: Servicio Geológico Minero Argentino (SEGEMAR),Servicio Nacional de Geología y Minería (SERNAGEOMIN),Sistema y Servicio Nacional de Prevención y Repuesta Ante Desastres (SENAPRED)",
-              "categories": [],
-              "feed": {
-                "title": "Smithsonian / USGS Weekly Volcanic Activity Report",
-                "url": "https://volcano.si.edu/reports_weekly.cfm",
-                "feed_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-            "elapsed_ms": 186,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.32"
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "namespace": "volcanoes",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://volcano.si.edu/reports_weekly.cfm"
-    },
-    {
-      "id": "66ec370b8a7ea493a893",
-      "title": "Tokachidake (Japan) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-      "content_text": "The Japan Meteorological Agency (JMA) reported that volcanic activity at Tokachidake continued to intensify. Inflation at relatively shallow depths began to be detected in March. Beginning in April there was an increase in sulfur dioxide emissions, a higher frequency of diffuse volcanic emissions and crater glow observed in monitoring cameras, and slightly elevated seismic activity near and around 62-2 Crater. Starting in May volcanic plumes became more frequent and emissions at the Furikozawa…",
-      "date_published": "2026-09-24T11:03:38Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "66ec370b8a7ea493a893",
-          "source": "rss",
-          "type": "change",
-          "key": "https://volcano.si.edu/reports_weekly.cfm#vn_285050",
-          "source_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-          "timestamp": null,
-          "observed_at": "2026-10-01T20:43:50Z",
-          "data": {
-            "change": "added",
-            "label": "Tokachidake (Japan) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "item_type": "entry",
-            "summary": "added: Tokachidake (Japan) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "after": {
-              "title": "Tokachidake (Japan) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-              "link": "https://volcano.si.edu/reports_weekly.cfm",
-              "id": "https://volcano.si.edu/reports_weekly.cfm#vn_285050",
-              "author": null,
-              "published_at": "2026-09-24T11:03:38Z",
-              "updated_at": "2026-09-24T11:03:38Z",
-              "summary": "The Japan Meteorological Agency (JMA) reported that volcanic activity at Tokachidake continued to intensify. Inflation at relatively shallow depths began to be detected in March. Beginning in April there was an increase in sulfur dioxide emissions, a higher frequency of diffuse volcanic emissions and crater glow observed in monitoring cameras, and slightly elevated seismic activity near and around 62-2 Crater. Starting in May volcanic plumes became more frequent and emissions at the Furikozawa fumarole group rose higher. Subsequently, very small-scale eruptions occurred near the 62-2 Crater on 22 July, 5 August, and 6 August. Additionally, there was an increase in large-amplitude volcanic earthquakes originating near the edifice; two occurred on 12 September, bringing the total count over the preceding 30 days to five. At 0930 on 12 September the Alert Level was raised to 3 (on a scale of 1-5) and the public was warned to be cautious within a 3 km radius.\nSource: Japan Meteorological Agency (JMA)",
               "categories": [],
               "feed": {
                 "title": "Smithsonian / USGS Weekly Volcanic Activity Report",
