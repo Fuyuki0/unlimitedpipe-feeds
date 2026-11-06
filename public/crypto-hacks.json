@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "406ae9cab4f18d5a047c",
+      "title": "Drop: $4.4M lost (governance)",
+      "content_text": "Malicious Proposal. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-09-22T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "406ae9cab4f18d5a047c",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Drop 1790035200",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-06T18:15:04Z",
+          "data": {
+            "change": "added",
+            "label": "Drop: $4.4M lost (governance)",
+            "item_type": "record",
+            "summary": "added: Drop: $4.4M lost (governance)",
+            "after": {
+              "title": "Drop: $4.4M lost (governance)",
+              "summary": "Malicious Proposal. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-09-22T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Drop 1790035200",
+              "chain": [
+                "Neutron"
+              ],
+              "amount": 4400000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 51,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "8ab99380cd42ec52397e",
       "title": "GarudaDefi: hacked, amount not disclosed (key compromise)",
       "content_text": "Private Key Compromised. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10761,115 +10870,6 @@
                 "Constellation"
               ],
               "amount": 90750
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "902750192ed58e3f20ec",
-      "title": "Nesa: $50.0M lost (token & share accounting)",
-      "content_text": "published_at 2026-08-24T00:00:00Z · amount 50000000",
-      "date_published": "2026-08-24T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "902750192ed58e3f20ec",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Nesa 1787529600",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Nesa: $50.0M lost (token & share accounting)",
-            "item_type": "record",
-            "summary": "added: Nesa: $50.0M lost (token & share accounting)",
-            "after": {
-              "title": "Nesa: $50.0M lost (token & share accounting)",
-              "summary": "Arithmetic Error. Target: Chain.",
-              "published_at": "2026-08-24T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Nesa 1787529600",
-              "chain": [
-                "Nesa"
-              ],
-              "amount": 50000000
             }
           },
           "metadata": {
