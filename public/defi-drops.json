@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "4279bc58d8c19e24515a",
+      "title": "Kodiak Islands TVL down 51% in a day, to $17.7M",
+      "content_text": "Kodiak Islands (Liquidity Manager) holds $17.7M after a 50.9% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4279bc58d8c19e24515a",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#kodiak-islands 2026-11-06",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-06T09:43:30Z",
+          "data": {
+            "change": "added",
+            "label": "Kodiak Islands TVL down 51% in a day, to $17.7M",
+            "item_type": "record",
+            "summary": "added: Kodiak Islands TVL down 51% in a day, to $17.7M",
+            "after": {
+              "title": "Kodiak Islands TVL down 51% in a day, to $17.7M",
+              "summary": "Kodiak Islands (Liquidity Manager) holds $17.7M after a 50.9% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/kodiak-islands",
+              "published_at": "2026-11-06T00:00:00Z",
+              "day_key": "kodiak-islands 2026-11-06"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 90,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-06T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-06\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/kodiak-islands"
+    },
+    {
       "id": "403fb1f60ff930317fb4",
       "title": "Dolomite TVL down 31% in a day, to $127M",
       "content_text": "Dolomite (Lending) holds $127M after a 31.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
