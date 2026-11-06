@@ -9,6 +9,109 @@
   },
   "items": [
     {
+      "id": "5889efd0203d548c0c56",
+      "title": "Kilauea: Volcano activity notice, 2026-11-06",
+      "content_text": "Volcano activity notice from the Hawaiian Volcano Observatory (USGS) for Kilauea, sent 2026-11-06 04:21:58 UTC.",
+      "date_published": "2026-11-06T04:21:58Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "5889efd0203d548c0c56",
+          "source": "web",
+          "type": "change",
+          "key": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices#DOI-USGS-HVO-2026-11-06T04:05:40+00:00",
+          "source_url": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices",
+          "timestamp": null,
+          "observed_at": "2026-11-06T04:23:19Z",
+          "data": {
+            "change": "added",
+            "label": "Kilauea: Volcano activity notice, 2026-11-06",
+            "item_type": "record",
+            "summary": "added: Kilauea: Volcano activity notice, 2026-11-06",
+            "after": {
+              "title": "Kilauea: Volcano activity notice, 2026-11-06",
+              "summary": "Volcano activity notice from the Hawaiian Volcano Observatory (USGS) for Kilauea, sent 2026-11-06 04:21:58 UTC.",
+              "link": "https://volcanoes.usgs.gov/hans-public/notice/DOI-USGS-HVO-2026-11-06T04:05:40+00:00",
+              "published_at": "2026-11-06T04:21:58Z",
+              "id": "DOI-USGS-HVO-2026-11-06T04:05:40+00:00"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices",
+            "content_type": "application/json",
+            "elapsed_ms": 102,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "notice_category != \"Scheduled Update\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(replace(replace(notice_type_title, \"^VAN/VONA$\", \"Volcano activity notice\"), \"^Status Report$\", \"Status report\"), \"^Information Statement$\", \"Information statement\")",
+                  "where=replace(volcanoes, \"^\\\\s*$\", obs_fullname)",
+                  "title=where + \": \" + kind + \", \" + replace(sent_utc, \" .*$\", \"\")",
+                  "summary=kind + \" from the \" + obs_fullname + \" (USGS)\" + replace(\" for \" + volcanoes, \"^ for \\\\s*$\", \"\") + \", sent \" + sent_utc + \" UTC.\"",
+                  "published_at=replace(sent_utc, \" \", \"T\") + \"Z\"",
+                  "link=notice_url",
+                  "id=notice_identifier"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "us-volcano-alerts",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://volcanoes.usgs.gov/hans-public/notice/DOI-USGS-HVO-2026-11-06T04:05:40+00:00"
+    },
+    {
       "id": "34c7fc82933d31e64e73",
       "title": "Kilauea: Volcano activity notice, 2026-11-06",
       "content_text": "Volcano activity notice from the Hawaiian Volcano Observatory (USGS) for Kilauea, sent 2026-11-06 00:34:07 UTC.",
