@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "403fb1f60ff930317fb4",
+      "title": "Dolomite TVL down 31% in a day, to $127M",
+      "content_text": "Dolomite (Lending) holds $127M after a 31.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "403fb1f60ff930317fb4",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#dolomite 2026-11-06",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-06T00:41:06Z",
+          "data": {
+            "change": "added",
+            "label": "Dolomite TVL down 31% in a day, to $127M",
+            "item_type": "record",
+            "summary": "added: Dolomite TVL down 31% in a day, to $127M",
+            "after": {
+              "title": "Dolomite TVL down 31% in a day, to $127M",
+              "summary": "Dolomite (Lending) holds $127M after a 31.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/dolomite",
+              "published_at": "2026-11-06T00:00:00Z",
+              "day_key": "dolomite 2026-11-06"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 118,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-06T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-06\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/dolomite"
+    },
+    {
       "id": "cbbe2c2f9724b9ec1975",
       "title": "Circle Bitcoin TVL down 25% in a day, to $131.5M",
       "content_text": "Circle Bitcoin (Bridge) holds $131.5M after a 25.1% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
