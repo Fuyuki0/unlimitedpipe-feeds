@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "c7c09002efbac169b233",
+      "title": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+      "content_text": "We are experiencing elevated launch failures in the US-WEST-2 Region",
+      "date_published": "2026-11-06T22:51:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c7c09002efbac169b233",
+          "source": "rss",
+          "type": "change",
+          "key": "https://status.aws.amazon.com/#ec2-us-west-2_1794005465",
+          "source_url": "https://status.aws.amazon.com/rss/all.rss",
+          "timestamp": null,
+          "observed_at": "2026-11-06T22:53:23Z",
+          "data": {
+            "change": "added",
+            "label": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+            "item_type": "entry",
+            "summary": "added: AWS: Service impact: Elevated Launch Failures (us-west-2)",
+            "after": {
+              "title": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+              "link": "https://status.aws.amazon.com/",
+              "id": "https://status.aws.amazon.com/#ec2-us-west-2_1794005465",
+              "author": null,
+              "published_at": "2026-11-06T22:51:05Z",
+              "updated_at": "2026-11-06T22:51:05Z",
+              "summary": "We are experiencing elevated launch failures in the US-WEST-2 Region",
+              "categories": [],
+              "feed": {
+                "title": "Amazon Web Services Service Status",
+                "url": "https://status.aws.amazon.com/",
+                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://status.aws.amazon.com/rss/all.rss",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (summary contains \"scheduled maintenance\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
+                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "cloud-status",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://status.aws.amazon.com/"
+    },
+    {
       "id": "d5684bc582450f71693c",
       "title": "OpenAI: Elevated error rates with Brex Cards",
       "content_text": "Status: Identified\nInvestigating — We’re seeing payment declines on some U.S. business Mastercards, including some Brex cards. For API customers, this can prevent automatic recharges and one-time credit purchases. If your prepaid balance runs out, your API requests may fail.\nIf you use one of these cards, we recommend adding a card from a different issuer before your next payment, even if you haven’t seen a decline. If an API credit purchase has already failed, use the new card to retry the…",
@@ -8966,97 +9057,6 @@
             "status": 200,
             "final_url": "https://status.aws.amazon.com/rss/all.rss",
             "elapsed_ms": 316,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.55"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.55",
-              "args": {
-                "expr": "not (summary contains \"scheduled maintenance\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.55",
-              "args": {
-                "assign": [
-                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
-                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.55",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.55",
-              "args": {
-                "namespace": "cloud-status",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://status.aws.amazon.com/"
-    },
-    {
-      "id": "5e95f44eef22a37c1438",
-      "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-      "content_text": "Our efforts to mitigate the elevated packet loss with a single Availability Zone (eus2-az1) in the EU-SOUTH-2 Region is still underway. We are seeing some signs of improvement as a result of multiple parallel efforts. We continue to work to confirm root cause and fully mitigate the issue. While we currently do not have an estimate for how long our actions will take, we will keep you informed of our progress and provide you with another update by 11:00 AM PDT or sooner as new information becomes…",
-      "date_published": "2026-10-04T17:06:14Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "5e95f44eef22a37c1438",
-          "source": "rss",
-          "type": "change",
-          "key": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791133574",
-          "source_url": "https://status.aws.amazon.com/rss/all.rss",
-          "timestamp": null,
-          "observed_at": "2026-10-04T17:08:14Z",
-          "data": {
-            "change": "added",
-            "label": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-            "item_type": "entry",
-            "summary": "added: AWS: Service impact: Elevated packet loss (eu-south-2)",
-            "after": {
-              "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-              "link": "https://status.aws.amazon.com/",
-              "id": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791133574",
-              "author": null,
-              "published_at": "2026-10-04T17:06:14Z",
-              "updated_at": "2026-10-04T17:06:14Z",
-              "summary": "Our efforts to mitigate the elevated packet loss with a single Availability Zone (eus2-az1) in the EU-SOUTH-2 Region is still underway. We are seeing some signs of improvement as a result of multiple parallel efforts. We continue to work to confirm root cause and fully mitigate the issue. While we currently do not have an estimate for how long our actions will take, we will keep you informed of our progress and provide you with another update by 11:00 AM PDT or sooner as new information becomes available.",
-              "categories": [],
-              "feed": {
-                "title": "Amazon Web Services Service Status",
-                "url": "https://status.aws.amazon.com/",
-                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://status.aws.amazon.com/rss/all.rss",
-            "elapsed_ms": 200,
             "not_modified": false,
             "method": "rss20"
           },
