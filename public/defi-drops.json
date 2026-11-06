@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "21c5b30d72795cdd1746",
+      "title": "Jupiter Lend DEX TVL down 31% in a day, to $23.9M",
+      "content_text": "Jupiter Lend DEX (Dexs) holds $23.9M after a 31.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "21c5b30d72795cdd1746",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#jupiter-lend-dex 2026-11-06",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-06T20:44:28Z",
+          "data": {
+            "change": "added",
+            "label": "Jupiter Lend DEX TVL down 31% in a day, to $23.9M",
+            "item_type": "record",
+            "summary": "added: Jupiter Lend DEX TVL down 31% in a day, to $23.9M",
+            "after": {
+              "title": "Jupiter Lend DEX TVL down 31% in a day, to $23.9M",
+              "summary": "Jupiter Lend DEX (Dexs) holds $23.9M after a 31.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/jupiter-lend-dex",
+              "published_at": "2026-11-06T00:00:00Z",
+              "day_key": "jupiter-lend-dex 2026-11-06"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 71,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-06T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-06\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/jupiter-lend-dex"
+    },
+    {
       "id": "00bb7ad9beef374b85c3",
       "title": "Rysk V12 TVL down 48% in a day, to $26.8M",
       "content_text": "Rysk V12 (Options Vault) holds $26.8M after a 47.9% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
