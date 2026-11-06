@@ -1,13 +1,253 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic indicators (FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-07&coed=2026-11-06",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-07-09&coed=2026-11-06",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "d3a4bb65e55d1cef188a",
+      "title": "US jobs report: payrolls change: +165,000 jobs (2026-10)",
+      "content_text": "US jobs report: payrolls change for 2026-10, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-10-01T12:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "d3a4bb65e55d1cef188a",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-07-09&coed=2026-11-06#PAYEMS 2026-10-01",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-07-09&coed=2026-11-06",
+          "timestamp": null,
+          "observed_at": "2026-11-06T15:52:34Z",
+          "data": {
+            "change": "added",
+            "label": "US jobs report: payrolls change: +165,000 jobs (2026-10)",
+            "item_type": "record",
+            "summary": "added: US jobs report: payrolls change: +165,000 jobs (2026-10)",
+            "after": {
+              "title": "US jobs report: payrolls change: +165,000 jobs (2026-10)",
+              "summary": "US jobs report: payrolls change for 2026-10, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/PAYEMS",
+              "published_at": "2026-10-01T12:30:00Z",
+              "key": "PAYEMS 2026-10-01"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-07-09&coed=2026-11-06",
+            "content_type": "application/csv",
+            "elapsed_ms": 362,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^-?[\\\\d.]+$\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
+                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
+                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
+                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
+                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
+                  "title=name + \": \" + shown + \" (\" + period + \")\"",
+                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T12:30:00Z\"",
+                  "key=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "key"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "key",
+                "namespace": "us-indicators",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/PAYEMS"
+    },
+    {
+      "id": "05f6d39c2ce77ee7822b",
+      "title": "US unemployment rate: 4.1% (2026-10)",
+      "content_text": "US unemployment rate for 2026-10, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-10-01T12:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "05f6d39c2ce77ee7822b",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=2026-07-09&coed=2026-11-06#UNRATE 2026-10-01",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=2026-07-09&coed=2026-11-06",
+          "timestamp": null,
+          "observed_at": "2026-11-06T15:52:34Z",
+          "data": {
+            "change": "added",
+            "label": "US unemployment rate: 4.1% (2026-10)",
+            "item_type": "record",
+            "summary": "added: US unemployment rate: 4.1% (2026-10)",
+            "after": {
+              "title": "US unemployment rate: 4.1% (2026-10)",
+              "summary": "US unemployment rate for 2026-10, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/UNRATE",
+              "published_at": "2026-10-01T12:30:00Z",
+              "key": "UNRATE 2026-10-01"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=2026-07-09&coed=2026-11-06",
+            "content_type": "application/csv",
+            "elapsed_ms": 371,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^-?[\\\\d.]+$\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
+                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
+                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
+                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
+                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
+                  "title=name + \": \" + shown + \" (\" + period + \")\"",
+                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T12:30:00Z\"",
+                  "key=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "key"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "key",
+                "namespace": "us-indicators",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/UNRATE"
+    },
     {
       "id": "b4f97db496318fdd01ce",
       "title": "US 30-year mortgage rate: 7.18% (week of 2026-11-05)",
@@ -11767,246 +12007,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/GASREGW"
-    },
-    {
-      "id": "26a30fc62249bc63093b",
-      "title": "US weekly jobless claims: 207,000 new claims (week ending 2026-09-05)",
-      "content_text": "US weekly jobless claims for week ending 2026-09-05, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-09-05T12:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "26a30fc62249bc63093b",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=2026-09-05&coed=2026-10-05#ICSA 2026-09-05",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=2026-09-05&coed=2026-10-05",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:00:17Z",
-          "data": {
-            "change": "added",
-            "label": "US weekly jobless claims: 207,000 new claims (week ending 2026-09-05)",
-            "item_type": "record",
-            "summary": "added: US weekly jobless claims: 207,000 new claims (week ending 2026-09-05)",
-            "after": {
-              "title": "US weekly jobless claims: 207,000 new claims (week ending 2026-09-05)",
-              "summary": "US weekly jobless claims for week ending 2026-09-05, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/ICSA",
-              "published_at": "2026-09-05T12:30:00Z",
-              "key": "ICSA 2026-09-05"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=2026-09-05&coed=2026-10-05",
-            "content_type": "application/csv",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^-?[\\\\d.]+$\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
-                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
-                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
-                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
-                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
-                  "title=name + \": \" + shown + \" (\" + period + \")\"",
-                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T12:30:00Z\"",
-                  "key=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "key"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "key",
-                "namespace": "us-indicators",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/ICSA"
-    },
-    {
-      "id": "06e27d87c58c24d99370",
-      "title": "US jobs report: payrolls change: +29,000 jobs (2026-09)",
-      "content_text": "US jobs report: payrolls change for 2026-09, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-09-01T12:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "06e27d87c58c24d99370",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-06-07&coed=2026-10-05#PAYEMS 2026-09-01",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-06-07&coed=2026-10-05",
-          "timestamp": null,
-          "observed_at": "2026-10-05T00:00:17Z",
-          "data": {
-            "change": "added",
-            "label": "US jobs report: payrolls change: +29,000 jobs (2026-09)",
-            "item_type": "record",
-            "summary": "added: US jobs report: payrolls change: +29,000 jobs (2026-09)",
-            "after": {
-              "title": "US jobs report: payrolls change: +29,000 jobs (2026-09)",
-              "summary": "US jobs report: payrolls change for 2026-09, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/PAYEMS",
-              "published_at": "2026-09-01T12:30:00Z",
-              "key": "PAYEMS 2026-09-01"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS&transformation=chg&cosd=2026-06-07&coed=2026-10-05",
-            "content_type": "application/csv",
-            "elapsed_ms": 258,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^-?[\\\\d.]+$\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
-                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
-                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
-                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
-                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
-                  "title=name + \": \" + shown + \" (\" + period + \")\"",
-                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T12:30:00Z\"",
-                  "key=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "key"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "key",
-                "namespace": "us-indicators",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/PAYEMS"
     }
   ]
 }
