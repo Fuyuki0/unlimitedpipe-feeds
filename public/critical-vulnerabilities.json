@@ -9,6 +9,220 @@
   },
   "items": [
     {
+      "id": "a7f54b30d585458f34b6",
+      "title": "CVE-2026-114630 (critical 9.1): The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion",
+      "content_text": "The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion due to insufficient file path validation in the factory_reset function in all versions up to, and including, 3.3.8 This makes it possible for unauthenticated attackers to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php). This vulnerability is exploitable via a two-step chain: an…",
+      "date_published": "2026-11-06T12:17:16Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a7f54b30d585458f34b6",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-114630",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-06T12:41:36Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-114630 (critical 9.1): The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion",
+            "item_type": "record",
+            "summary": "added: CVE-2026-114630 (critical 9.1): The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion",
+            "after": {
+              "title": "CVE-2026-114630 (critical 9.1): The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion",
+              "summary": "The ELEX WordPress HelpDesk & Customer Ticketing System plugin for WordPress is vulnerable to arbitrary file deletion due to insufficient file path validation in the factory_reset function in all versions up to, and including, 3.3.8 This makes it possible for unauthenticated attackers to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php). This vulnerability is exploitable via a two-step chain: an unauthenticated attacker first stores an arbitrary ticket_attachment_path value by submitting a ticket through the nopriv eh_crm_new_ticket_post AJAX endpoint (whose nonce is publicly exposed via the [wsdesk_support] shortcode), then triggers the factory_reset routine via a GET request to wp-admin/admin.php?page=wsdesk_factory_reset, which is guarded only by is_admin() — a request-type check — rather than a capability check, causing unlink() to be called on the attacker-supplied path.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-114630",
+              "published_at": "2026-11-06T12:17:16.503Z",
+              "id": "CVE-2026-114630"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 580,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114630"
+    },
+    {
+      "id": "c723a4a0536ea216d88a",
+      "title": "CVE-2026-107622 (critical 9.8): The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+      "content_text": "The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 2.10.5 via a form-type confusion attack through the `bf_post_type` parameter. This is due to the public frontend submission handler `buddyforms_form_response_no_ajax()` authorizing logged-out submissions based solely on the target form's `public_submit` flag while independently trusting the attacker-supplied `$_POST['bf_post_type']` to determine the post type of the newly created…",
+      "date_published": "2026-11-06T12:17:16Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c723a4a0536ea216d88a",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-107622",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-06T12:41:36Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-107622 (critical 9.8): The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+            "item_type": "record",
+            "summary": "added: CVE-2026-107622 (critical 9.8): The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+            "after": {
+              "title": "CVE-2026-107622 (critical 9.8): The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+              "summary": "The BuddyForms plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 2.10.5 via a form-type confusion attack through the `bf_post_type` parameter. This is due to the public frontend submission handler `buddyforms_form_response_no_ajax()` authorizing logged-out submissions based solely on the target form's `public_submit` flag while independently trusting the attacker-supplied `$_POST['bf_post_type']` to determine the post type of the newly created object — a cross-check introduced in 2.10.2 applies only to existing posts (`post_id != 0`) and is completely bypassed for new-object creation — combined with the `save_post` listener `buddyforms_edit_form_save_meta_box_data()` lacking both a `current_user_can()` capability check and a form-builder nonce, causing it to unconditionally persist attacker-supplied `$_POST['buddyforms_options']` for any newly inserted `buddyforms` CPT post. This makes it possible for unauthenticated attackers to insert a rogue BuddyForms form configuration with an attacker-controlled `new_user_role` value into the live global form registry, then submit a registration through that form to create a new WordPress account with administrator-level privileges and achieve full site takeover. Exploitation requires the WordPress site to have \"Anyone can register\" enabled and at least one public BuddyForms form attached to a page, both of which are standard BuddyForms deployment configurations.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-107622",
+              "published_at": "2026-11-06T12:17:16.020Z",
+              "id": "CVE-2026-107622"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-10-30T00:00:00.000&pubEndDate=2026-11-06T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 580,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107622"
+    },
+    {
       "id": "ca51d52cb474ec3cae21",
       "title": "CVE-2026-119757 (critical 9.8): BTCPay Server before 2.4.2, including 2.4.2 release candidates, contains an information disclosure vulnerability",
       "content_text": "BTCPay Server before 2.4.2, including 2.4.2 release candidates, contains an information disclosure vulnerability that allows unauthenticated remote attackers to retrieve .macaroon credential files for an LND (Lightning Network Daemon) node. Attackers can use the exposed macaroon to gain full control of the LND node, including moving funds, resulting in theft of funds from affected deployments.",
@@ -15843,220 +16057,6 @@
         }
       },
       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101072"
-    },
-    {
-      "id": "3a04da987dd7d642a0c9",
-      "title": "CVE-2026-101038 (critical 9.9): A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function",
-      "content_text": "A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function MmtAtePrase of the component MmtAtePrase Parser. This manipulation causes stack-based buffer overflow. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
-      "date_published": "2026-09-28T11:16:43Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "3a04da987dd7d642a0c9",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-101038",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-10-04T00:23:33Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-101038 (critical 9.9): A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function",
-            "item_type": "record",
-            "summary": "added: CVE-2026-101038 (critical 9.9): A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function",
-            "after": {
-              "title": "CVE-2026-101038 (critical 9.9): A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function",
-              "summary": "A vulnerability was determined in FAST FAC1200R 5.0_20201119_1.0.2. Affected by this vulnerability is the function MmtAtePrase of the component MmtAtePrase Parser. This manipulation causes stack-based buffer overflow. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-101038",
-              "published_at": "2026-09-28T11:16:43.423Z",
-              "id": "CVE-2026-101038"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 1138,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.49"
-            },
-            {
-              "step": "select",
-              "version": "0.10.49",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.49",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.49",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.49",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.49",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101038"
-    },
-    {
-      "id": "0ccfbe822754608e3d65",
-      "title": "CVE-2026-88777 (critical 9.8): Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-      "content_text": "Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23  leading to unpredictable or erroneous behavior or Denial of Service",
-      "date_published": "2026-09-27T17:16:56Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0ccfbe822754608e3d65",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-88777",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-10-04T00:23:33Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-88777 (critical 9.8): Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-            "item_type": "record",
-            "summary": "added: CVE-2026-88777 (critical 9.8): Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-            "after": {
-              "title": "CVE-2026-88777 (critical 9.8): Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway. This issue affects",
-              "summary": "Memory overflow vulnerability vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23  leading to unpredictable or erroneous behavior or Denial of Service",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-88777",
-              "published_at": "2026-09-27T17:16:56.990Z",
-              "id": "CVE-2026-88777"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-09-27T00:00:00.000&pubEndDate=2026-10-04T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 1138,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.49"
-            },
-            {
-              "step": "select",
-              "version": "0.10.49",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.49",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.49",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.49",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.49",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-88777"
     }
   ]
 }
