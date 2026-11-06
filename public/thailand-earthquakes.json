@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "b17e674b05a99511d336",
+      "title": "M2.9 earthquake in Myanmar",
+      "content_text": "At 2026-11-06 11:46:03 Thai time (UTC+7), latitude 21.166, longitude 98.369, magnitude 2.9",
+      "date_published": "2026-11-06T04:55:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "b17e674b05a99511d336",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17382",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-06T04:56:38Z",
+          "data": {
+            "change": "added",
+            "label": "M2.9 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M2.9 earthquake in Myanmar",
+            "after": {
+              "title": "M2.9 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17382",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17382",
+              "author": null,
+              "published_at": "2026-11-06T04:55:05Z",
+              "updated_at": "2026-11-06T04:55:05Z",
+              "summary": "At 2026-11-06 11:46:03 Thai time (UTC+7), latitude 21.166, longitude 98.369, magnitude 2.9",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "2.9",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1386,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17382"
+    },
+    {
       "id": "ec73d832dff29c49fc94",
       "title": "M1.8 earthquake in Tambon Mae Faek Mai, Amphoe SanSai, ChiangMai",
       "content_text": "At 2026-11-06 09:47:29 Thai time (UTC+7), latitude 18.978, longitude 99.005, magnitude 1.8",
