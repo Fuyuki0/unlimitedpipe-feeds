@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "ceba5cb9644904335e4b",
+      "title": "M3.9 earthquake in Northern Sumatra, Indonesia",
+      "content_text": "At 2026-11-07 08:59:41 Thai time (UTC+7), latitude 4.093, longitude 97.080, magnitude 3.9",
+      "date_published": "2026-11-07T02:20:57Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ceba5cb9644904335e4b",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-07T02:27:36Z",
+          "data": {
+            "change": "added",
+            "label": "M3.9 earthquake in Northern Sumatra, Indonesia",
+            "item_type": "entry",
+            "summary": "added: M3.9 earthquake in Northern Sumatra, Indonesia",
+            "after": {
+              "title": "M3.9 earthquake in Northern Sumatra, Indonesia",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387",
+              "author": null,
+              "published_at": "2026-11-07T02:20:57Z",
+              "updated_at": "2026-11-07T02:20:57Z",
+              "summary": "At 2026-11-07 08:59:41 Thai time (UTC+7), latitude 4.093, longitude 97.080, magnitude 3.9",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "3.9",
+              "place": "Northern Sumatra, Indonesia"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 991,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387"
+    },
+    {
       "id": "77625edb165666dda2c5",
       "title": "M2.1 earthquake in Myanmar",
       "content_text": "At 2026-11-07 03:47:48 Thai time (UTC+7), latitude 18.168, longitude 96.765, magnitude 2.1",
