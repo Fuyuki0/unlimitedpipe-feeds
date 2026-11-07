@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "4cfa45760101c88d983b",
+      "title": "Anemoy Capital TVL down 49% in a day, to $52.2M",
+      "content_text": "Anemoy Capital (RWA) holds $52.2M after a 49.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-07T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4cfa45760101c88d983b",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#anemoy-capital 2026-11-07",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-07T09:38:19Z",
+          "data": {
+            "change": "added",
+            "label": "Anemoy Capital TVL down 49% in a day, to $52.2M",
+            "item_type": "record",
+            "summary": "added: Anemoy Capital TVL down 49% in a day, to $52.2M",
+            "after": {
+              "title": "Anemoy Capital TVL down 49% in a day, to $52.2M",
+              "summary": "Anemoy Capital (RWA) holds $52.2M after a 49.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/anemoy-capital",
+              "published_at": "2026-11-07T00:00:00Z",
+              "day_key": "anemoy-capital 2026-11-07"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 66,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-07T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-07\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/anemoy-capital"
+    },
+    {
       "id": "a45c6bf34cdd43d3f4bd",
       "title": "Rysk V12 TVL down 38% in a day, to $31.3M",
       "content_text": "Rysk V12 (Options Vault) holds $31.3M after a 38.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
