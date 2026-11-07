@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "af0c240d1c33c1f8e345",
+      "title": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+      "content_text": "We can confirm EC2 instance launch failures affecting all AZs (usw2-az1, usw2-az2, usw2-az3, usw2-az4) in the US-WEST-2 Region. We have identified the issue to be caused by a subsystem that supports EBS Volumes required during instance launch. Services that instantiate new instances, such as cross-region data copy for DataSync, within the US-WEST-2 Region as either the source or destination are also affected. We recommend that customers do not mutate running instances at this time that would…",
+      "date_published": "2026-11-07T00:08:32Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "af0c240d1c33c1f8e345",
+          "source": "rss",
+          "type": "change",
+          "key": "https://status.aws.amazon.com/#ec2-us-west-2_1794010112",
+          "source_url": "https://status.aws.amazon.com/rss/all.rss",
+          "timestamp": null,
+          "observed_at": "2026-11-07T00:10:56Z",
+          "data": {
+            "change": "added",
+            "label": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+            "item_type": "entry",
+            "summary": "added: AWS: Service impact: Elevated Launch Failures (us-west-2)",
+            "after": {
+              "title": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
+              "link": "https://status.aws.amazon.com/",
+              "id": "https://status.aws.amazon.com/#ec2-us-west-2_1794010112",
+              "author": null,
+              "published_at": "2026-11-07T00:08:32Z",
+              "updated_at": "2026-11-07T00:08:32Z",
+              "summary": "We can confirm EC2 instance launch failures affecting all AZs (usw2-az1, usw2-az2, usw2-az3, usw2-az4) in the US-WEST-2 Region. We have identified the issue to be caused by a subsystem that supports EBS Volumes required during instance launch. Services that instantiate new instances, such as cross-region data copy for DataSync, within the US-WEST-2 Region as either the source or destination are also affected. We recommend that customers do not mutate running instances at this time that would result in the replacement or creation of a new EC2 instance in the Region. Running EC2 instances and already created EBS volumes continue to operate as normal.\nWe are seeing early signs of recovery, and continue to take steps to restore launches within the Region. We will update this post by 5:30 PM PST or earlier if we have new information to share.",
+              "categories": [],
+              "feed": {
+                "title": "Amazon Web Services Service Status",
+                "url": "https://status.aws.amazon.com/",
+                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://status.aws.amazon.com/rss/all.rss",
+            "elapsed_ms": 71,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (summary contains \"scheduled maintenance\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
+                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "cloud-status",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://status.aws.amazon.com/"
+    },
+    {
       "id": "1aa6a6bd4b8fa83638b9",
       "title": "AWS: Service impact: Elevated Launch Failures (us-west-2)",
       "content_text": "We are experiencing elevated launch failures in the US-WEST-2 Region caused by an issue with the EBS service. Services that depend on EBS or EC2 will experience failure rates of their own. We are working to mitigate the issues. We will provide you with another update by 4:00 PM PST or sooner if new information becomes available.",
@@ -8966,97 +9057,6 @@
             "status": 200,
             "final_url": "https://status.aws.amazon.com/rss/all.rss",
             "elapsed_ms": 358,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.56"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.56",
-              "args": {
-                "expr": "not (summary contains \"scheduled maintenance\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.56",
-              "args": {
-                "assign": [
-                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
-                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.56",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.56",
-              "args": {
-                "namespace": "cloud-status",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://status.aws.amazon.com/"
-    },
-    {
-      "id": "254cbd8ea4c78a3a0961",
-      "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-      "content_text": "We are seeing early signs of recovery. We will provide you with another update by 12:00 PM PDT.",
-      "date_published": "2026-10-04T18:45:47Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "254cbd8ea4c78a3a0961",
-          "source": "rss",
-          "type": "change",
-          "key": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791139547",
-          "source_url": "https://status.aws.amazon.com/rss/all.rss",
-          "timestamp": null,
-          "observed_at": "2026-10-04T18:48:38Z",
-          "data": {
-            "change": "added",
-            "label": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-            "item_type": "entry",
-            "summary": "added: AWS: Service impact: Elevated packet loss (eu-south-2)",
-            "after": {
-              "title": "AWS: Service impact: Elevated packet loss (eu-south-2)",
-              "link": "https://status.aws.amazon.com/",
-              "id": "https://status.aws.amazon.com/#internetconnectivity-eu-south-2_1791139547",
-              "author": null,
-              "published_at": "2026-10-04T18:45:47Z",
-              "updated_at": "2026-10-04T18:45:47Z",
-              "summary": "We are seeing early signs of recovery. We will provide you with another update by 12:00 PM PDT.",
-              "categories": [],
-              "feed": {
-                "title": "Amazon Web Services Service Status",
-                "url": "https://status.aws.amazon.com/",
-                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://status.aws.amazon.com/rss/all.rss",
-            "elapsed_ms": 113,
             "not_modified": false,
             "method": "rss20"
           },
