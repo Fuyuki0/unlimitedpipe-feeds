@@ -9,6 +9,117 @@
   },
   "items": [
     {
+      "id": "a248a698881871e191d1",
+      "title": "Meter: hacked, amount not disclosed (protocol logic)",
+      "content_text": "Unknown. Target: Chain. From DefiLlama's list of hacks.",
+      "date_published": "2026-09-23T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a248a698881871e191d1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Meter 1790121600",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-07T18:10:52Z",
+          "data": {
+            "change": "added",
+            "label": "Meter: hacked, amount not disclosed (protocol logic)",
+            "item_type": "record",
+            "summary": "added: Meter: hacked, amount not disclosed (protocol logic)",
+            "after": {
+              "title": "Meter: hacked, amount not disclosed (protocol logic)",
+              "summary": "Unknown. Target: Chain. From DefiLlama's list of hacks.",
+              "published_at": "2026-09-23T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Meter 1790121600",
+              "chain": [
+                "Meter",
+                "BSC",
+                "Ethereum"
+              ],
+              "amount": null
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 25,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "e58c4bd5d6b6c8c16772",
       "title": "Keplr Wallet (Web3Auth): hacked, amount not disclosed (frontend & infrastructure)",
       "content_text": "Supply Chain Attack. Target: Wallet. From DefiLlama's list of hacks.",
@@ -10759,115 +10870,6 @@
                 "Base"
               ],
               "amount": 8700000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "7eb02bc873c8f57a05bd",
-      "title": "CCC: $117K lost (protocol logic)",
-      "content_text": "published_at 2026-08-27T00:00:00Z · amount 117000",
-      "date_published": "2026-08-27T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7eb02bc873c8f57a05bd",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#CCC 1787788800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "CCC: $117K lost (protocol logic)",
-            "item_type": "record",
-            "summary": "added: CCC: $117K lost (protocol logic)",
-            "after": {
-              "title": "CCC: $117K lost (protocol logic)",
-              "summary": "Swap Logic Flaw. Target: Token.",
-              "published_at": "2026-08-27T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "CCC 1787788800",
-              "chain": [
-                "BSC"
-              ],
-              "amount": 117000
             }
           },
           "metadata": {
