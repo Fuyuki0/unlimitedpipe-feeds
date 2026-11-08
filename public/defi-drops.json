@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "9d41eb7777f939ad75f1",
+      "title": "Hyperliquid Spot Orderbook TVL down 26% in a day, to $96.1M",
+      "content_text": "Hyperliquid Spot Orderbook (Dexs) holds $96.1M after a 25.6% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-08T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9d41eb7777f939ad75f1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#hyperliquid-spot-orderbook 2026-11-08",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-08T23:25:29Z",
+          "data": {
+            "change": "added",
+            "label": "Hyperliquid Spot Orderbook TVL down 26% in a day, to $96.1M",
+            "item_type": "record",
+            "summary": "added: Hyperliquid Spot Orderbook TVL down 26% in a day, to $96.1M",
+            "after": {
+              "title": "Hyperliquid Spot Orderbook TVL down 26% in a day, to $96.1M",
+              "summary": "Hyperliquid Spot Orderbook (Dexs) holds $96.1M after a 25.6% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/hyperliquid-spot-orderbook",
+              "published_at": "2026-11-08T00:00:00Z",
+              "day_key": "hyperliquid-spot-orderbook 2026-11-08"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 62,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-08T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-08\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/hyperliquid-spot-orderbook"
+    },
+    {
       "id": "ca2e43b03833e6805008",
       "title": "Anemoy Capital TVL down 49% in a day, to $52.2M",
       "content_text": "Anemoy Capital (RWA) holds $52.2M after a 49.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
