@@ -9,6 +9,96 @@
   },
   "items": [
     {
+      "id": "6e86d01bd8e388d3da2e",
+      "title": "Typhoon 31W (Cempaka) Warning #11 (Northwest Pacific/North Indian Ocean*)",
+      "content_text": "Typhoon 31W (Cempaka) Warning #11\nIssued at 08/2100Z\nTC Warning Text\nTC Warning Graphic\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+      "date_published": "2026-11-08T20:00:06Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "6e86d01bd8e388d3da2e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss#Typhoon 31W (Cempaka) Warning #11",
+          "source_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+          "timestamp": null,
+          "observed_at": "2026-11-08T20:00:39Z",
+          "data": {
+            "change": "added",
+            "label": "Typhoon 31W (Cempaka) Warning #11 (Northwest Pacific/North Indian Ocean*)",
+            "item_type": "entry",
+            "summary": "added: Typhoon 31W (Cempaka) Warning #11 (Northwest Pacific/North Indian Ocean*)",
+            "after": {
+              "title": "Typhoon 31W (Cempaka) Warning #11 (Northwest Pacific/North Indian Ocean*)",
+              "link": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+              "id": "https://www.metoc.navy.mil/jtwc/rss/NWPAC-NIO-WARNINGS",
+              "author": "CDO.JTWC.fct@navy.mil (JTWC CDO)",
+              "published_at": "2026-11-08T20:00:06Z",
+              "updated_at": "2026-11-08T20:00:06Z",
+              "summary": "Typhoon 31W (Cempaka) Warning #11\nIssued at 08/2100Z\nTC Warning Text\nTC Warning Graphic\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
+              "categories": [
+                "Northwest Pacific/North Indian Ocean* Tropical Systems"
+              ],
+              "feed": {
+                "title": "JTWC TROPICAL CYCLONE INFORMATION FEED",
+                "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+                "feed_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss"
+              },
+              "region": "Northwest Pacific/North Indian Ocean*",
+              "warning": "Typhoon 31W (Cempaka) Warning #11"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
+            "elapsed_ms": 217,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "summary matches \"Warning #\\\\d+\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "region=replace(title, \"^Current (.+?) Tropical Systems$\", \"\\\\1\")",
+                  "warning=replace(summary, \"(?s)^\\\\s*([^\\\\n]*?Warning #\\\\d+).*$\", \"\\\\1\")",
+                  "title=warning + \" (\" + region + \")\""
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "warning",
+                "namespace": "typhoons",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
+      "tags": [
+        "Northwest Pacific/North Indian Ocean* Tropical Systems"
+      ]
+    },
+    {
       "id": "ce96d794c579e9dfd1cf",
       "title": "Tropical Cyclone 03S (Three) Warning #03 (Southern Hemisphere)",
       "content_text": "Tropical Cyclone 03S (Three) Warning #03 Final Warning\nIssued at 08/2100Z\nTC Warning Text\nTC Warning Graphic\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin",
@@ -8872,96 +8962,6 @@
             "status": 200,
             "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
             "elapsed_ms": 626,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.9.1"
-            },
-            {
-              "step": "filter",
-              "version": "0.9.1",
-              "args": {
-                "expr": "summary matches \"Warning #\\\\d+\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.9.1",
-              "args": {
-                "assign": [
-                  "region=replace(title, \"^Current (.+?) Tropical Systems$\", \"\\\\1\")",
-                  "warning=replace(summary, \"(?s)^\\\\s*([^\\\\n]*?Warning #\\\\d+).*$\", \"\\\\1\")",
-                  "title=warning + \" (\" + region + \")\""
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.9.1",
-              "args": {
-                "key": "warning",
-                "namespace": "typhoons",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
-      "tags": [
-        "Northwest Pacific/North Indian Ocean* Tropical Systems"
-      ]
-    },
-    {
-      "id": "d0dd1c6722d8d934d0d3",
-      "title": "Typhoon 25W (Surigae) Warning #14 (Northwest Pacific/North Indian Ocean*)",
-      "content_text": "Typhoon 25W (Surigae) Warning #14\nIssued at 26/1500Z\nTC Warning Text\nTC Warning Graphic\n3 Hour Position Update Graphic Valid 26/1500Z\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
-      "date_published": "2026-09-26T17:26:02Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d0dd1c6722d8d934d0d3",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss#Typhoon 25W (Surigae) Warning #14",
-          "source_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
-          "timestamp": null,
-          "observed_at": "2026-09-26T17:27:35Z",
-          "data": {
-            "change": "added",
-            "label": "Typhoon 25W (Surigae) Warning #14 (Northwest Pacific/North Indian Ocean*)",
-            "item_type": "entry",
-            "summary": "added: Typhoon 25W (Surigae) Warning #14 (Northwest Pacific/North Indian Ocean*)",
-            "after": {
-              "title": "Typhoon 25W (Surigae) Warning #14 (Northwest Pacific/North Indian Ocean*)",
-              "link": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
-              "id": "https://www.metoc.navy.mil/jtwc/rss/NWPAC-NIO-WARNINGS",
-              "author": "CDO.JTWC.fct@navy.mil (JTWC CDO)",
-              "published_at": "2026-09-26T17:26:02Z",
-              "updated_at": "2026-09-26T17:26:02Z",
-              "summary": "Typhoon 25W (Surigae) Warning #14\nIssued at 26/1500Z\nTC Warning Text\nTC Warning Graphic\n3 Hour Position Update Graphic Valid 26/1500Z\nPrognostic Reasoning\nJMV 3.0 Data\nGoogle Earth Overlay\nIR Satellite Imagery\nSatellite Fix Bulletin\n* Includes Bay of Bengal and Arabian Sea",
-              "categories": [
-                "Northwest Pacific/North Indian Ocean* Tropical Systems"
-              ],
-              "feed": {
-                "title": "JTWC TROPICAL CYCLONE INFORMATION FEED",
-                "url": "https://s3.amazonaws.com/www.metoc.navy.mil/jtwc/jtwc.html",
-                "feed_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss"
-              },
-              "region": "Northwest Pacific/North Indian Ocean*",
-              "warning": "Typhoon 25W (Surigae) Warning #14"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.metoc.navy.mil/jtwc/rss/jtwc.rss",
-            "elapsed_ms": 458,
             "not_modified": false,
             "method": "rss20"
           },
