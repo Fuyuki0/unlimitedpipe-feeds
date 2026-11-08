@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "ff22c853b85079dc4939",
+      "title": "M4.2 earthquake in Myanmar",
+      "content_text": "At 2026-11-08 13:54:47 Thai time (UTC+7), latitude 18.924, longitude 96.288, magnitude 4.2",
+      "date_published": "2026-11-08T06:59:56Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ff22c853b85079dc4939",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17393",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-08T07:00:43Z",
+          "data": {
+            "change": "added",
+            "label": "M4.2 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M4.2 earthquake in Myanmar",
+            "after": {
+              "title": "M4.2 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17393",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17393",
+              "author": null,
+              "published_at": "2026-11-08T06:59:56Z",
+              "updated_at": "2026-11-08T06:59:56Z",
+              "summary": "At 2026-11-08 13:54:47 Thai time (UTC+7), latitude 18.924, longitude 96.288, magnitude 4.2",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "4.2",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1690,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17393"
+    },
+    {
       "id": "22e349787133a6e918f2",
       "title": "M3.6 earthquake in Andaman Islands, India Region",
       "content_text": "At 2026-11-08 12:40:59 Thai time (UTC+7), latitude 13.789, longitude 95.753, magnitude 3.6",
