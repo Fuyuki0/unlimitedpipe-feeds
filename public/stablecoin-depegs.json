@@ -9,6 +9,106 @@
   },
   "items": [
     {
+      "id": "8d065b0ee9ea278a4711",
+      "title": "FRAX at $0.9898, 1.0% below its $1 peg",
+      "content_text": "Frax (FRAX) trades at $0.9898, 1.0% below its $1 peg, with $141.7M in circulation (DefiLlama). Data, not investment advice.",
+      "date_published": "2026-11-08T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8d065b0ee9ea278a4711",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=true#FRAX 2026-11-08",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+          "timestamp": null,
+          "observed_at": "2026-11-08T07:06:18Z",
+          "data": {
+            "change": "added",
+            "label": "FRAX at $0.9898, 1.0% below its $1 peg",
+            "item_type": "record",
+            "summary": "added: FRAX at $0.9898, 1.0% below its $1 peg",
+            "after": {
+              "id": "6",
+              "name": "Frax",
+              "symbol": "FRAX",
+              "gecko_id": "frax",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "algorithmic",
+              "circulating": {
+                "peggedUSD": 141713483.29590762
+              },
+              "price": 0.9897710010531309,
+              "off": 1.0,
+              "side": "below",
+              "title": "FRAX at $0.9898, 1.0% below its $1 peg",
+              "summary": "Frax (FRAX) trades at $0.9898, 1.0% below its $1 peg, with $141.7M in circulation (DefiLlama). Data, not investment advice.",
+              "link": "https://defillama.com/stablecoin/frax",
+              "published_at": "2026-11-08T00:00:00Z",
+              "day_key": "FRAX 2026-11-08"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+            "content_type": "application/json",
+            "elapsed_ms": 29,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "pegType == \"peggedUSD\" and exists(price) and price != null and circulating.peggedUSD >= 100000000 and price <= 0.99"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "off=round(abs(price - 1) * 100, 1)",
+                  "side=replace(replace(\"\" + (price > 1), \"^True$\", \"above\"), \"^False$\", \"below\")",
+                  "title=symbol + \" at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg\"",
+                  "summary=name + \" (\" + symbol + \") trades at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg, with $\" + short(circulating.peggedUSD) + \" in circulation (DefiLlama). Data, not investment advice.\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "published_at=\"2026-11-08T00:00:00Z\"",
+                  "day_key=symbol + \" 2026-11-08\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth",
+                  "circulatingPrevWeek",
+                  "circulatingPrevDay"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-depegs",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/frax"
+    },
+    {
       "id": "a52df2503d709d6ebb35",
       "title": "apxUSD at $0.9894, 1.1% below its $1 peg",
       "content_text": "apxUSD (apxUSD) trades at $0.9894, 1.1% below its $1 peg, with $277.1M in circulation (DefiLlama). Data, not investment advice.",
