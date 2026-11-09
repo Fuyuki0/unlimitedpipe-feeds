@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "738d45baf545bf8d057c",
+      "title": "FDA approves Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack",
+      "content_text": "Novel drug approval of 11/9/2026: Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "738d45baf545bf8d057c",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026#Sunharbo",
+          "source_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+          "timestamp": null,
+          "observed_at": "2026-11-09T23:23:17Z",
+          "data": {
+            "change": "added",
+            "label": "FDA approves Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack",
+            "item_type": "record",
+            "summary": "added: FDA approves Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack",
+            "after": {
+              "title": "FDA approves Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack",
+              "summary": "Novel drug approval of 11/9/2026: Sunharbo (asundexian) to reduce the risk of stroke in adults following a recent mild-to-moderate non-cardioembolic ischemic stroke or a high-risk transient ischemic attack.",
+              "link": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+              "published_at": "2026-11-09T00:00:00Z",
+              "drug": "Sunharbo"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+            "content_type": "text/html",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "name != \"\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "use=replace(replace(trim(use), \"^To (adults|patients|pediatric)\", \"for \\\\1\"), \"^To \", \"to \")",
+                  "title=\"FDA approves \" + trim(name) + \" (\" + trim(ingredient) + \") \" + replace(use, \"^(.{150}[^ ,]*)[ ,].+$\", \"\\\\1…\")",
+                  "summary=\"Novel drug approval of \" + trim(approved) + \": \" + trim(name) + \" (\" + trim(ingredient) + \") \" + use + \".\"",
+                  "published_at=date(replace(replace(replace(trim(approved), \"^(\\\\d)/\", \"0\\\\1/\"), \"/(\\\\d)/\", \"/0\\\\1/\"), \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\"))",
+                  "link=\"https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-\" + replace(published_at, \"-.*$\", \"\")",
+                  "drug=trim(name)"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "drug"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "drug",
+                "namespace": "drug-approvals",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
+    },
+    {
       "id": "94023d4e3df7151260c9",
       "title": "FDA approves Hibsago (bepirovirsen) to treat chronic hepatitis B virus infection in certain adults without cirrhosis, in combination with existing antiviral therapy",
       "content_text": "Novel drug approval of 10/20/2026: Hibsago (bepirovirsen) to treat chronic hepatitis B virus infection in certain adults without cirrhosis, in combination with existing antiviral therapy.",
