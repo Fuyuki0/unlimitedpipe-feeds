@@ -1,13 +1,125 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "8fca8f47decf5091bb53",
+      "title": "Federal Reserve: Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+      "content_text": "Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+      "date_published": "2026-11-09T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8fca8f47decf5091bb53",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.federalreserve.gov/newsevents/pressreleases/orders20261109a.htm",
+          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-09T21:10:32Z",
+          "data": {
+            "change": "added",
+            "label": "Federal Reserve: Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+            "item_type": "entry",
+            "summary": "added: Federal Reserve: Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+            "after": {
+              "title": "Federal Reserve: Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+              "link": "https://www.federalreserve.gov/newsevents/pressreleases/orders20261109a.htm",
+              "id": "https://www.federalreserve.gov/newsevents/pressreleases/orders20261109a.htm",
+              "author": null,
+              "published_at": "2026-11-09T21:00:00Z",
+              "updated_at": "2026-11-09T21:00:00Z",
+              "summary": "Federal Reserve Board announces approval of two applications by Mutual Federal Bancorp, MHC, and MFB Bancorp, Inc.",
+              "categories": [
+                "Orders on Banking Applications"
+              ],
+              "feed": {
+                "title": "FRB: Press Release - All Releases",
+                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
+                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
+              },
+              "outlet": "Federal Reserve"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+            "elapsed_ms": 62,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/orders20261109a.htm",
+      "tags": [
+        "Orders on Banking Applications"
+      ]
+    },
     {
       "id": "deb408eab667c66f7ea4",
       "title": "Reserve Bank of India: Supersession of Board of Directors of Abhyudaya Co-operative Bank Ltd., Mumbai - Extension of period",
@@ -15990,113 +16102,6 @@
         }
       },
       "url": "https://www.bankofengland.co.uk/minutes/2026/june/fxjsc-operations-sub-committee-meeting-16-june-2026"
-    },
-    {
-      "id": "64068e6d619aa58b5ceb",
-      "title": "Bank of England: Minutes of the London FXJSC Main Committee Meeting – 24 June 2026",
-      "content_text": "The Bank of England chairs the London Foreign Exchange Joint Standing Committee (FXJSC), which is a forum for discussion of the wholesale foreign exchange market. The FXJSC is made up of market participants, infrastructure providers and the UK financial regulators.",
-      "date_published": "2026-10-07T09:08:40Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "64068e6d619aa58b5ceb",
-          "source": "rss",
-          "type": "change",
-          "key": "{57EDB981-169F-48DB-89A8-CB9DF69E22CC}",
-          "source_url": "https://www.bankofengland.co.uk/rss/news",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:40Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of England: Minutes of the London FXJSC Main Committee Meeting – 24 June 2026",
-            "item_type": "entry",
-            "summary": "added: Bank of England: Minutes of the London FXJSC Main Committee Meeting – 24 June 2026",
-            "after": {
-              "title": "Bank of England: Minutes of the London FXJSC Main Committee Meeting – 24 June 2026",
-              "link": "https://www.bankofengland.co.uk/minutes/2026/june/fxjsc-main-committee-meeting-24-june-2026",
-              "id": "{57EDB981-169F-48DB-89A8-CB9DF69E22CC}",
-              "author": null,
-              "published_at": "2026-10-07T09:08:40Z",
-              "updated_at": "2026-10-07T09:08:40Z",
-              "summary": "The Bank of England chairs the London Foreign Exchange Joint Standing Committee (FXJSC), which is a forum for discussion of the wholesale foreign exchange market. The FXJSC is made up of market participants, infrastructure providers and the UK financial regulators.",
-              "categories": [],
-              "feed": {
-                "title": "News",
-                "url": "https://www.bankofengland.co.uk/rss/news",
-                "feed_url": "https://www.bankofengland.co.uk/rss/news"
-              },
-              "outlet": "Bank of England"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.bankofengland.co.uk/rss/news",
-            "elapsed_ms": 211,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.bankofengland.co.uk/minutes/2026/june/fxjsc-main-committee-meeting-24-june-2026"
     }
   ]
 }
