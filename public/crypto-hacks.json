@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "cc0d9818394aa676746b",
+      "title": "Sovryn (Lending & Margin): $914K lost (protocol logic)",
+      "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-10-31T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cc0d9818394aa676746b",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Sovryn (Lending & Margin) 1793404800",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-09T18:25:47Z",
+          "data": {
+            "change": "added",
+            "label": "Sovryn (Lending & Margin): $914K lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: Sovryn (Lending & Margin): $914K lost (protocol logic)",
+            "after": {
+              "title": "Sovryn (Lending & Margin): $914K lost (protocol logic)",
+              "summary": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-10-31T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Sovryn (Lending & Margin) 1793404800",
+              "chain": [
+                "Rootstock"
+              ],
+              "amount": 914000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 70,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "e58c4bd5d6b6c8c16772",
       "title": "Keplr Wallet (Web3Auth): hacked, amount not disclosed (frontend & infrastructure)",
       "content_text": "Supply Chain Attack. Target: Wallet. From DefiLlama's list of hacks.",
@@ -10761,115 +10870,6 @@
                 "Fogo"
               ],
               "amount": 3000000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "8c44e6d26ed56185c123",
-      "title": "Moonwell Lending: $8.7M lost (oracle manipulation)",
-      "content_text": "Spot Price Manipulation. Target: DeFi Protocol.",
-      "date_published": "2026-08-27T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8c44e6d26ed56185c123",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Moonwell Lending 1787788800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Moonwell Lending: $8.7M lost (oracle manipulation)",
-            "item_type": "record",
-            "summary": "added: Moonwell Lending: $8.7M lost (oracle manipulation)",
-            "after": {
-              "title": "Moonwell Lending: $8.7M lost (oracle manipulation)",
-              "summary": "Spot Price Manipulation. Target: DeFi Protocol.",
-              "published_at": "2026-08-27T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Moonwell Lending 1787788800",
-              "chain": [
-                "Base"
-              ],
-              "amount": 8700000
             }
           },
           "metadata": {
