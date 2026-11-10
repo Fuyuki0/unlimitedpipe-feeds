@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "616b9684d8dacdcf5425",
+      "title": "Initia: $615K lost (key compromise)",
+      "content_text": "Private Key Compromised. Target: Chain. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-10T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "616b9684d8dacdcf5425",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Initia 1794268800",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-10T17:55:31Z",
+          "data": {
+            "change": "added",
+            "label": "Initia: $615K lost (key compromise)",
+            "item_type": "record",
+            "summary": "added: Initia: $615K lost (key compromise)",
+            "after": {
+              "title": "Initia: $615K lost (key compromise)",
+              "summary": "Private Key Compromised. Target: Chain. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-10T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Initia 1794268800",
+              "chain": [
+                "Initia"
+              ],
+              "amount": 615000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 33,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "37432e52e1b5afaecca7",
       "title": "Ankr Bridge: $304.5K lost (bridge & cross-chain)",
       "content_text": "Cross-Chain Message Spoofing. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10763,115 +10872,6 @@
               "id": "Full Sail 1787961600",
               "chain": [
                 "Sui"
-              ],
-              "amount": null
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "c957dfe1068959286de4",
-      "title": "Permapod: hacked, amount not disclosed (protocol logic)",
-      "content_text": "Unknown. Target: DeFi Protocol.",
-      "date_published": "2026-08-29T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "c957dfe1068959286de4",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Permapod 1787961600",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Permapod: hacked, amount not disclosed (protocol logic)",
-            "item_type": "record",
-            "summary": "added: Permapod: hacked, amount not disclosed (protocol logic)",
-            "after": {
-              "title": "Permapod: hacked, amount not disclosed (protocol logic)",
-              "summary": "Unknown. Target: DeFi Protocol.",
-              "published_at": "2026-08-29T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Permapod 1787961600",
-              "chain": [
-                "ZIGChain"
               ],
               "amount": null
             }
