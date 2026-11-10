@@ -9,6 +9,92 @@
   },
   "items": [
     {
+      "id": "0b7d436336531e496687",
+      "title": "M2.6 earthquake in Myanmar",
+      "content_text": "At 2026-11-10 07:30:29 Thai time (UTC+7), latitude 20.931, longitude 97.688, magnitude 2.6",
+      "date_published": "2026-11-10T00:40:15Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0b7d436336531e496687",
+          "source": "rss",
+          "type": "change",
+          "key": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17401",
+          "source_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-10T00:40:33Z",
+          "data": {
+            "change": "added",
+            "label": "M2.6 earthquake in Myanmar",
+            "item_type": "entry",
+            "summary": "added: M2.6 earthquake in Myanmar",
+            "after": {
+              "title": "M2.6 earthquake in Myanmar",
+              "link": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17401",
+              "id": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17401",
+              "author": null,
+              "published_at": "2026-11-10T00:40:15Z",
+              "updated_at": "2026-11-10T00:40:15Z",
+              "summary": "At 2026-11-10 07:30:29 Thai time (UTC+7), latitude 20.931, longitude 97.688, magnitude 2.6",
+              "categories": [],
+              "feed": {
+                "title": "แผ่นดินไหว",
+                "url": "https://earthquake.tmd.go.th",
+                "feed_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml"
+              },
+              "magnitude": "2.6",
+              "place": "Myanmar"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://earthquake.tmd.go.th/feed/rss_tmd.xml",
+            "elapsed_ms": 1528,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "magnitude=replace(summary, \"(?s)^.*ขนาด\\\\s*([\\\\d.]+).*$\", \"\\\\1\")",
+                  "place=replace(title, \"^(?!.*\\\\()(.*)$\", \"Thailand: \\\\1\")",
+                  "place=replace(place, \"^.*\\\\(([^)]*)\\\\)\\\\s*$\", \"\\\\1\")",
+                  "title=\"M\" + magnitude + \" earthquake in \" + place",
+                  "summary=replace(summary, \"(?s)^.*?(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d).*?Lat\\\\. ([\\\\d.]+) , Long\\\\. ([\\\\d.]+).*$\", \"At \\\\1 Thai time (UTC+7), latitude \\\\2, longitude \\\\3, magnitude \") + magnitude"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "magnitude > 0 and not (title matches \" in $\")"
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "thailand-earthquakes",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17401"
+    },
+    {
       "id": "89af63b95582db147af4",
       "title": "M1.8 earthquake in Myanmar",
       "content_text": "At 2026-11-10 02:09:22 Thai time (UTC+7), latitude 20.018, longitude 97.861, magnitude 1.8",
