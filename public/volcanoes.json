@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "99838536542fec5629da",
+      "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-10",
+      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/373 for Sheveluch, Russia, at 2026-11-10 09:20 UTC: ash reported or expected in the air, a hazard to aircraft.",
+      "date_published": "2026-11-10T09:20:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "99838536542fec5629da",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sheveluch 2026-11-10",
+          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+          "timestamp": null,
+          "observed_at": "2026-11-10T09:42:35Z",
+          "data": {
+            "change": "added",
+            "label": "Volcanic ash from Sheveluch (Russia) on 2026-11-10",
+            "item_type": "record",
+            "summary": "added: Volcanic ash from Sheveluch (Russia) on 2026-11-10",
+            "after": {
+              "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-10",
+              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/373 for Sheveluch, Russia, at 2026-11-10 09:20 UTC: ash reported or expected in the air, a hazard to aircraft.",
+              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261110_30027000_0373_Text.html",
+              "published_at": "2026-11-10T09:20:00Z",
+              "day_key": "Sheveluch 2026-11-10"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+            "content_type": "text/html",
+            "elapsed_ms": 20,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "name=title(lower(trim(volcano)))",
+                  "place=title(lower(trim(area)))",
+                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
+                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
+                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
+                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
+                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "volcanoes-vaac",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261110_30027000_0373_Text.html"
+    },
+    {
       "id": "8390acef21b6ed3a1ae4",
       "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-06",
       "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/372 for Sheveluch, Russia, at 2026-11-06 02:50 UTC: ash reported or expected in the air, a hazard to aircraft.",
@@ -9150,70 +9243,6 @@
               "published_at": "2026-09-24T11:03:38Z",
               "updated_at": "2026-09-24T11:03:38Z",
               "summary": "The Vanuatu Meteorology and Geo-Hazards Department (VMGD) reported that a new eruption at Ambrym likely started on 19 September. An intense thermal anomaly and high sulfur dioxide emissions were identified in satellite data; a volcanic cloud was visible in a satellite image at 0600. Ground-based observers reported dark gray ash-and-gas plumes rising from Marum Crater and rumbling sounds coming from the crater. Minor ashfall was reported in areas downwind, including in communities to the W, NW, and NNE. Summit incandescence was reported by residents at around 2000. The eruption continued on 20 September. Ash-and-gas plumes were visible in satellite data at 0350 and lava effusion within the crater was detected at 1009. Residents continued to hear rumbling and observe crater incandescence. The Alert Level remained at 2 (on a scale of 0-5). VMGD warned the public to stay outside of Permanent Danger Zone A, defined as a 1-km radius around Benbow Crater and a 2-km radius around Marum Crater (including Maben-Mbwelesu, Niri-Mbwelesu, and Mbwelesu craters).\nSource: Vanuatu Meteorology and Geohazards Department (VMGD)",
-              "categories": [],
-              "feed": {
-                "title": "Smithsonian / USGS Weekly Volcanic Activity Report",
-                "url": "https://volcano.si.edu/reports_weekly.cfm",
-                "feed_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-            "elapsed_ms": 186,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.32"
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "namespace": "volcanoes",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://volcano.si.edu/reports_weekly.cfm"
-    },
-    {
-      "id": "8bb6ff8c23e625bdc34b",
-      "title": "Chikurachki (Russia) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-      "content_text": "The Kamchatkan Volcanic Eruption Response Team (KVERT) reported that an explosive eruption at Chikurachki likely began at 1830 on 20 September based on satellite data and advisories issued by the Tokyo Volcanic Ash Advisory Center (VAAC). Ash plumes rose as high as 3 km (10,000 ft) a.s.l. and drifted 140 km NE and E. Explosions continued intermittently through the next day. The VAAC noted that during 20-21 September ash plumes rose to 2.7-4.6 km (9,000-15,000 ft) a.s.l. and drifted NE and E. At…",
-      "date_published": "2026-09-24T11:03:38Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8bb6ff8c23e625bdc34b",
-          "source": "rss",
-          "type": "change",
-          "key": "https://volcano.si.edu/reports_weekly.cfm#vn_290360",
-          "source_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-          "timestamp": null,
-          "observed_at": "2026-10-01T20:43:50Z",
-          "data": {
-            "change": "added",
-            "label": "Chikurachki (Russia) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "item_type": "entry",
-            "summary": "added: Chikurachki (Russia) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "after": {
-              "title": "Chikurachki (Russia) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-              "link": "https://volcano.si.edu/reports_weekly.cfm",
-              "id": "https://volcano.si.edu/reports_weekly.cfm#vn_290360",
-              "author": null,
-              "published_at": "2026-09-24T11:03:38Z",
-              "updated_at": "2026-09-24T11:03:38Z",
-              "summary": "The Kamchatkan Volcanic Eruption Response Team (KVERT) reported that an explosive eruption at Chikurachki likely began at 1830 on 20 September based on satellite data and advisories issued by the Tokyo Volcanic Ash Advisory Center (VAAC). Ash plumes rose as high as 3 km (10,000 ft) a.s.l. and drifted 140 km NE and E. Explosions continued intermittently through the next day. The VAAC noted that during 20-21 September ash plumes rose to 2.7-4.6 km (9,000-15,000 ft) a.s.l. and drifted NE and E. At 1226 on 21 September the Aviation Color Code was raised to Orange (the second highest level on a four-color scale).\nSources: Kamchatkan Volcanic Eruption Response Team (KVERT),Tokyo Volcanic Ash Advisory Center (VAAC)",
               "categories": [],
               "feed": {
                 "title": "Smithsonian / USGS Weekly Volcanic Activity Report",
