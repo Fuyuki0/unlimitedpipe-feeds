@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "101ca62e4db3c8c8c2eb",
+      "title": "Bank of England: Exchange of letters between the Governor and the Chancellor on the Asset Purchase Facility - November 2026",
+      "content_text": "Exchange of letters between the Governor and the Chancellor",
+      "date_published": "2026-11-10T12:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "101ca62e4db3c8c8c2eb",
+          "source": "rss",
+          "type": "change",
+          "key": "{95FAFF72-DE1F-413D-A78A-69F57067E4D2}",
+          "source_url": "https://www.bankofengland.co.uk/rss/news",
+          "timestamp": null,
+          "observed_at": "2026-11-10T12:46:11Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of England: Exchange of letters between the Governor and the Chancellor on the Asset Purchase Facility - November 2026",
+            "item_type": "entry",
+            "summary": "added: Bank of England: Exchange of letters between the Governor and the Chancellor on the Asset Purchase Facility - November 2026",
+            "after": {
+              "title": "Bank of England: Exchange of letters between the Governor and the Chancellor on the Asset Purchase Facility - November 2026",
+              "link": "https://www.bankofengland.co.uk/letter/2026/asset-purchase-facility-november-2026",
+              "id": "{95FAFF72-DE1F-413D-A78A-69F57067E4D2}",
+              "author": null,
+              "published_at": "2026-11-10T12:00:00Z",
+              "updated_at": "2026-11-10T12:00:00Z",
+              "summary": "Exchange of letters between the Governor and the Chancellor",
+              "categories": [],
+              "feed": {
+                "title": "News",
+                "url": "https://www.bankofengland.co.uk/rss/news",
+                "feed_url": "https://www.bankofengland.co.uk/rss/news"
+              },
+              "outlet": "Bank of England"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.bankofengland.co.uk/rss/news",
+            "elapsed_ms": 595,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.bankofengland.co.uk/letter/2026/asset-purchase-facility-november-2026"
+    },
     {
       "id": "b7d445a20469be3ee794",
       "title": "Bank of Japan: Principal Figures of Financial Institutions (Oct.)",
@@ -15990,118 +16097,6 @@
         }
       },
       "url": "https://www.bankofengland.co.uk/news/2026/october/boe-announces-the-four-animals-that-will-feature-on-next-series-of-banknotes"
-    },
-    {
-      "id": "b544ff17bb5d6a364419",
-      "title": "Federal Reserve: Minutes of the Federal Open Market Committee, September 15-16, 2026",
-      "content_text": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
-      "date_published": "2026-10-07T18:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "b544ff17bb5d6a364419",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
-          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:40Z",
-          "data": {
-            "change": "added",
-            "label": "Federal Reserve: Minutes of the Federal Open Market Committee, September 15-16, 2026",
-            "item_type": "entry",
-            "summary": "added: Federal Reserve: Minutes of the Federal Open Market Committee, September 15-16, 2026",
-            "after": {
-              "title": "Federal Reserve: Minutes of the Federal Open Market Committee, September 15-16, 2026",
-              "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
-              "id": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
-              "author": null,
-              "published_at": "2026-10-07T18:00:00Z",
-              "updated_at": "2026-10-07T18:00:00Z",
-              "summary": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
-              "categories": [
-                "Monetary Policy"
-              ],
-              "feed": {
-                "title": "FRB: Press Release - All Releases",
-                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
-                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
-              },
-              "outlet": "Federal Reserve"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-            "elapsed_ms": 49,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
-      "tags": [
-        "Monetary Policy"
-      ]
     }
   ]
 }
