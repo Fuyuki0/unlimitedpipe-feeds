@@ -9,6 +9,169 @@
   },
   "items": [
     {
+      "id": "923075e11979da78b9a2",
+      "title": "onóna: Twin Embeddings with Tied Unembeddings",
+      "content_text": "Weight tying reduces the parameter cost of language models, but the usual tied output head is limited to a single softmax. We introduce onóna, a two-table parameterization that increases output expressiveness while preserving input-output weight sharing. The Transformer takes the average of two embedding tables as input, and the output head combines the softmax distributions defined by those same tables. A gate conditioned only on the current input token determines the mixture weight. Its…",
+      "date_published": "2026-11-10T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "923075e11979da78b9a2",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.10556",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-11-10T19:45:05Z",
+          "data": {
+            "change": "added",
+            "label": "onóna: Twin Embeddings with Tied Unembeddings",
+            "item_type": "record",
+            "summary": "added: onóna: Twin Embeddings with Tied Unembeddings",
+            "after": {
+              "title": "onóna: Twin Embeddings with Tied Unembeddings",
+              "summary": "Weight tying reduces the parameter cost of language models, but the usual tied output head is limited to a single softmax. We introduce onóna, a two-table parameterization that increases output expressiveness while preserving input-output weight sharing. The Transformer takes the average of two embedding tables as input, and the output head combines the softmax distributions defined by those same tables. A gate conditioned only on the current input token determines the mixture weight. Its values can be precomputed for inference, and the Transformer body remains unchanged. We evaluate onóna across Dense, Gated DeltaNet hybrid, mixture-of-experts, and Attention Residual architectures at 142M, 330M, and 1B scales. Under matched token budgets, onóna lowers final validation loss and external perplexity in 11 of 12 comparisons and raises the average accuracy over eight downstream tasks in 10 of 12. The one exception on loss is the 1B MoE model. The cost is one extra embedding table and one extra vocabulary projection.",
+              "link": "https://huggingface.co/papers/2611.10556",
+              "published_at": "2026-11-10T00:00:00.000Z",
+              "upvotes": 2
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 128,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2611.10556"
+    },
+    {
+      "id": "cfe16bf611fb6b52d7e8",
+      "title": "RidgeFill: Training-Free Late-Layer Cache Fill for Faster Prefill",
+      "content_text": "RidgeFill shortens prefill by not computing most of a model's upper layers for the prompt. The lower layers run exactly up to a split; from the split layer's state a per-layer map predicts every later layer's input, and each late layer writes its cache from that prediction. The design follows YOCO and DeepSeek-V4.1-Flash, where the projection is trained into the model. RidgeFill retrofits it onto models that were never trained for it: the map is a ridge regression fitted once in closed form…",
+      "date_published": "2026-11-10T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "cfe16bf611fb6b52d7e8",
+          "source": "web",
+          "type": "change",
+          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.09709",
+          "source_url": "https://huggingface.co/api/daily_papers",
+          "timestamp": null,
+          "observed_at": "2026-11-10T19:45:05Z",
+          "data": {
+            "change": "added",
+            "label": "RidgeFill: Training-Free Late-Layer Cache Fill for Faster Prefill",
+            "item_type": "record",
+            "summary": "added: RidgeFill: Training-Free Late-Layer Cache Fill for Faster Prefill",
+            "after": {
+              "title": "RidgeFill: Training-Free Late-Layer Cache Fill for Faster Prefill",
+              "summary": "RidgeFill shortens prefill by not computing most of a model's upper layers for the prompt. The lower layers run exactly up to a split; from the split layer's state a per-layer map predicts every later layer's input, and each late layer writes its cache from that prediction. The design follows YOCO and DeepSeek-V4.1-Flash, where the projection is trained into the model. RidgeFill retrofits it onto models that were never trained for it: the map is a ridge regression fitted once in closed form from one pass over calibration text, the layer's own projections run unchanged, and a chosen set of rows, the last few thousand tokens, and every decoding step run the full model. Nothing is trained and no token is dropped.\n  Most of the work was in measurement, finding a repeatable methodology. Loss averaged over all tokens hides RidgeFill's error. Needle retrieval in the filled region, loss on tokens that depend on distant context, and splice tests that swap filled keys or values for exact ones show which component carries it: the keys on Llama-3.1-8B, half of it in their scale, and the values and the recurrent state on Qwen3.5-9B.\n  On Qwen3.8-27B in a llama.cpp fork on an A100, time to first token is 1.25 to 1.31x faster at 16K to 120K tokens with the maps in VRAM; RULER changes by -1.2 and -1.4 points and LongBench v2 by -1.4; the 95 % intervals include zero but do not rule out losses of a few points. On Qwen3.8-Flash-Next in vLLM it is 1.50 to 1.60x faster than exact at 9K to 32K tokens, with RULER's needle tasks at 99.8 against 100.0 and perplexity on novel tokens 2.65 % higher [-0.02 %, +4.93 %]. On three 8 to 9B reference models, at the same split and tail as the identity fill, the fitted map retrieves 49.1 and 49.6 more filled-region RULER points on the two dense models (at that split Llama's loss is worse), and its long-document loss is +/-0.03 nats of the released SwiftKV checkpoint's.",
+              "mediaUrls": [
+                "https://cdn-uploads.huggingface.co/production/uploads/69fbbcf0d339628242737ae8/Tpu5uWfEUNa1hmspprmfn.mp4"
+              ],
+              "organization": {
+                "_id": "6abf11ba6bcb4adf15746abf",
+                "name": "TheCacheIsALie",
+                "fullname": "Approximate Science",
+                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/69fbbcf0d339628242737ae8/eZdYvIVPFCn7A-vnmF1A4.png"
+              },
+              "link": "https://huggingface.co/papers/2611.09709",
+              "published_at": "2026-11-10T00:00:00.000Z",
+              "upvotes": 2
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://huggingface.co/api/daily_papers",
+            "content_type": "application/json",
+            "elapsed_ms": 128,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "link=\"https://huggingface.co/papers/\" + paper.id",
+                  "published_at=paper.submittedOnDailyAt",
+                  "upvotes=paper.upvotes"
+                ],
+                "drop": [
+                  "paper",
+                  "publishedAt",
+                  "thumbnail",
+                  "submittedBy",
+                  "isAuthorParticipating",
+                  "numComments"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "link",
+                "namespace": "ai-papers",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://huggingface.co/papers/2611.09709"
+    },
+    {
       "id": "c328ebd2a71a61253602",
       "title": "Creative Priming: Decoupling Process from Product to Escape the Creative Paradox",
       "content_text": "Many of the most consequential advances promised by AI, from curing diseases and inventing new technologies to formulating new scientific theories, are fundamentally creative acts. Yet creativity is uniquely difficult to learn because it faces a creative paradox: learning to repeat past examples of creative success makes those specific examples more likely to recur, inhibiting the very creativity desired. This work argues that creativity is better modeled as an explicit process rather than as a…",
@@ -12249,175 +12412,6 @@
         }
       },
       "url": "https://huggingface.co/papers/2611.04785"
-    },
-    {
-      "id": "7a7f6e648be76cb809b1",
-      "title": "Factorized MLLM Embeddings for Composed Image Retrieval",
-      "content_text": "Composed Image Retrieval (CIR) aims to retrieve a target image given a reference image and a modification text. Although recent approaches leveraging Multimodal Large Language Models (MLLMs) have shown significant progress, we argue that the MLLM's compositional understanding remains underutilized. This stems from directly mapping composed queries into a retrieval embedding via contrastive supervision alone, without explicitly resolving the intended visual modifications. In this work, we…",
-      "date_published": "2026-11-04T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7a7f6e648be76cb809b1",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.05193",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:35Z",
-          "data": {
-            "change": "added",
-            "label": "Factorized MLLM Embeddings for Composed Image Retrieval",
-            "item_type": "record",
-            "summary": "added: Factorized MLLM Embeddings for Composed Image Retrieval",
-            "after": {
-              "title": "Factorized MLLM Embeddings for Composed Image Retrieval",
-              "summary": "Composed Image Retrieval (CIR) aims to retrieve a target image given a reference image and a modification text. Although recent approaches leveraging Multimodal Large Language Models (MLLMs) have shown significant progress, we argue that the MLLM's compositional understanding remains underutilized. This stems from directly mapping composed queries into a retrieval embedding via contrastive supervision alone, without explicitly resolving the intended visual modifications. In this work, we introduce Factorized MLLM Embeddings (FactEmbed), which decouples compositional query comprehension from building discriminative embeddings. Rather than directly projecting the composed query into a single embedding without internal reasoning, FactEmbed employs a set of factorized latents that simulate the intended visual modifications via an intermediate target imagination objective. This process encourages the latents to ground into target semantics before forming discriminative representations for retrieval. Subsequently, to propagate these factorized representations throughout the model for retrieval, we optimize a factor-level contrastive loss while distilling the decomposed representations into a deeper attention layer of the MLLM. Finally, for efficient inference, we retain the [EOS] token to establish a global-level embedding on top of these factorized latents, while we exploit the mean-pooled factorized latents to rerank a short candidate list at negligible cost, as both are produced by the same forward pass. Extensive evaluations demonstrate that FactEmbed outperforms prior works across CIR benchmarks.",
-              "mediaUrls": [
-                "https://cdn-uploads.huggingface.co/production/uploads/637b9711086af1cb122e99b3/XujQpQFnbtbm5iVulkWDZ.gif"
-              ],
-              "organization": {
-                "_id": "6475760c33192631bad2bb38",
-                "name": "kaist-ai",
-                "fullname": "KAIST AI",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/6469949654873f0043b09c22/aaZFiyXe1qR-Dmy_xq67m.png"
-              },
-              "link": "https://huggingface.co/papers/2611.05193",
-              "published_at": "2026-11-04T00:00:00.000Z",
-              "upvotes": 45
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 63,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2611.05193"
-    },
-    {
-      "id": "163dd48e9768eddb4dec",
-      "title": "Think Less, Locally: Local Preference Learning for Reasoning Compression",
-      "content_text": "Large reasoning models achieve strong performance on challenging tasks, but their long chain-of-thought often incurs substantial inference costs by continuing to deliberate after sufficient information has been obtained. Existing reasoning compression methods primarily operate on reasoning trajectories, paying less attention to the local decision of whether further reasoning is necessary given the current state. We propose LoCo, a local preference learning method for reasoning compression. LoCo…",
-      "date_published": "2026-11-04T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "163dd48e9768eddb4dec",
-          "source": "web",
-          "type": "change",
-          "key": "https://huggingface.co/api/daily_papers#https://huggingface.co/papers/2611.04814",
-          "source_url": "https://huggingface.co/api/daily_papers",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:35Z",
-          "data": {
-            "change": "added",
-            "label": "Think Less, Locally: Local Preference Learning for Reasoning Compression",
-            "item_type": "record",
-            "summary": "added: Think Less, Locally: Local Preference Learning for Reasoning Compression",
-            "after": {
-              "title": "Think Less, Locally: Local Preference Learning for Reasoning Compression",
-              "summary": "Large reasoning models achieve strong performance on challenging tasks, but their long chain-of-thought often incurs substantial inference costs by continuing to deliberate after sufficient information has been obtained. Existing reasoning compression methods primarily operate on reasoning trajectories, paying less attention to the local decision of whether further reasoning is necessary given the current state. We propose LoCo, a local preference learning method for reasoning compression. LoCo detects candidate overthinking states from the model's own traces, freezes the corresponding reasoning prefixes, regenerates shorter verified continuations from the same states, and trains on the resulting state-conditioned preference pairs with DPO. This formulation teaches the model when to continue reasoning and when to conclude, rather than simply encouraging shorter trajectories overall. We construct training data entirely from self-generated mathematical traces and evaluate LoCo on five mathematical and three code generation benchmarks. LoCo reduces completion length by 41.7\\%--45.4\\% on mathematics and 23.4\\%--36.3\\% on code, while maintaining or improving accuracy and achieving the best AUC across all code benchmarks. LoCo consistently improves the accuracy-efficiency trade-off on mathematics and transfers effectively to code generation despite math-only training, demonstrating the cross-domain generality of local preference learning for reasoning compression. The code and model will be publicly released at https://github.com/MuyaoYuan/LoCo.",
-              "organization": {
-                "_id": "66543b6e420092799d2f625c",
-                "name": "tencent",
-                "fullname": "Tencent",
-                "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/5dd96eb166059660ed1ee413/Lp3m-XLpjQGwBItlvn69q.png"
-              },
-              "link": "https://huggingface.co/papers/2611.04814",
-              "published_at": "2026-11-04T00:00:00.000Z",
-              "upvotes": 53
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://huggingface.co/api/daily_papers",
-            "content_type": "application/json",
-            "elapsed_ms": 63,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "link=\"https://huggingface.co/papers/\" + paper.id",
-                  "published_at=paper.submittedOnDailyAt",
-                  "upvotes=paper.upvotes"
-                ],
-                "drop": [
-                  "paper",
-                  "publishedAt",
-                  "thumbnail",
-                  "submittedBy",
-                  "isAuthorParticipating",
-                  "numComments"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "link",
-                "namespace": "ai-papers",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://huggingface.co/papers/2611.04814"
     }
   ]
 }
