@@ -9,6 +9,128 @@
   },
   "items": [
     {
+      "id": "adf76a3fb7539a4ba86f",
+      "title": "YouHack: 7.2M accounts breached",
+      "content_text": "In May 2013, the Russian-language hacking forum YouHack suffered a data breach that was later redistributed as part of a larger corpus of data. The breach exposed 107k forum members' email addresses, usernames, IP addresses and MD5 password hashes, most of which were unsalted. Forum posts also contained email address and password pairs belonging to other victims, bringing the total to 7.2M unique email addresses.",
+      "date_published": "2026-11-11T07:29:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "adf76a3fb7539a4ba86f",
+          "source": "web",
+          "type": "change",
+          "key": "https://haveibeenpwned.com/api/v3/breaches#YouHack",
+          "source_url": "https://haveibeenpwned.com/api/v3/breaches",
+          "timestamp": null,
+          "observed_at": "2026-11-11T08:27:17Z",
+          "data": {
+            "change": "added",
+            "label": "YouHack: 7.2M accounts breached",
+            "item_type": "record",
+            "summary": "added: YouHack: 7.2M accounts breached",
+            "after": {
+              "Name": "YouHack",
+              "Domain": "youhack.ru",
+              "BreachDate": "2013-05-29",
+              "AddedDate": "2026-11-11T07:29:19Z",
+              "ModifiedDate": "2026-11-11T07:29:19Z",
+              "PwnCount": 7160849,
+              "Attribution": null,
+              "DisclosureUrl": null,
+              "DataClasses": [
+                "Email addresses",
+                "IP addresses",
+                "Passwords",
+                "Usernames"
+              ],
+              "IsVerified": true,
+              "IsFabricated": false,
+              "IsSensitive": false,
+              "IsRetired": false,
+              "IsSpamList": false,
+              "IsMalware": false,
+              "IsSubscriptionFree": false,
+              "IsStealerLog": false,
+              "accounts": "7.2M",
+              "title": "YouHack: 7.2M accounts breached",
+              "summary": "In May 2013, the Russian-language hacking forum YouHack suffered a data breach that was later redistributed as part of a larger corpus of data. The breach exposed 107k forum members' email addresses, usernames, IP addresses and MD5 password hashes, most of which were unsalted. Forum posts also contained email address and password pairs belonging to other victims, bringing the total to 7.2M unique email addresses.",
+              "published_at": "2026-11-11T07:29:19Z",
+              "link": "https://haveibeenpwned.com/Breach/YouHack"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://haveibeenpwned.com/api/v3/breaches",
+            "content_type": "application/json",
+            "elapsed_ms": 145,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "IsVerified and not IsFabricated and not IsSpamList"
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "AddedDate"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 30
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "accounts=short(PwnCount)",
+                  "title=Title + \": \" + accounts + \" accounts breached\"",
+                  "summary=replace(Description, \"<[^>]+>\", \"\")",
+                  "published_at=AddedDate",
+                  "link=\"https://haveibeenpwned.com/Breach/\" + Name"
+                ],
+                "drop": [
+                  "Description",
+                  "LogoPath",
+                  "Title"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "Name",
+                "namespace": "data-breaches",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://haveibeenpwned.com/Breach/YouHack"
+    },
+    {
       "id": "27e99c938dd270f452f6",
       "title": "СберСпасибо (SberSpasibo): 3.3M accounts breached",
       "content_text": "In March 2023, data allegedly taken from СберСпасибо (SberSpasibo), the loyalty program of Russian bank Сбербанк (Sberbank), was published online. The data contained records relating to 48M users, including 3.3M unique email addresses alongside phone numbers and dates of birth. Data also included bank card numbers stored as unsalted SHA-1 hashes, plus loyalty program details such as membership dates and the redemption of bonus points for partner offers.",
