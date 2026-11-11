@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
+  "home_page_url": "https://www.jpcert.or.jp/english/rss/jpcert-en.rdf",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "4662aff9ee2e484f424a",
+      "title": "JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
+      "content_text": "JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
+      "date_published": "2026-11-11T02:21:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4662aff9ee2e484f424a",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.jpcert.or.jp/english/at/2026/at260035.html",
+          "source_url": "https://www.jpcert.or.jp/english/rss/jpcert-en.rdf",
+          "timestamp": null,
+          "observed_at": "2026-11-11T03:40:50Z",
+          "data": {
+            "change": "added",
+            "label": "JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
+            "item_type": "entry",
+            "summary": "added: JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
+            "after": {
+              "title": "JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
+              "link": "https://www.jpcert.or.jp/english/at/2026/at260035.html",
+              "id": "https://www.jpcert.or.jp/english/at/2026/at260035.html",
+              "author": null,
+              "published_at": "2026-11-11T02:21:00Z",
+              "updated_at": "2026-11-11T02:21:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "JPCERT/CC RSS Feed",
+                "url": "https://www.jpcert.or.jp/",
+                "feed_url": "https://www.jpcert.or.jp/english/rss/jpcert-en.rdf"
+              },
+              "agency": "JPCERT/CC"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.jpcert.or.jp/english/rss/jpcert-en.rdf",
+            "elapsed_ms": 360,
+            "not_modified": false,
+            "method": "rss10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.jpcert.or.jp/english/at/2026/at260035.html"
+    },
     {
       "id": "a8021dcb414a3044c503",
       "title": "Canadian Centre for Cyber Security: AL26-028 – Ongoing Help Desk Voice Phishing Campaign Targeting Canadian Organizations",
