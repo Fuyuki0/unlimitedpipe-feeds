@@ -9,6 +9,98 @@
   },
   "items": [
     {
+      "id": "3ff2958538dde42f0b3c",
+      "title": "Sporting Events Bill [HL]: Consideration of Commons amendments and / or reasons (Lords)",
+      "content_text": "The Sporting Events Bill [HL] reached Consideration of Commons amendments and / or reasons in the Lords; it started in the Lords. UK Parliament bills service.",
+      "date_published": "2026-11-11T08:53:15Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3ff2958538dde42f0b3c",
+          "source": "web",
+          "type": "change",
+          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25443.0",
+          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+          "timestamp": null,
+          "observed_at": "2026-11-11T09:24:47Z",
+          "data": {
+            "change": "added",
+            "label": "Sporting Events Bill [HL]: Consideration of Commons amendments and / or reasons (Lords)",
+            "item_type": "record",
+            "summary": "added: Sporting Events Bill [HL]: Consideration of Commons amendments and / or reasons (Lords)",
+            "after": {
+              "title": "Sporting Events Bill [HL]: Consideration of Commons amendments and / or reasons (Lords)",
+              "summary": "The Sporting Events Bill [HL] reached Consideration of Commons amendments and / or reasons in the Lords; it started in the Lords. UK Parliament bills service.",
+              "link": "https://bills.parliament.uk/bills/4127",
+              "published_at": "2026-11-11T08:53:15Z",
+              "step": 25443.0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+            "content_type": "application/json",
+            "elapsed_ms": 7857,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(currentStage.description)"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "stage=currentStage.description",
+                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
+                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
+                  "link=\"https://bills.parliament.uk/bills/\" + billId",
+                  "published_at=date(lastUpdate)",
+                  "step=\"\" + billId + \" \" + currentStage.id"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "step"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "step",
+                "namespace": "uk-bills",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://bills.parliament.uk/bills/4127"
+    },
+    {
       "id": "70960b37e7cb3101657a",
       "title": "Financial Services and Markets Bill [HL]: Committee stage (Commons)",
       "content_text": "The Financial Services and Markets Bill [HL] reached Committee stage in the Commons; it started in the Lords. UK Parliament bills service.",
