@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "2f7c4b85edc4ff22a0d1",
+      "title": "Volcanic ash from Mayon (Philippines) on 2026-11-11",
+      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/822 for Mayon, Philippines, at 2026-11-11 04:21 UTC: ash reported or expected in the air, a hazard to aircraft.",
+      "date_published": "2026-11-11T04:21:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2f7c4b85edc4ff22a0d1",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Mayon 2026-11-11",
+          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+          "timestamp": null,
+          "observed_at": "2026-11-11T04:38:43Z",
+          "data": {
+            "change": "added",
+            "label": "Volcanic ash from Mayon (Philippines) on 2026-11-11",
+            "item_type": "record",
+            "summary": "added: Volcanic ash from Mayon (Philippines) on 2026-11-11",
+            "after": {
+              "title": "Volcanic ash from Mayon (Philippines) on 2026-11-11",
+              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/822 for Mayon, Philippines, at 2026-11-11 04:21 UTC: ash reported or expected in the air, a hazard to aircraft.",
+              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261111_27303000_0822_Text.html",
+              "published_at": "2026-11-11T04:21:00Z",
+              "day_key": "Mayon 2026-11-11"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+            "content_type": "text/html",
+            "elapsed_ms": 803,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "name=title(lower(trim(volcano)))",
+                  "place=title(lower(trim(area)))",
+                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
+                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
+                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
+                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
+                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "volcanoes-vaac",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261111_27303000_0822_Text.html"
+    },
+    {
       "id": "99838536542fec5629da",
       "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-10",
       "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/373 for Sheveluch, Russia, at 2026-11-10 09:20 UTC: ash reported or expected in the air, a hazard to aircraft.",
@@ -9214,70 +9307,6 @@
         }
       },
       "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260901_28208001_0185_Text.html"
-    },
-    {
-      "id": "b8cc229bcab75820846f",
-      "title": "Ambrym (Vanuatu) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-      "content_text": "The Vanuatu Meteorology and Geo-Hazards Department (VMGD) reported that a new eruption at Ambrym likely started on 19 September. An intense thermal anomaly and high sulfur dioxide emissions were identified in satellite data; a volcanic cloud was visible in a satellite image at 0600. Ground-based observers reported dark gray ash-and-gas plumes rising from Marum Crater and rumbling sounds coming from the crater. Minor ashfall was reported in areas downwind, including in communities to the W, NW…",
-      "date_published": "2026-09-24T11:03:38Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "b8cc229bcab75820846f",
-          "source": "rss",
-          "type": "change",
-          "key": "https://volcano.si.edu/reports_weekly.cfm#vn_257040",
-          "source_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-          "timestamp": null,
-          "observed_at": "2026-10-01T20:43:50Z",
-          "data": {
-            "change": "added",
-            "label": "Ambrym (Vanuatu) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "item_type": "entry",
-            "summary": "added: Ambrym (Vanuatu) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-            "after": {
-              "title": "Ambrym (Vanuatu) - Report for 16 September-22 September 2026 - New Eruptive Activity",
-              "link": "https://volcano.si.edu/reports_weekly.cfm",
-              "id": "https://volcano.si.edu/reports_weekly.cfm#vn_257040",
-              "author": null,
-              "published_at": "2026-09-24T11:03:38Z",
-              "updated_at": "2026-09-24T11:03:38Z",
-              "summary": "The Vanuatu Meteorology and Geo-Hazards Department (VMGD) reported that a new eruption at Ambrym likely started on 19 September. An intense thermal anomaly and high sulfur dioxide emissions were identified in satellite data; a volcanic cloud was visible in a satellite image at 0600. Ground-based observers reported dark gray ash-and-gas plumes rising from Marum Crater and rumbling sounds coming from the crater. Minor ashfall was reported in areas downwind, including in communities to the W, NW, and NNE. Summit incandescence was reported by residents at around 2000. The eruption continued on 20 September. Ash-and-gas plumes were visible in satellite data at 0350 and lava effusion within the crater was detected at 1009. Residents continued to hear rumbling and observe crater incandescence. The Alert Level remained at 2 (on a scale of 0-5). VMGD warned the public to stay outside of Permanent Danger Zone A, defined as a 1-km radius around Benbow Crater and a 2-km radius around Marum Crater (including Maben-Mbwelesu, Niri-Mbwelesu, and Mbwelesu craters).\nSource: Vanuatu Meteorology and Geohazards Department (VMGD)",
-              "categories": [],
-              "feed": {
-                "title": "Smithsonian / USGS Weekly Volcanic Activity Report",
-                "url": "https://volcano.si.edu/reports_weekly.cfm",
-                "feed_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://volcano.si.edu/news/WeeklyVolcanoRSS.xml",
-            "elapsed_ms": 186,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.32"
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "namespace": "volcanoes",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://volcano.si.edu/reports_weekly.cfm"
     }
   ]
 }
