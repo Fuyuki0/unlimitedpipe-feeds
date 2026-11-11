@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "ee7dc7f60f90429a218e",
+      "title": "AWS: Service is operating normally: [RESOLVED] Elevated API issues and Launch Failures (ap-northeast-1)",
+      "content_text": "Between 6:46 AM and 9:46 AM PST, we experienced elevated API error rates and launch failures primarily centered in a single Availability Zone (apne1-az1). We also experienced impact to other services such as ECS and Fargate Task Launch failures, ELB provisioning delays, Nat Gateway failures for Create and Disassociate workflows and Managed Flink application state transitions delays. Running EC2 instances and existing workflows were not affected. During this time, EC2 and EBS health data was…",
+      "date_published": "2026-11-11T21:11:29Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ee7dc7f60f90429a218e",
+          "source": "rss",
+          "type": "change",
+          "key": "https://status.aws.amazon.com/#ec2-ap-northeast-1_1794431489",
+          "source_url": "https://status.aws.amazon.com/rss/all.rss",
+          "timestamp": null,
+          "observed_at": "2026-11-11T21:14:39Z",
+          "data": {
+            "change": "added",
+            "label": "AWS: Service is operating normally: [RESOLVED] Elevated API issues and Launch Failures (ap-northeast-1)",
+            "item_type": "entry",
+            "summary": "added: AWS: Service is operating normally: [RESOLVED] Elevated API issues and Launch Failures (ap-northeast-1)",
+            "after": {
+              "title": "AWS: Service is operating normally: [RESOLVED] Elevated API issues and Launch Failures (ap-northeast-1)",
+              "link": "https://status.aws.amazon.com/",
+              "id": "https://status.aws.amazon.com/#ec2-ap-northeast-1_1794431489",
+              "author": null,
+              "published_at": "2026-11-11T21:11:29Z",
+              "updated_at": "2026-11-11T21:11:29Z",
+              "summary": "Between 6:46 AM and 9:46 AM PST, we experienced elevated API error rates and launch failures primarily centered in a single Availability Zone (apne1-az1). We also experienced impact to other services such as ECS and Fargate Task Launch failures, ELB provisioning delays, Nat Gateway failures for Create and Disassociate workflows and Managed Flink application state transitions delays. Running EC2 instances and existing workflows were not affected. During this time, EC2 and EBS health data was missing or delayed for the affected Availability Zone resulting in CloudWatch alarms to transition to INSUFFICENT_DATA state and the DescribeInstanceStatus API to return Insufficient Data.\nWe had identified the root cause and began our mitigation efforts by 7:47 AM, and by 9:46 AM we were seeing broad recovery for APIs and were able to see new EC2 launches succeed. While monitoring for full recovery, we began to observe that new launches in the single affected Availability Zone were experiencing connectivity issues, instance to instance connectivity was unaffected as was instances launched before the impact began. We were able to identify that this shared a root cause to the initial issue.\nWe took multiple parallel paths to mitigate the connectivity issue, and saw first signs of recovery for the connectivity issue at 11:51 AM and full recovery by 12:31 PM. The issue has been resolved and the service is operating normally.",
+              "categories": [],
+              "feed": {
+                "title": "Amazon Web Services Service Status",
+                "url": "https://status.aws.amazon.com/",
+                "feed_url": "https://status.aws.amazon.com/rss/all.rss"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://status.aws.amazon.com/rss/all.rss",
+            "elapsed_ms": 335,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (summary contains \"scheduled maintenance\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
+                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "cloud-status",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://status.aws.amazon.com/"
+    },
+    {
       "id": "f6579b738e2b22a38366",
       "title": "GitHub: Incident with Webhooks",
       "content_text": "Nov 11 , 20:56 UTC\nUpdate - We’re investigating issues impacting multiple GitHub products including Actions, Pages, and Copilot products.\nNov 11 , 20:56 UTC\nUpdate - Pages is experiencing degraded availability. We are continuing to investigate.\nNov 11 , 20:48 UTC\nUpdate - Webhooks is experiencing degraded performance. We are continuing to investigate.\nNov 11 , 20:48 UTC\nUpdate - Actions is experiencing degraded availability. We are continuing to investigate.\nNov 11 , 20:48 UTC\nInvestigating -…",
@@ -9016,97 +9107,6 @@
         }
       },
       "url": "https://www.githubstatus.com/incidents/8tzbpcnl75jp"
-    },
-    {
-      "id": "1f7dc6d92591bdc80968",
-      "title": "OpenAI: File Download errors",
-      "content_text": "Status: Resolved\nAll impacted services have now fully recovered.\nAffected components\nFile uploads (Operational)\nImages (Operational)\nFiles (Operational)\nResponses (Operational)\nImage Generation (Operational)",
-      "date_published": "2026-10-19T14:14:03Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "1f7dc6d92591bdc80968",
-          "source": "rss",
-          "type": "change",
-          "key": "https://status.openai.com//incidents/01M5A5S1ATN3QB2WCHQ3VDZC81",
-          "source_url": "https://status.openai.com/history.rss",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:54:11Z",
-          "data": {
-            "change": "added",
-            "label": "OpenAI: File Download errors",
-            "item_type": "entry",
-            "summary": "added: OpenAI: File Download errors",
-            "after": {
-              "title": "OpenAI: File Download errors",
-              "link": "https://status.openai.com//incidents/01M5A5S1ATN3QB2WCHQ3VDZC81",
-              "id": "https://status.openai.com//incidents/01M5A5S1ATN3QB2WCHQ3VDZC81",
-              "author": null,
-              "published_at": "2026-10-19T14:14:03Z",
-              "updated_at": "2026-10-19T14:14:03Z",
-              "summary": "Status: Resolved\nAll impacted services have now fully recovered.\nAffected components\nFile uploads (Operational)\nImages (Operational)\nFiles (Operational)\nResponses (Operational)\nImage Generation (Operational)",
-              "categories": [],
-              "feed": {
-                "title": "OpenAI status",
-                "url": "https://status.openai.com/",
-                "feed_url": "https://status.openai.com/history.rss"
-              }
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://status.openai.com/history.rss",
-            "elapsed_ms": 102,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (summary contains \"scheduled maintenance\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=replace(replace(feed.title, \"(?i)^Amazon Web Services.*$\", \"AWS\"), \"(?i)\\\\s*(status|service health)\\\\b.*$\", \"\") + \": \" + title",
-                  "title=title + replace(replace(id, \"^https://status\\\\.aws\\\\.amazon\\\\.com/#[a-z0-9]+-([a-z]+-[a-z]+-\\\\d+)_\\\\d+$\", \" (\\\\1)\"), \"^(?! \\\\().*$\", \"\")"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "cloud-status",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://status.openai.com//incidents/01M5A5S1ATN3QB2WCHQ3VDZC81"
     }
   ]
 }
