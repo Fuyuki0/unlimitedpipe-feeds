@@ -1,13 +1,133 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic indicators (FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ICSA&cosd=2026-10-13&coed=2026-11-12",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-13&coed=2026-11-12",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "adc691663e7d20ba4630",
+      "title": "US 30-year mortgage rate: 7.11% (week of 2026-11-12)",
+      "content_text": "US 30-year mortgage rate for week of 2026-11-12, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-12T12:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "adc691663e7d20ba4630",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-13&coed=2026-11-12#MORTGAGE30US 2026-11-12",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-13&coed=2026-11-12",
+          "timestamp": null,
+          "observed_at": "2026-11-12T17:06:41Z",
+          "data": {
+            "change": "added",
+            "label": "US 30-year mortgage rate: 7.11% (week of 2026-11-12)",
+            "item_type": "record",
+            "summary": "added: US 30-year mortgage rate: 7.11% (week of 2026-11-12)",
+            "after": {
+              "title": "US 30-year mortgage rate: 7.11% (week of 2026-11-12)",
+              "summary": "US 30-year mortgage rate for week of 2026-11-12, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/MORTGAGE30US",
+              "published_at": "2026-11-12T12:30:00Z",
+              "key": "MORTGAGE30US 2026-11-12"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-13&coed=2026-11-12",
+            "content_type": "application/csv",
+            "elapsed_ms": 611,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^-?[\\\\d.]+$\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
+                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
+                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
+                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
+                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
+                  "title=name + \": \" + shown + \" (\" + period + \")\"",
+                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T12:30:00Z\"",
+                  "key=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "key"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "key",
+                "namespace": "us-indicators",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/MORTGAGE30US"
+    },
     {
       "id": "4c955eaf8a8c9734ef7e",
       "title": "US weekly jobless claims: 200,000 new claims (week ending 2026-11-07)",
@@ -11887,126 +12007,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/ICSA"
-    },
-    {
-      "id": "48815af8e94e73149c34",
-      "title": "US 30-year mortgage rate: 7.40% (week of 2026-10-15)",
-      "content_text": "US 30-year mortgage rate for week of 2026-10-15, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-10-15T12:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "48815af8e94e73149c34",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-10&coed=2026-11-09#MORTGAGE30US 2026-10-15",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-10&coed=2026-11-09",
-          "timestamp": null,
-          "observed_at": "2026-11-09T00:00:32Z",
-          "data": {
-            "change": "added",
-            "label": "US 30-year mortgage rate: 7.40% (week of 2026-10-15)",
-            "item_type": "record",
-            "summary": "added: US 30-year mortgage rate: 7.40% (week of 2026-10-15)",
-            "after": {
-              "title": "US 30-year mortgage rate: 7.40% (week of 2026-10-15)",
-              "summary": "US 30-year mortgage rate for week of 2026-10-15, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/MORTGAGE30US",
-              "published_at": "2026-10-15T12:30:00Z",
-              "key": "MORTGAGE30US 2026-10-15"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2026-10-10&coed=2026-11-09",
-            "content_type": "application/csv",
-            "elapsed_ms": 328,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=CPIAUCSL_PC1|CPILFESL_PC1|PAYEMS_CHG|UNRATE|ICSA|FEDFUNDS|MORTGAGE30US|GASREGW"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^-?[\\\\d.]+$\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^CPIAUCSL$\", \"US inflation (CPI, a year before)\"), \"^CPILFESL$\", \"US core inflation (CPI without food and energy, a year before)\"), \"^PAYEMS$\", \"US jobs report: payrolls change\"), \"^UNRATE$\", \"US unemployment rate\")",
-                  "name=replace(replace(replace(name, \"^ICSA$\", \"US weekly jobless claims\"), \"^FEDFUNDS$\", \"Fed funds rate (effective)\"), \"^MORTGAGE30US$\", \"US 30-year mortgage rate\")",
-                  "name=replace(name, \"^GASREGW$\", \"US regular gasoline price\")",
-                  "shown=replace(replace(replace(series, \"^(CPIAUCSL|CPILFESL)$\", round(value, 2) + \"%\"), \"^PAYEMS$\", replace(commas(value * 1000, 0), \"^(?!-)\", \"+\") + \" jobs\"), \"^ICSA$\", commas(value, 0) + \" new claims\")",
-                  "shown=replace(shown, \"^(UNRATE|FEDFUNDS|MORTGAGE30US)$\", value + \"%\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "period=replace(replace(replace(series, \"^ICSA$\", \"week ending \" + date), \"^(MORTGAGE30US|GASREGW)$\", \"week of \" + date), \"^[A-Z0-9]+$\", replace(date, \"^(\\\\d{4}-\\\\d\\\\d)-01$\", \"\\\\1\"))",
-                  "title=name + \": \" + shown + \" (\" + period + \")\"",
-                  "summary=name + \" for \" + period + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T12:30:00Z\"",
-                  "key=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "key"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "key",
-                "namespace": "us-indicators",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/MORTGAGE30US"
     }
   ]
 }
