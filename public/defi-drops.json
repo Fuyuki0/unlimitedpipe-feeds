@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "9f88941308683e7fefa5",
+      "title": "JupUSD TVL down 34% in a day, to $28.9M",
+      "content_text": "JupUSD (Basis Trading) holds $28.9M after a 34.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-12T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9f88941308683e7fefa5",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#jupusd 2026-11-12",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-12T08:27:49Z",
+          "data": {
+            "change": "added",
+            "label": "JupUSD TVL down 34% in a day, to $28.9M",
+            "item_type": "record",
+            "summary": "added: JupUSD TVL down 34% in a day, to $28.9M",
+            "after": {
+              "title": "JupUSD TVL down 34% in a day, to $28.9M",
+              "summary": "JupUSD (Basis Trading) holds $28.9M after a 34.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/jupusd",
+              "published_at": "2026-11-12T00:00:00Z",
+              "day_key": "jupusd 2026-11-12"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 68,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-12T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-12\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/jupusd"
+    },
+    {
       "id": "7c146e4c5dcaf8150817",
       "title": "Anemoy Capital TVL down 46% in a day, to $28.2M",
       "content_text": "Anemoy Capital (RWA) holds $28.2M after a 45.9% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
