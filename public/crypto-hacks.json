@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "bad8b8fadb9fc098178b",
+      "title": "Edel: $300K lost (protocol logic)",
+      "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-12T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "bad8b8fadb9fc098178b",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Edel 1794441600",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-12T17:24:44Z",
+          "data": {
+            "change": "added",
+            "label": "Edel: $300K lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: Edel: $300K lost (protocol logic)",
+            "after": {
+              "title": "Edel: $300K lost (protocol logic)",
+              "summary": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-12T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Edel 1794441600",
+              "chain": [
+                "Ethereum"
+              ],
+              "amount": 300000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 33,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "f1ef9738ae25ca10dee2",
       "title": "Rujira AMM Strategies: $200K lost (protocol logic)",
       "content_text": "Swap Logic Flaw. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10766,115 +10875,6 @@
                 "Radix"
               ],
               "amount": 1249946
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "3cffb4d772a246714d5c",
-      "title": "Float Protocol: $28K lost (oracle manipulation)",
-      "content_text": "Spot Price Manipulation. Target: DeFi Protocol.",
-      "date_published": "2026-08-31T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "3cffb4d772a246714d5c",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Float Protocol 1788134400",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Float Protocol: $28K lost (oracle manipulation)",
-            "item_type": "record",
-            "summary": "added: Float Protocol: $28K lost (oracle manipulation)",
-            "after": {
-              "title": "Float Protocol: $28K lost (oracle manipulation)",
-              "summary": "Spot Price Manipulation. Target: DeFi Protocol.",
-              "published_at": "2026-08-31T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Float Protocol 1788134400",
-              "chain": [
-                "Ethereum"
-              ],
-              "amount": 28000
             }
           },
           "metadata": {
