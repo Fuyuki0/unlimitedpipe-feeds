@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "56b9d794f4232640732a",
+      "title": "Bank of Japan: Basic Figures on Fails (Oct.)",
+      "content_text": "Bank of Japan: Basic Figures on Fails (Oct.)",
+      "date_published": "2026-11-12T07:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "56b9d794f4232640732a",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.boj.or.jp/en/statistics/set/bffail/sjgb2610.pdf",
+          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-12T07:31:18Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of Japan: Basic Figures on Fails (Oct.)",
+            "item_type": "entry",
+            "summary": "added: Bank of Japan: Basic Figures on Fails (Oct.)",
+            "after": {
+              "title": "Bank of Japan: Basic Figures on Fails (Oct.)",
+              "link": "http://www.boj.or.jp/en/statistics/set/bffail/sjgb2610.pdf",
+              "id": "http://www.boj.or.jp/en/statistics/set/bffail/sjgb2610.pdf",
+              "author": null,
+              "published_at": "2026-11-12T07:30:00Z",
+              "updated_at": "2026-11-12T07:30:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Bank of Japan：RSS",
+                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
+                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
+              },
+              "outlet": "Bank of Japan"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+            "elapsed_ms": 231,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.boj.or.jp/en/statistics/set/bffail/sjgb2610.pdf"
+    },
     {
       "id": "3425d92d2e0f7dea73f2",
       "title": "Reserve Bank of India: Underwriting Auction for sale of Government Security for ₹34,000 crore on November 13, 2026",
@@ -15970,113 +16077,6 @@
         }
       },
       "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261027~506ef03145.en.html"
-    },
-    {
-      "id": "0577e6b099a4af37548d",
-      "title": "ECB: Survey on the Access to Finance of Enterprises: lending conditions tightened",
-      "content_text": "ECB: Survey on the Access to Finance of Enterprises: lending conditions tightened",
-      "date_published": "2026-10-26T09:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0577e6b099a4af37548d",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261026~bde7b6d11a.en.html",
-          "source_url": "https://www.ecb.europa.eu/rss/press.html",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:40Z",
-          "data": {
-            "change": "added",
-            "label": "ECB: Survey on the Access to Finance of Enterprises: lending conditions tightened",
-            "item_type": "entry",
-            "summary": "added: ECB: Survey on the Access to Finance of Enterprises: lending conditions tightened",
-            "after": {
-              "title": "ECB: Survey on the Access to Finance of Enterprises: lending conditions tightened",
-              "link": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261026~bde7b6d11a.en.html",
-              "id": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261026~bde7b6d11a.en.html",
-              "author": null,
-              "published_at": "2026-10-26T09:00:00Z",
-              "updated_at": "2026-10-26T09:00:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "ECB - European Central Bank",
-                "url": "https://www.ecb.europa.eu/",
-                "feed_url": "https://www.ecb.europa.eu/rss/press.html"
-              },
-              "outlet": "ECB"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.ecb.europa.eu/rss/press.html",
-            "elapsed_ms": 325,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261026~bde7b6d11a.en.html"
     }
   ]
 }
