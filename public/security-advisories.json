@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://www.jpcert.or.jp/english/rss/jpcert-en.rdf",
+  "home_page_url": "https://cert.europa.eu/publications/security-advisories-rss",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "21507de2281789d88d21",
+      "title": "CERT-EU: 2026-020: Critical Vulnerabilities in Citrix NetScaler ADC and NetScaler Gateway",
+      "content_text": "On 12 November 2026, the Cloud Software Group published security bulletins for its Citrix products addressing 28 memory flaws in Citrix NetScaler ADC and Citrix NetScaler Gateway. One of these vulnerabilities, CVE-2026-120868, affects every deployment, including those using the default configuration. The vendor bulletin describes the impact as unpredictable behaviour and denial of service.\nCitrix reports no exploitation, and no public proof-of-concept has been confirmed. CERT-EU strongly…",
+      "date_published": "2026-11-12T18:20:53Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "21507de2281789d88d21",
+          "source": "rss",
+          "type": "change",
+          "key": "https://cert.europa.eu/publications/security-advisories-10957",
+          "source_url": "https://cert.europa.eu/publications/security-advisories-rss",
+          "timestamp": null,
+          "observed_at": "2026-11-12T18:10:41Z",
+          "data": {
+            "change": "added",
+            "label": "CERT-EU: 2026-020: Critical Vulnerabilities in Citrix NetScaler ADC and NetScaler Gateway",
+            "item_type": "entry",
+            "summary": "added: CERT-EU: 2026-020: Critical Vulnerabilities in Citrix NetScaler ADC and NetScaler Gateway",
+            "after": {
+              "title": "CERT-EU: 2026-020: Critical Vulnerabilities in Citrix NetScaler ADC and NetScaler Gateway",
+              "link": "https://cert.europa.eu/publications/security-advisories/2026-020/",
+              "id": "https://cert.europa.eu/publications/security-advisories-10957",
+              "author": null,
+              "published_at": "2026-11-12T18:20:53Z",
+              "updated_at": "2026-11-12T18:20:53Z",
+              "summary": "On 12 November 2026, the Cloud Software Group published security bulletins for its Citrix products addressing 28 memory flaws in Citrix NetScaler ADC and Citrix NetScaler Gateway. One of these vulnerabilities, CVE-2026-120868, affects every deployment, including those using the default configuration. The vendor bulletin describes the impact as unpredictable behaviour and denial of service.\nCitrix reports no exploitation, and no public proof-of-concept has been confirmed. CERT-EU strongly recommends upgrading all customer-managed NetScaler ADC and NetScaler Gateway appliances to the fixed releases. Internet-facing Gateway and AAA appliances should be upgraded first.",
+              "categories": [],
+              "feed": {
+                "title": "Latest publications of type Security Advisories",
+                "url": "https://cert.europa.eu/publications/security-advisories/",
+                "feed_url": "https://cert.europa.eu/publications/security-advisories-rss"
+              },
+              "agency": "CERT-EU"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://cert.europa.eu/publications/security-advisories-rss",
+            "elapsed_ms": 524,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://cert.europa.eu/publications/security-advisories/2026-020/"
+    },
     {
       "id": "4662aff9ee2e484f424a",
       "title": "JPCERT/CC: Security Alert: Microsoft Releases November 2026 Security Updates",
