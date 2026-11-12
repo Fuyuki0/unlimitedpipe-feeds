@@ -1,13 +1,125 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "f5ac0e928f589b622748",
+      "title": "Federal Reserve: Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+      "content_text": "Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+      "date_published": "2026-11-12T16:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f5ac0e928f589b622748",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261112a.htm",
+          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-12T16:13:32Z",
+          "data": {
+            "change": "added",
+            "label": "Federal Reserve: Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+            "item_type": "entry",
+            "summary": "added: Federal Reserve: Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+            "after": {
+              "title": "Federal Reserve: Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+              "link": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261112a.htm",
+              "id": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261112a.htm",
+              "author": null,
+              "published_at": "2026-11-12T16:00:00Z",
+              "updated_at": "2026-11-12T16:00:00Z",
+              "summary": "Federal Reserve Board issues enforcement action with former employee of United Community Bank",
+              "categories": [
+                "Enforcement Actions"
+              ],
+              "feed": {
+                "title": "FRB: Press Release - All Releases",
+                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
+                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
+              },
+              "outlet": "Federal Reserve"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+            "elapsed_ms": 83,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261112a.htm",
+      "tags": [
+        "Enforcement Actions"
+      ]
+    },
     {
       "id": "7d8f596c8bd072e51f81",
       "title": "Reserve Bank of India: RBI to conduct 3-day Variable Rate Reverse Repo (VRRR) auction under LAF on November 13, 2026",
@@ -15965,118 +16077,6 @@
         }
       },
       "url": "https://www.bankofengland.co.uk/news/2026/october/bank-of-england-sets-out-approach-to-tokenised-collateral-in-central-clearing"
-    },
-    {
-      "id": "0364925f24d19054fd75",
-      "title": "Federal Reserve: Federal Reserve issues FOMC statement",
-      "content_text": "Federal Reserve issues FOMC statement",
-      "date_published": "2026-10-28T18:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0364925f24d19054fd75",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-          "source_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:40Z",
-          "data": {
-            "change": "added",
-            "label": "Federal Reserve: Federal Reserve issues FOMC statement",
-            "item_type": "entry",
-            "summary": "added: Federal Reserve: Federal Reserve issues FOMC statement",
-            "after": {
-              "title": "Federal Reserve: Federal Reserve issues FOMC statement",
-              "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-              "id": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-              "author": null,
-              "published_at": "2026-10-28T18:00:00Z",
-              "updated_at": "2026-10-28T18:00:00Z",
-              "summary": "Federal Reserve issues FOMC statement",
-              "categories": [
-                "Monetary Policy"
-              ],
-              "feed": {
-                "title": "FRB: Press Release - All Releases",
-                "url": "https://www.federalreserve.gov/feeds/feeds.htm",
-                "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml"
-              },
-              "outlet": "Federal Reserve"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.federalreserve.gov/feeds/press_all.xml",
-            "elapsed_ms": 49,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-      "tags": [
-        "Monetary Policy"
-      ]
     }
   ]
 }
