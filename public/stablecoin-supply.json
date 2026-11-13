@@ -9,6 +9,118 @@
   },
   "items": [
     {
+      "id": "554be01874ef108a366f",
+      "title": "USDf burned $103.3M in a day, supply now $1.6B",
+      "content_text": "Falcon USD (USDf): -$103.3M in 24 hours; week before: $1.7B.",
+      "date_published": "2026-11-13T16:45:21Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "554be01874ef108a366f",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDf 2026-11-13",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-11-13T16:45:21Z",
+          "data": {
+            "change": "added",
+            "label": "USDf burned $103.3M in a day, supply now $1.6B",
+            "item_type": "record",
+            "summary": "added: USDf burned $103.3M in a day, supply now $1.6B",
+            "after": {
+              "id": "246",
+              "name": "Falcon USD",
+              "symbol": "USDf",
+              "gecko_id": "falcon-finance",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "crypto-backed",
+              "circulating": {
+                "peggedUSD": 1557723345.7744563
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 1661040226.601577
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 1660510811.3114111
+              },
+              "price": 0.9951969206882391,
+              "supply": 1557723345.7744563,
+              "change": -103316880.82712078,
+              "moved": "-$103.3M",
+              "title": "USDf burned $103.3M in a day, supply now $1.6B",
+              "summary": "Falcon USD (USDf): -$103.3M in 24 hours; week before: $1.7B.",
+              "link": "https://defillama.com/stablecoin/falcon-finance",
+              "day_key": "USDf 2026-11-13"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 71,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-11-13\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/falcon-finance"
+    },
+    {
       "id": "c1da7e191c42740e250a",
       "title": "USD1 burned $100.7M in a day, supply now $3.2B",
       "content_text": "World Liberty Financial USD (USD1): -$100.7M in 24 hours; week before: $3.6B.",
@@ -11095,118 +11207,6 @@
         }
       },
       "url": "https://defillama.com/stablecoin/usds"
-    },
-    {
-      "id": "5e7759096c29e6c4ed8a",
-      "title": "BUIDL minted $133.5M in a day, supply now $2.2B",
-      "content_text": "BlackRock USD (BUIDL): +$133.5M in 24 hours; week before: $2.3B.",
-      "date_published": "2026-09-30T00:41:48Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "5e7759096c29e6c4ed8a",
-          "source": "web",
-          "type": "change",
-          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#BUIDL 2026-09-30",
-          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-          "timestamp": null,
-          "observed_at": "2026-09-30T00:41:48Z",
-          "data": {
-            "change": "added",
-            "label": "BUIDL minted $133.5M in a day, supply now $2.2B",
-            "item_type": "record",
-            "summary": "added: BUIDL minted $133.5M in a day, supply now $2.2B",
-            "after": {
-              "id": "173",
-              "name": "BlackRock USD",
-              "symbol": "BUIDL",
-              "gecko_id": "blackrock-usd-institutional-digital-liquidity-fund",
-              "pegType": "peggedUSD",
-              "priceSource": "coingecko",
-              "pegMechanism": "fiat-backed",
-              "circulating": {
-                "peggedUSD": 2244829721.767649
-              },
-              "circulatingPrevDay": {
-                "peggedUSD": 2111364899.2676492
-              },
-              "circulatingPrevWeek": {
-                "peggedUSD": 2294574743.527649
-              },
-              "price": 1,
-              "supply": 2244829721.767649,
-              "change": 133464822.5,
-              "moved": "+$133.5M",
-              "title": "BUIDL minted $133.5M in a day, supply now $2.2B",
-              "summary": "BlackRock USD (BUIDL): +$133.5M in 24 hours; week before: $2.3B.",
-              "link": "https://defillama.com/stablecoin/blackrock-usd-institutional-digital-liquidity-fund",
-              "day_key": "BUIDL 2026-09-30"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-            "content_type": "application/json",
-            "elapsed_ms": 70,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "supply=circulating.peggedUSD",
-                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.32",
-              "args": {
-                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
-                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
-                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
-                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
-                  "day_key=symbol + \" 2026-09-30\""
-                ],
-                "drop": [
-                  "chainCirculating",
-                  "chains",
-                  "circulatingPrevMonth"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "day_key",
-                "namespace": "stablecoin-supply",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/stablecoin/blackrock-usd-institutional-digital-liquidity-fund"
     }
   ]
 }
