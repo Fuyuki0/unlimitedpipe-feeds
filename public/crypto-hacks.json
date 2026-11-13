@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "3c537d2fad3ac5193d37",
+      "title": "Pennysia: $5.1K lost (access control)",
+      "content_text": "Arbitrary External Call. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-13T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3c537d2fad3ac5193d37",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Pennysia 1794528000",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-13T20:55:05Z",
+          "data": {
+            "change": "added",
+            "label": "Pennysia: $5.1K lost (access control)",
+            "item_type": "record",
+            "summary": "added: Pennysia: $5.1K lost (access control)",
+            "after": {
+              "title": "Pennysia: $5.1K lost (access control)",
+              "summary": "Arbitrary External Call. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-13T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Pennysia 1794528000",
+              "chain": [
+                "Ethereum"
+              ],
+              "amount": 5131
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 81,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "bad8b8fadb9fc098178b",
       "title": "Edel: $300K lost (protocol logic)",
       "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10766,115 +10875,6 @@
                 "Flow"
               ],
               "amount": 410000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "a3e9cafcd65f5e5af3bc",
-      "title": "Radix: $1.2M lost (access control)",
-      "content_text": "Improper Access Control. Target: Chain.",
-      "date_published": "2026-08-31T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "a3e9cafcd65f5e5af3bc",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Radix 1788134400",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Radix: $1.2M lost (access control)",
-            "item_type": "record",
-            "summary": "added: Radix: $1.2M lost (access control)",
-            "after": {
-              "title": "Radix: $1.2M lost (access control)",
-              "summary": "Improper Access Control. Target: Chain.",
-              "published_at": "2026-08-31T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Radix 1788134400",
-              "chain": [
-                "Radix"
-              ],
-              "amount": 1249946
             }
           },
           "metadata": {
