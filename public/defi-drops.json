@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "736c7e23b88e7ad04957",
+      "title": "Rysk V12 TVL down 40% in a day, to $24.3M",
+      "content_text": "Rysk V12 (Options Vault) holds $24.3M after a 40.2% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-13T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "736c7e23b88e7ad04957",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#rysk-v12 2026-11-13",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-13T09:59:34Z",
+          "data": {
+            "change": "added",
+            "label": "Rysk V12 TVL down 40% in a day, to $24.3M",
+            "item_type": "record",
+            "summary": "added: Rysk V12 TVL down 40% in a day, to $24.3M",
+            "after": {
+              "title": "Rysk V12 TVL down 40% in a day, to $24.3M",
+              "summary": "Rysk V12 (Options Vault) holds $24.3M after a 40.2% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/rysk-v12",
+              "published_at": "2026-11-13T00:00:00Z",
+              "day_key": "rysk-v12 2026-11-13"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 67,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-13T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-13\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/rysk-v12"
+    },
+    {
       "id": "c676c7aff1f121508e32",
       "title": "JupUSD TVL down 34% in a day, to $28.9M",
       "content_text": "JupUSD (Basis Trading) holds $28.9M after a 33.8% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
