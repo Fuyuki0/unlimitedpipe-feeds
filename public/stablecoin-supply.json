@@ -9,6 +9,230 @@
   },
   "items": [
     {
+      "id": "24dbe4f959cd738b5637",
+      "title": "USDC burned $651M in a day, supply now $69.5B",
+      "content_text": "USD Coin (USDC): -$651M in 24 hours; week before: $71.1B.",
+      "date_published": "2026-11-13T00:23:51Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "24dbe4f959cd738b5637",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDC 2026-11-13",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-11-13T00:23:51Z",
+          "data": {
+            "change": "added",
+            "label": "USDC burned $651M in a day, supply now $69.5B",
+            "item_type": "record",
+            "summary": "added: USDC burned $651M in a day, supply now $69.5B",
+            "after": {
+              "id": "2",
+              "name": "USD Coin",
+              "symbol": "USDC",
+              "gecko_id": "usd-coin",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 69489368412.54886
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 70140375527.14397
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 71127870441.58775
+              },
+              "price": 0.9998189472,
+              "supply": 69489368412.54886,
+              "change": -651007114.595108,
+              "moved": "-$651M",
+              "title": "USDC burned $651M in a day, supply now $69.5B",
+              "summary": "USD Coin (USDC): -$651M in 24 hours; week before: $71.1B.",
+              "link": "https://defillama.com/stablecoin/usd-coin",
+              "day_key": "USDC 2026-11-13"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 46,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-11-13\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/usd-coin"
+    },
+    {
+      "id": "e625815f7f95f5ee4e40",
+      "title": "PYUSD burned $116.1M in a day, supply now $2.7B",
+      "content_text": "PayPal USD (PYUSD): -$116.1M in 24 hours; week before: $2.7B.",
+      "date_published": "2026-11-13T00:23:51Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e625815f7f95f5ee4e40",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#PYUSD 2026-11-13",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-11-13T00:23:51Z",
+          "data": {
+            "change": "added",
+            "label": "PYUSD burned $116.1M in a day, supply now $2.7B",
+            "item_type": "record",
+            "summary": "added: PYUSD burned $116.1M in a day, supply now $2.7B",
+            "after": {
+              "id": "120",
+              "name": "PayPal USD",
+              "symbol": "PYUSD",
+              "gecko_id": "paypal-usd",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 2673862441.2443814
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 2789914052.325875
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 2675416449.131767
+              },
+              "price": 0.9995792159999999,
+              "supply": 2673862441.2443814,
+              "change": -116051611.08149338,
+              "moved": "-$116.1M",
+              "title": "PYUSD burned $116.1M in a day, supply now $2.7B",
+              "summary": "PayPal USD (PYUSD): -$116.1M in 24 hours; week before: $2.7B.",
+              "link": "https://defillama.com/stablecoin/paypal-usd",
+              "day_key": "PYUSD 2026-11-13"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 46,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-11-13\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/paypal-usd"
+    },
+    {
       "id": "3d0029af497858a1892e",
       "title": "PYUSD burned $106.4M in a day, supply now $2.7B",
       "content_text": "PayPal USD (PYUSD): -$106.4M in 24 hours; week before: $2.7B.",
@@ -10983,230 +11207,6 @@
         }
       },
       "url": "https://defillama.com/stablecoin/tether"
-    },
-    {
-      "id": "8b8af36a6107908b09fa",
-      "title": "USDGO burned $148M in a day, supply now $1.3B",
-      "content_text": "USDGO (USDGO): -$148M in 24 hours; week before: $1.4B.",
-      "date_published": "2026-09-29T10:22:43Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8b8af36a6107908b09fa",
-          "source": "web",
-          "type": "change",
-          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDGO 2026-09-29",
-          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-          "timestamp": null,
-          "observed_at": "2026-09-29T10:22:43Z",
-          "data": {
-            "change": "added",
-            "label": "USDGO burned $148M in a day, supply now $1.3B",
-            "item_type": "record",
-            "summary": "added: USDGO burned $148M in a day, supply now $1.3B",
-            "after": {
-              "id": "347",
-              "name": "USDGO",
-              "symbol": "USDGO",
-              "gecko_id": "usdgo",
-              "pegType": "peggedUSD",
-              "priceSource": "defillama",
-              "pegMechanism": "fiat-backed",
-              "circulating": {
-                "peggedUSD": 1259774052.5979125
-              },
-              "circulatingPrevDay": {
-                "peggedUSD": 1407770476.8174765
-              },
-              "circulatingPrevWeek": {
-                "peggedUSD": 1403774506.1340415
-              },
-              "price": 0.9999926635222706,
-              "supply": 1259774052.5979125,
-              "change": -147996424.21956396,
-              "moved": "-$148M",
-              "title": "USDGO burned $148M in a day, supply now $1.3B",
-              "summary": "USDGO (USDGO): -$148M in 24 hours; week before: $1.4B.",
-              "link": "https://defillama.com/stablecoin/usdgo",
-              "day_key": "USDGO 2026-09-29"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-            "content_type": "application/json",
-            "elapsed_ms": 50,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "supply=circulating.peggedUSD",
-                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.32",
-              "args": {
-                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
-                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
-                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
-                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
-                  "day_key=symbol + \" 2026-09-29\""
-                ],
-                "drop": [
-                  "chainCirculating",
-                  "chains",
-                  "circulatingPrevMonth"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "day_key",
-                "namespace": "stablecoin-supply",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/stablecoin/usdgo"
-    },
-    {
-      "id": "428b8b367047a0547752",
-      "title": "USDC burned $540.9M in a day, supply now $74.9B",
-      "content_text": "USD Coin (USDC): -$540.9M in 24 hours; week before: $74.4B.",
-      "date_published": "2026-09-29T00:51:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "428b8b367047a0547752",
-          "source": "web",
-          "type": "change",
-          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDC 2026-09-29",
-          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-          "timestamp": null,
-          "observed_at": "2026-09-29T00:51:00Z",
-          "data": {
-            "change": "added",
-            "label": "USDC burned $540.9M in a day, supply now $74.9B",
-            "item_type": "record",
-            "summary": "added: USDC burned $540.9M in a day, supply now $74.9B",
-            "after": {
-              "id": "2",
-              "name": "USD Coin",
-              "symbol": "USDC",
-              "gecko_id": "usd-coin",
-              "pegType": "peggedUSD",
-              "priceSource": "defillama",
-              "pegMechanism": "fiat-backed",
-              "circulating": {
-                "peggedUSD": 74873836735.59631
-              },
-              "circulatingPrevDay": {
-                "peggedUSD": 75414745466.36696
-              },
-              "circulatingPrevWeek": {
-                "peggedUSD": 74434265793.47377
-              },
-              "price": 0.9998703479086016,
-              "supply": 74873836735.59631,
-              "change": -540908730.7706451,
-              "moved": "-$540.9M",
-              "title": "USDC burned $540.9M in a day, supply now $74.9B",
-              "summary": "USD Coin (USDC): -$540.9M in 24 hours; week before: $74.4B.",
-              "link": "https://defillama.com/stablecoin/usd-coin",
-              "day_key": "USDC 2026-09-29"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-            "content_type": "application/json",
-            "elapsed_ms": 73,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.29"
-            },
-            {
-              "step": "map",
-              "version": "0.10.29",
-              "args": {
-                "assign": [
-                  "supply=circulating.peggedUSD",
-                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.29",
-              "args": {
-                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.29",
-              "args": {
-                "assign": [
-                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
-                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
-                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
-                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
-                  "day_key=symbol + \" 2026-09-29\""
-                ],
-                "drop": [
-                  "chainCirculating",
-                  "chains",
-                  "circulatingPrevMonth"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.29",
-              "args": {
-                "key": "day_key",
-                "namespace": "stablecoin-supply",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/stablecoin/usd-coin"
     }
   ]
 }
