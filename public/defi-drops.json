@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "fc13bf5cb63f1d9eb45a",
+      "title": "Orderly Bridge TVL down 42% in a day, to $10.5M",
+      "content_text": "Orderly Bridge (Bridge) holds $10.5M after a 42.4% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-14T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "fc13bf5cb63f1d9eb45a",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#orderly-bridge 2026-11-14",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-14T14:55:02Z",
+          "data": {
+            "change": "added",
+            "label": "Orderly Bridge TVL down 42% in a day, to $10.5M",
+            "item_type": "record",
+            "summary": "added: Orderly Bridge TVL down 42% in a day, to $10.5M",
+            "after": {
+              "title": "Orderly Bridge TVL down 42% in a day, to $10.5M",
+              "summary": "Orderly Bridge (Bridge) holds $10.5M after a 42.4% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/orderly-bridge",
+              "published_at": "2026-11-14T00:00:00Z",
+              "day_key": "orderly-bridge 2026-11-14"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 53,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-14T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-14\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/orderly-bridge"
+    },
+    {
       "id": "e52d3c3335688ce73f1d",
       "title": "Circle Bitcoin TVL down 25% in a day, to $16.9M",
       "content_text": "Circle Bitcoin (Bridge) holds $16.9M after a 25.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
