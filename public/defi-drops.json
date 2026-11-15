@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "846904ddb4b1058b9683",
+      "title": "Jupiter Lend DEX TVL down 37% in a day, to $21.9M",
+      "content_text": "Jupiter Lend DEX (Dexs) holds $21.9M after a 36.5% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "846904ddb4b1058b9683",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#jupiter-lend-dex 2026-11-15",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-15T14:54:39Z",
+          "data": {
+            "change": "added",
+            "label": "Jupiter Lend DEX TVL down 37% in a day, to $21.9M",
+            "item_type": "record",
+            "summary": "added: Jupiter Lend DEX TVL down 37% in a day, to $21.9M",
+            "after": {
+              "title": "Jupiter Lend DEX TVL down 37% in a day, to $21.9M",
+              "summary": "Jupiter Lend DEX (Dexs) holds $21.9M after a 36.5% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/jupiter-lend-dex",
+              "published_at": "2026-11-15T00:00:00Z",
+              "day_key": "jupiter-lend-dex 2026-11-15"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 92,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-15T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-15\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/jupiter-lend-dex"
+    },
+    {
       "id": "11233dcbb2396e90f5f4",
       "title": "Hyperliquid Spot Orderbook TVL down 26% in a day, to $89.8M",
       "content_text": "Hyperliquid Spot Orderbook (Dexs) holds $89.8M after a 26.2% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
