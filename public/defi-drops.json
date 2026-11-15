@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "06f916e5f3dd68d4a2da",
+      "title": "AO Bridge TVL down 25% in a day, to $55.5M",
+      "content_text": "AO Bridge (Canonical Bridge) holds $55.5M after a 25.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "06f916e5f3dd68d4a2da",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#ao-bridge 2026-11-15",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-15T02:25:55Z",
+          "data": {
+            "change": "added",
+            "label": "AO Bridge TVL down 25% in a day, to $55.5M",
+            "item_type": "record",
+            "summary": "added: AO Bridge TVL down 25% in a day, to $55.5M",
+            "after": {
+              "title": "AO Bridge TVL down 25% in a day, to $55.5M",
+              "summary": "AO Bridge (Canonical Bridge) holds $55.5M after a 25.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/ao-bridge",
+              "published_at": "2026-11-15T00:00:00Z",
+              "day_key": "ao-bridge 2026-11-15"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 64,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-15T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-15\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/ao-bridge"
+    },
+    {
       "id": "7e1f3f91e5588d384c35",
       "title": "SUNSwap V3 TVL down 44% in a day, to $86.7M",
       "content_text": "SUNSwap V3 (Dexs) holds $86.7M after a 43.8% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
