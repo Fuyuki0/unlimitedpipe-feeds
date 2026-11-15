@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "20cf754728175e7d3757",
+      "title": "SunSwap V4 TVL down 52% in a day, to $62.4M",
+      "content_text": "SunSwap V4 (Dexs) holds $62.4M after a 52.1% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "20cf754728175e7d3757",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#sunswap-v4 2026-11-15",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-15T04:21:25Z",
+          "data": {
+            "change": "added",
+            "label": "SunSwap V4 TVL down 52% in a day, to $62.4M",
+            "item_type": "record",
+            "summary": "added: SunSwap V4 TVL down 52% in a day, to $62.4M",
+            "after": {
+              "title": "SunSwap V4 TVL down 52% in a day, to $62.4M",
+              "summary": "SunSwap V4 (Dexs) holds $62.4M after a 52.1% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/sunswap-v4",
+              "published_at": "2026-11-15T00:00:00Z",
+              "day_key": "sunswap-v4 2026-11-15"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 213,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-15T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-15\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/sunswap-v4"
+    },
+    {
       "id": "06f916e5f3dd68d4a2da",
       "title": "AO Bridge TVL down 25% in a day, to $55.5M",
       "content_text": "AO Bridge (Canonical Bridge) holds $55.5M after a 25.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
