@@ -9,6 +9,70 @@
   },
   "items": [
     {
+      "id": "110364db5dae23708467",
+      "title": "Enabling the parallel frontend on nightly",
+      "content_text": "TL;DR: We are enabling the parallel frontend of the Rust compiler on nightly by default,\nto find remaining issues in preparation for its stabilization.\nContext\nThe Rust compiler has been using multiple threads to compile code in its \"backend\" part (using LLVM) for a long time. However, its \"frontend\" part (which includes type checking and borrow checking) has been executing sequentially, on a single thread, which of course limits the performance of the compiler. If you are interested in a more…",
+      "date_published": "2026-11-16T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "110364db5dae23708467",
+          "source": "rss",
+          "type": "change",
+          "key": "https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/",
+          "source_url": "https://blog.rust-lang.org/feed.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-16T15:21:10Z",
+          "data": {
+            "change": "added",
+            "label": "Enabling the parallel frontend on nightly",
+            "item_type": "entry",
+            "summary": "added: Enabling the parallel frontend on nightly",
+            "after": {
+              "title": "Enabling the parallel frontend on nightly",
+              "link": "https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/",
+              "id": "https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/",
+              "author": "Jakub Beránek",
+              "published_at": "2026-11-16T00:00:00Z",
+              "updated_at": "2026-11-16T00:00:00Z",
+              "summary": "TL;DR: We are enabling the parallel frontend of the Rust compiler on nightly by default,\nto find remaining issues in preparation for its stabilization.\nContext\nThe Rust compiler has been using multiple threads to compile code in its \"backend\" part (using LLVM) for a long time. However, its \"frontend\" part (which includes type checking and borrow checking) has been executing sequentially, on a single thread, which of course limits the performance of the compiler. If you are interested in a more in-depth explanation of parallelism in the Rust compiler, see this previous post.\nThe compiler frontend actually had support for running in parallel for a long time, but it was not enabled by default due to various issues. Three years ago, we made it possible to opt into the parallel frontend on the nightly channel, with the plan to stabilize it in 2024. Clearly, we did not achieve that goal, but work on the parallel frontend was still slowly progressing in the meantime.\nLast year, Vadim Petrochenkov, together with several other contributors, started a coordinated effort to finally get the parallel frontend over the finish line. Since then, many long-standing issues were fixed, and its performance was improved. Now we are at a point where we would like to make it widely available. But before that, we want to find out if people encounter issues with it in the wild, which is why we are enabling it by default only on the nightly channel. Once we will be confident enough that it is working well, we want to stabilize it.\nThe parallel frontend has been enabled on the nightly channel by default since nightly-2026-11-14 .\nBenefits\nThe primary benefit of enabling the parallel frontend is, of course, faster compilation of Rust programs.\nWe benchmarked the parallel frontend in our benchmark suite, which measures the duration to compile the leaf crate in a crate graph. As usual, the results were varied. In some benchmarks, the parallel frontend barely helped. In others, for example when p",
+              "categories": [],
+              "feed": {
+                "title": "Rust Blog",
+                "url": "https://blog.rust-lang.org/",
+                "feed_url": "https://blog.rust-lang.org/feed.xml"
+              }
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://blog.rust-lang.org/feed.xml",
+            "elapsed_ms": 113,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "rust-news",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/"
+    },
+    {
       "id": "02e925b4d3af59d3de5a",
       "title": "Announcing Rust 1.100.0",
       "content_text": "The Rust team is happy to announce a new version of Rust, 1.100.0. Rust is a programming language empowering everyone to build reliable and efficient software.\nIf you have a previous version of Rust installed via rustup , you can get 1.100.0 with:\n$ rustup update stable\nIf you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.100.0.\nIf you'd like to help us out by testing future releases, you might consider…",
