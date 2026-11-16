@@ -9,6 +9,109 @@
   },
   "items": [
     {
+      "id": "760355c12ecb09f718f7",
+      "title": "Katmai: Volcano activity notice, 2026-11-16",
+      "content_text": "Volcano activity notice from the Alaska Volcano Observatory (USGS) for Katmai, sent 2026-11-16 19:48:35 UTC.",
+      "date_published": "2026-11-16T19:48:35Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "760355c12ecb09f718f7",
+          "source": "web",
+          "type": "change",
+          "key": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices#DOI-USGS-AVO-2026-11-16T19:46:24+00:00",
+          "source_url": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices",
+          "timestamp": null,
+          "observed_at": "2026-11-16T19:51:31Z",
+          "data": {
+            "change": "added",
+            "label": "Katmai: Volcano activity notice, 2026-11-16",
+            "item_type": "record",
+            "summary": "added: Katmai: Volcano activity notice, 2026-11-16",
+            "after": {
+              "title": "Katmai: Volcano activity notice, 2026-11-16",
+              "summary": "Volcano activity notice from the Alaska Volcano Observatory (USGS) for Katmai, sent 2026-11-16 19:48:35 UTC.",
+              "link": "https://volcanoes.usgs.gov/hans-public/notice/DOI-USGS-AVO-2026-11-16T19:46:24+00:00",
+              "published_at": "2026-11-16T19:48:35Z",
+              "id": "DOI-USGS-AVO-2026-11-16T19:46:24+00:00"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://volcanoes.usgs.gov/hans-public/api/notice/getRecentNotices",
+            "content_type": "application/json",
+            "elapsed_ms": 418,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "notice_category != \"Scheduled Update\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "kind=replace(replace(replace(notice_type_title, \"^VAN/VONA$\", \"Volcano activity notice\"), \"^Status Report$\", \"Status report\"), \"^Information Statement$\", \"Information statement\")",
+                  "where=replace(volcanoes, \"^\\\\s*$\", obs_fullname)",
+                  "title=where + \": \" + kind + \", \" + replace(sent_utc, \" .*$\", \"\")",
+                  "summary=kind + \" from the \" + obs_fullname + \" (USGS)\" + replace(\" for \" + volcanoes, \"^ for \\\\s*$\", \"\") + \", sent \" + sent_utc + \" UTC.\"",
+                  "published_at=replace(sent_utc, \" \", \"T\") + \"Z\"",
+                  "link=notice_url",
+                  "id=notice_identifier"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "us-volcano-alerts",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://volcanoes.usgs.gov/hans-public/notice/DOI-USGS-AVO-2026-11-16T19:46:24+00:00"
+    },
+    {
       "id": "50cd535b0b2045770991",
       "title": "Katmai: Volcano activity notice, 2026-11-14",
       "content_text": "Volcano activity notice from the Alaska Volcano Observatory (USGS) for Katmai, sent 2026-11-14 18:48:15 UTC.",
