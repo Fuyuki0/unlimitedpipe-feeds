@@ -9,6 +9,118 @@
   },
   "items": [
     {
+      "id": "711caa7ede4446e874e1",
+      "title": "PYUSD burned $107.7M in a day, supply now $2.5B",
+      "content_text": "PayPal USD (PYUSD): -$107.7M in 24 hours; week before: $2.8B.",
+      "date_published": "2026-11-16T11:13:47Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "711caa7ede4446e874e1",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#PYUSD 2026-11-16",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-11-16T11:13:47Z",
+          "data": {
+            "change": "added",
+            "label": "PYUSD burned $107.7M in a day, supply now $2.5B",
+            "item_type": "record",
+            "summary": "added: PYUSD burned $107.7M in a day, supply now $2.5B",
+            "after": {
+              "id": "120",
+              "name": "PayPal USD",
+              "symbol": "PYUSD",
+              "gecko_id": "paypal-usd",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 2497393570.595916
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 2605101143.4636664
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 2750938483.6295476
+              },
+              "price": 0.9996645132499999,
+              "supply": 2497393570.595916,
+              "change": -107707572.86775064,
+              "moved": "-$107.7M",
+              "title": "PYUSD burned $107.7M in a day, supply now $2.5B",
+              "summary": "PayPal USD (PYUSD): -$107.7M in 24 hours; week before: $2.8B.",
+              "link": "https://defillama.com/stablecoin/paypal-usd",
+              "day_key": "PYUSD 2026-11-16"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 31,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-11-16\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/paypal-usd"
+    },
+    {
       "id": "709b05ee58f23a5f0075",
       "title": "USDT minted $110.7M in a day, supply now $175.4B",
       "content_text": "Tether (USDT): +$110.7M in 24 hours; week before: $176.9B.",
@@ -11095,118 +11207,6 @@
         }
       },
       "url": "https://defillama.com/stablecoin/tether"
-    },
-    {
-      "id": "85fa93cf8a67b5774615",
-      "title": "PYUSD minted $119.5M in a day, supply now $2.8B",
-      "content_text": "PayPal USD (PYUSD): +$119.5M in 24 hours; week before: $2.7B.",
-      "date_published": "2026-10-01T21:40:59Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "85fa93cf8a67b5774615",
-          "source": "web",
-          "type": "change",
-          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#PYUSD 2026-10-01",
-          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-          "timestamp": null,
-          "observed_at": "2026-10-01T21:40:59Z",
-          "data": {
-            "change": "added",
-            "label": "PYUSD minted $119.5M in a day, supply now $2.8B",
-            "item_type": "record",
-            "summary": "added: PYUSD minted $119.5M in a day, supply now $2.8B",
-            "after": {
-              "id": "120",
-              "name": "PayPal USD",
-              "symbol": "PYUSD",
-              "gecko_id": "paypal-usd",
-              "pegType": "peggedUSD",
-              "priceSource": "defillama",
-              "pegMechanism": "fiat-backed",
-              "circulating": {
-                "peggedUSD": 2838743054.3677325
-              },
-              "circulatingPrevDay": {
-                "peggedUSD": 2719258101.9044285
-              },
-              "circulatingPrevWeek": {
-                "peggedUSD": 2696707106.273674
-              },
-              "price": 0.9999881578657552,
-              "supply": 2838743054.3677325,
-              "change": 119484952.46330404,
-              "moved": "+$119.5M",
-              "title": "PYUSD minted $119.5M in a day, supply now $2.8B",
-              "summary": "PayPal USD (PYUSD): +$119.5M in 24 hours; week before: $2.7B.",
-              "link": "https://defillama.com/stablecoin/paypal-usd",
-              "day_key": "PYUSD 2026-10-01"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-            "content_type": "application/json",
-            "elapsed_ms": 43,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.32"
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "supply=circulating.peggedUSD",
-                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.32",
-              "args": {
-                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.32",
-              "args": {
-                "assign": [
-                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
-                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
-                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
-                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
-                  "day_key=symbol + \" 2026-10-01\""
-                ],
-                "drop": [
-                  "chainCirculating",
-                  "chains",
-                  "circulatingPrevMonth"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.32",
-              "args": {
-                "key": "day_key",
-                "namespace": "stablecoin-supply",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/stablecoin/paypal-usd"
     }
   ]
 }
