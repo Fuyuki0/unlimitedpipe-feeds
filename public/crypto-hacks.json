@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "87cec63c0f89ddf09fd8",
+      "title": "MORE Markets: $308K lost (protocol logic)",
+      "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-16T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "87cec63c0f89ddf09fd8",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#MORE Markets 1794787200",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-16T20:00:56Z",
+          "data": {
+            "change": "added",
+            "label": "MORE Markets: $308K lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: MORE Markets: $308K lost (protocol logic)",
+            "after": {
+              "title": "MORE Markets: $308K lost (protocol logic)",
+              "summary": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-16T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "MORE Markets 1794787200",
+              "chain": [
+                "Flow"
+              ],
+              "amount": 308000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 786,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "a4f49da1402394878b2b",
       "title": "Lighter Perps: $10.4M lost (frontend & infrastructure)",
       "content_text": "API Key Compromised. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10766,115 +10875,6 @@
                 "Optimism"
               ],
               "amount": 163326
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "ef75eef5e19f719b4664",
-      "title": "Liquid Network: $320.0M lost (bridge & cross-chain)",
-      "content_text": "Unbacked Cross-Chain Mint. Target: Chain.",
-      "date_published": "2026-09-06T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "ef75eef5e19f719b4664",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Liquid Network 1788652800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Liquid Network: $320.0M lost (bridge & cross-chain)",
-            "item_type": "record",
-            "summary": "added: Liquid Network: $320.0M lost (bridge & cross-chain)",
-            "after": {
-              "title": "Liquid Network: $320.0M lost (bridge & cross-chain)",
-              "summary": "Unbacked Cross-Chain Mint. Target: Chain.",
-              "published_at": "2026-09-06T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Liquid Network 1788652800",
-              "chain": [
-                "Liquid"
-              ],
-              "amount": 320000000
             }
           },
           "metadata": {
