@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://cert.europa.eu/publications/security-advisories-rss",
+  "home_page_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "e5f8c35415f111f86d38",
+      "title": "Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
+      "content_text": "Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
+      "date_published": "2026-11-17T23:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e5f8c35415f111f86d38",
+          "source": "rss",
+          "type": "change",
+          "key": "https://cyber.gc.ca/en/alerts-advisories/al26-029-critical-vulnerability-impacting-oracle-java-cve-2026-114938",
+          "source_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
+          "timestamp": null,
+          "observed_at": "2026-11-17T23:50:04Z",
+          "data": {
+            "change": "added",
+            "label": "Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
+            "item_type": "entry",
+            "summary": "added: Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
+            "after": {
+              "title": "Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
+              "link": "https://cyber.gc.ca/en/alerts-advisories/al26-029-critical-vulnerability-impacting-oracle-java-cve-2026-114938",
+              "id": "https://cyber.gc.ca/en/alerts-advisories/al26-029-critical-vulnerability-impacting-oracle-java-cve-2026-114938",
+              "author": "Canadian Centre for Cyber Security",
+              "published_at": "2026-11-17T23:30:00Z",
+              "updated_at": "2026-11-17T23:30:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Alerts and advisories",
+                "url": "https://cyber.gc.ca/api/cccs/atom/v1/get?feed=alerts_advisories&lang=en",
+                "feed_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en"
+              },
+              "agency": "Canadian Centre for Cyber Security"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.cyber.gc.ca/api/cccs/atom/v1/get?feed=alerts_advisories&lang=en",
+            "elapsed_ms": 195,
+            "not_modified": false,
+            "method": "atom10"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://cyber.gc.ca/en/alerts-advisories/al26-029-critical-vulnerability-impacting-oracle-java-cve-2026-114938"
+    },
     {
       "id": "21507de2281789d88d21",
       "title": "CERT-EU: 2026-020: Critical Vulnerabilities in Citrix NetScaler ADC and NetScaler Gateway",
