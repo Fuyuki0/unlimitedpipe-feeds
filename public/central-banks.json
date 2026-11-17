@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "7b8859dc38d65ec393c0",
+      "title": "Bank of Japan: Release of Latest \"Loans and Bills Discounted by Sector\" and \"Loans to Households\" Data",
+      "content_text": "Bank of Japan: Release of Latest \"Loans and Bills Discounted by Sector\" and \"Loans to Households\" Data",
+      "date_published": "2026-11-16T23:50:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7b8859dc38d65ec393c0",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.boj.or.jp/en/statistics/outline/notice_2026/not261117a.htm",
+          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-17T00:13:29Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of Japan: Release of Latest \"Loans and Bills Discounted by Sector\" and \"Loans to Households\" Data",
+            "item_type": "entry",
+            "summary": "added: Bank of Japan: Release of Latest \"Loans and Bills Discounted by Sector\" and \"Loans to Households\" Data",
+            "after": {
+              "title": "Bank of Japan: Release of Latest \"Loans and Bills Discounted by Sector\" and \"Loans to Households\" Data",
+              "link": "http://www.boj.or.jp/en/statistics/outline/notice_2026/not261117a.htm",
+              "id": "http://www.boj.or.jp/en/statistics/outline/notice_2026/not261117a.htm",
+              "author": null,
+              "published_at": "2026-11-16T23:50:00Z",
+              "updated_at": "2026-11-16T23:50:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Bank of Japan：RSS",
+                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
+                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
+              },
+              "outlet": "Bank of Japan"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+            "elapsed_ms": 367,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.boj.or.jp/en/statistics/outline/notice_2026/not261117a.htm"
+    },
     {
       "id": "e1039d557e1d4adb50c3",
       "title": "Reserve Bank of India: RBI to conduct 2-day Variable Rate Reverse Repo (VRRR) auction under LAF on November 17, 2026",
@@ -15975,113 +16082,6 @@
         }
       },
       "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940"
-    },
-    {
-      "id": "d44e358559841f3f9c93",
-      "title": "Reserve Bank of India: Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract",
-      "content_text": "1. Reserve Bank of India - Liabilities and Assets* (₹ Crore) Item 2025 2026 Variation Oct. 31 Oct. 23 Oct. 30 Week Year 1 2 3 4 5 4 Loans and Advances 4.1 Central Government - 0 0 0 0 4.2 State Governments 20016 21074 20463 -611 447 * Data are provisional; difference, if any, is due to rounding off.\n2. Foreign Exchange Reserves* Item As on October 30, 2026 Variation over Week End-March 2026 Year ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. 1 2 3 4 5 6 7 8 1 Total Reserves 6808728…",
-      "date_published": "2026-11-06T11:41:53Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d44e358559841f3f9c93",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63939",
-          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-06T11:41:53Z",
-          "data": {
-            "change": "added",
-            "label": "Reserve Bank of India: Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract",
-            "item_type": "entry",
-            "summary": "added: Reserve Bank of India: Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract",
-            "after": {
-              "title": "Reserve Bank of India: Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract",
-              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63939",
-              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63939",
-              "author": null,
-              "published_at": null,
-              "updated_at": null,
-              "summary": "1. Reserve Bank of India - Liabilities and Assets* (₹ Crore) Item 2025 2026 Variation Oct. 31 Oct. 23 Oct. 30 Week Year 1 2 3 4 5 4 Loans and Advances 4.1 Central Government - 0 0 0 0 4.2 State Governments 20016 21074 20463 -611 447 * Data are provisional; difference, if any, is due to rounding off.\n2. Foreign Exchange Reserves* Item As on October 30, 2026 Variation over Week End-March 2026 Year ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. 1 2 3 4 5 6 7 8 1 Total Reserves 6808728 717056 -24777 -2691 254866 25949 685697 27324 1.1 Foreign Currency Assets # 5612775 591118 -19299 -2088 375408 38835 600657 26527 1.2 Gold 974120 102591 -5219 -559 -120190 -12805 71058 865 1.3 SDRs 176209 18558 -430 -47 -381 -64 10694 -87 1.4 Reserve Position in the IMF 45625 4790 172 3 29 -18 3287 18 * Difference, if any, is due to rounding off.\n# Excludes (a) SDR holdings of the Reserve Bank, as they are included under the SDR holdings; (b) investment in bonds issued by IIFC (UK); (c) amounts lent under SAARC and ACU currency swap arrangements; and (d) RBI’s contribution to funding of Nexus Global Payments.\n4. Scheduled Commercial Banks - Business in India (₹ Crore) Item Outstanding as on Oct. 15, 2026 Variation over Fortnight Financial year so far Year-on-Year 2025-26 2026-27 2025 2026 1 2 3 4 5 6 2 Liabilities to Others 2.1 Aggregate Deposits 27875910 -519169 1302614 1647123 2074883 3992695 2.1a Growth (Per cent) -1.8 5.8 6.3 9.5 16.7 2.1.1 Demand 3299048 -436882 275653 -390226 429094 325346 2.1.2 Time 24576862 -82287 1026961 2037349 1645789 3667349 2.2 Borrowings 1000281 36258 -54451 192364 -4599 139483 2.3 Other Demand and Time Liabilities 1224273 -15538 30789 100750 141805 131852 7 Bank Credit 22742777 -252075 991782 1382880 1998080 3507023 7.1a Growth (Per cent) -1.1 5.4 6.5 11.6 18.2 7a.1 Food Credit 100093 3806 15959 29821 33836 47603 7a.2 Non-food credit 22642685 -255881 975824 1353059 1964245 3459420 Note: Data include the impact of merger of a non-bank with a bank w.",
-              "categories": [],
-              "feed": {
-                "title": "PRESS RELEASES FROM RBI",
-                "url": "http://www.rbi.org.in",
-                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
-              },
-              "outlet": "Reserve Bank of India"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-            "elapsed_ms": 35,
-            "not_modified": true,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63939"
     }
   ]
 }
