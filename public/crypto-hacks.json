@@ -9,6 +9,119 @@
   },
   "items": [
     {
+      "id": "5a357bd3f745b809cd9f",
+      "title": "Optimizely (OPTIMJACK): $2.3K lost (frontend & infrastructure)",
+      "content_text": "Supply Chain Attack. Target: Web Infrastructure. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-16T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "5a357bd3f745b809cd9f",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Optimizely (OPTIMJACK) 1794787200",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-17T17:57:22Z",
+          "data": {
+            "change": "added",
+            "label": "Optimizely (OPTIMJACK): $2.3K lost (frontend & infrastructure)",
+            "item_type": "record",
+            "summary": "added: Optimizely (OPTIMJACK): $2.3K lost (frontend & infrastructure)",
+            "after": {
+              "title": "Optimizely (OPTIMJACK): $2.3K lost (frontend & infrastructure)",
+              "summary": "Supply Chain Attack. Target: Web Infrastructure. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-16T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Optimizely (OPTIMJACK) 1794787200",
+              "chain": [
+                "Bitcoin",
+                "Litecoin",
+                "TRON",
+                "Ethereum",
+                "BSC"
+              ],
+              "amount": 2260
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 73,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "87cec63c0f89ddf09fd8",
       "title": "MORE Markets: $308K lost (protocol logic)",
       "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10766,115 +10879,6 @@
                 "BSC"
               ],
               "amount": 26414
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "51bde847af128996ff2d",
-      "title": "Cozy V2: $163K lost (protocol logic)",
-      "content_text": "Unknown. Target: DeFi Protocol.",
-      "date_published": "2026-09-07T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "51bde847af128996ff2d",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Cozy V2 1788739200",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Cozy V2: $163K lost (protocol logic)",
-            "item_type": "record",
-            "summary": "added: Cozy V2: $163K lost (protocol logic)",
-            "after": {
-              "title": "Cozy V2: $163K lost (protocol logic)",
-              "summary": "Unknown. Target: DeFi Protocol.",
-              "published_at": "2026-09-07T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Cozy V2 1788739200",
-              "chain": [
-                "Optimism"
-              ],
-              "amount": 163326
             }
           },
           "metadata": {
