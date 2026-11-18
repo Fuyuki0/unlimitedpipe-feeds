@@ -1,13 +1,685 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "New listings: Coinbase, Binance, OKX, Upbit",
-  "home_page_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
+  "home_page_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "efe64305f2f06651438c",
+      "title": "Binance lists EWJB (EWJBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: EWJBUSDT, EWJB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "efe64305f2f06651438c",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance EWJBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists EWJB (EWJBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists EWJB (EWJBUSDT)",
+            "after": {
+              "pair": "EWJBUSDT",
+              "name": "EWJB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists EWJB (EWJBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: EWJBUSDT, EWJB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance EWJBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "870b39f224dc71579841",
+      "title": "Binance lists EWTB (EWTBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: EWTBUSDT, EWTB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "870b39f224dc71579841",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance EWTBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists EWTB (EWTBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists EWTB (EWTBUSDT)",
+            "after": {
+              "pair": "EWTBUSDT",
+              "name": "EWTB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists EWTB (EWTBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: EWTBUSDT, EWTB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance EWTBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "30d610d249902326a272",
+      "title": "Binance lists EWZB (EWZBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: EWZBUSDT, EWZB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "30d610d249902326a272",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance EWZBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists EWZB (EWZBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists EWZB (EWZBUSDT)",
+            "after": {
+              "pair": "EWZBUSDT",
+              "name": "EWZB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists EWZB (EWZBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: EWZBUSDT, EWZB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance EWZBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "9cbaefda0b13f577277e",
+      "title": "Binance lists EWZSB (EWZSBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: EWZSBUSDT, EWZSB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9cbaefda0b13f577277e",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance EWZSBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists EWZSB (EWZSBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists EWZSB (EWZSBUSDT)",
+            "after": {
+              "pair": "EWZSBUSDT",
+              "name": "EWZSB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists EWZSB (EWZSBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: EWZSBUSDT, EWZSB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance EWZSBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "c59be79f7600a03e3d31",
+      "title": "Binance lists IWMB (IWMBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: IWMBUSDT, IWMB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c59be79f7600a03e3d31",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance IWMBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists IWMB (IWMBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists IWMB (IWMBUSDT)",
+            "after": {
+              "pair": "IWMBUSDT",
+              "name": "IWMB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists IWMB (IWMBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: IWMBUSDT, IWMB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance IWMBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "382cb8fe5094f6bbc9b8",
+      "title": "Binance lists MELIB (MELIBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: MELIBUSDT, MELIB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "382cb8fe5094f6bbc9b8",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance MELIBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists MELIB (MELIBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists MELIB (MELIBUSDT)",
+            "after": {
+              "pair": "MELIBUSDT",
+              "name": "MELIB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists MELIB (MELIBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: MELIBUSDT, MELIB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance MELIBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
+    {
+      "id": "46b1fdb5b6430fe79970",
+      "title": "Binance lists NUB (NUBUSDT)",
+      "content_text": "A new trading pair on Binance's public market list: NUBUSDT, NUB against USDT. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-18T13:25:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "46b1fdb5b6430fe79970",
+          "source": "web",
+          "type": "change",
+          "key": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false#Binance NUBUSDT",
+          "source_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+          "timestamp": null,
+          "observed_at": "2026-11-18T13:25:05Z",
+          "data": {
+            "change": "added",
+            "label": "Binance lists NUB (NUBUSDT)",
+            "item_type": "record",
+            "summary": "added: Binance lists NUB (NUBUSDT)",
+            "after": {
+              "pair": "NUBUSDT",
+              "name": "NUB",
+              "quote": "USDT",
+              "listed_at": null,
+              "exchange": "Binance",
+              "title": "Binance lists NUB (NUBUSDT)",
+              "summary": "A new trading pair on Binance's public market list: NUBUSDT, NUB against USDT. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Binance NUBUSDT"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+            "content_type": "application/json",
+            "elapsed_ms": 673,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false"
+    },
     {
       "id": "01cf86c2fd29d13619ea",
       "title": "OKX lists (XZHONGJI-USDT)",
@@ -8655,678 +9327,6 @@
               "summary": "A new trading pair on OKX's public market list: XCGNX-USDT, XCGNX against USDT. New tokens are often risky; data, not investment advice.",
               "published_at": "2026-10-12T08:00:00Z",
               "listing": "OKX XCGNX-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "8263a04ddc0134b77c8b",
-      "title": "OKX lists XCOST (XCOST-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XCOST-USDT, XCOST against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-23T07:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8263a04ddc0134b77c8b",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XCOST-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XCOST (XCOST-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XCOST (XCOST-USDT)",
-            "after": {
-              "pair": "XCOST-USDT",
-              "name": "XCOST",
-              "quote": "USDT",
-              "listed_at": "1792738800000",
-              "exchange": "OKX",
-              "title": "OKX lists XCOST (XCOST-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XCOST-USDT, XCOST against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-23T07:00:00Z",
-              "listing": "OKX XCOST-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "cecb6f62ca4937c658e6",
-      "title": "OKX lists XCRDO (XCRDO-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XCRDO-USDT, XCRDO against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-09T09:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "cecb6f62ca4937c658e6",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XCRDO-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XCRDO (XCRDO-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XCRDO (XCRDO-USDT)",
-            "after": {
-              "pair": "XCRDO-USDT",
-              "name": "XCRDO",
-              "quote": "USDT",
-              "listed_at": "1791538200000",
-              "exchange": "OKX",
-              "title": "OKX lists XCRDO (XCRDO-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XCRDO-USDT, XCRDO against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-09T09:30:00Z",
-              "listing": "OKX XCRDO-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "c9056761b06aea2df917",
-      "title": "OKX lists XDDOG (XDDOG-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XDDOG-USDT, XDDOG against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-23T07:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "c9056761b06aea2df917",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XDDOG-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XDDOG (XDDOG-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XDDOG (XDDOG-USDT)",
-            "after": {
-              "pair": "XDDOG-USDT",
-              "name": "XDDOG",
-              "quote": "USDT",
-              "listed_at": "1792740600000",
-              "exchange": "OKX",
-              "title": "OKX lists XDDOG (XDDOG-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XDDOG-USDT, XDDOG against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-23T07:30:00Z",
-              "listing": "OKX XDDOG-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "0351219077a399b5e49d",
-      "title": "OKX lists XEWJ (XEWJ-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XEWJ-USDT, XEWJ against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-14T07:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0351219077a399b5e49d",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XEWJ-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XEWJ (XEWJ-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XEWJ (XEWJ-USDT)",
-            "after": {
-              "pair": "XEWJ-USDT",
-              "name": "XEWJ",
-              "quote": "USDT",
-              "listed_at": "1791961200000",
-              "exchange": "OKX",
-              "title": "OKX lists XEWJ (XEWJ-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XEWJ-USDT, XEWJ against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-14T07:00:00Z",
-              "listing": "OKX XEWJ-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "8e66dde78fe063a3b2c2",
-      "title": "OKX lists XEWT (XEWT-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XEWT-USDT, XEWT against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-14T07:30:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8e66dde78fe063a3b2c2",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XEWT-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XEWT (XEWT-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XEWT (XEWT-USDT)",
-            "after": {
-              "pair": "XEWT-USDT",
-              "name": "XEWT",
-              "quote": "USDT",
-              "listed_at": "1791963000000",
-              "exchange": "OKX",
-              "title": "OKX lists XEWT (XEWT-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XEWT-USDT, XEWT against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-14T07:30:00Z",
-              "listing": "OKX XEWT-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "d04d65e5113cdd994bda",
-      "title": "OKX lists XEWZ (XEWZ-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XEWZ-USDT, XEWZ against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-14T08:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d04d65e5113cdd994bda",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XEWZ-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XEWZ (XEWZ-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XEWZ (XEWZ-USDT)",
-            "after": {
-              "pair": "XEWZ-USDT",
-              "name": "XEWZ",
-              "quote": "USDT",
-              "listed_at": "1791964800000",
-              "exchange": "OKX",
-              "title": "OKX lists XEWZ (XEWZ-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XEWZ-USDT, XEWZ against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-14T08:00:00Z",
-              "listing": "OKX XEWZ-USDT"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-            "content_type": "application/json",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT"
-    },
-    {
-      "id": "0f48afcdeb5172dd1f36",
-      "title": "OKX lists XFLNC (XFLNC-USDT)",
-      "content_text": "A new trading pair on OKX's public market list: XFLNC-USDT, XFLNC against USDT. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-10-09T10:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0f48afcdeb5172dd1f36",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.okx.com/api/v5/public/instruments?instType=SPOT#OKX XFLNC-USDT",
-          "source_url": "https://www.okx.com/api/v5/public/instruments?instType=SPOT",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "OKX lists XFLNC (XFLNC-USDT)",
-            "item_type": "record",
-            "summary": "added: OKX lists XFLNC (XFLNC-USDT)",
-            "after": {
-              "pair": "XFLNC-USDT",
-              "name": "XFLNC",
-              "quote": "USDT",
-              "listed_at": "1791540000000",
-              "exchange": "OKX",
-              "title": "OKX lists XFLNC (XFLNC-USDT)",
-              "summary": "A new trading pair on OKX's public market list: XFLNC-USDT, XFLNC against USDT. New tokens are often risky; data, not investment advice.",
-              "published_at": "2026-10-09T10:00:00Z",
-              "listing": "OKX XFLNC-USDT"
             }
           },
           "metadata": {
