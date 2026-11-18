@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "5b74db0d723ff411753e",
+      "title": "FDA approves Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease",
+      "content_text": "Novel drug approval of 11/18/2026: Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease.",
+      "date_published": "2026-11-18T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "5b74db0d723ff411753e",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026#Infilbray",
+          "source_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+          "timestamp": null,
+          "observed_at": "2026-11-18T22:07:59Z",
+          "data": {
+            "change": "added",
+            "label": "FDA approves Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease",
+            "item_type": "record",
+            "summary": "added: FDA approves Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease",
+            "after": {
+              "title": "FDA approves Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease",
+              "summary": "Novel drug approval of 11/18/2026: Infilbray (venglustat) to treat the neurological symptoms of Type 3 Gaucher disease.",
+              "link": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+              "published_at": "2026-11-18T00:00:00Z",
+              "drug": "Infilbray"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+            "content_type": "text/html",
+            "elapsed_ms": 330,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "name != \"\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "use=replace(replace(trim(use), \"^To (adults|patients|pediatric)\", \"for \\\\1\"), \"^To \", \"to \")",
+                  "title=\"FDA approves \" + trim(name) + \" (\" + trim(ingredient) + \") \" + replace(use, \"^(.{150}[^ ,]*)[ ,].+$\", \"\\\\1…\")",
+                  "summary=\"Novel drug approval of \" + trim(approved) + \": \" + trim(name) + \" (\" + trim(ingredient) + \") \" + use + \".\"",
+                  "published_at=date(replace(replace(replace(trim(approved), \"^(\\\\d)/\", \"0\\\\1/\"), \"/(\\\\d)/\", \"/0\\\\1/\"), \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\"))",
+                  "link=\"https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-\" + replace(published_at, \"-.*$\", \"\")",
+                  "drug=trim(name)"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "drug"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "drug",
+                "namespace": "drug-approvals",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
+    },
+    {
       "id": "ef0d9050fddbb3aa04a1",
       "title": "FDA approves Lembaz (adrabetadex) to treat a severe form of Niemann-Pick disease type C",
       "content_text": "Novel drug approval of 11/17/2026: Lembaz (adrabetadex) to treat a severe form of Niemann-Pick disease type C.",
