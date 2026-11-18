@@ -1,13 +1,106 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Security advisories (CERT-EU, JPCERT/CC, Canada)",
-  "home_page_url": "https://www.cyber.gc.ca/api/cccs/rss/v1/get?feed=alerts_advisories&lang=en",
+  "home_page_url": "https://cert.europa.eu/publications/security-advisories-rss",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "a4ed2efc006ed122a120",
+      "title": "CERT-EU: 2026-021: High Severity Vulnerability in Java SE and OpenJDK",
+      "content_text": "On 17 November 2026, Oracle and the OpenJDK project released fixes for CVE-2026-114938, a high severity vulnerability in OpenJDK which could lead, under certain circumstances, in unauthenticated Remote Code Execution (RCE).\nCERT-EU recommends updating vulnerable version of OpenJDK, prioritising internet facing applications.",
+      "date_published": "2026-11-18T10:11:05Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a4ed2efc006ed122a120",
+          "source": "rss",
+          "type": "change",
+          "key": "https://cert.europa.eu/publications/security-advisories-10958",
+          "source_url": "https://cert.europa.eu/publications/security-advisories-rss",
+          "timestamp": null,
+          "observed_at": "2026-11-18T09:28:39Z",
+          "data": {
+            "change": "added",
+            "label": "CERT-EU: 2026-021: High Severity Vulnerability in Java SE and OpenJDK",
+            "item_type": "entry",
+            "summary": "added: CERT-EU: 2026-021: High Severity Vulnerability in Java SE and OpenJDK",
+            "after": {
+              "title": "CERT-EU: 2026-021: High Severity Vulnerability in Java SE and OpenJDK",
+              "link": "https://cert.europa.eu/publications/security-advisories/2026-021/",
+              "id": "https://cert.europa.eu/publications/security-advisories-10958",
+              "author": null,
+              "published_at": "2026-11-18T10:11:05Z",
+              "updated_at": "2026-11-18T10:11:05Z",
+              "summary": "On 17 November 2026, Oracle and the OpenJDK project released fixes for CVE-2026-114938, a high severity vulnerability in OpenJDK which could lead, under certain circumstances, in unauthenticated Remote Code Execution (RCE).\nCERT-EU recommends updating vulnerable version of OpenJDK, prioritising internet facing applications.",
+              "categories": [],
+              "feed": {
+                "title": "Latest publications of type Security Advisories",
+                "url": "https://cert.europa.eu/publications/security-advisories/",
+                "feed_url": "https://cert.europa.eu/publications/security-advisories-rss"
+              },
+              "agency": "CERT-EU"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://cert.europa.eu/publications/security-advisories-rss",
+            "elapsed_ms": 829,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"\\\\(AV\\\\d+-\\\\d+\\\\)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(source_url, \"^https?://(?:www\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "agency=replace(replace(replace(agency, \"^cert\\\\.europa\\\\.eu$\", \"CERT-EU\"), \"^jpcert\\\\.or\\\\.jp$\", \"JPCERT/CC\"), \"^cyber\\\\.gc\\\\.ca$\", \"Canadian Centre for Cyber Security\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "security-advisories",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://cert.europa.eu/publications/security-advisories/2026-021/"
+    },
     {
       "id": "e5f8c35415f111f86d38",
       "title": "Canadian Centre for Cyber Security: AL26-029 - Critical vulnerability impacting Oracle Java - CVE-2026-114938",
