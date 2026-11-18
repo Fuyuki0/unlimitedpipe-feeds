@@ -1,13 +1,114 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic data releases",
-  "home_page_url": "https://www.dol.gov/rss/releases.xml",
+  "home_page_url": "https://apps.bea.gov/rss/rss.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "f7354658f7cbb59075b9",
+      "title": "BEA: Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+      "content_text": "The value added of the outdoor recreation economy accounted for 2.3 percent ($704.2 billion) of current-dollar gross domestic product (GDP) for the nation in 2025. Across states and the District of Columbia, value added for outdoor recreation as a share of state GDP ranged from 6.1 percent in Hawaii to 1.0 percent in the District of Columbia.",
+      "date_published": "2026-11-18T15:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "f7354658f7cbb59075b9",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.bea.gov/news/2026/outdoor-recreation-economic-statistics-us-and-states-2025",
+          "source_url": "https://apps.bea.gov/rss/rss.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-18T15:24:08Z",
+          "data": {
+            "change": "added",
+            "label": "BEA: Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+            "item_type": "entry",
+            "summary": "added: BEA: Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+            "after": {
+              "title": "BEA: Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+              "link": "https://www.bea.gov/news/2026/outdoor-recreation-economic-statistics-us-and-states-2025",
+              "id": "https://www.bea.gov/news/2026/outdoor-recreation-economic-statistics-us-and-states-2025",
+              "author": null,
+              "published_at": "2026-11-18T15:00:00Z",
+              "updated_at": "2026-11-18T15:00:00Z",
+              "summary": "The value added of the outdoor recreation economy accounted for 2.3 percent ($704.2 billion) of current-dollar gross domestic product (GDP) for the nation in 2025. Across states and the District of Columbia, value added for outdoor recreation as a share of state GDP ranged from 6.1 percent in Hawaii to 1.0 percent in the District of Columbia.",
+              "categories": [],
+              "feed": {
+                "title": "U.S. Bureau of Economic Analysis",
+                "url": "https://www.bea.gov",
+                "feed_url": "https://apps.bea.gov/rss/rss.xml"
+              },
+              "agency": "BEA"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://apps.bea.gov/rss/rss.xml",
+            "elapsed_ms": 489,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.bea.gov/news/2026/outdoor-recreation-economic-statistics-us-and-states-2025"
+    },
     {
       "id": "687276b9577c100d7319",
       "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
