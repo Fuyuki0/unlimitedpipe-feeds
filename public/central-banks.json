@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "9ceb1b31164f81b9378e",
+      "title": "Bank of England: Minutes of the Market Participants Group meeting – 18 November 2026",
+      "content_text": "The Market Participants Group (MPG) is a senior-level forum for financial market participants to share their views on relevant themes and narratives in financial markets with members of the Bank of England’s Monetary Policy Committee.",
+      "date_published": "2026-11-19T07:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9ceb1b31164f81b9378e",
+          "source": "rss",
+          "type": "change",
+          "key": "{5AD98198-3122-4B03-B451-51C411FDA9CA}",
+          "source_url": "https://www.bankofengland.co.uk/rss/news",
+          "timestamp": null,
+          "observed_at": "2026-11-19T07:56:10Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of England: Minutes of the Market Participants Group meeting – 18 November 2026",
+            "item_type": "entry",
+            "summary": "added: Bank of England: Minutes of the Market Participants Group meeting – 18 November 2026",
+            "after": {
+              "title": "Bank of England: Minutes of the Market Participants Group meeting – 18 November 2026",
+              "link": "https://www.bankofengland.co.uk/minutes/2026/november/market-participants-group-meeting-18-november-2026",
+              "id": "{5AD98198-3122-4B03-B451-51C411FDA9CA}",
+              "author": null,
+              "published_at": "2026-11-19T07:30:00Z",
+              "updated_at": "2026-11-19T07:30:00Z",
+              "summary": "The Market Participants Group (MPG) is a senior-level forum for financial market participants to share their views on relevant themes and narratives in financial markets with members of the Bank of England’s Monetary Policy Committee.",
+              "categories": [],
+              "feed": {
+                "title": "News",
+                "url": "https://www.bankofengland.co.uk/rss/news",
+                "feed_url": "https://www.bankofengland.co.uk/rss/news"
+              },
+              "outlet": "Bank of England"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.bankofengland.co.uk/rss/news",
+            "elapsed_ms": 397,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.bankofengland.co.uk/minutes/2026/november/market-participants-group-meeting-18-november-2026"
+    },
     {
       "id": "41af91c18b0e3f8ad9ad",
       "title": "Reserve Bank of India: Result of the Overnight Variable Rate Reverse Repo (VRRR) auction held on November 19, 2026",
@@ -15980,113 +16087,6 @@
         }
       },
       "url": "http://www.boj.or.jp/en/finsys/macpru/mac261009a.pdf"
-    },
-    {
-      "id": "d93239f8ad532cc49968",
-      "title": "Bank of Japan: Amendment to \"Prices of Eligible Collateral\"",
-      "content_text": "Bank of Japan: Amendment to \"Prices of Eligible Collateral\"",
-      "date_published": "2026-10-09T07:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d93239f8ad532cc49968",
-          "source": "rss",
-          "type": "change",
-          "key": "http://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/mpr261009a.pdf",
-          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-06T17:50:11Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of Japan: Amendment to \"Prices of Eligible Collateral\"",
-            "item_type": "entry",
-            "summary": "added: Bank of Japan: Amendment to \"Prices of Eligible Collateral\"",
-            "after": {
-              "title": "Bank of Japan: Amendment to \"Prices of Eligible Collateral\"",
-              "link": "http://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/mpr261009a.pdf",
-              "id": "http://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/mpr261009a.pdf",
-              "author": null,
-              "published_at": "2026-10-09T07:00:00Z",
-              "updated_at": "2026-10-09T07:00:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "Bank of Japan：RSS",
-                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
-                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
-              },
-              "outlet": "Bank of Japan"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-            "elapsed_ms": 194,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "http://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/mpr261009a.pdf"
     }
   ]
 }
