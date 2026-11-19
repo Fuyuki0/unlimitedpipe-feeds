@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "800702daff8bd7e505d9",
+      "title": "Bank of Japan: Statement by Governor UEDA concerning the Bank's Semiannual Report on Currency and Monetary Control (Committee on Financial Affairs, Senate)",
+      "content_text": "Bank of Japan: Statement by Governor UEDA concerning the Bank's Semiannual Report on Currency and Monetary Control (Committee on Financial Affairs, Senate)",
+      "date_published": "2026-11-19T01:13:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "800702daff8bd7e505d9",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.boj.or.jp/en/mopo/diet/d_state/dst261119a.htm",
+          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-19T02:05:31Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of Japan: Statement by Governor UEDA concerning the Bank's Semiannual Report on Currency and Monetary Control (Committee on Financial Affairs, Senate)",
+            "item_type": "entry",
+            "summary": "added: Bank of Japan: Statement by Governor UEDA concerning the Bank's Semiannual Report on Currency and Monetary Control (Committee on Financial Affairs, Senate)",
+            "after": {
+              "title": "Bank of Japan: Statement by Governor UEDA concerning the Bank's Semiannual Report on Currency and Monetary Control (Committee on Financial Affairs, Senate)",
+              "link": "http://www.boj.or.jp/en/mopo/diet/d_state/dst261119a.htm",
+              "id": "http://www.boj.or.jp/en/mopo/diet/d_state/dst261119a.htm",
+              "author": null,
+              "published_at": "2026-11-19T01:13:00Z",
+              "updated_at": "2026-11-19T01:13:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Bank of Japan：RSS",
+                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
+                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
+              },
+              "outlet": "Bank of Japan"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+            "elapsed_ms": 154,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.boj.or.jp/en/mopo/diet/d_state/dst261119a.htm"
+    },
     {
       "id": "62898a97613de90a6694",
       "title": "Federal Reserve: Minutes of the Federal Open Market Committee, October 27-28, 2026",
@@ -15980,113 +16087,6 @@
         }
       },
       "url": "http://www.boj.or.jp/en/statistics/br/bop_06/bpdata/diiqcy.htm"
-    },
-    {
-      "id": "62a3061420af56ea4a05",
-      "title": "Bank of Japan: Amounts Outstanding in the Call Money Market (Sept.)",
-      "content_text": "Bank of Japan: Amounts Outstanding in the Call Money Market (Sept.)",
-      "date_published": "2026-10-07T06:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "62a3061420af56ea4a05",
-          "source": "rss",
-          "type": "change",
-          "key": "http://www.boj.or.jp/en/statistics/market/short/call/call.xlsx",
-          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-06T17:50:11Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of Japan: Amounts Outstanding in the Call Money Market (Sept.)",
-            "item_type": "entry",
-            "summary": "added: Bank of Japan: Amounts Outstanding in the Call Money Market (Sept.)",
-            "after": {
-              "title": "Bank of Japan: Amounts Outstanding in the Call Money Market (Sept.)",
-              "link": "http://www.boj.or.jp/en/statistics/market/short/call/call.xlsx",
-              "id": "http://www.boj.or.jp/en/statistics/market/short/call/call.xlsx",
-              "author": null,
-              "published_at": "2026-10-07T06:00:00Z",
-              "updated_at": "2026-10-07T06:00:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "Bank of Japan：RSS",
-                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
-                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
-              },
-              "outlet": "Bank of Japan"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-            "elapsed_ms": 194,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "http://www.boj.or.jp/en/statistics/market/short/call/call.xlsx"
     }
   ]
 }
