@@ -1,13 +1,215 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic data releases",
-  "home_page_url": "https://apps.bea.gov/rss/rss.xml",
+  "home_page_url": "https://www.census.gov/economic-indicators/indicator.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "a979b6d1223f9bce8c0b",
+      "title": "Census Bureau: Rental Vacancy Rate",
+      "content_text": "The rental vacancy rate of 7.6 percent was higher than the rate in the third quarter 2025. Compared to the third quarter 2025, the rental vacancy rates were higher in the Northeast and West, and they were not statistically different in the Midwest and South.\n3rd Qtr 2026: +0.5 Percentage Points\n3rd Qtr 2025: +0.2* Percentage Points",
+      "date_published": "2026-10-28T14:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a979b6d1223f9bce8c0b",
+          "source": "rss",
+          "type": "change",
+          "key": "rental_vacancy",
+          "source_url": "https://www.census.gov/economic-indicators/indicator.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-19T15:43:46Z",
+          "data": {
+            "change": "added",
+            "label": "Census Bureau: Rental Vacancy Rate",
+            "item_type": "entry",
+            "summary": "added: Census Bureau: Rental Vacancy Rate",
+            "after": {
+              "title": "Census Bureau: Rental Vacancy Rate",
+              "link": "https://www.census.gov/housing/hvs/",
+              "id": "rental_vacancy",
+              "author": null,
+              "published_at": "2026-10-28T14:00:00Z",
+              "updated_at": "2026-10-28T14:00:00Z",
+              "summary": "The rental vacancy rate of 7.6 percent was higher than the rate in the third quarter 2025. Compared to the third quarter 2025, the rental vacancy rates were higher in the Northeast and West, and they were not statistically different in the Midwest and South.\n3rd Qtr 2026: +0.5 Percentage Points\n3rd Qtr 2025: +0.2* Percentage Points",
+              "categories": [],
+              "feed": {
+                "title": "U.S. Census Bureau Economic Briefing Room",
+                "url": "https://www.census.gov/economic-indicators/",
+                "feed_url": "https://www.census.gov/economic-indicators/indicator.xml"
+              },
+              "agency": "Census Bureau"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.census.gov/economic-indicators/indicator.xml",
+            "elapsed_ms": 33,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.census.gov/housing/hvs/"
+    },
+    {
+      "id": "9655840820c9eb4a2deb",
+      "title": "Census Bureau: Advance Wholesale Inventories",
+      "content_text": "September end-of-month inventories were $1,011.5 billion, up 0.6 percent (+/- 0.2 percent) from last month.\nSeptember 2026: +0.6 % Change in Inventories\nAugust 2026 (r): +0.5 % Change in Inventories",
+      "date_published": "2026-10-28T12:30:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9655840820c9eb4a2deb",
+          "source": "rss",
+          "type": "change",
+          "key": "adv_mwts",
+          "source_url": "https://www.census.gov/economic-indicators/indicator.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-19T15:43:46Z",
+          "data": {
+            "change": "added",
+            "label": "Census Bureau: Advance Wholesale Inventories",
+            "item_type": "entry",
+            "summary": "added: Census Bureau: Advance Wholesale Inventories",
+            "after": {
+              "title": "Census Bureau: Advance Wholesale Inventories",
+              "link": "https://www.census.gov/econ/indicators/index.html",
+              "id": "adv_mwts",
+              "author": null,
+              "published_at": "2026-10-28T12:30:00Z",
+              "updated_at": "2026-10-28T12:30:00Z",
+              "summary": "September end-of-month inventories were $1,011.5 billion, up 0.6 percent (+/- 0.2 percent) from last month.\nSeptember 2026: +0.6 % Change in Inventories\nAugust 2026 (r): +0.5 % Change in Inventories",
+              "categories": [],
+              "feed": {
+                "title": "U.S. Census Bureau Economic Briefing Room",
+                "url": "https://www.census.gov/economic-indicators/",
+                "feed_url": "https://www.census.gov/economic-indicators/indicator.xml"
+              },
+              "agency": "Census Bureau"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.census.gov/economic-indicators/indicator.xml",
+            "elapsed_ms": 33,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.census.gov/econ/indicators/index.html"
+    },
     {
       "id": "f7354658f7cbb59075b9",
       "title": "BEA: Outdoor Recreation Economic Statistics, U.S. and States, 2025",
