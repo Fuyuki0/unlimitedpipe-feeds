@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.ecb.europa.eu/rss/press.html",
+  "home_page_url": "https://www.rbi.org.in/pressreleases_rss.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "96fc0efc49bf21a157a9",
+      "title": "Reserve Bank of India: Government Stock - Full Auction Results",
+      "content_text": "Reserve Bank of India: Government Stock - Full Auction Results",
+      "date_published": "2026-11-20T10:06:46Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "96fc0efc49bf21a157a9",
+          "source": "rss",
+          "type": "change",
+          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64012",
+          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-20T10:06:46Z",
+          "data": {
+            "change": "added",
+            "label": "Reserve Bank of India: Government Stock - Full Auction Results",
+            "item_type": "entry",
+            "summary": "added: Reserve Bank of India: Government Stock - Full Auction Results",
+            "after": {
+              "title": "Reserve Bank of India: Government Stock - Full Auction Results",
+              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64012",
+              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64012",
+              "author": null,
+              "published_at": null,
+              "updated_at": null,
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "PRESS RELEASES FROM RBI",
+                "url": "http://www.rbi.org.in",
+                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
+              },
+              "outlet": "Reserve Bank of India"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
+            "elapsed_ms": 866,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64012"
+    },
     {
       "id": "8c08da5347bf8944ae2c",
       "title": "ECB: Christine Lagarde: Acting in time",
@@ -15980,113 +16087,6 @@
         }
       },
       "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63957"
-    },
-    {
-      "id": "dda8c8295e2a296544d9",
-      "title": "Reserve Bank of India: Treasury Bills: Full Auction Result",
-      "content_text": "(Amount in ₹ crore) Auction Results 91-Day 182-Day 364-Day I. Notified Amount 8,000 8,000 7,000 II. Competitive Bids Received (i) Number 132 91 146 (ii) Amount 27,046.800 20,021.500 21,548.500 III. Cut-off price (₹) / Yield 98.5581 96.8521 93.7900 (YTM: 5.8681%) (YTM: 6.5183%) (YTM: 6.6394%) IV. Competitive Bids Accepted (i) Number 28 18 48 (ii) Amount 7,600.000 7,600.000 6,650.000 V. Partial Allotment Percentage of Competitive Bids 48.1700% 62.7941% 60.0855% (2 bids) (1 bid) (3 bids) VI…",
-      "date_published": "2026-11-11T08:27:13Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "dda8c8295e2a296544d9",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63956",
-          "source_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-11T08:27:13Z",
-          "data": {
-            "change": "added",
-            "label": "Reserve Bank of India: Treasury Bills: Full Auction Result",
-            "item_type": "entry",
-            "summary": "added: Reserve Bank of India: Treasury Bills: Full Auction Result",
-            "after": {
-              "title": "Reserve Bank of India: Treasury Bills: Full Auction Result",
-              "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63956",
-              "id": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63956",
-              "author": null,
-              "published_at": null,
-              "updated_at": null,
-              "summary": "(Amount in ₹ crore) Auction Results 91-Day 182-Day 364-Day I. Notified Amount 8,000 8,000 7,000 II. Competitive Bids Received (i) Number 132 91 146 (ii) Amount 27,046.800 20,021.500 21,548.500 III. Cut-off price (₹) / Yield 98.5581 96.8521 93.7900 (YTM: 5.8681%) (YTM: 6.5183%) (YTM: 6.6394%) IV. Competitive Bids Accepted (i) Number 28 18 48 (ii) Amount 7,600.000 7,600.000 6,650.000 V. Partial Allotment Percentage of Competitive Bids 48.1700% 62.7941% 60.0855% (2 bids) (1 bid) (3 bids) VI. Weighted Average Price (₹)/Yield 98.5602 96.8579 93.8091 (WAY: 5.8594%) (WAY: 6.5059%) (WAY: 6.6176%) VII. Non-Competitive Bids Received (i) Number 9 5 6 (ii) Amount 11,614.937 1,019.514 1,794.240 VIII. Non-Competitive Bids Accepted (i) Number 9 5 6 (ii) Amount 11,600.000 1,000.000 1,700.000 (iii) Partial Allotment Percentage 96.4002 95.3484 78.7862 Ajit Prasad\nDeputy General Manager\n(Communications)\nPress Release: 2026-2027/1478",
-              "categories": [],
-              "feed": {
-                "title": "PRESS RELEASES FROM RBI",
-                "url": "http://www.rbi.org.in",
-                "feed_url": "https://www.rbi.org.in/pressreleases_rss.xml"
-              },
-              "outlet": "Reserve Bank of India"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.rbi.org.in/pressreleases_rss.xml",
-            "elapsed_ms": 65,
-            "not_modified": true,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63956"
     }
   ]
 }
