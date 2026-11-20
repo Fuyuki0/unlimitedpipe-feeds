@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "0b57b973c26ab133a153",
+      "title": "Wagyu (XMR1): $13.5M lost (frontend & infrastructure)",
+      "content_text": "Key Leaked via Infrastructure. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-20T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0b57b973c26ab133a153",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Wagyu (XMR1) 1795132800",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-20T18:55:48Z",
+          "data": {
+            "change": "added",
+            "label": "Wagyu (XMR1): $13.5M lost (frontend & infrastructure)",
+            "item_type": "record",
+            "summary": "added: Wagyu (XMR1): $13.5M lost (frontend & infrastructure)",
+            "after": {
+              "title": "Wagyu (XMR1): $13.5M lost (frontend & infrastructure)",
+              "summary": "Key Leaked via Infrastructure. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-20T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Wagyu (XMR1) 1795132800",
+              "chain": [
+                "Hyperliquid L1"
+              ],
+              "amount": 13510000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 39,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "1b8b753a507c55afb5fc",
       "title": "Fluidkey: hacked, amount not disclosed (protocol logic)",
       "content_text": "Unknown. Target: Wallet. From DefiLlama's list of hacks.",
@@ -10766,115 +10875,6 @@
                 "Ethereum"
               ],
               "amount": 595000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "22b5a92bcd820b62b7ad",
-      "title": "Startale: $2K lost (access control)",
-      "content_text": "Improper Access Control. Target: DeFi Protocol.",
-      "date_published": "2026-09-16T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "22b5a92bcd820b62b7ad",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Startale 1789516800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Startale: $2K lost (access control)",
-            "item_type": "record",
-            "summary": "added: Startale: $2K lost (access control)",
-            "after": {
-              "title": "Startale: $2K lost (access control)",
-              "summary": "Improper Access Control. Target: DeFi Protocol.",
-              "published_at": "2026-09-16T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Startale 1789516800",
-              "chain": [
-                "Ethereum"
-              ],
-              "amount": 2876
             }
           },
           "metadata": {
