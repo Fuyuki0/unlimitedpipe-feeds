@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "c2a0067bf002b6672cca",
+      "title": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-11-21",
+      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/349 for Sakurajima (Aira Caldera), Japan, at 2026-11-21 05:53 UTC: ash reported or expected in the air, a hazard to aircraft.",
+      "date_published": "2026-11-21T05:53:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c2a0067bf002b6672cca",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sakurajima (Aira Caldera) 2026-11-21",
+          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+          "timestamp": null,
+          "observed_at": "2026-11-21T06:26:29Z",
+          "data": {
+            "change": "added",
+            "label": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-11-21",
+            "item_type": "record",
+            "summary": "added: Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-11-21",
+            "after": {
+              "title": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-11-21",
+              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/349 for Sakurajima (Aira Caldera), Japan, at 2026-11-21 05:53 UTC: ash reported or expected in the air, a hazard to aircraft.",
+              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261121_28208001_0349_Text.html",
+              "published_at": "2026-11-21T05:53:00Z",
+              "day_key": "Sakurajima (Aira Caldera) 2026-11-21"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+            "content_type": "text/html",
+            "elapsed_ms": 8,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "name=title(lower(trim(volcano)))",
+                  "place=title(lower(trim(area)))",
+                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
+                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
+                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
+                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
+                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "volcanoes-vaac",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261121_28208001_0349_Text.html"
+    },
+    {
       "id": "3f6a006177250016dfac",
       "title": "Volcanic ash from Kanlaon (Philippines) on 2026-11-20",
       "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/276 for Kanlaon, Philippines, at 2026-11-20 07:34 UTC: ash reported or expected in the air, a hazard to aircraft.",
@@ -9214,99 +9307,6 @@
         }
       },
       "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260914_27303000_0787_Text.html"
-    },
-    {
-      "id": "786204305be26c809422",
-      "title": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-09-13",
-      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/189 for Sakurajima (Aira Caldera), Japan, at 2026-09-13 17:37 UTC: ash reported or expected in the air, a hazard to aircraft.",
-      "date_published": "2026-09-13T17:37:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "786204305be26c809422",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sakurajima (Aira Caldera) 2026-09-13",
-          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
-          "timestamp": null,
-          "observed_at": "2026-10-04T04:20:14Z",
-          "data": {
-            "change": "added",
-            "label": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-09-13",
-            "item_type": "record",
-            "summary": "added: Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-09-13",
-            "after": {
-              "title": "Volcanic ash from Sakurajima (Aira Caldera) (Japan) on 2026-09-13",
-              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/189 for Sakurajima (Aira Caldera), Japan, at 2026-09-13 17:37 UTC: ash reported or expected in the air, a hazard to aircraft.",
-              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260913_28208001_0189_Text.html",
-              "published_at": "2026-09-13T17:37:00Z",
-              "day_key": "Sakurajima (Aira Caldera) 2026-09-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
-            "content_type": "text/html",
-            "elapsed_ms": 66,
-            "not_modified": false,
-            "method": "css"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.50"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.50",
-              "args": {
-                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.50",
-              "args": {
-                "assign": [
-                  "name=title(lower(trim(volcano)))",
-                  "place=title(lower(trim(area)))",
-                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
-                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
-                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
-                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
-                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.50",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day_key"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.50",
-              "args": {
-                "key": "day_key",
-                "namespace": "volcanoes-vaac",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260913_28208001_0189_Text.html"
     }
   ]
 }
