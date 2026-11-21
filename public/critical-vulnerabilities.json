@@ -9,6 +9,113 @@
   },
   "items": [
     {
+      "id": "ef8a1245beb1f3bdad34",
+      "title": "CVE-2026-125294 (critical 9.8): The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+      "content_text": "The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 5.0.10 via the `tpgb_ajax_register_user()` function. This is due to a byte-level denylist on the `tpgb_acf_key[]` and `tpgb_acf[]` parameters that fails to block Unicode look-alike characters — such as U+1E87 and U+00E7 in a key like `ẇp_çapabilities` — whose UTF-8 byte sequences do not match any ASCII-based pattern check, while the database's default accent-insensitive…",
+      "date_published": "2026-11-21T19:16:31Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ef8a1245beb1f3bdad34",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-14T00:00:00.000&pubEndDate=2026-11-21T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-125294",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-14T00:00:00.000&pubEndDate=2026-11-21T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-21T19:50:03Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-125294 (critical 9.8): The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+            "item_type": "record",
+            "summary": "added: CVE-2026-125294 (critical 9.8): The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+            "after": {
+              "title": "CVE-2026-125294 (critical 9.8): The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including,",
+              "summary": "The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 5.0.10 via the `tpgb_ajax_register_user()` function. This is due to a byte-level denylist on the `tpgb_acf_key[]` and `tpgb_acf[]` parameters that fails to block Unicode look-alike characters — such as U+1E87 and U+00E7 in a key like `ẇp_çapabilities` — whose UTF-8 byte sequences do not match any ASCII-based pattern check, while the database's default accent-insensitive collation (`utf8mb4_unicode_ci` / `utf8mb4_0900_ai_ci`) treats the decorated key as equivalent to the canonical `wp_capabilities` row, causing `update_user_meta()` to overwrite the newly registered user's role with `administrator`. This makes it possible for unauthenticated attackers to register a new account bearing the full Administrator role, gaining complete control over the WordPress site including the ability to install plugins, modify files, and execute arbitrary code. The nonce required by the handler is publicly emitted on any page containing the tp-login-register block, making the full exploit chain — nonce retrieval, a single crafted registration POST, and the plugin's own `autologin` flow — trivially reachable on any default install where user registration is enabled. Successful exploitation causes the attacker's own account to receive the complete Administrator role.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-125294",
+              "published_at": "2026-11-21T19:16:31.403Z",
+              "id": "CVE-2026-125294"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-14T00:00:00.000&pubEndDate=2026-11-21T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 971,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125294"
+    },
+    {
       "id": "6c9ca2e28faa9a1d014f",
       "title": "CVE-2026-133993 (critical 10.0): A security flaw has been discovered in D-Link DIR-600L 2.17b02. This affects the function FUN_0040efb0 of the file",
       "content_text": "A security flaw has been discovered in D-Link DIR-600L 2.17b02. This affects the function FUN_0040efb0 of the file gena.cgi of the component GENA Subscription Handler. Performing a manipulation of the argument service results in stack-based buffer overflow. The attack is possible to be carried out remotely. The exploit has been released to the public and may be used for attacks.",
@@ -15950,113 +16057,6 @@
         }
       },
       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114835"
-    },
-    {
-      "id": "d5ddb2c57f85e95112fd",
-      "title": "CVE-2026-114826 (critical 9.8): Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).",
-      "content_text": "Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).   The supported version that is affected is 14.1.2.0.0. Easily exploitable vulnerability allows unauthenticated attacker with network access via SOAP to compromise Service Delivery Platform.  Successful attacks of this vulnerability can result in takeover of Service Delivery Platform. CVSS 3.1 Base Score 9.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector…",
-      "date_published": "2026-11-17T22:18:10Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d5ddb2c57f85e95112fd",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-11T00:00:00.000&pubEndDate=2026-11-18T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-114826",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-11T00:00:00.000&pubEndDate=2026-11-18T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-18T00:48:01Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-114826 (critical 9.8): Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).",
-            "item_type": "record",
-            "summary": "added: CVE-2026-114826 (critical 9.8): Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).",
-            "after": {
-              "title": "CVE-2026-114826 (critical 9.8): Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).",
-              "summary": "Vulnerability in the Service Delivery Platform product of Oracle Fusion Middleware (component: Messaging Enabler).   The supported version that is affected is 14.1.2.0.0. Easily exploitable vulnerability allows unauthenticated attacker with network access via SOAP to compromise Service Delivery Platform.  Successful attacks of this vulnerability can result in takeover of Service Delivery Platform. CVSS 3.1 Base Score 9.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H).",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-114826",
-              "published_at": "2026-11-17T22:18:10.630Z",
-              "id": "CVE-2026-114826"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-11T00:00:00.000&pubEndDate=2026-11-18T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 1931,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114826"
     }
   ]
 }
