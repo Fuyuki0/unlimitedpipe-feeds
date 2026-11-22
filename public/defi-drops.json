@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "4141d081f7e635b46531",
+      "title": "Mellow Restaking TVL down 37% in a day, to $10M",
+      "content_text": "Mellow Restaking (Liquid Restaking) holds $10M after a 37.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-22T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4141d081f7e635b46531",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#mellow-restaking 2026-11-22",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-22T10:07:45Z",
+          "data": {
+            "change": "added",
+            "label": "Mellow Restaking TVL down 37% in a day, to $10M",
+            "item_type": "record",
+            "summary": "added: Mellow Restaking TVL down 37% in a day, to $10M",
+            "after": {
+              "title": "Mellow Restaking TVL down 37% in a day, to $10M",
+              "summary": "Mellow Restaking (Liquid Restaking) holds $10M after a 37.0% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/mellow-restaking",
+              "published_at": "2026-11-22T00:00:00Z",
+              "day_key": "mellow-restaking 2026-11-22"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 80,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-22T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-22\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/mellow-restaking"
+    },
+    {
       "id": "a8f545685ebfaa369bb1",
       "title": "Exponent Strategy Vaults TVL down 32% in a day, to $10.5M",
       "content_text": "Exponent Strategy Vaults (Onchain Capital Allocator) holds $10.5M after a 31.9% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
