@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "bc2da32f225ef017c925",
+      "title": "New Solana token cCAT (Confidential Cat): $462.8K market cap, $132.7K liquidity, 2,980 holders",
+      "content_text": "Confidential Cat (cCAT) first traded 2026-11-22 23:00 UTC on pump.fun; Jupiter organic score: medium; minting switched off. Mint 6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump. Most new tokens fail; data, not investment advice.",
+      "date_published": "2026-11-22T23:00:15Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "bc2da32f225ef017c925",
+          "source": "web",
+          "type": "change",
+          "key": "https://lite-api.jup.ag/tokens/v2/toptraded/24h?limit=100#6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump",
+          "source_url": "https://lite-api.jup.ag/tokens/v2/toptraded/24h?limit=100",
+          "timestamp": null,
+          "observed_at": "2026-11-23T02:22:12Z",
+          "data": {
+            "change": "added",
+            "label": "New Solana token cCAT (Confidential Cat): $462.8K market cap, $132.7K liquidity, 2,980 holders",
+            "item_type": "record",
+            "summary": "added: New Solana token cCAT (Confidential Cat): $462.8K market cap, $132.7K liquidity, 2,980 holders",
+            "after": {
+              "title": "New Solana token cCAT (Confidential Cat): $462.8K market cap, $132.7K liquidity, 2,980 holders",
+              "summary": "Confidential Cat (cCAT) first traded 2026-11-22 23:00 UTC on pump.fun; Jupiter organic score: medium; minting switched off. Mint 6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump. Most new tokens fail; data, not investment advice.",
+              "link": "https://jup.ag/tokens/6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump",
+              "published_at": "2026-11-22T23:00:15Z",
+              "id": "6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://lite-api.jup.ag/tokens/v2/toptraded/24h?limit=100",
+            "content_type": "application/json",
+            "elapsed_ms": 60,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(firstPool.createdAt) and firstPool.createdAt >= \"2026-11-21T02:22:09Z\" and liquidity >= 100000 and holderCount >= 1000 and audit.mintAuthorityDisabled == true"
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=\"New Solana token \" + symbol + \" (\" + trim(name) + \"): $\" + short(mcap) + \" market cap, $\" + short(liquidity) + \" liquidity, \" + commas(holderCount) + \" holders\"",
+                  "summary=trim(name) + \" (\" + symbol + \") first traded \" + replace(firstPool.createdAt, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + default(\" on \" + launchpad, \"\") + \"; Jupiter organic score: \" + default(organicScoreLabel, \"unknown\") + \"; minting switched off. Mint \" + id + \". Most new tokens fail; data, not investment advice.\"",
+                  "link=\"https://jup.ag/tokens/\" + id",
+                  "published_at=firstPool.createdAt"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "solana-new-tokens",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://jup.ag/tokens/6aiyJ9uwGYRE3tM6rk7oeqLwpdDcdtVgU7aW2mFFpump"
+    },
+    {
       "id": "b8156971761896b784ad",
       "title": "New Solana token MCAT (Moon Cat): $606.5K market cap, $100.7K liquidity, 2,969 holders",
       "content_text": "Moon Cat (MCAT) first traded 2026-11-22 12:56 UTC on raydium-launchlab; Jupiter organic score: medium; minting switched off. Mint BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi. Most new tokens fail; data, not investment advice.",
