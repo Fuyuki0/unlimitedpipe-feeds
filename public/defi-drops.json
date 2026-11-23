@@ -9,6 +9,97 @@
   },
   "items": [
     {
+      "id": "250467607a6eddc50484",
+      "title": "PancakeSwap AMM V3 TVL down 36% in a day, to $609.7M",
+      "content_text": "PancakeSwap AMM V3 (Dexs) holds $609.7M after a 36.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+      "date_published": "2026-11-23T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "250467607a6eddc50484",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/protocols#pancakeswap-amm-v3 2026-11-23",
+          "source_url": "https://api.llama.fi/protocols",
+          "timestamp": null,
+          "observed_at": "2026-11-23T23:33:50Z",
+          "data": {
+            "change": "added",
+            "label": "PancakeSwap AMM V3 TVL down 36% in a day, to $609.7M",
+            "item_type": "record",
+            "summary": "added: PancakeSwap AMM V3 TVL down 36% in a day, to $609.7M",
+            "after": {
+              "title": "PancakeSwap AMM V3 TVL down 36% in a day, to $609.7M",
+              "summary": "PancakeSwap AMM V3 (Dexs) holds $609.7M after a 36.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
+              "link": "https://defillama.com/protocol/pancakeswap-amm-v3",
+              "published_at": "2026-11-23T00:00:00Z",
+              "day_key": "pancakeswap-amm-v3 2026-11-23"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/protocols",
+            "content_type": "application/json",
+            "elapsed_ms": 73,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(change_1d) and change_1d != null and change_1d <= -25 and tvl >= 10000000 and category != \"CEX\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=name + \" TVL down \" + round(abs(change_1d), 0) + \"% in a day, to $\" + short(tvl)",
+                  "summary=name + \" (\" + default(category, \"DeFi\") + \") holds $\" + short(tvl) + \" after a \" + round(abs(change_1d), 1) + \"% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.\"",
+                  "link=\"https://defillama.com/protocol/\" + slug",
+                  "published_at=\"2026-11-23T00:00:00Z\"",
+                  "day_key=slug + \" 2026-11-23\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "defi-drops",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/protocol/pancakeswap-amm-v3"
+    },
+    {
       "id": "adef671ddb274f43585f",
       "title": "Uniswap V2 TVL down 25% in a day, to $488.7M",
       "content_text": "Uniswap V2 (Dexs) holds $488.7M after a 25.3% drop in 24 hours (DefiLlama). A sudden drop can mean a hack, an exploit or users leaving. Data, not investment advice.",
