@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "9dbf06068a24d20d2598",
+      "title": "FDA approves Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib",
+      "content_text": "Novel drug approval of 11/24/2026: Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9dbf06068a24d20d2598",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026#Ekitna",
+          "source_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+          "timestamp": null,
+          "observed_at": "2026-11-24T22:03:11Z",
+          "data": {
+            "change": "added",
+            "label": "FDA approves Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib",
+            "item_type": "record",
+            "summary": "added: FDA approves Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib",
+            "after": {
+              "title": "FDA approves Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib",
+              "summary": "Novel drug approval of 11/24/2026: Ekitna (bezuclastinib) to treat advanced gastrointestinal stromal tumors, in combination with sunitinib, in adults who have received prior treatment with imatinib.",
+              "link": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+              "published_at": "2026-11-24T00:00:00Z",
+              "drug": "Ekitna"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026",
+            "content_type": "text/html",
+            "elapsed_ms": 69,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "name != \"\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "use=replace(replace(trim(use), \"^To (adults|patients|pediatric)\", \"for \\\\1\"), \"^To \", \"to \")",
+                  "title=\"FDA approves \" + trim(name) + \" (\" + trim(ingredient) + \") \" + replace(use, \"^(.{150}[^ ,]*)[ ,].+$\", \"\\\\1…\")",
+                  "summary=\"Novel drug approval of \" + trim(approved) + \": \" + trim(name) + \" (\" + trim(ingredient) + \") \" + use + \".\"",
+                  "published_at=date(replace(replace(replace(trim(approved), \"^(\\\\d)/\", \"0\\\\1/\"), \"/(\\\\d)/\", \"/0\\\\1/\"), \"^(\\\\d\\\\d)/(\\\\d\\\\d)/(\\\\d{4})$\", \"\\\\3-\\\\1-\\\\2\"))",
+                  "link=\"https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-\" + replace(published_at, \"-.*$\", \"\")",
+                  "drug=trim(name)"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "drug"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "drug",
+                "namespace": "drug-approvals",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
+    },
+    {
       "id": "f344d013f8af0b49e747",
       "title": "FDA approves Welgemda (ribitol) to treat limb-girdle muscular dystrophy type 2I/R9",
       "content_text": "Novel drug approval of 11/23/2026: Welgemda (ribitol) to treat limb-girdle muscular dystrophy type 2I/R9.",
