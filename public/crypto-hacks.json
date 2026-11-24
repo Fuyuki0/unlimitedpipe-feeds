@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "e8be5a489c092239c16b",
+      "title": "Bullpen: $2.6M lost (protocol logic)",
+      "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e8be5a489c092239c16b",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Bullpen 1795478400",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-24T17:55:05Z",
+          "data": {
+            "change": "added",
+            "label": "Bullpen: $2.6M lost (protocol logic)",
+            "item_type": "record",
+            "summary": "added: Bullpen: $2.6M lost (protocol logic)",
+            "after": {
+              "title": "Bullpen: $2.6M lost (protocol logic)",
+              "summary": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-24T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Bullpen 1795478400",
+              "chain": [
+                "Solana"
+              ],
+              "amount": 2570000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 1253,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "7f7d09684447717605f7",
       "title": "Endurance Bridge: $1M lost (bridge & cross-chain)",
       "content_text": "Unbacked Cross-Chain Mint. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10768,115 +10877,6 @@
                 "Polygon"
               ],
               "amount": 35486
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "9812f84a2814a89947b7",
-      "title": "Fetch.ai: $1.5M lost (key compromise)",
-      "content_text": "Private Key Compromised. Target: DeFi Protocol.",
-      "date_published": "2026-09-19T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "9812f84a2814a89947b7",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#Fetch.ai 1789776000",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "Fetch.ai: $1.5M lost (key compromise)",
-            "item_type": "record",
-            "summary": "added: Fetch.ai: $1.5M lost (key compromise)",
-            "after": {
-              "title": "Fetch.ai: $1.5M lost (key compromise)",
-              "summary": "Private Key Compromised. Target: DeFi Protocol.",
-              "published_at": "2026-09-19T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "Fetch.ai 1789776000",
-              "chain": [
-                "Ethereum"
-              ],
-              "amount": 1530000
             }
           },
           "metadata": {
