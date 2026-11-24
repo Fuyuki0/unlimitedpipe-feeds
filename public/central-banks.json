@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.ecb.europa.eu/rss/press.html",
+  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "acbf7a6a0a9061cbb087",
+      "title": "Bank of Japan: Statistics on Securities Financing Transactions in Japan",
+      "content_text": "Bank of Japan: Statistics on Securities Financing Transactions in Japan",
+      "date_published": "2026-11-23T23:50:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "acbf7a6a0a9061cbb087",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.boj.or.jp/en/statistics/bis/repo/index.htm",
+          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-24T00:34:51Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of Japan: Statistics on Securities Financing Transactions in Japan",
+            "item_type": "entry",
+            "summary": "added: Bank of Japan: Statistics on Securities Financing Transactions in Japan",
+            "after": {
+              "title": "Bank of Japan: Statistics on Securities Financing Transactions in Japan",
+              "link": "http://www.boj.or.jp/en/statistics/bis/repo/index.htm",
+              "id": "http://www.boj.or.jp/en/statistics/bis/repo/index.htm",
+              "author": null,
+              "published_at": "2026-11-23T23:50:00Z",
+              "updated_at": "2026-11-23T23:50:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Bank of Japan：RSS",
+                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
+                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
+              },
+              "outlet": "Bank of Japan"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+            "elapsed_ms": 265,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.boj.or.jp/en/statistics/bis/repo/index.htm"
+    },
     {
       "id": "8697088458a70b151b23",
       "title": "ECB: Philip R. Lane: Climate change and monetary policy",
@@ -15970,113 +16077,6 @@
         }
       },
       "url": "https://www.boj.or.jp/en/intl_finance/cooperate/coop261014a.pdf"
-    },
-    {
-      "id": "4cd3ce234b588d8c3b04",
-      "title": "Bank of Japan: The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
-      "content_text": "Bank of Japan: The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
-      "date_published": "2026-10-14T11:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "4cd3ce234b588d8c3b04",
-          "source": "rss",
-          "type": "change",
-          "key": "http://www.boj.or.jp/en/intl_finance/cooperate/coop261014a.pdf",
-          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-14T23:32:34Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of Japan: The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
-            "item_type": "entry",
-            "summary": "added: Bank of Japan: The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
-            "after": {
-              "title": "Bank of Japan: The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
-              "link": "http://www.boj.or.jp/en/intl_finance/cooperate/coop261014a.pdf",
-              "id": "http://www.boj.or.jp/en/intl_finance/cooperate/coop261014a.pdf",
-              "author": null,
-              "published_at": "2026-10-14T11:00:00Z",
-              "updated_at": "2026-10-14T11:00:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "Bank of Japan：RSS",
-                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
-                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
-              },
-              "outlet": "Bank of Japan"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-            "elapsed_ms": 294,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "http://www.boj.or.jp/en/intl_finance/cooperate/coop261014a.pdf"
     }
   ]
 }
