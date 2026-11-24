@@ -9,6 +9,98 @@
   },
   "items": [
     {
+      "id": "8cf0002c98ba9c4328a0",
+      "title": "Hospice Funding Bill: 2nd reading (Commons)",
+      "content_text": "The Hospice Funding Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+      "date_published": "2026-11-24T16:03:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8cf0002c98ba9c4328a0",
+          "source": "web",
+          "type": "change",
+          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25066.0",
+          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+          "timestamp": null,
+          "observed_at": "2026-11-24T16:16:16Z",
+          "data": {
+            "change": "added",
+            "label": "Hospice Funding Bill: 2nd reading (Commons)",
+            "item_type": "record",
+            "summary": "added: Hospice Funding Bill: 2nd reading (Commons)",
+            "after": {
+              "title": "Hospice Funding Bill: 2nd reading (Commons)",
+              "summary": "The Hospice Funding Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+              "link": "https://bills.parliament.uk/bills/4178",
+              "published_at": "2026-11-24T16:03:00Z",
+              "step": 25066.0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+            "content_type": "application/json",
+            "elapsed_ms": 103,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(currentStage.description)"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "stage=currentStage.description",
+                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
+                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
+                  "link=\"https://bills.parliament.uk/bills/\" + billId",
+                  "published_at=date(lastUpdate)",
+                  "step=\"\" + billId + \" \" + currentStage.id"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "step"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "step",
+                "namespace": "uk-bills",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://bills.parliament.uk/bills/4178"
+    },
+    {
       "id": "427836d9d86484337518",
       "title": "Church Appointments (Repeal of Discriminatory Provision) Bill: Royal Assent, now law (Unassigned)",
       "content_text": "The Church Appointments (Repeal of Discriminatory Provision) Bill reached Royal Assent in the Unassigned; it started in the Commons. UK Parliament bills service.",
@@ -9115,98 +9207,6 @@
         }
       },
       "url": "https://bills.parliament.uk/bills/4136"
-    },
-    {
-      "id": "9922368cf9115b9320ca",
-      "title": "European Union (Withdrawal Arrangements) Bill [HL]: 2nd reading (Lords)",
-      "content_text": "The European Union (Withdrawal Arrangements) Bill [HL] reached 2nd reading in the Lords; it started in the Lords. UK Parliament bills service.",
-      "date_published": "2026-10-28T14:16:58Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "9922368cf9115b9320ca",
-          "source": "web",
-          "type": "change",
-          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#24913.0",
-          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:58:44Z",
-          "data": {
-            "change": "added",
-            "label": "European Union (Withdrawal Arrangements) Bill [HL]: 2nd reading (Lords)",
-            "item_type": "record",
-            "summary": "added: European Union (Withdrawal Arrangements) Bill [HL]: 2nd reading (Lords)",
-            "after": {
-              "title": "European Union (Withdrawal Arrangements) Bill [HL]: 2nd reading (Lords)",
-              "summary": "The European Union (Withdrawal Arrangements) Bill [HL] reached 2nd reading in the Lords; it started in the Lords. UK Parliament bills service.",
-              "link": "https://bills.parliament.uk/bills/4134",
-              "published_at": "2026-10-28T14:16:58Z",
-              "step": 24913.0
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-            "content_type": "application/json",
-            "elapsed_ms": 10311,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "exists(currentStage.description)"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "stage=currentStage.description",
-                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
-                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
-                  "link=\"https://bills.parliament.uk/bills/\" + billId",
-                  "published_at=date(lastUpdate)",
-                  "step=\"\" + billId + \" \" + currentStage.id"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "step"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "step",
-                "namespace": "uk-bills",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://bills.parliament.uk/bills/4134"
     }
   ]
 }
