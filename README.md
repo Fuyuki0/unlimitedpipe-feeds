@@ -1,8 +1,9 @@
 # UnlimitedPipe feeds
 
-89 free feeds, served by GitHub Pages. 20 time-sensitive ones (disasters, security incidents,
-critical vulnerabilities, SEC filings, rate decisions, economic data, top headlines) are in an
-express lane that runs about every 2 minutes; the rest refresh every hour.
+124 free feeds, served by GitHub Pages. 23 time-sensitive ones (disasters, security incidents,
+exploited vulnerabilities, SEC filings, rate decisions, economic data, top headlines) are in an
+express lane that runs about every 2 minutes; the rest refresh every hour. The tables below show
+89 of them; [`feeds.json`](https://feeds.daemonfill.dev/feeds.json) lists all.
 No server, no database, no account. Each feed is one short YAML file, built with
 [UnlimitedPipe](https://github.com/Fuyuki0/unlimitedpipe).
 
