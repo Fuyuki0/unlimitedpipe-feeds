@@ -9,6 +9,103 @@
   },
   "items": [
     {
+      "id": "0c580ef562d59c30d61a",
+      "title": "New law: Secure America Act (Public Law 119-98)",
+      "content_text": "S. 2 of the 119th Congress became Public Law 119-98 on 2026-06-10.",
+      "date_published": "2026-06-10T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "0c580ef562d59c30d61a",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.congress.gov/v3/law/119?format=json&limit=50#119-98",
+          "source_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
+          "timestamp": null,
+          "observed_at": "2026-11-25T02:52:34Z",
+          "data": {
+            "change": "added",
+            "label": "New law: Secure America Act (Public Law 119-98)",
+            "item_type": "record",
+            "summary": "added: New law: Secure America Act (Public Law 119-98)",
+            "after": {
+              "title": "New law: Secure America Act (Public Law 119-98)",
+              "summary": "S. 2 of the 119th Congress became Public Law 119-98 on 2026-06-10.",
+              "link": "https://www.congress.gov/bill/119th-congress/senate-bill/2",
+              "published_at": "2026-06-10T00:00:00Z",
+              "law": "119-98"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
+            "content_type": "application/json",
+            "elapsed_ms": 64,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "law=replace(latestAction.text, \"^.*No: ([0-9-]+).*$\", \"\\\\1\")",
+                  "nth=replace(replace(replace(congress + \"th\", \"^((?:\\\\d*[02-9])?)1th$\", \"\\\\g<1>1st\"), \"^((?:\\\\d*[02-9])?)2th$\", \"\\\\g<1>2nd\"), \"^((?:\\\\d*[02-9])?)3th$\", \"\\\\g<1>3rd\")",
+                  "kind=replace(replace(replace(replace(type, \"^HR$\", \"house-bill\"), \"^S$\", \"senate-bill\"), \"^HJRES$\", \"house-joint-resolution\"), \"^SJRES$\", \"senate-joint-resolution\")",
+                  "code=replace(replace(replace(replace(type, \"^HR$\", \"H.R.\"), \"^S$\", \"S.\"), \"^HJRES$\", \"H.J.Res.\"), \"^SJRES$\", \"S.J.Res.\")",
+                  "title=\"New law: \" + title + \" (Public Law \" + law + \")\"",
+                  "summary=code + \" \" + number + \" of the \" + nth + \" Congress became Public Law \" + law + \" on \" + latestAction.actionDate + \".\"",
+                  "link=\"https://www.congress.gov/bill/\" + nth + \"-congress/\" + kind + \"/\" + number",
+                  "published_at=latestAction.actionDate + \"T00:00:00Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "law"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "law",
+                "namespace": "us-new-laws",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2"
+    },
+    {
       "id": "a18ebe7d887a17a140b2",
       "title": "New law: Laken Riley Act (Public Law 119-1)",
       "content_text": "S. 5 of the 119th Congress became Public Law 119-1 on 2025-01-29.",
@@ -104,103 +201,6 @@
         }
       },
       "url": "https://www.congress.gov/bill/119th-congress/senate-bill/5"
-    },
-    {
-      "id": "0c580ef562d59c30d61a",
-      "title": "New law: Secure America Act (Public Law 119-98)",
-      "content_text": "S. 2 of the 119th Congress became Public Law 119-98 on 2026-06-10.",
-      "date_published": "2026-06-10T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "0c580ef562d59c30d61a",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.congress.gov/v3/law/119?format=json&limit=50#119-98",
-          "source_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
-          "timestamp": null,
-          "observed_at": "2026-11-25T00:57:22Z",
-          "data": {
-            "change": "added",
-            "label": "New law: Secure America Act (Public Law 119-98)",
-            "item_type": "record",
-            "summary": "added: New law: Secure America Act (Public Law 119-98)",
-            "after": {
-              "title": "New law: Secure America Act (Public Law 119-98)",
-              "summary": "S. 2 of the 119th Congress became Public Law 119-98 on 2026-06-10.",
-              "link": "https://www.congress.gov/bill/119th-congress/senate-bill/2",
-              "published_at": "2026-06-10T00:00:00Z",
-              "law": "119-98"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
-            "content_type": "application/json",
-            "elapsed_ms": 114,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "law=replace(latestAction.text, \"^.*No: ([0-9-]+).*$\", \"\\\\1\")",
-                  "nth=replace(replace(replace(congress + \"th\", \"^((?:\\\\d*[02-9])?)1th$\", \"\\\\g<1>1st\"), \"^((?:\\\\d*[02-9])?)2th$\", \"\\\\g<1>2nd\"), \"^((?:\\\\d*[02-9])?)3th$\", \"\\\\g<1>3rd\")",
-                  "kind=replace(replace(replace(replace(type, \"^HR$\", \"house-bill\"), \"^S$\", \"senate-bill\"), \"^HJRES$\", \"house-joint-resolution\"), \"^SJRES$\", \"senate-joint-resolution\")",
-                  "code=replace(replace(replace(replace(type, \"^HR$\", \"H.R.\"), \"^S$\", \"S.\"), \"^HJRES$\", \"H.J.Res.\"), \"^SJRES$\", \"S.J.Res.\")",
-                  "title=\"New law: \" + title + \" (Public Law \" + law + \")\"",
-                  "summary=code + \" \" + number + \" of the \" + nth + \" Congress became Public Law \" + law + \" on \" + latestAction.actionDate + \".\"",
-                  "link=\"https://www.congress.gov/bill/\" + nth + \"-congress/\" + kind + \"/\" + number",
-                  "published_at=latestAction.actionDate + \"T00:00:00Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "law"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "law",
-                "namespace": "us-new-laws",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2"
     },
     {
       "id": "c4c49432e93fb363a780",
