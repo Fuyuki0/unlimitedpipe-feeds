@@ -9,6 +9,103 @@
   },
   "items": [
     {
+      "id": "a18ebe7d887a17a140b2",
+      "title": "New law: Laken Riley Act (Public Law 119-1)",
+      "content_text": "S. 5 of the 119th Congress became Public Law 119-1 on 2025-01-29.",
+      "date_published": "2025-01-29T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "a18ebe7d887a17a140b2",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.congress.gov/v3/law/119?format=json&limit=50#119-1",
+          "source_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
+          "timestamp": null,
+          "observed_at": "2026-11-25T08:37:33Z",
+          "data": {
+            "change": "added",
+            "label": "New law: Laken Riley Act (Public Law 119-1)",
+            "item_type": "record",
+            "summary": "added: New law: Laken Riley Act (Public Law 119-1)",
+            "after": {
+              "title": "New law: Laken Riley Act (Public Law 119-1)",
+              "summary": "S. 5 of the 119th Congress became Public Law 119-1 on 2025-01-29.",
+              "link": "https://www.congress.gov/bill/119th-congress/senate-bill/5",
+              "published_at": "2025-01-29T00:00:00Z",
+              "law": "119-1"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
+            "content_type": "application/json",
+            "elapsed_ms": 76,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "law=replace(latestAction.text, \"^.*No: ([0-9-]+).*$\", \"\\\\1\")",
+                  "nth=replace(replace(replace(congress + \"th\", \"^((?:\\\\d*[02-9])?)1th$\", \"\\\\g<1>1st\"), \"^((?:\\\\d*[02-9])?)2th$\", \"\\\\g<1>2nd\"), \"^((?:\\\\d*[02-9])?)3th$\", \"\\\\g<1>3rd\")",
+                  "kind=replace(replace(replace(replace(type, \"^HR$\", \"house-bill\"), \"^S$\", \"senate-bill\"), \"^HJRES$\", \"house-joint-resolution\"), \"^SJRES$\", \"senate-joint-resolution\")",
+                  "code=replace(replace(replace(replace(type, \"^HR$\", \"H.R.\"), \"^S$\", \"S.\"), \"^HJRES$\", \"H.J.Res.\"), \"^SJRES$\", \"S.J.Res.\")",
+                  "title=\"New law: \" + title + \" (Public Law \" + law + \")\"",
+                  "summary=code + \" \" + number + \" of the \" + nth + \" Congress became Public Law \" + law + \" on \" + latestAction.actionDate + \".\"",
+                  "link=\"https://www.congress.gov/bill/\" + nth + \"-congress/\" + kind + \"/\" + number",
+                  "published_at=latestAction.actionDate + \"T00:00:00Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "law"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "law",
+                "namespace": "us-new-laws",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/5"
+    },
+    {
       "id": "e4294b8c2534689a29d6",
       "title": "New law: 21st Century ROAD to Housing Act (Public Law 119-101)",
       "content_text": "H.R. 6644 of the 119th Congress became Public Law 119-101 on 2026-07-11.",
@@ -298,103 +395,6 @@
         }
       },
       "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2"
-    },
-    {
-      "id": "a18ebe7d887a17a140b2",
-      "title": "New law: Laken Riley Act (Public Law 119-1)",
-      "content_text": "S. 5 of the 119th Congress became Public Law 119-1 on 2025-01-29.",
-      "date_published": "2025-01-29T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "a18ebe7d887a17a140b2",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.congress.gov/v3/law/119?format=json&limit=50#119-1",
-          "source_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
-          "timestamp": null,
-          "observed_at": "2026-11-25T06:40:56Z",
-          "data": {
-            "change": "added",
-            "label": "New law: Laken Riley Act (Public Law 119-1)",
-            "item_type": "record",
-            "summary": "added: New law: Laken Riley Act (Public Law 119-1)",
-            "after": {
-              "title": "New law: Laken Riley Act (Public Law 119-1)",
-              "summary": "S. 5 of the 119th Congress became Public Law 119-1 on 2025-01-29.",
-              "link": "https://www.congress.gov/bill/119th-congress/senate-bill/5",
-              "published_at": "2025-01-29T00:00:00Z",
-              "law": "119-1"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.congress.gov/v3/law/119?format=json&limit=50",
-            "content_type": "application/json",
-            "elapsed_ms": 105,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "law=replace(latestAction.text, \"^.*No: ([0-9-]+).*$\", \"\\\\1\")",
-                  "nth=replace(replace(replace(congress + \"th\", \"^((?:\\\\d*[02-9])?)1th$\", \"\\\\g<1>1st\"), \"^((?:\\\\d*[02-9])?)2th$\", \"\\\\g<1>2nd\"), \"^((?:\\\\d*[02-9])?)3th$\", \"\\\\g<1>3rd\")",
-                  "kind=replace(replace(replace(replace(type, \"^HR$\", \"house-bill\"), \"^S$\", \"senate-bill\"), \"^HJRES$\", \"house-joint-resolution\"), \"^SJRES$\", \"senate-joint-resolution\")",
-                  "code=replace(replace(replace(replace(type, \"^HR$\", \"H.R.\"), \"^S$\", \"S.\"), \"^HJRES$\", \"H.J.Res.\"), \"^SJRES$\", \"S.J.Res.\")",
-                  "title=\"New law: \" + title + \" (Public Law \" + law + \")\"",
-                  "summary=code + \" \" + number + \" of the \" + nth + \" Congress became Public Law \" + law + \" on \" + latestAction.actionDate + \".\"",
-                  "link=\"https://www.congress.gov/bill/\" + nth + \"-congress/\" + kind + \"/\" + number",
-                  "published_at=latestAction.actionDate + \"T00:00:00Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "law"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "law",
-                "namespace": "us-new-laws",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/5"
     },
     {
       "id": "c4c49432e93fb363a780",
