@@ -1,13 +1,114 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "US economic data releases",
-  "home_page_url": "https://apps.bea.gov/rss/rss.xml",
+  "home_page_url": "https://www.dol.gov/rss/releases.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "38458e72c87f09b23256",
+      "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
+      "content_text": "In the week ending November 21, the advance figure for seasonally adjusted initial claims was 189,000, a decrease of 13,000 from the previous week's revised level. The previous week's level was revised down by 1,000 from 203,000 to 202,000. The 4-week moving average was 196,000, a decrease of 1,500 from the previous week's revised average. The previous week's average was revised down by 250 from 197,750 to 197,500.",
+      "date_published": "2026-11-25T12:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "38458e72c87f09b23256",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.dol.gov/newsroom/releases/eta/eta20261125",
+          "source_url": "https://www.dol.gov/rss/releases.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-25T20:11:04Z",
+          "data": {
+            "change": "added",
+            "label": "Labor Department: Unemployment Insurance Weekly Claims Report",
+            "item_type": "entry",
+            "summary": "added: Labor Department: Unemployment Insurance Weekly Claims Report",
+            "after": {
+              "title": "Labor Department: Unemployment Insurance Weekly Claims Report",
+              "link": "http://www.dol.gov/newsroom/releases/eta/eta20261125",
+              "id": "http://www.dol.gov/newsroom/releases/eta/eta20261125",
+              "author": "",
+              "published_at": "2026-11-25T12:00:00Z",
+              "updated_at": "2026-11-25T12:00:00Z",
+              "summary": "In the week ending November 21, the advance figure for seasonally adjusted initial claims was 189,000, a decrease of 13,000 from the previous week's revised level. The previous week's level was revised down by 1,000 from 203,000 to 202,000. The 4-week moving average was 196,000, a decrease of 1,500 from the previous week's revised average. The previous week's average was revised down by 250 from 197,750 to 197,500.",
+              "categories": [],
+              "feed": {
+                "title": "DOL News Releases and Briefs",
+                "url": "http://www.dol.gov/",
+                "feed_url": "https://www.dol.gov/rss/releases.xml"
+              },
+              "agency": "Labor Department"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.dol.gov/rss/releases.xml",
+            "elapsed_ms": 158,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (source_url contains \"dol.gov\") or title matches \"(?i)weekly claims|employment situation|job openings\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "agency=replace(replace(replace(source_url, \"^.*bea\\\\.gov.*$\", \"BEA\"), \"^.*census\\\\.gov.*$\", \"Census Bureau\"), \"^.*dol\\\\.gov.*$\", \"Labor Department\")",
+                  "title=agency + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "us-economy",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.dol.gov/newsroom/releases/eta/eta20261125"
+    },
     {
       "id": "12a9b313fc1b9117b36e",
       "title": "BEA: GDP, (Second Estimate) and Corporate Profits, 3rd Quarter 2026",
