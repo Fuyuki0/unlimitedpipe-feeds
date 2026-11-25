@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "636ee243f1b9d38d0030",
+      "title": "Biswap V3: $51K lost (token & share accounting)",
+      "content_text": "Incorrect Share Accounting. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "636ee243f1b9d38d0030",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Biswap V3 1795478400",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-25T05:25:01Z",
+          "data": {
+            "change": "added",
+            "label": "Biswap V3: $51K lost (token & share accounting)",
+            "item_type": "record",
+            "summary": "added: Biswap V3: $51K lost (token & share accounting)",
+            "after": {
+              "title": "Biswap V3: $51K lost (token & share accounting)",
+              "summary": "Incorrect Share Accounting. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-24T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Biswap V3 1795478400",
+              "chain": [
+                "BSC"
+              ],
+              "amount": 51000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 72,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "e8be5a489c092239c16b",
       "title": "Bullpen: $2.6M lost (protocol logic)",
       "content_text": "Unknown. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10768,115 +10877,6 @@
                 "Base"
               ],
               "amount": 16380
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "635576f5920aceeffd64",
-      "title": "DoinGud: $35K lost (protocol logic)",
-      "content_text": "published_at 2026-09-21T00:00:00Z · amount 35486",
-      "date_published": "2026-09-21T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "635576f5920aceeffd64",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#DoinGud 1789948800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "DoinGud: $35K lost (protocol logic)",
-            "item_type": "record",
-            "summary": "added: DoinGud: $35K lost (protocol logic)",
-            "after": {
-              "title": "DoinGud: $35K lost (protocol logic)",
-              "summary": "Swap Logic Flaw. Target: NFTfi.",
-              "published_at": "2026-09-21T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "DoinGud 1789948800",
-              "chain": [
-                "Polygon"
-              ],
-              "amount": 35486
             }
           },
           "metadata": {
