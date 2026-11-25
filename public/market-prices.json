@@ -1,13 +1,1203 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Treasury yields, oil and gas (FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-11-15&coed=2026-11-25",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "ccfe70ba5494b8475d90",
+      "title": "WTI crude oil: $82.24 a barrel on 2026-11-24",
+      "content_text": "The WTI crude oil on 2026-11-24: $82.24 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-24T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ccfe70ba5494b8475d90",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25#DCOILWTICO 2026-11-24",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $82.24 a barrel on 2026-11-24",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $82.24 a barrel on 2026-11-24",
+            "after": {
+              "title": "WTI crude oil: $82.24 a barrel on 2026-11-24",
+              "summary": "The WTI crude oil on 2026-11-24: $82.24 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-11-24T21:00:00Z",
+              "day": "DCOILWTICO 2026-11-24"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 310,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "4c954717465dbde31e30",
+      "title": "Henry Hub natural gas: $3.30 per million Btu on 2026-11-24",
+      "content_text": "The Henry Hub natural gas on 2026-11-24: $3.30 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-24T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4c954717465dbde31e30",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25#DHHNGSP 2026-11-24",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "Henry Hub natural gas: $3.30 per million Btu on 2026-11-24",
+            "item_type": "record",
+            "summary": "added: Henry Hub natural gas: $3.30 per million Btu on 2026-11-24",
+            "after": {
+              "title": "Henry Hub natural gas: $3.30 per million Btu on 2026-11-24",
+              "summary": "The Henry Hub natural gas on 2026-11-24: $3.30 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
+              "published_at": "2026-11-24T21:00:00Z",
+              "day": "DHHNGSP 2026-11-24"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
+    },
+    {
+      "id": "502ef78018e725dc34aa",
+      "title": "WTI crude oil: $81.42 a barrel on 2026-11-23",
+      "content_text": "The WTI crude oil on 2026-11-23: $81.42 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-23T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "502ef78018e725dc34aa",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25#DCOILWTICO 2026-11-23",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $81.42 a barrel on 2026-11-23",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $81.42 a barrel on 2026-11-23",
+            "after": {
+              "title": "WTI crude oil: $81.42 a barrel on 2026-11-23",
+              "summary": "The WTI crude oil on 2026-11-23: $81.42 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-11-23T21:00:00Z",
+              "day": "DCOILWTICO 2026-11-23"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 310,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "2123cbef86bafb9a5c26",
+      "title": "Henry Hub natural gas: $3.28 per million Btu on 2026-11-23",
+      "content_text": "The Henry Hub natural gas on 2026-11-23: $3.28 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-23T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2123cbef86bafb9a5c26",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25#DHHNGSP 2026-11-23",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "Henry Hub natural gas: $3.28 per million Btu on 2026-11-23",
+            "item_type": "record",
+            "summary": "added: Henry Hub natural gas: $3.28 per million Btu on 2026-11-23",
+            "after": {
+              "title": "Henry Hub natural gas: $3.28 per million Btu on 2026-11-23",
+              "summary": "The Henry Hub natural gas on 2026-11-23: $3.28 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
+              "published_at": "2026-11-23T21:00:00Z",
+              "day": "DHHNGSP 2026-11-23"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
+    },
+    {
+      "id": "53b7fb2b5cfe3b8828aa",
+      "title": "WTI crude oil: $87.59 a barrel on 2026-11-20",
+      "content_text": "The WTI crude oil on 2026-11-20: $87.59 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-20T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "53b7fb2b5cfe3b8828aa",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25#DCOILWTICO 2026-11-20",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $87.59 a barrel on 2026-11-20",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $87.59 a barrel on 2026-11-20",
+            "after": {
+              "title": "WTI crude oil: $87.59 a barrel on 2026-11-20",
+              "summary": "The WTI crude oil on 2026-11-20: $87.59 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-11-20T21:00:00Z",
+              "day": "DCOILWTICO 2026-11-20"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 310,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "bbe9db8bad225f80e794",
+      "title": "Henry Hub natural gas: $3.29 per million Btu on 2026-11-20",
+      "content_text": "The Henry Hub natural gas on 2026-11-20: $3.29 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-20T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "bbe9db8bad225f80e794",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25#DHHNGSP 2026-11-20",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "Henry Hub natural gas: $3.29 per million Btu on 2026-11-20",
+            "item_type": "record",
+            "summary": "added: Henry Hub natural gas: $3.29 per million Btu on 2026-11-20",
+            "after": {
+              "title": "Henry Hub natural gas: $3.29 per million Btu on 2026-11-20",
+              "summary": "The Henry Hub natural gas on 2026-11-20: $3.29 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
+              "published_at": "2026-11-20T21:00:00Z",
+              "day": "DHHNGSP 2026-11-20"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
+    },
+    {
+      "id": "3f7a5e56a01546769644",
+      "title": "WTI crude oil: $86.78 a barrel on 2026-11-19",
+      "content_text": "The WTI crude oil on 2026-11-19: $86.78 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-19T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3f7a5e56a01546769644",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25#DCOILWTICO 2026-11-19",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $86.78 a barrel on 2026-11-19",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $86.78 a barrel on 2026-11-19",
+            "after": {
+              "title": "WTI crude oil: $86.78 a barrel on 2026-11-19",
+              "summary": "The WTI crude oil on 2026-11-19: $86.78 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-11-19T21:00:00Z",
+              "day": "DCOILWTICO 2026-11-19"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 310,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "1eae3e39c3f6204c468c",
+      "title": "Henry Hub natural gas: $3.31 per million Btu on 2026-11-19",
+      "content_text": "The Henry Hub natural gas on 2026-11-19: $3.31 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-19T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "1eae3e39c3f6204c468c",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25#DHHNGSP 2026-11-19",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "Henry Hub natural gas: $3.31 per million Btu on 2026-11-19",
+            "item_type": "record",
+            "summary": "added: Henry Hub natural gas: $3.31 per million Btu on 2026-11-19",
+            "after": {
+              "title": "Henry Hub natural gas: $3.31 per million Btu on 2026-11-19",
+              "summary": "The Henry Hub natural gas on 2026-11-19: $3.31 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
+              "published_at": "2026-11-19T21:00:00Z",
+              "day": "DHHNGSP 2026-11-19"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
+    },
+    {
+      "id": "d9c6ccc892f9ea836d84",
+      "title": "WTI crude oil: $86.81 a barrel on 2026-11-18",
+      "content_text": "The WTI crude oil on 2026-11-18: $86.81 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-18T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "d9c6ccc892f9ea836d84",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25#DCOILWTICO 2026-11-18",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "WTI crude oil: $86.81 a barrel on 2026-11-18",
+            "item_type": "record",
+            "summary": "added: WTI crude oil: $86.81 a barrel on 2026-11-18",
+            "after": {
+              "title": "WTI crude oil: $86.81 a barrel on 2026-11-18",
+              "summary": "The WTI crude oil on 2026-11-18: $86.81 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
+              "published_at": "2026-11-18T21:00:00Z",
+              "day": "DCOILWTICO 2026-11-18"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 310,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
+    },
+    {
+      "id": "2003e66d0394b7363948",
+      "title": "Henry Hub natural gas: $3.24 per million Btu on 2026-11-18",
+      "content_text": "The Henry Hub natural gas on 2026-11-18: $3.24 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+      "date_published": "2026-11-18T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2003e66d0394b7363948",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25#DHHNGSP 2026-11-18",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+          "timestamp": null,
+          "observed_at": "2026-11-25T19:12:34Z",
+          "data": {
+            "change": "added",
+            "label": "Henry Hub natural gas: $3.24 per million Btu on 2026-11-18",
+            "item_type": "record",
+            "summary": "added: Henry Hub natural gas: $3.24 per million Btu on 2026-11-18",
+            "after": {
+              "title": "Henry Hub natural gas: $3.24 per million Btu on 2026-11-18",
+              "summary": "The Henry Hub natural gas on 2026-11-18: $3.24 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
+              "published_at": "2026-11-18T21:00:00Z",
+              "day": "DHHNGSP 2026-11-18"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-15&coed=2026-11-25",
+            "content_type": "application/csv",
+            "elapsed_ms": 337,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
+                  "shown=value + \"%\"",
+                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
+                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
+                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
+                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
+                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
+                  "title=name + \": \" + shown + \" on \" + date",
+                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "market-prices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
+    },
     {
       "id": "ea6824110ee171a449c4",
       "title": "US 10-year Treasury yield: 4.92% on 2026-11-23",
@@ -10717,1196 +11907,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/DHHNGSP"
-    },
-    {
-      "id": "9a2f6f6125c7fef045e7",
-      "title": "US regular gasoline, weekly average: $3.805 a gallon on 2026-11-16",
-      "content_text": "The US regular gasoline, weekly average on 2026-11-16: $3.805 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-16T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "9a2f6f6125c7fef045e7",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23#GASREGW 2026-11-16",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US regular gasoline, weekly average: $3.805 a gallon on 2026-11-16",
-            "item_type": "record",
-            "summary": "added: US regular gasoline, weekly average: $3.805 a gallon on 2026-11-16",
-            "after": {
-              "title": "US regular gasoline, weekly average: $3.805 a gallon on 2026-11-16",
-              "summary": "The US regular gasoline, weekly average on 2026-11-16: $3.805 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/GASREGW",
-              "published_at": "2026-11-16T21:00:00Z",
-              "day": "GASREGW 2026-11-16"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 14,
-            "not_modified": true,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/GASREGW"
-    },
-    {
-      "id": "de18d4a3b4e5c722b3ea",
-      "title": "US 10-year Treasury yield: 5.15% on 2026-11-13",
-      "content_text": "The US 10-year Treasury yield on 2026-11-13: 5.15%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "de18d4a3b4e5c722b3ea",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-11-13&coed=2026-11-23#DGS10 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US 10-year Treasury yield: 5.15% on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: US 10-year Treasury yield: 5.15% on 2026-11-13",
-            "after": {
-              "title": "US 10-year Treasury yield: 5.15% on 2026-11-13",
-              "summary": "The US 10-year Treasury yield on 2026-11-13: 5.15%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DGS10",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DGS10 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 192,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DGS10"
-    },
-    {
-      "id": "92f6fb165cca7fbec477",
-      "title": "WTI crude oil: $91.96 a barrel on 2026-11-13",
-      "content_text": "The WTI crude oil on 2026-11-13: $91.96 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "92f6fb165cca7fbec477",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-13&coed=2026-11-23#DCOILWTICO 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "WTI crude oil: $91.96 a barrel on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: WTI crude oil: $91.96 a barrel on 2026-11-13",
-            "after": {
-              "title": "WTI crude oil: $91.96 a barrel on 2026-11-13",
-              "summary": "The WTI crude oil on 2026-11-13: $91.96 a barrel, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DCOILWTICO",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DCOILWTICO 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 310,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DCOILWTICO"
-    },
-    {
-      "id": "f81eb44aa0f95f82560b",
-      "title": "US 3-month Treasury yield: 4.32% on 2026-11-13",
-      "content_text": "The US 3-month Treasury yield on 2026-11-13: 4.32%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "f81eb44aa0f95f82560b",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS3MO&cosd=2026-11-13&coed=2026-11-23#DGS3MO 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS3MO&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US 3-month Treasury yield: 4.32% on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: US 3-month Treasury yield: 4.32% on 2026-11-13",
-            "after": {
-              "title": "US 3-month Treasury yield: 4.32% on 2026-11-13",
-              "summary": "The US 3-month Treasury yield on 2026-11-13: 4.32%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DGS3MO",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DGS3MO 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS3MO&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 261,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DGS3MO"
-    },
-    {
-      "id": "1f6deb693952d4238d72",
-      "title": "US 2-year Treasury yield: 4.88% on 2026-11-13",
-      "content_text": "The US 2-year Treasury yield on 2026-11-13: 4.88%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "1f6deb693952d4238d72",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-11-13&coed=2026-11-23#DGS2 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US 2-year Treasury yield: 4.88% on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: US 2-year Treasury yield: 4.88% on 2026-11-13",
-            "after": {
-              "title": "US 2-year Treasury yield: 4.88% on 2026-11-13",
-              "summary": "The US 2-year Treasury yield on 2026-11-13: 4.88%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DGS2",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DGS2 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 14,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DGS2"
-    },
-    {
-      "id": "03d4961e4583f94b38e1",
-      "title": "US 30-year Treasury yield: 5.47% on 2026-11-13",
-      "content_text": "The US 30-year Treasury yield on 2026-11-13: 5.47%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "03d4961e4583f94b38e1",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS30&cosd=2026-11-13&coed=2026-11-23#DGS30 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS30&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US 30-year Treasury yield: 5.47% on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: US 30-year Treasury yield: 5.47% on 2026-11-13",
-            "after": {
-              "title": "US 30-year Treasury yield: 5.47% on 2026-11-13",
-              "summary": "The US 30-year Treasury yield on 2026-11-13: 5.47%, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DGS30",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DGS30 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS30&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 250,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DGS30"
-    },
-    {
-      "id": "d1207802de9d60ee3a98",
-      "title": "Henry Hub natural gas: $3.26 per million Btu on 2026-11-13",
-      "content_text": "The Henry Hub natural gas on 2026-11-13: $3.26 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-13T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d1207802de9d60ee3a98",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-13&coed=2026-11-23#DHHNGSP 2026-11-13",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-13&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "Henry Hub natural gas: $3.26 per million Btu on 2026-11-13",
-            "item_type": "record",
-            "summary": "added: Henry Hub natural gas: $3.26 per million Btu on 2026-11-13",
-            "after": {
-              "title": "Henry Hub natural gas: $3.26 per million Btu on 2026-11-13",
-              "summary": "The Henry Hub natural gas on 2026-11-13: $3.26 per million Btu, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/DHHNGSP",
-              "published_at": "2026-11-13T21:00:00Z",
-              "day": "DHHNGSP 2026-11-13"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DHHNGSP&cosd=2026-11-13&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 259,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/DHHNGSP"
-    },
-    {
-      "id": "7fa9d657e6400811b098",
-      "title": "US regular gasoline, weekly average: $3.995 a gallon on 2026-11-09",
-      "content_text": "The US regular gasoline, weekly average on 2026-11-09: $3.995 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-09T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7fa9d657e6400811b098",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23#GASREGW 2026-11-09",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US regular gasoline, weekly average: $3.995 a gallon on 2026-11-09",
-            "item_type": "record",
-            "summary": "added: US regular gasoline, weekly average: $3.995 a gallon on 2026-11-09",
-            "after": {
-              "title": "US regular gasoline, weekly average: $3.995 a gallon on 2026-11-09",
-              "summary": "The US regular gasoline, weekly average on 2026-11-09: $3.995 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/GASREGW",
-              "published_at": "2026-11-09T21:00:00Z",
-              "day": "GASREGW 2026-11-09"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 14,
-            "not_modified": true,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/GASREGW"
-    },
-    {
-      "id": "6a99cb60155af4ef4044",
-      "title": "US regular gasoline, weekly average: $4.153 a gallon on 2026-11-02",
-      "content_text": "The US regular gasoline, weekly average on 2026-11-02: $4.153 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-11-02T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "6a99cb60155af4ef4044",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23#GASREGW 2026-11-02",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US regular gasoline, weekly average: $4.153 a gallon on 2026-11-02",
-            "item_type": "record",
-            "summary": "added: US regular gasoline, weekly average: $4.153 a gallon on 2026-11-02",
-            "after": {
-              "title": "US regular gasoline, weekly average: $4.153 a gallon on 2026-11-02",
-              "summary": "The US regular gasoline, weekly average on 2026-11-02: $4.153 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/GASREGW",
-              "published_at": "2026-11-02T21:00:00Z",
-              "day": "GASREGW 2026-11-02"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 14,
-            "not_modified": true,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/GASREGW"
-    },
-    {
-      "id": "08e3b240c1251cdf22de",
-      "title": "US regular gasoline, weekly average: $4.269 a gallon on 2026-10-26",
-      "content_text": "The US regular gasoline, weekly average on 2026-10-26: $4.269 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-      "date_published": "2026-10-26T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "08e3b240c1251cdf22de",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23#GASREGW 2026-10-26",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-          "timestamp": null,
-          "observed_at": "2026-11-23T00:27:53Z",
-          "data": {
-            "change": "added",
-            "label": "US regular gasoline, weekly average: $4.269 a gallon on 2026-10-26",
-            "item_type": "record",
-            "summary": "added: US regular gasoline, weekly average: $4.269 a gallon on 2026-10-26",
-            "after": {
-              "title": "US regular gasoline, weekly average: $4.269 a gallon on 2026-10-26",
-              "summary": "The US regular gasoline, weekly average on 2026-10-26: $4.269 a gallon, from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/GASREGW",
-              "published_at": "2026-10-26T21:00:00Z",
-              "day": "GASREGW 2026-10-26"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW&cosd=2026-10-24&coed=2026-11-23",
-            "content_type": "application/csv",
-            "elapsed_ms": 14,
-            "not_modified": true,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=DGS10|DCOILWTICO|DGS3MO|DGS2|DGS30|DHHNGSP|GASREGW|WCESTUS1"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(replace(replace(replace(replace(series, \"^DGS10$\", \"US 10-year Treasury yield\"), \"^DCOILWTICO$\", \"WTI crude oil\"), \"^DGS3MO$\", \"US 3-month Treasury yield\"), \"^DGS2$\", \"US 2-year Treasury yield\"), \"^DGS30$\", \"US 30-year Treasury yield\"), \"^DHHNGSP$\", \"Henry Hub natural gas\"), \"^GASREGW$\", \"US regular gasoline, weekly average\"), \"^WCESTUS1$\", \"US crude oil inventories (weekly)\")",
-                  "shown=value + \"%\"",
-                  "shown=replace(series, \"^DCOILWTICO$\", \"$\" + value + \" a barrel\")",
-                  "shown=replace(shown, \"^DHHNGSP$\", \"$\" + value + \" per million Btu\")",
-                  "shown=replace(shown, \"^GASREGW$\", \"$\" + value + \" a gallon\")",
-                  "shown=replace(shown, \"^WCESTUS1$\", commas(number(value)) + \" thousand barrels\")",
-                  "shown=replace(shown, \"^DGS\\\\w+$\", value + \"%\")",
-                  "title=name + \": \" + shown + \" on \" + date",
-                  "summary=replace(name, \"^(.*)$\", \"The \\\\1\") + \" on \" + date + \": \" + shown + \", from FRED (Federal Reserve Bank of St. Louis). Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "market-prices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/GASREGW"
     }
   ]
 }
