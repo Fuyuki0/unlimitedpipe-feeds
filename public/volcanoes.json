@@ -9,6 +9,99 @@
   },
   "items": [
     {
+      "id": "98f053da701a696b7a4c",
+      "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-26",
+      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/385 for Sheveluch, Russia, at 2026-11-26 22:06 UTC: ash reported or expected in the air, a hazard to aircraft.",
+      "date_published": "2026-11-26T22:06:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "98f053da701a696b7a4c",
+          "source": "web",
+          "type": "change",
+          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sheveluch 2026-11-26",
+          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+          "timestamp": null,
+          "observed_at": "2026-11-26T23:04:29Z",
+          "data": {
+            "change": "added",
+            "label": "Volcanic ash from Sheveluch (Russia) on 2026-11-26",
+            "item_type": "record",
+            "summary": "added: Volcanic ash from Sheveluch (Russia) on 2026-11-26",
+            "after": {
+              "title": "Volcanic ash from Sheveluch (Russia) on 2026-11-26",
+              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/385 for Sheveluch, Russia, at 2026-11-26 22:06 UTC: ash reported or expected in the air, a hazard to aircraft.",
+              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261126_30027000_0385_Text.html",
+              "published_at": "2026-11-26T22:06:00Z",
+              "day_key": "Sheveluch 2026-11-26"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
+            "content_type": "text/html",
+            "elapsed_ms": 123,
+            "not_modified": false,
+            "method": "css"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "name=title(lower(trim(volcano)))",
+                  "place=title(lower(trim(area)))",
+                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
+                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
+                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
+                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
+                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day_key"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "volcanoes-vaac",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20261126_30027000_0385_Text.html"
+    },
+    {
       "id": "70cb8fbac4cb1431e794",
       "title": "Volcanic ash from Kanlaon (Philippines) on 2026-11-26",
       "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/280 for Kanlaon, Philippines, at 2026-11-26 00:00 UTC: ash reported or expected in the air, a hazard to aircraft.",
@@ -9214,99 +9307,6 @@
         }
       },
       "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260918_28208001_0204_Text.html"
-    },
-    {
-      "id": "1a1d34d0787dc89b4c30",
-      "title": "Volcanic ash from Sheveluch (Russia) on 2026-09-18",
-      "content_text": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/334 for Sheveluch, Russia, at 2026-09-18 05:50 UTC: ash reported or expected in the air, a hazard to aircraft.",
-      "date_published": "2026-09-18T05:50:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "1a1d34d0787dc89b4c30",
-          "source": "web",
-          "type": "change",
-          "key": "https://www.data.jma.go.jp/vaac/data/vaac_list.html#Sheveluch 2026-09-18",
-          "source_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
-          "timestamp": null,
-          "observed_at": "2026-10-04T04:20:14Z",
-          "data": {
-            "change": "added",
-            "label": "Volcanic ash from Sheveluch (Russia) on 2026-09-18",
-            "item_type": "record",
-            "summary": "added: Volcanic ash from Sheveluch (Russia) on 2026-09-18",
-            "after": {
-              "title": "Volcanic ash from Sheveluch (Russia) on 2026-09-18",
-              "summary": "The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory 2026/334 for Sheveluch, Russia, at 2026-09-18 05:50 UTC: ash reported or expected in the air, a hazard to aircraft.",
-              "link": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260918_30027000_0334_Text.html",
-              "published_at": "2026-09-18T05:50:00Z",
-              "day_key": "Sheveluch 2026-09-18"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.data.jma.go.jp/vaac/data/vaac_list.html",
-            "content_type": "text/html",
-            "elapsed_ms": 66,
-            "not_modified": false,
-            "method": "css"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.50"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.50",
-              "args": {
-                "expr": "volcano != \"\" and stamp matches \"^\\\\d{4}/\\\\d\\\\d/\\\\d\\\\d \\\\d\\\\d:\\\\d\\\\d\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.50",
-              "args": {
-                "assign": [
-                  "name=title(lower(trim(volcano)))",
-                  "place=title(lower(trim(area)))",
-                  "published_at=replace(trim(stamp), \"^(\\\\d{4})/(\\\\d\\\\d)/(\\\\d\\\\d) (\\\\d\\\\d:\\\\d\\\\d:\\\\d\\\\d)$\", \"\\\\1-\\\\2-\\\\3T\\\\4Z\")",
-                  "title=\"Volcanic ash from \" + name + \" (\" + place + \") on \" + replace(published_at, \"T.*$\", \"\")",
-                  "summary=\"The Tokyo Volcanic Ash Advisory Center (Japan Meteorological Agency) issued volcanic ash advisory \" + trim(number) + \" for \" + name + \", \" + place + \", at \" + replace(published_at, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(\\\\d\\\\d:\\\\d\\\\d).*$\", \"\\\\1 \\\\2 UTC\") + \": ash reported or expected in the air, a hazard to aircraft.\"",
-                  "link=default(text, \"https://www.data.jma.go.jp/vaac/data/vaac_list.html\")",
-                  "day_key=name + \" \" + replace(published_at, \"T.*$\", \"\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.50",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day_key"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.50",
-              "args": {
-                "key": "day_key",
-                "namespace": "volcanoes-vaac",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.data.jma.go.jp/vaac/data/TextData/2026/20260918_30027000_0334_Text.html"
     }
   ]
 }
