@@ -9,6 +9,115 @@
   },
   "items": [
     {
+      "id": "28d9cee9493240ec94ec",
+      "title": "Hegic: $1M lost (oracle manipulation)",
+      "content_text": "Oracle Misconfiguration. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+      "date_published": "2026-11-17T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "28d9cee9493240ec94ec",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.llama.fi/hacks#Hegic 1794873600",
+          "source_url": "https://api.llama.fi/hacks",
+          "timestamp": null,
+          "observed_at": "2026-11-26T18:57:56Z",
+          "data": {
+            "change": "added",
+            "label": "Hegic: $1M lost (oracle manipulation)",
+            "item_type": "record",
+            "summary": "added: Hegic: $1M lost (oracle manipulation)",
+            "after": {
+              "title": "Hegic: $1M lost (oracle manipulation)",
+              "summary": "Oracle Misconfiguration. Target: DeFi Protocol. From DefiLlama's list of hacks.",
+              "published_at": "2026-11-17T00:00:00Z",
+              "link": "https://defillama.com/hacks",
+              "id": "Hegic 1794873600",
+              "chain": [
+                "Arbitrum"
+              ],
+              "amount": 1000000
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.llama.fi/hacks",
+            "content_type": "application/json",
+            "elapsed_ms": 44,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "date"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "limit",
+              "version": "0.10.62",
+              "args": {
+                "count": 50
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "lost=\"$\" + short(amount)",
+                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
+                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
+                  "summary=default(technique + \". \", \"\") + default(\"Target: \" + targetType + \". \", \"\") + \"From DefiLlama's list of hacks.\"",
+                  "published_at=date(date)",
+                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
+                  "id=name + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title=title|untold",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "id",
+                  "chain",
+                  "amount"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "crypto-hacks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/hacks"
+    },
+    {
       "id": "636ee243f1b9d38d0030",
       "title": "Biswap V3: $51K lost (token & share accounting)",
       "content_text": "Incorrect Share Accounting. Target: DeFi Protocol. From DefiLlama's list of hacks.",
@@ -10768,115 +10877,6 @@
                 "Neutron"
               ],
               "amount": 4900000
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.llama.fi/hacks",
-            "content_type": "application/json",
-            "elapsed_ms": 29,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.3.2"
-            },
-            {
-              "step": "sort",
-              "version": "0.3.2",
-              "args": {
-                "by": [
-                  "date"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "limit",
-              "version": "0.3.2",
-              "args": {
-                "count": 50
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.3.2",
-              "args": {
-                "assign": [
-                  "lost=replace(replace(\"\" + amount, \"^(\\\\d+)(\\\\d)\\\\d{5}(\\\\.\\\\d+)?$\", \"$\\\\1.\\\\2M\"), \"^(\\\\d+)\\\\d{3}(\\\\.\\\\d+)?$\", \"$\\\\1K\")",
-                  "title=name + \": \" + lost + \" lost (\" + lower(classification) + \")\"",
-                  "untold=name + \": hacked, amount not disclosed (\" + lower(classification) + \")\"",
-                  "summary=technique + \". Target: \" + targetType + \".\"",
-                  "published_at=date(date)",
-                  "link=replace(source, \"^$\", \"https://defillama.com/hacks\")",
-                  "id=name + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.3.2",
-              "args": {
-                "fields": [
-                  "title=title|untold",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "id",
-                  "chain",
-                  "amount"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.3.2",
-              "args": {
-                "key": "id",
-                "namespace": "crypto-hacks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/hacks"
-    },
-    {
-      "id": "481c56e1a937a834cb84",
-      "title": "The Internet Token: $16K lost (access control)",
-      "content_text": "Arbitrary External Call. Target: Token.",
-      "date_published": "2026-09-21T00:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "481c56e1a937a834cb84",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.llama.fi/hacks#The Internet Token 1789948800",
-          "source_url": "https://api.llama.fi/hacks",
-          "timestamp": null,
-          "observed_at": "2026-09-25T23:17:43Z",
-          "data": {
-            "change": "added",
-            "label": "The Internet Token: $16K lost (access control)",
-            "item_type": "record",
-            "summary": "added: The Internet Token: $16K lost (access control)",
-            "after": {
-              "title": "The Internet Token: $16K lost (access control)",
-              "summary": "Arbitrary External Call. Target: Token.",
-              "published_at": "2026-09-21T00:00:00Z",
-              "link": "https://defillama.com/hacks",
-              "id": "The Internet Token 1789948800",
-              "chain": [
-                "Base"
-              ],
-              "amount": 16380
             }
           },
           "metadata": {
