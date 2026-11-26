@@ -9,6 +9,98 @@
   },
   "items": [
     {
+      "id": "aaed65b202b8f781a2f7",
+      "title": "Energy Independence Bill: 2nd reading (Commons)",
+      "content_text": "The Energy Independence Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+      "date_published": "2026-11-26T12:05:13Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "aaed65b202b8f781a2f7",
+          "source": "web",
+          "type": "change",
+          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25621.0",
+          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+          "timestamp": null,
+          "observed_at": "2026-11-26T12:32:08Z",
+          "data": {
+            "change": "added",
+            "label": "Energy Independence Bill: 2nd reading (Commons)",
+            "item_type": "record",
+            "summary": "added: Energy Independence Bill: 2nd reading (Commons)",
+            "after": {
+              "title": "Energy Independence Bill: 2nd reading (Commons)",
+              "summary": "The Energy Independence Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
+              "link": "https://bills.parliament.uk/bills/4319",
+              "published_at": "2026-11-26T12:05:13Z",
+              "step": 25621.0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+            "content_type": "application/json",
+            "elapsed_ms": 6364,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(currentStage.description)"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "stage=currentStage.description",
+                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
+                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
+                  "link=\"https://bills.parliament.uk/bills/\" + billId",
+                  "published_at=date(lastUpdate)",
+                  "step=\"\" + billId + \" \" + currentStage.id"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "step"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "step",
+                "namespace": "uk-bills",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://bills.parliament.uk/bills/4319"
+    },
+    {
       "id": "516f942c32019d47aa40",
       "title": "Sale of Electric Personal Vehicles (Offences) Bill: 2nd reading (Commons)",
       "content_text": "The Sale of Electric Personal Vehicles (Offences) Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
@@ -9115,98 +9207,6 @@
         }
       },
       "url": "https://bills.parliament.uk/bills/4290"
-    },
-    {
-      "id": "e0da15522b9d643b9a91",
-      "title": "Social Housing Bill [HL]: Report stage (Commons)",
-      "content_text": "The Social Housing Bill [HL] reached Report stage in the Commons; it started in the Lords. UK Parliament bills service.",
-      "date_published": "2026-11-04T10:49:02Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "e0da15522b9d643b9a91",
-          "source": "web",
-          "type": "change",
-          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25422.0",
-          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:58:44Z",
-          "data": {
-            "change": "added",
-            "label": "Social Housing Bill [HL]: Report stage (Commons)",
-            "item_type": "record",
-            "summary": "added: Social Housing Bill [HL]: Report stage (Commons)",
-            "after": {
-              "title": "Social Housing Bill [HL]: Report stage (Commons)",
-              "summary": "The Social Housing Bill [HL] reached Report stage in the Commons; it started in the Lords. UK Parliament bills service.",
-              "link": "https://bills.parliament.uk/bills/4126",
-              "published_at": "2026-11-04T10:49:02Z",
-              "step": 25422.0
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-            "content_type": "application/json",
-            "elapsed_ms": 10311,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "exists(currentStage.description)"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "stage=currentStage.description",
-                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
-                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
-                  "link=\"https://bills.parliament.uk/bills/\" + billId",
-                  "published_at=date(lastUpdate)",
-                  "step=\"\" + billId + \" \" + currentStage.id"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "step"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "step",
-                "namespace": "uk-bills",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://bills.parliament.uk/bills/4126"
     }
   ]
 }
