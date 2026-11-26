@@ -9,6 +9,541 @@
   },
   "items": [
     {
+      "id": "ac4e2f19c7b4596d7f8d",
+      "title": "CVE-2026-136240 (critical 9.1): The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object",
+      "content_text": "The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object Injection in all versions up to, and including, 7.2.0 via deserialization of untrusted input . This makes it possible for unauthenticated attackers to inject a PHP Object. No known POP chain is present in the vulnerable software, which means this vulnerability has no impact unless another plugin or theme containing a POP chain is installed on the site. If a POP chain is present via…",
+      "date_published": "2026-11-26T15:17:26Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ac4e2f19c7b4596d7f8d",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-136240",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-26T15:24:54Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-136240 (critical 9.1): The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object",
+            "item_type": "record",
+            "summary": "added: CVE-2026-136240 (critical 9.1): The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object",
+            "after": {
+              "title": "CVE-2026-136240 (critical 9.1): The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object",
+              "summary": "The PDF Invoice for WooCommerce + Drag and Drop Template Builder plugin for WordPress is vulnerable to PHP Object Injection in all versions up to, and including, 7.2.0 via deserialization of untrusted input . This makes it possible for unauthenticated attackers to inject a PHP Object. No known POP chain is present in the vulnerable software, which means this vulnerability has no impact unless another plugin or theme containing a POP chain is installed on the site. If a POP chain is present via an additional plugin or theme installed on the target system, it may allow the attacker to perform actions like delete arbitrary files, retrieve sensitive data, or execute code depending on the POP chain present. The incomplete remediation in version 7.2.0 applied escape_pdf_note() only to the customer_note path; the billing address path at woocommerce/shortcodes.php:975–978 remains unpatched, and exploitation requires guest checkout to be enabled along with a payment method that transitions orders to on-hold status (such as the stock WooCommerce Direct Bank Transfer option).",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-136240",
+              "published_at": "2026-11-26T15:17:26.867Z",
+              "id": "CVE-2026-136240"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1549,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-136240"
+    },
+    {
+      "id": "7eb3f7e1120d5b19db78",
+      "title": "CVE-2026-135641 (critical 9.1): The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable",
+      "content_text": "The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable to Authentication Bypass leading to Account Takeover in all versions up to, and including, 2.7.2 This is due to a flaw in `WPJOBPORTALuser::__construct()` where the non-empty guard on the `wpjobportal-socialid` cookie is evaluated against the raw cookie value before `sanitize_key()` is applied — allowing a value composed entirely of characters outside `[a-z0-9_-]` to pass the…",
+      "date_published": "2026-11-26T15:17:26Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "7eb3f7e1120d5b19db78",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-135641",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-26T15:24:54Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-135641 (critical 9.1): The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable",
+            "item_type": "record",
+            "summary": "added: CVE-2026-135641 (critical 9.1): The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable",
+            "after": {
+              "title": "CVE-2026-135641 (critical 9.1): The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable",
+              "summary": "The WP Job Portal – AI-Powered Recruitment System for Company or Job Board website plugin for WordPress is vulnerable to Authentication Bypass leading to Account Takeover in all versions up to, and including, 2.7.2 This is due to a flaw in `WPJOBPORTALuser::__construct()` where the non-empty guard on the `wpjobportal-socialid` cookie is evaluated against the raw cookie value before `sanitize_key()` is applied — allowing a value composed entirely of characters outside `[a-z0-9_-]` to pass the guard, be reduced to an empty string by `sanitize_key()`, and be used as the literal value in a `WHERE socialid = ''` database query that matches the first portal account whose `socialid` column is empty. This makes it possible for unauthenticated attackers to be bound to an existing WP Job Portal Employer or Jobseeker account, gaining the ability to create, edit, and delete the victim's companies, job listings, resumes, and applications, as well as overwrite the linked WordPress user's first name, last name, and display name via the `saveuser`→`syncWPUserName()` path. Exploitation is viable on virtually all installations because every portal account not registered through the social-login flow retains the default empty `socialid` value; nonce checks on downstream actions such as `savecompany` and `saveuser` do not mitigate this issue because those nonces are minted within the already-hijacked session and validate against the attacker's own subsequent requests. Successful exploitation gives the attacker control of a distinct, already-privileged WP Job Portal Employer / Jobseeker (bound to a specific WordPress user) account; it does not promote the attacker's original account.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-135641",
+              "published_at": "2026-11-26T15:17:26.100Z",
+              "id": "CVE-2026-135641"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1549,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-135641"
+    },
+    {
+      "id": "2fb9ca9617620545dd5f",
+      "title": "CVE-2026-134173 (critical 9.1): The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and",
+      "content_text": "The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and including, 5.3.1 via the 'wfu_ajax_action_handshake' and 'wfu_ajax_action_send_email_notification' AJAX Actions. This is due to the unauthenticated handshake accepting a 'sid' parameter sanitized only with sanitize_text_field(), which does not strip '[', ']', '{', or '}', allowing the sid to be crafted as an item name containing embedded delimiter pairs that plant forged records for…",
+      "date_published": "2026-11-26T15:17:25Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "2fb9ca9617620545dd5f",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-134173",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-26T15:24:54Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-134173 (critical 9.1): The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and",
+            "item_type": "record",
+            "summary": "added: CVE-2026-134173 (critical 9.1): The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and",
+            "after": {
+              "title": "CVE-2026-134173 (critical 9.1): The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and",
+              "summary": "The WordPress File Upload plugin for WordPress is vulnerable to Arbitrary File Deletion in versions up to, and including, 5.3.1 via the 'wfu_ajax_action_handshake' and 'wfu_ajax_action_send_email_notification' AJAX Actions. This is due to the unauthenticated handshake accepting a 'sid' parameter sanitized only with sanitize_text_field(), which does not strip '[', ']', '{', or '}', allowing the sid to be crafted as an item name containing embedded delimiter pairs that plant forged records for arbitrary other item names — including the per-session file path list and the consent flag — in the plugin's shared concatenated user-state option store, combined with the notification handler being gated only by a nonce freely minted by the same nopriv handshake. This makes it possible for unauthenticated attackers to delete arbitrary files on the affected site's server which may make remote code execution possible.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-134173",
+              "published_at": "2026-11-26T15:17:25.647Z",
+              "id": "CVE-2026-134173"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1549,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-134173"
+    },
+    {
+      "id": "9f71e692fcf3f7f961d0",
+      "title": "CVE-2026-133951 (critical 9.1): The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including,",
+      "content_text": "The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including, 4.8.9 This is due to the site-wide signing secret `swpm_private_key_one` being generated at install time with PHP's non-cryptographic `uniqid('', true)` function in `SwpmInstallation::installer()`, whose timestamp-derived keyspace (~10^15 candidates / ~50 bits) can be constrained via the public WordPress REST API date of the plugin's auto-created registration page, combined with a…",
+      "date_published": "2026-11-26T15:17:25Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9f71e692fcf3f7f961d0",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-133951",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-26T15:24:54Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-133951 (critical 9.1): The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including,",
+            "item_type": "record",
+            "summary": "added: CVE-2026-133951 (critical 9.1): The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including,",
+            "after": {
+              "title": "CVE-2026-133951 (critical 9.1): The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including,",
+              "summary": "The Simple Membership plugin for WordPress is vulnerable to Privilege Escalation in versions up to, and including, 4.8.9 This is due to the site-wide signing secret `swpm_private_key_one` being generated at install time with PHP's non-cryptographic `uniqid('', true)` function in `SwpmInstallation::installer()`, whose timestamp-derived keyspace (~10^15 candidates / ~50 bits) can be constrained via the public WordPress REST API date of the plugin's auto-created registration page, combined with a single-MD5 oracle (`md5(key|level)`) that the public registration form prints as `swpm_level_hash` and a non-constant-time `!=` comparison in `SwpmFrontRegistration::register_front_end()` as the sole authorization gate on which membership level a visitor may register into; `SwpmUtils::get_free_level()` then honors an attacker-posted `level_identifier=md5(level)` regardless of the configured free-membership setting, and `prepare_and_create_wp_user_front_end()` creates the WordPress account with whatever role the level is configured to grant (only the `administrator` role is refused). This makes it possible for unauthenticated attackers, after an offline brute-force recovery of the install-time secret against the public MD5 oracle, to forge a valid `swpm_level_hash` for any configured membership level and self-register into that level, elevating their newly created WordPress account to the level's assigned role — e. Successful exploitation causes the attacker's own account to receive the complete editor role.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-133951",
+              "published_at": "2026-11-26T15:17:25.487Z",
+              "id": "CVE-2026-133951"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1549,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-133951"
+    },
+    {
+      "id": "4c338070c1d914b43294",
+      "title": "CVE-2026-104998 (critical 9.8): The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions",
+      "content_text": "The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions up to, and including, 2.1.0 via the process_file_input_field function. This is due to missing file type validation in the process_file_input_field function, which accepts the client-supplied multipart Content-Type header as the sole type gate and writes the uploaded file to the unprotected pif_temp directory using the verbatim client-supplied filename. This makes it possible for…",
+      "date_published": "2026-11-26T15:17:22Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4c338070c1d914b43294",
+          "source": "web",
+          "type": "change",
+          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-104998",
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+          "timestamp": null,
+          "observed_at": "2026-11-26T15:24:54Z",
+          "data": {
+            "change": "added",
+            "label": "CVE-2026-104998 (critical 9.8): The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions",
+            "item_type": "record",
+            "summary": "added: CVE-2026-104998 (critical 9.8): The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions",
+            "after": {
+              "title": "CVE-2026-104998 (critical 9.8): The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions",
+              "summary": "The Product Input Fields for WooCommerce plugin for WordPress is vulnerable to Arbitrary File Upload in all versions up to, and including, 2.1.0 via the process_file_input_field function. This is due to missing file type validation in the process_file_input_field function, which accepts the client-supplied multipart Content-Type header as the sole type gate and writes the uploaded file to the unprotected pif_temp directory using the verbatim client-supplied filename. This makes it possible for unauthenticated attackers to upload files that may be executable, which makes remote code execution possible. Exploitation requires that an administrator has configured at least one product with a File-type Product Input Field with the \"Show thumbnail\" option enabled, which is a standard use of the feature; additionally, the pif_temp/ upload directory is created without .htaccess or index.php restrictions, leaving written files directly web-accessible and executable on default Apache/mod_php configurations.",
+              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-104998",
+              "published_at": "2026-11-26T15:17:22.833Z",
+              "id": "CVE-2026-104998"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-19T00:00:00.000&pubEndDate=2026-11-26T23:59:59.999&cvssV3Severity=CRITICAL",
+            "content_type": "application/json",
+            "elapsed_ms": 1549,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "id=cve.id",
+                  "published=cve.published",
+                  "text=cve.descriptions.0.value",
+                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
+                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
+                  "summary=text",
+                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
+                  "published_at=published + \"Z\""
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "id"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "id",
+                "namespace": "critical-vulnerabilities",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true,
+                "remember": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104998"
+    },
+    {
       "id": "128af166e9d85d952200",
       "title": "CVE-2026-137567 (critical 9.8): llama.cpp b11450 before b12658 contains an out-of-bounds write vulnerability in the ggml RPC server that allows",
       "content_text": "llama.cpp b11450 before b12658 contains an out-of-bounds write vulnerability in the ggml RPC server that allows unauthenticated attackers to write to arbitrary heap addresses via zero-element destination tensors. Attackers can learn buffer bases with BUFFER_GET_BASE, then send RPC_CMD_COPY_TENSOR with a destination pointer below the buffer base to crash the server or execute code.",
@@ -15522,541 +16057,6 @@
         }
       },
       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-133500"
-    },
-    {
-      "id": "c69fb557be989916462a",
-      "title": "CVE-2026-70305 (critical 9.6): Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an",
-      "content_text": "Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an unauthorized attacker to perform spoofing over a network.",
-      "date_published": "2026-11-23T22:22:50Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "c69fb557be989916462a",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-70305",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-23T22:36:39Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-70305 (critical 9.6): Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an",
-            "item_type": "record",
-            "summary": "added: CVE-2026-70305 (critical 9.6): Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an",
-            "after": {
-              "title": "CVE-2026-70305 (critical 9.6): Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an",
-              "summary": "Improper neutralization of input during web page generation ('cross-site scripting') in Azure Portal allows an unauthorized attacker to perform spoofing over a network.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-70305",
-              "published_at": "2026-11-23T22:22:50.890Z",
-              "id": "CVE-2026-70305"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 821,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-70305"
-    },
-    {
-      "id": "87aa61c054a0de2539af",
-      "title": "CVE-2026-70193 (critical 9.9): Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows",
-      "content_text": "Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.",
-      "date_published": "2026-11-23T22:22:36Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "87aa61c054a0de2539af",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-70193",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-23T22:36:39Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-70193 (critical 9.9): Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows",
-            "item_type": "record",
-            "summary": "added: CVE-2026-70193 (critical 9.9): Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows",
-            "after": {
-              "title": "CVE-2026-70193 (critical 9.9): Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows",
-              "summary": "Improper limitation of a pathname to a restricted directory ('path traversal') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-70193",
-              "published_at": "2026-11-23T22:22:36.660Z",
-              "id": "CVE-2026-70193"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 821,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-70193"
-    },
-    {
-      "id": "7015478e02a67f51d6ad",
-      "title": "CVE-2026-69899 (critical 9.1): Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over",
-      "content_text": "Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over a network.",
-      "date_published": "2026-11-23T22:22:11Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7015478e02a67f51d6ad",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-69899",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-23T22:36:39Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-69899 (critical 9.1): Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over",
-            "item_type": "record",
-            "summary": "added: CVE-2026-69899 (critical 9.1): Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over",
-            "after": {
-              "title": "CVE-2026-69899 (critical 9.1): Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over",
-              "summary": "Authentication bypass by spoofing in Azure DevTest Labs allows an unauthorized attacker to perform spoofing over a network.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-69899",
-              "published_at": "2026-11-23T22:22:11.980Z",
-              "id": "CVE-2026-69899"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 821,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69899"
-    },
-    {
-      "id": "ee6bad4d70100bb0a141",
-      "title": "CVE-2026-62841 (critical 10.0): Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-      "content_text": "Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-      "date_published": "2026-11-23T22:20:39Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "ee6bad4d70100bb0a141",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-62841",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-23T22:36:39Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-62841 (critical 10.0): Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-            "item_type": "record",
-            "summary": "added: CVE-2026-62841 (critical 10.0): Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-            "after": {
-              "title": "CVE-2026-62841 (critical 10.0): Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-              "summary": "Improper authentication in Azure Event Grid allows an unauthorized attacker to elevate privileges over a network.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-62841",
-              "published_at": "2026-11-23T22:20:39.293Z",
-              "id": "CVE-2026-62841"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 821,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62841"
-    },
-    {
-      "id": "8eb223b82097b4b213ed",
-      "title": "CVE-2026-50691 (critical 9.9): Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-      "content_text": "Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-      "date_published": "2026-11-23T22:20:16Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8eb223b82097b4b213ed",
-          "source": "web",
-          "type": "change",
-          "key": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL#CVE-2026-50691",
-          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-          "timestamp": null,
-          "observed_at": "2026-11-23T22:36:39Z",
-          "data": {
-            "change": "added",
-            "label": "CVE-2026-50691 (critical 9.9): Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-            "item_type": "record",
-            "summary": "added: CVE-2026-50691 (critical 9.9): Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-            "after": {
-              "title": "CVE-2026-50691 (critical 9.9): Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-              "summary": "Improper authorization in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-              "link": "https://nvd.nist.gov/vuln/detail/CVE-2026-50691",
-              "published_at": "2026-11-23T22:20:16.553Z",
-              "id": "CVE-2026-50691"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-16T00:00:00.000&pubEndDate=2026-11-23T23:59:59.999&cvssV3Severity=CRITICAL",
-            "content_type": "application/json",
-            "elapsed_ms": 821,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "id=cve.id",
-                  "published=cve.published",
-                  "text=cve.descriptions.0.value",
-                  "first=cve.metrics.cvssMetricV31.0.cvssData.baseScore",
-                  "second=cve.metrics.cvssMetricV31.1.cvssData.baseScore"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "title=id + \" (critical\" + default(\" \" + max(first, second), \"\") + \"): \" + replace(replace(text, \"\\\\s+\", \" \"), \"^(.{0,110}[^ ]*).*$\", \"\\\\1\")",
-                  "summary=text",
-                  "link=\"https://nvd.nist.gov/vuln/detail/\" + id",
-                  "published_at=published + \"Z\""
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "id"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "id",
-                "namespace": "critical-vulnerabilities",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true,
-                "remember": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50691"
     }
   ]
 }
