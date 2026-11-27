@@ -1,13 +1,493 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "New listings: Coinbase, Binance, OKX, Upbit",
-  "home_page_url": "https://data-api.binance.vision/api/v3/exchangeInfo?permissions=SPOT&showPermissionSets=false",
+  "home_page_url": "https://api.upbit.com/v1/market/all",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "3058b065a7aadd3de206",
+      "title": "Upbit lists Flare (USDT-FLR)",
+      "content_text": "A new trading pair on Upbit's public market list: USDT-FLR. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-27T03:53:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "3058b065a7aadd3de206",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.upbit.com/v1/market/all#Upbit USDT-FLR",
+          "source_url": "https://api.upbit.com/v1/market/all",
+          "timestamp": null,
+          "observed_at": "2026-11-27T03:53:19Z",
+          "data": {
+            "change": "added",
+            "label": "Upbit lists Flare (USDT-FLR)",
+            "item_type": "record",
+            "summary": "added: Upbit lists Flare (USDT-FLR)",
+            "after": {
+              "pair": "USDT-FLR",
+              "name": "Flare",
+              "quote": null,
+              "listed_at": null,
+              "exchange": "Upbit",
+              "title": "Upbit lists Flare (USDT-FLR)",
+              "summary": "A new trading pair on Upbit's public market list: USDT-FLR. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Upbit USDT-FLR"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.upbit.com/v1/market/all",
+            "content_type": "application/json",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.upbit.com/v1/market/all"
+    },
+    {
+      "id": "e3c033d1ac475ac8e3c4",
+      "title": "Upbit lists Flare (BTC-FLR)",
+      "content_text": "A new trading pair on Upbit's public market list: BTC-FLR. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-27T03:53:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e3c033d1ac475ac8e3c4",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.upbit.com/v1/market/all#Upbit BTC-FLR",
+          "source_url": "https://api.upbit.com/v1/market/all",
+          "timestamp": null,
+          "observed_at": "2026-11-27T03:53:19Z",
+          "data": {
+            "change": "added",
+            "label": "Upbit lists Flare (BTC-FLR)",
+            "item_type": "record",
+            "summary": "added: Upbit lists Flare (BTC-FLR)",
+            "after": {
+              "pair": "BTC-FLR",
+              "name": "Flare",
+              "quote": null,
+              "listed_at": null,
+              "exchange": "Upbit",
+              "title": "Upbit lists Flare (BTC-FLR)",
+              "summary": "A new trading pair on Upbit's public market list: BTC-FLR. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Upbit BTC-FLR"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.upbit.com/v1/market/all",
+            "content_type": "application/json",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.upbit.com/v1/market/all"
+    },
+    {
+      "id": "addc730af3a2f49aae3b",
+      "title": "Upbit lists KGeN (USDT-KGEN)",
+      "content_text": "A new trading pair on Upbit's public market list: USDT-KGEN. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-27T03:53:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "addc730af3a2f49aae3b",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.upbit.com/v1/market/all#Upbit USDT-KGEN",
+          "source_url": "https://api.upbit.com/v1/market/all",
+          "timestamp": null,
+          "observed_at": "2026-11-27T03:53:19Z",
+          "data": {
+            "change": "added",
+            "label": "Upbit lists KGeN (USDT-KGEN)",
+            "item_type": "record",
+            "summary": "added: Upbit lists KGeN (USDT-KGEN)",
+            "after": {
+              "pair": "USDT-KGEN",
+              "name": "KGeN",
+              "quote": null,
+              "listed_at": null,
+              "exchange": "Upbit",
+              "title": "Upbit lists KGeN (USDT-KGEN)",
+              "summary": "A new trading pair on Upbit's public market list: USDT-KGEN. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Upbit USDT-KGEN"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.upbit.com/v1/market/all",
+            "content_type": "application/json",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.upbit.com/v1/market/all"
+    },
+    {
+      "id": "fcb16f1da273397883d1",
+      "title": "Upbit lists KGeN (BTC-KGEN)",
+      "content_text": "A new trading pair on Upbit's public market list: BTC-KGEN. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-27T03:53:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "fcb16f1da273397883d1",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.upbit.com/v1/market/all#Upbit BTC-KGEN",
+          "source_url": "https://api.upbit.com/v1/market/all",
+          "timestamp": null,
+          "observed_at": "2026-11-27T03:53:19Z",
+          "data": {
+            "change": "added",
+            "label": "Upbit lists KGeN (BTC-KGEN)",
+            "item_type": "record",
+            "summary": "added: Upbit lists KGeN (BTC-KGEN)",
+            "after": {
+              "pair": "BTC-KGEN",
+              "name": "KGeN",
+              "quote": null,
+              "listed_at": null,
+              "exchange": "Upbit",
+              "title": "Upbit lists KGeN (BTC-KGEN)",
+              "summary": "A new trading pair on Upbit's public market list: BTC-KGEN. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Upbit BTC-KGEN"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.upbit.com/v1/market/all",
+            "content_type": "application/json",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.upbit.com/v1/market/all"
+    },
+    {
+      "id": "e567630f5f6875599b2d",
+      "title": "Upbit lists Haedal Protocol (KRW-HAEDAL)",
+      "content_text": "A new trading pair on Upbit's public market list: KRW-HAEDAL. New tokens are often risky; data, not investment advice.",
+      "date_published": "2026-11-27T03:53:19Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e567630f5f6875599b2d",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.upbit.com/v1/market/all#Upbit KRW-HAEDAL",
+          "source_url": "https://api.upbit.com/v1/market/all",
+          "timestamp": null,
+          "observed_at": "2026-11-27T03:53:19Z",
+          "data": {
+            "change": "added",
+            "label": "Upbit lists Haedal Protocol (KRW-HAEDAL)",
+            "item_type": "record",
+            "summary": "added: Upbit lists Haedal Protocol (KRW-HAEDAL)",
+            "after": {
+              "pair": "KRW-HAEDAL",
+              "name": "Haedal Protocol",
+              "quote": null,
+              "listed_at": null,
+              "exchange": "Upbit",
+              "title": "Upbit lists Haedal Protocol (KRW-HAEDAL)",
+              "summary": "A new trading pair on Upbit's public market list: KRW-HAEDAL. New tokens are often risky; data, not investment advice.",
+              "published_at": null,
+              "listing": "Upbit KRW-HAEDAL"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.upbit.com/v1/market/all",
+            "content_type": "application/json",
+            "elapsed_ms": 215,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "pair=display_name|instId|market|symbol",
+                  "name=english_name|baseAsset|baseCcy|base_currency",
+                  "quote=quoteAsset|quoteCcy|quote_currency",
+                  "listed_at=listTime"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
+                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
+                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
+                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
+                  "published_at=date(listed_at)"
+                ]
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "listing=exchange + \" \" + pair"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "listing",
+                "namespace": "exchange-listings-by-exchange",
+                "only": [
+                  "added",
+                  "removed"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://api.upbit.com/v1/market/all"
+    },
     {
       "id": "edd8f1248d3635ca25bb",
       "title": "Binance lists ARTYB (ARTYBUSDT)",
@@ -8847,486 +9327,6 @@
               "summary": "A new trading pair on Upbit's public market list: USDT-PONS. New tokens are often risky; data, not investment advice.",
               "published_at": null,
               "listing": "Upbit USDT-PONS"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.upbit.com/v1/market/all",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.upbit.com/v1/market/all"
-    },
-    {
-      "id": "cf600b9e799fc24fc10d",
-      "title": "Upbit lists Collector Crypt (KRW-CARDS)",
-      "content_text": "A new trading pair on Upbit's public market list: KRW-CARDS. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-11-05T09:57:49Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "cf600b9e799fc24fc10d",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.upbit.com/v1/market/all#Upbit KRW-CARDS",
-          "source_url": "https://api.upbit.com/v1/market/all",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "Upbit lists Collector Crypt (KRW-CARDS)",
-            "item_type": "record",
-            "summary": "added: Upbit lists Collector Crypt (KRW-CARDS)",
-            "after": {
-              "pair": "KRW-CARDS",
-              "name": "Collector Crypt",
-              "quote": null,
-              "listed_at": null,
-              "exchange": "Upbit",
-              "title": "Upbit lists Collector Crypt (KRW-CARDS)",
-              "summary": "A new trading pair on Upbit's public market list: KRW-CARDS. New tokens are often risky; data, not investment advice.",
-              "published_at": null,
-              "listing": "Upbit KRW-CARDS"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.upbit.com/v1/market/all",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.upbit.com/v1/market/all"
-    },
-    {
-      "id": "7c29055833cc7f7ea8fd",
-      "title": "Upbit lists Reserve Rights (KRW-RSR)",
-      "content_text": "A new trading pair on Upbit's public market list: KRW-RSR. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-11-05T09:57:49Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7c29055833cc7f7ea8fd",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.upbit.com/v1/market/all#Upbit KRW-RSR",
-          "source_url": "https://api.upbit.com/v1/market/all",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "Upbit lists Reserve Rights (KRW-RSR)",
-            "item_type": "record",
-            "summary": "added: Upbit lists Reserve Rights (KRW-RSR)",
-            "after": {
-              "pair": "KRW-RSR",
-              "name": "Reserve Rights",
-              "quote": null,
-              "listed_at": null,
-              "exchange": "Upbit",
-              "title": "Upbit lists Reserve Rights (KRW-RSR)",
-              "summary": "A new trading pair on Upbit's public market list: KRW-RSR. New tokens are often risky; data, not investment advice.",
-              "published_at": null,
-              "listing": "Upbit KRW-RSR"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.upbit.com/v1/market/all",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.upbit.com/v1/market/all"
-    },
-    {
-      "id": "7d0623b8ca78cc57b9c0",
-      "title": "Upbit lists Collector Crypt (USDT-CARDS)",
-      "content_text": "A new trading pair on Upbit's public market list: USDT-CARDS. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-11-05T09:57:49Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "7d0623b8ca78cc57b9c0",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.upbit.com/v1/market/all#Upbit USDT-CARDS",
-          "source_url": "https://api.upbit.com/v1/market/all",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "Upbit lists Collector Crypt (USDT-CARDS)",
-            "item_type": "record",
-            "summary": "added: Upbit lists Collector Crypt (USDT-CARDS)",
-            "after": {
-              "pair": "USDT-CARDS",
-              "name": "Collector Crypt",
-              "quote": null,
-              "listed_at": null,
-              "exchange": "Upbit",
-              "title": "Upbit lists Collector Crypt (USDT-CARDS)",
-              "summary": "A new trading pair on Upbit's public market list: USDT-CARDS. New tokens are often risky; data, not investment advice.",
-              "published_at": null,
-              "listing": "Upbit USDT-CARDS"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.upbit.com/v1/market/all",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.upbit.com/v1/market/all"
-    },
-    {
-      "id": "e22f993430b6aba39453",
-      "title": "Upbit lists Numeraire (KRW-NMR)",
-      "content_text": "A new trading pair on Upbit's public market list: KRW-NMR. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-11-05T09:57:49Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "e22f993430b6aba39453",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.upbit.com/v1/market/all#Upbit KRW-NMR",
-          "source_url": "https://api.upbit.com/v1/market/all",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "Upbit lists Numeraire (KRW-NMR)",
-            "item_type": "record",
-            "summary": "added: Upbit lists Numeraire (KRW-NMR)",
-            "after": {
-              "pair": "KRW-NMR",
-              "name": "Numeraire",
-              "quote": null,
-              "listed_at": null,
-              "exchange": "Upbit",
-              "title": "Upbit lists Numeraire (KRW-NMR)",
-              "summary": "A new trading pair on Upbit's public market list: KRW-NMR. New tokens are often risky; data, not investment advice.",
-              "published_at": null,
-              "listing": "Upbit KRW-NMR"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.upbit.com/v1/market/all",
-            "content_type": "application/json",
-            "elapsed_ms": 179,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "pair=display_name|instId|market|symbol",
-                  "name=english_name|baseAsset|baseCcy|base_currency",
-                  "quote=quoteAsset|quoteCcy|quote_currency",
-                  "listed_at=listTime"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "exchange=replace(source_url, \"^https://[a-z.-]*?(coinbase|binance|okx|upbit)\\\\..*$\", \"\\\\1\")",
-                  "exchange=replace(replace(replace(replace(exchange, \"^coinbase$\", \"Coinbase\"), \"^binance$\", \"Binance\"), \"^okx$\", \"OKX\"), \"^upbit$\", \"Upbit\")",
-                  "title=exchange + \" lists \" + name + \" (\" + pair + \")\"",
-                  "summary=\"A new trading pair on \" + exchange + \"'s public market list: \" + pair + default(\", \" + name + \" against \" + quote, \"\") + \". New tokens are often risky; data, not investment advice.\"",
-                  "published_at=date(listed_at)"
-                ]
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "listing=exchange + \" \" + pair"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "listing",
-                "namespace": "exchange-listings-by-exchange",
-                "only": [
-                  "added",
-                  "removed"
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://api.upbit.com/v1/market/all"
-    },
-    {
-      "id": "749a91614f1d5f876abf",
-      "title": "Upbit lists Puffer (KRW-PUFFER)",
-      "content_text": "A new trading pair on Upbit's public market list: KRW-PUFFER. New tokens are often risky; data, not investment advice.",
-      "date_published": "2026-11-05T09:57:49Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "749a91614f1d5f876abf",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.upbit.com/v1/market/all#Upbit KRW-PUFFER",
-          "source_url": "https://api.upbit.com/v1/market/all",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:57:49Z",
-          "data": {
-            "change": "added",
-            "label": "Upbit lists Puffer (KRW-PUFFER)",
-            "item_type": "record",
-            "summary": "added: Upbit lists Puffer (KRW-PUFFER)",
-            "after": {
-              "pair": "KRW-PUFFER",
-              "name": "Puffer",
-              "quote": null,
-              "listed_at": null,
-              "exchange": "Upbit",
-              "title": "Upbit lists Puffer (KRW-PUFFER)",
-              "summary": "A new trading pair on Upbit's public market list: KRW-PUFFER. New tokens are often risky; data, not investment advice.",
-              "published_at": null,
-              "listing": "Upbit KRW-PUFFER"
             }
           },
           "metadata": {
