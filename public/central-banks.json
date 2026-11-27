@@ -1,13 +1,120 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Central banks (Fed, ECB, BoJ, BoE, RBI, RBA)",
-  "home_page_url": "https://www.bankofengland.co.uk/rss/news",
+  "home_page_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "ba884070554db54c9065",
+      "title": "Bank of Japan: Keynote speech by Executive Director KAMIYAMA at the IMF MCM-OAP Seminar in Tokyo (Digital Money and Payments: Transitioning Toward a New Paradigm)",
+      "content_text": "Bank of Japan: Keynote speech by Executive Director KAMIYAMA at the IMF MCM-OAP Seminar in Tokyo (Digital Money and Payments: Transitioning Toward a New Paradigm)",
+      "date_published": "2026-11-27T01:15:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "ba884070554db54c9065",
+          "source": "rss",
+          "type": "change",
+          "key": "http://www.boj.or.jp/en/about/press/koen_2026/ko261127a.htm",
+          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "timestamp": null,
+          "observed_at": "2026-11-27T01:58:24Z",
+          "data": {
+            "change": "added",
+            "label": "Bank of Japan: Keynote speech by Executive Director KAMIYAMA at the IMF MCM-OAP Seminar in Tokyo (Digital Money and Payments: Transitioning Toward a New Paradigm)",
+            "item_type": "entry",
+            "summary": "added: Bank of Japan: Keynote speech by Executive Director KAMIYAMA at the IMF MCM-OAP Seminar in Tokyo (Digital Money and Payments: Transitioning Toward a New Paradigm)",
+            "after": {
+              "title": "Bank of Japan: Keynote speech by Executive Director KAMIYAMA at the IMF MCM-OAP Seminar in Tokyo (Digital Money and Payments: Transitioning Toward a New Paradigm)",
+              "link": "http://www.boj.or.jp/en/about/press/koen_2026/ko261127a.htm",
+              "id": "http://www.boj.or.jp/en/about/press/koen_2026/ko261127a.htm",
+              "author": null,
+              "published_at": "2026-11-27T01:15:00Z",
+              "updated_at": "2026-11-27T01:15:00Z",
+              "summary": null,
+              "categories": [],
+              "feed": {
+                "title": "Bank of Japan：RSS",
+                "url": "http://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
+                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
+              },
+              "outlet": "Bank of Japan"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+            "elapsed_ms": 134,
+            "not_modified": false,
+            "method": "rss20"
+          },
+          "provenance": [
+            {
+              "step": "rss",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
+                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
+                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
+                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
+                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
+                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
+                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
+                  "title=outlet + \": \" + title"
+                ]
+              }
+            },
+            {
+              "step": "dedupe",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "link"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "namespace": "central-banks",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "http://www.boj.or.jp/en/about/press/koen_2026/ko261127a.htm"
+    },
     {
       "id": "b4a8d4f9b7b2c4f12e06",
       "title": "Bank of England: Payments systems Memorandum of Understanding",
@@ -15975,113 +16082,6 @@
         }
       },
       "url": "https://www.boj.or.jp/en/statistics/boj/other/acmai/release/2026/ac261020.htm"
-    },
-    {
-      "id": "d4ae90cc97aeaa495ab7",
-      "title": "Bank of Japan: Senior Loan Officer Opinion Survey (Oct.)",
-      "content_text": "Bank of Japan: Senior Loan Officer Opinion Survey (Oct.)",
-      "date_published": "2026-10-21T23:50:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "d4ae90cc97aeaa495ab7",
-          "source": "rss",
-          "type": "change",
-          "key": "https://www.boj.or.jp/en/statistics/dl/loan/loos/release/loos2610.pdf",
-          "source_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-          "timestamp": null,
-          "observed_at": "2026-11-20T00:25:49Z",
-          "data": {
-            "change": "added",
-            "label": "Bank of Japan: Senior Loan Officer Opinion Survey (Oct.)",
-            "item_type": "entry",
-            "summary": "added: Bank of Japan: Senior Loan Officer Opinion Survey (Oct.)",
-            "after": {
-              "title": "Bank of Japan: Senior Loan Officer Opinion Survey (Oct.)",
-              "link": "https://www.boj.or.jp/en/statistics/dl/loan/loos/release/loos2610.pdf",
-              "id": "https://www.boj.or.jp/en/statistics/dl/loan/loos/release/loos2610.pdf",
-              "author": null,
-              "published_at": "2026-10-21T23:50:00Z",
-              "updated_at": "2026-10-21T23:50:00Z",
-              "summary": null,
-              "categories": [],
-              "feed": {
-                "title": "Bank of Japan：RSS",
-                "url": "https://www.boj.or.jp/en/rss/whatsnew.xml?id=1002",
-                "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml"
-              },
-              "outlet": "Bank of Japan"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
-            "elapsed_ms": 255,
-            "not_modified": false,
-            "method": "rss20"
-          },
-          "provenance": [
-            {
-              "step": "rss",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "not (title matches \"(?i)^(conduct of|results of|outright purchase|amount outstanding|money market operation|statement of accounts|money stock|monetary base|weekly statistical|auction|japanese government bonds held)\")"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "outlet=replace(source_url, \"^https?://(?:www\\\\d?\\\\.)?([^/]+).*$\", \"\\\\1\")",
-                  "outlet=replace(outlet, \"^federalreserve\\\\.gov$\", \"Federal Reserve\")",
-                  "outlet=replace(outlet, \"^ecb\\\\.europa\\\\.eu$\", \"ECB\")",
-                  "outlet=replace(outlet, \"^boj\\\\.or\\\\.jp$\", \"Bank of Japan\")",
-                  "outlet=replace(outlet, \"^bankofengland\\\\.co\\\\.uk$\", \"Bank of England\")",
-                  "outlet=replace(outlet, \"^rbi\\\\.org\\\\.in$\", \"Reserve Bank of India\")",
-                  "outlet=replace(outlet, \"^rba\\\\.gov\\\\.au$\", \"Reserve Bank of Australia\")",
-                  "title=outlet + \": \" + title"
-                ]
-              }
-            },
-            {
-              "step": "dedupe",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "link"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "namespace": "central-banks",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.boj.or.jp/en/statistics/dl/loan/loos/release/loos2610.pdf"
     }
   ]
 }
