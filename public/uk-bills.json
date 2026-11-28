@@ -9,6 +9,98 @@
   },
   "items": [
     {
+      "id": "e01f7a9295f7d8bb1943",
+      "title": "Arup Employee Trust Bill: Examination for compliance with Standing Orders (Unassigned)",
+      "content_text": "The Arup Employee Trust Bill reached Examination for compliance with Standing Orders in the Unassigned; it started in the Unassigned. UK Parliament bills service.",
+      "date_published": "2026-11-27T13:29:43Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "e01f7a9295f7d8bb1943",
+          "source": "web",
+          "type": "change",
+          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25712.0",
+          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+          "timestamp": null,
+          "observed_at": "2026-11-28T06:38:32Z",
+          "data": {
+            "change": "added",
+            "label": "Arup Employee Trust Bill: Examination for compliance with Standing Orders (Unassigned)",
+            "item_type": "record",
+            "summary": "added: Arup Employee Trust Bill: Examination for compliance with Standing Orders (Unassigned)",
+            "after": {
+              "title": "Arup Employee Trust Bill: Examination for compliance with Standing Orders (Unassigned)",
+              "summary": "The Arup Employee Trust Bill reached Examination for compliance with Standing Orders in the Unassigned; it started in the Unassigned. UK Parliament bills service.",
+              "link": "https://bills.parliament.uk/bills/4339",
+              "published_at": "2026-11-27T13:29:43Z",
+              "step": 25712.0
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
+            "content_type": "application/json",
+            "elapsed_ms": 1577,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "exists(currentStage.description)"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "stage=currentStage.description",
+                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
+                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
+                  "link=\"https://bills.parliament.uk/bills/\" + billId",
+                  "published_at=date(lastUpdate)",
+                  "step=\"\" + billId + \" \" + currentStage.id"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "step"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "step",
+                "namespace": "uk-bills",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://bills.parliament.uk/bills/4339"
+    },
+    {
       "id": "175818bd2df53ae254bc",
       "title": "Immigration and Asylum Bill: 2nd reading (Lords)",
       "content_text": "The Immigration and Asylum Bill reached 2nd reading in the Lords; it started in the Commons. UK Parliament bills service.",
@@ -9115,98 +9207,6 @@
         }
       },
       "url": "https://bills.parliament.uk/bills/4254"
-    },
-    {
-      "id": "3396dda9298b0cc36146",
-      "title": "Visitor Levy (England) Bill: 2nd reading (Commons)",
-      "content_text": "The Visitor Levy (England) Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
-      "date_published": "2026-11-04T18:57:41Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "3396dda9298b0cc36146",
-          "source": "web",
-          "type": "change",
-          "key": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50#25623.0",
-          "source_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-          "timestamp": null,
-          "observed_at": "2026-11-05T09:58:44Z",
-          "data": {
-            "change": "added",
-            "label": "Visitor Levy (England) Bill: 2nd reading (Commons)",
-            "item_type": "record",
-            "summary": "added: Visitor Levy (England) Bill: 2nd reading (Commons)",
-            "after": {
-              "title": "Visitor Levy (England) Bill: 2nd reading (Commons)",
-              "summary": "The Visitor Levy (England) Bill reached 2nd reading in the Commons; it started in the Commons. UK Parliament bills service.",
-              "link": "https://bills.parliament.uk/bills/4320",
-              "published_at": "2026-11-04T18:57:41Z",
-              "step": 25623.0
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&take=50",
-            "content_type": "application/json",
-            "elapsed_ms": 10311,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "exists(currentStage.description)"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "stage=currentStage.description",
-                  "title=shortTitle + \": \" + replace(stage, \"^Royal Assent$\", \"Royal Assent, now law\") + \" (\" + default(currentStage.house, currentHouse) + \")\"",
-                  "summary=\"The \" + shortTitle + \" reached \" + stage + \" in the \" + default(currentStage.house, currentHouse) + \"; it started in the \" + originatingHouse + \". UK Parliament bills service.\"",
-                  "link=\"https://bills.parliament.uk/bills/\" + billId",
-                  "published_at=date(lastUpdate)",
-                  "step=\"\" + billId + \" \" + currentStage.id"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "step"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "step",
-                "namespace": "uk-bills",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://bills.parliament.uk/bills/4320"
     }
   ]
 }
