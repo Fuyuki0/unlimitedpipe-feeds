@@ -9,6 +9,118 @@
   },
   "items": [
     {
+      "id": "4fcadbbb2c1ab25a87a7",
+      "title": "USDT burned $106.7M in a day, supply now $173.5B",
+      "content_text": "Tether (USDT): -$106.7M in 24 hours; week before: $174.6B.",
+      "date_published": "2026-11-28T02:49:39Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "4fcadbbb2c1ab25a87a7",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDT 2026-11-28",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+          "timestamp": null,
+          "observed_at": "2026-11-28T02:49:39Z",
+          "data": {
+            "change": "added",
+            "label": "USDT burned $106.7M in a day, supply now $173.5B",
+            "item_type": "record",
+            "summary": "added: USDT burned $106.7M in a day, supply now $173.5B",
+            "after": {
+              "id": "1",
+              "name": "Tether",
+              "symbol": "USDT",
+              "gecko_id": "tether",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 173495084333.64722
+              },
+              "circulatingPrevDay": {
+                "peggedUSD": 173601822661.7746
+              },
+              "circulatingPrevWeek": {
+                "peggedUSD": 174600158691.9746
+              },
+              "price": 0.99901,
+              "supply": 173495084333.64722,
+              "change": -106738328.12738037,
+              "moved": "-$106.7M",
+              "title": "USDT burned $106.7M in a day, supply now $173.5B",
+              "summary": "Tether (USDT): -$106.7M in 24 hours; week before: $174.6B.",
+              "link": "https://defillama.com/stablecoin/tether",
+              "day_key": "USDT 2026-11-28"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+            "content_type": "application/json",
+            "elapsed_ms": 31,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "supply=circulating.peggedUSD",
+                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
+                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
+                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "day_key=symbol + \" 2026-11-28\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-supply",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/tether"
+    },
+    {
       "id": "a21d9df9f60bb156e324",
       "title": "USDC minted $172.7M in a day, supply now $69.4B",
       "content_text": "USD Coin (USDC): +$172.7M in 24 hours; week before: $68.7B.",
@@ -11095,118 +11207,6 @@
         }
       },
       "url": "https://defillama.com/stablecoin/usd-coin"
-    },
-    {
-      "id": "fcab7fa1bc84b8745d66",
-      "title": "USDS burned $914.1M in a day, supply now $5.6B",
-      "content_text": "Sky Dollar (USDS): -$914.1M in 24 hours; week before: $6.5B.",
-      "date_published": "2026-11-07T00:43:55Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "fcab7fa1bc84b8745d66",
-          "source": "web",
-          "type": "change",
-          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=false#USDS 2026-11-07",
-          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-          "timestamp": null,
-          "observed_at": "2026-11-07T00:43:55Z",
-          "data": {
-            "change": "added",
-            "label": "USDS burned $914.1M in a day, supply now $5.6B",
-            "item_type": "record",
-            "summary": "added: USDS burned $914.1M in a day, supply now $5.6B",
-            "after": {
-              "id": "209",
-              "name": "Sky Dollar",
-              "symbol": "USDS",
-              "gecko_id": "usds",
-              "pegType": "peggedUSD",
-              "priceSource": "defillama",
-              "pegMechanism": "crypto-backed",
-              "circulating": {
-                "peggedUSD": 5587969132.814575
-              },
-              "circulatingPrevDay": {
-                "peggedUSD": 6502071129.8349905
-              },
-              "circulatingPrevWeek": {
-                "peggedUSD": 6511056965.640273
-              },
-              "price": 1.0002046041963448,
-              "supply": 5587969132.814575,
-              "change": -914101997.0204153,
-              "moved": "-$914.1M",
-              "title": "USDS burned $914.1M in a day, supply now $5.6B",
-              "summary": "Sky Dollar (USDS): -$914.1M in 24 hours; week before: $6.5B.",
-              "link": "https://defillama.com/stablecoin/usds",
-              "day_key": "USDS 2026-11-07"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
-            "content_type": "application/json",
-            "elapsed_ms": 64,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "supply=circulating.peggedUSD",
-                  "change=circulating.peggedUSD - circulatingPrevDay.peggedUSD"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "supply >= 1000000000 and abs(change) >= 100000000"
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "moved=replace(replace(short(change), \"^(-?)\", \"\\\\1$\"), \"^\\\\$\", \"+$\")",
-                  "title=symbol + \" \" + replace(replace(moved, \"^\\\\+\\\\$\", \"minted $\"), \"^-\\\\$\", \"burned $\") + \" in a day, supply now $\" + short(supply)",
-                  "summary=name + \" (\" + symbol + \"): \" + moved + \" in 24 hours; week before: $\" + short(circulatingPrevWeek.peggedUSD) + \".\"",
-                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
-                  "day_key=symbol + \" 2026-11-07\""
-                ],
-                "drop": [
-                  "chainCirculating",
-                  "chains",
-                  "circulatingPrevMonth"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day_key",
-                "namespace": "stablecoin-supply",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://defillama.com/stablecoin/usds"
     }
   ]
 }
