@@ -9,6 +9,106 @@
   },
   "items": [
     {
+      "id": "9507998b1c08e2b6a3a0",
+      "title": "USD1 at $0.9896, 1.0% below its $1 peg",
+      "content_text": "World Liberty Financial USD (USD1) trades at $0.9896, 1.0% below its $1 peg, with $2.8B in circulation (DefiLlama). Data, not investment advice.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "9507998b1c08e2b6a3a0",
+          "source": "web",
+          "type": "change",
+          "key": "https://stablecoins.llama.fi/stablecoins?includePrices=true#USD1 2026-11-28",
+          "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+          "timestamp": null,
+          "observed_at": "2026-11-28T07:36:04Z",
+          "data": {
+            "change": "added",
+            "label": "USD1 at $0.9896, 1.0% below its $1 peg",
+            "item_type": "record",
+            "summary": "added: USD1 at $0.9896, 1.0% below its $1 peg",
+            "after": {
+              "id": "262",
+              "name": "World Liberty Financial USD",
+              "symbol": "USD1",
+              "gecko_id": "usd1-wlfi",
+              "pegType": "peggedUSD",
+              "priceSource": "defillama",
+              "pegMechanism": "fiat-backed",
+              "circulating": {
+                "peggedUSD": 2814009185.6819687
+              },
+              "price": 0.9895599533999999,
+              "off": 1.0,
+              "side": "below",
+              "title": "USD1 at $0.9896, 1.0% below its $1 peg",
+              "summary": "World Liberty Financial USD (USD1) trades at $0.9896, 1.0% below its $1 peg, with $2.8B in circulation (DefiLlama). Data, not investment advice.",
+              "link": "https://defillama.com/stablecoin/usd1-wlfi",
+              "published_at": "2026-11-28T00:00:00Z",
+              "day_key": "USD1 2026-11-28"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+            "content_type": "application/json",
+            "elapsed_ms": 25,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "pegType == \"peggedUSD\" and exists(price) and price != null and circulating.peggedUSD >= 100000000 and price <= 0.99"
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "off=round(abs(price - 1) * 100, 1)",
+                  "side=replace(replace(\"\" + (price > 1), \"^True$\", \"above\"), \"^False$\", \"below\")",
+                  "title=symbol + \" at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg\"",
+                  "summary=name + \" (\" + symbol + \") trades at $\" + round(price, 4) + \", \" + off + \"% \" + side + \" its $1 peg, with $\" + short(circulating.peggedUSD) + \" in circulation (DefiLlama). Data, not investment advice.\"",
+                  "link=\"https://defillama.com/stablecoin/\" + gecko_id",
+                  "published_at=\"2026-11-28T00:00:00Z\"",
+                  "day_key=symbol + \" 2026-11-28\""
+                ],
+                "drop": [
+                  "chainCirculating",
+                  "chains",
+                  "circulatingPrevMonth",
+                  "circulatingPrevWeek",
+                  "circulatingPrevDay"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day_key",
+                "namespace": "stablecoin-depegs",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://defillama.com/stablecoin/usd1-wlfi"
+    },
+    {
       "id": "e260a13bf0a838c450ef",
       "title": "apxUSD at $0.9806, 1.9% below its $1 peg",
       "content_text": "apxUSD (apxUSD) trades at $0.9806, 1.9% below its $1 peg, with $253.6M in circulation (DefiLlama). Data, not investment advice.",
