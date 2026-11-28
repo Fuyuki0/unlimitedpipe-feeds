@@ -9,6 +9,600 @@
   },
   "items": [
     {
+      "id": "358afca7690ed62a5301",
+      "title": "Bangkok: light rain showers, 26°C now",
+      "content_text": "Next 6 hours: 27–33°C, 0.1 mm of rain, humidity 72%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:52Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "358afca7690ed62a5301",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50#Bangkok 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:23Z",
+          "data": {
+            "change": "added",
+            "label": "Bangkok: light rain showers, 26°C now",
+            "item_type": "record",
+            "summary": "added: Bangkok: light rain showers, 26°C now",
+            "after": {
+              "title": "Bangkok: light rain showers, 26°C now",
+              "summary": "Next 6 hours: 27–33°C, 0.1 mm of rain, humidity 72%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:52Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/13.75,100.50",
+              "period": "Bangkok 2026-11-28 morning",
+              "city": "Bangkok",
+              "sky": "light rain showers"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
+            "content_type": "application/json",
+            "elapsed_ms": 109,
+            "not_modified": true,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/13.75,100.50"
+    },
+    {
+      "id": "27ab0f583bda98b0bba6",
+      "title": "Chiang Mai: partly cloudy, 20°C now",
+      "content_text": "Next 6 hours: 22–28°C, 0.0 mm of rain, humidity 86%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:07Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "27ab0f583bda98b0bba6",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98#Chiang Mai 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:24Z",
+          "data": {
+            "change": "added",
+            "label": "Chiang Mai: partly cloudy, 20°C now",
+            "item_type": "record",
+            "summary": "added: Chiang Mai: partly cloudy, 20°C now",
+            "after": {
+              "title": "Chiang Mai: partly cloudy, 20°C now",
+              "summary": "Next 6 hours: 22–28°C, 0.0 mm of rain, humidity 86%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:07Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/18.79,98.98",
+              "period": "Chiang Mai 2026-11-28 morning",
+              "city": "Chiang Mai",
+              "sky": "partly cloudy"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
+            "content_type": "application/json",
+            "elapsed_ms": 112,
+            "not_modified": true,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/18.79,98.98"
+    },
+    {
+      "id": "40ac20d2f611334804c0",
+      "title": "Phuket: light rain showers, 26°C now",
+      "content_text": "Next 6 hours: 27–30°C, 0.1 mm of rain, humidity 89%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:06Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "40ac20d2f611334804c0",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39#Phuket 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:25Z",
+          "data": {
+            "change": "added",
+            "label": "Phuket: light rain showers, 26°C now",
+            "item_type": "record",
+            "summary": "added: Phuket: light rain showers, 26°C now",
+            "after": {
+              "title": "Phuket: light rain showers, 26°C now",
+              "summary": "Next 6 hours: 27–30°C, 0.1 mm of rain, humidity 89%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:06Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.88,98.39",
+              "period": "Phuket 2026-11-28 morning",
+              "city": "Phuket",
+              "sky": "light rain showers"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
+            "content_type": "application/json",
+            "elapsed_ms": 109,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.88,98.39"
+    },
+    {
+      "id": "333f41fef99b0723d5e4",
+      "title": "Pattaya: partly cloudy, 27°C now",
+      "content_text": "Next 6 hours: 27–31°C, 0.0 mm of rain, humidity 74%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:52Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "333f41fef99b0723d5e4",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88#Pattaya 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:26Z",
+          "data": {
+            "change": "added",
+            "label": "Pattaya: partly cloudy, 27°C now",
+            "item_type": "record",
+            "summary": "added: Pattaya: partly cloudy, 27°C now",
+            "after": {
+              "title": "Pattaya: partly cloudy, 27°C now",
+              "summary": "Next 6 hours: 27–31°C, 0.0 mm of rain, humidity 74%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:52Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/12.93,100.88",
+              "period": "Pattaya 2026-11-28 morning",
+              "city": "Pattaya",
+              "sky": "partly cloudy"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
+            "content_type": "application/json",
+            "elapsed_ms": 109,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/12.93,100.88"
+    },
+    {
+      "id": "8629004c7894f8152b24",
+      "title": "Khon Kaen: partly cloudy, 22°C now",
+      "content_text": "Next 6 hours: 23–29°C, 0.0 mm of rain, humidity 78%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:06Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "8629004c7894f8152b24",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83#Khon Kaen 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:27Z",
+          "data": {
+            "change": "added",
+            "label": "Khon Kaen: partly cloudy, 22°C now",
+            "item_type": "record",
+            "summary": "added: Khon Kaen: partly cloudy, 22°C now",
+            "after": {
+              "title": "Khon Kaen: partly cloudy, 22°C now",
+              "summary": "Next 6 hours: 23–29°C, 0.0 mm of rain, humidity 78%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:06Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/16.43,102.83",
+              "period": "Khon Kaen 2026-11-28 morning",
+              "city": "Khon Kaen",
+              "sky": "partly cloudy"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
+            "content_type": "application/json",
+            "elapsed_ms": 111,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/16.43,102.83"
+    },
+    {
+      "id": "c4867852adc9b57ed807",
+      "title": "Hat Yai: light rain, 25°C now",
+      "content_text": "Next 6 hours: 26–30°C, 1.7 mm of rain, humidity 98%. Forecast by MET Norway.",
+      "date_published": "2026-11-27T23:18:07Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "c4867852adc9b57ed807",
+          "source": "web",
+          "type": "change",
+          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47#Hat Yai 2026-11-28 morning",
+          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+          "timestamp": null,
+          "observed_at": "2026-11-28T00:56:28Z",
+          "data": {
+            "change": "added",
+            "label": "Hat Yai: light rain, 25°C now",
+            "item_type": "record",
+            "summary": "added: Hat Yai: light rain, 25°C now",
+            "after": {
+              "title": "Hat Yai: light rain, 25°C now",
+              "summary": "Next 6 hours: 26–30°C, 1.7 mm of rain, humidity 98%. Forecast by MET Norway.",
+              "published_at": "2026-11-27T23:18:07Z",
+              "link": "https://www.yr.no/en/forecast/daily-table/7.01,100.47",
+              "period": "Hat Yai 2026-11-28 morning",
+              "city": "Hat Yai",
+              "sky": "light rain"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
+            "content_type": "application/json",
+            "elapsed_ms": 111,
+            "not_modified": false,
+            "method": "json"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
+                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
+                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
+                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
+                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
+                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
+                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
+                  "now=properties.timeseries.0.data",
+                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
+                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
+                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
+                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
+                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
+                  "published_at=properties.meta.updated_at",
+                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
+                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "published_at",
+                  "link",
+                  "period",
+                  "city",
+                  "sky"
+                ]
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "period",
+                "namespace": "thailand-weather",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://www.yr.no/en/forecast/daily-table/7.01,100.47"
+    },
+    {
       "id": "e9d6cf522fb77cb77c93",
       "title": "Bangkok: partly cloudy, 30°C now",
       "content_text": "Next 6 hours: 27–30°C, 0.0 mm of rain, humidity 64%. Forecast by MET Norway.",
@@ -9251,600 +9845,6 @@
             "content_type": "application/json",
             "elapsed_ms": 131,
             "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/12.93,100.88"
-    },
-    {
-      "id": "e2bf14ddbb7d4554dc4c",
-      "title": "Khon Kaen: fair, 23°C now",
-      "content_text": "Next 6 hours: 25–30°C, 0.0 mm of rain, humidity 81%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T23:21:41Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "e2bf14ddbb7d4554dc4c",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83#Khon Kaen 2026-11-20 morning",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
-          "timestamp": null,
-          "observed_at": "2026-11-20T00:26:28Z",
-          "data": {
-            "change": "added",
-            "label": "Khon Kaen: fair, 23°C now",
-            "item_type": "record",
-            "summary": "added: Khon Kaen: fair, 23°C now",
-            "after": {
-              "title": "Khon Kaen: fair, 23°C now",
-              "summary": "Next 6 hours: 25–30°C, 0.0 mm of rain, humidity 81%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T23:21:41Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/16.43,102.83",
-              "period": "Khon Kaen 2026-11-20 morning",
-              "city": "Khon Kaen",
-              "sky": "fair"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=16.43&lon=102.83",
-            "content_type": "application/json",
-            "elapsed_ms": 131,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/16.43,102.83"
-    },
-    {
-      "id": "1d08b30fcf9d02960082",
-      "title": "Hat Yai: light rain showers, 24°C now",
-      "content_text": "Next 6 hours: 26–30°C, 1.9 mm of rain, humidity 98%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T23:21:41Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "1d08b30fcf9d02960082",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47#Hat Yai 2026-11-20 morning",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
-          "timestamp": null,
-          "observed_at": "2026-11-20T00:26:29Z",
-          "data": {
-            "change": "added",
-            "label": "Hat Yai: light rain showers, 24°C now",
-            "item_type": "record",
-            "summary": "added: Hat Yai: light rain showers, 24°C now",
-            "after": {
-              "title": "Hat Yai: light rain showers, 24°C now",
-              "summary": "Next 6 hours: 26–30°C, 1.9 mm of rain, humidity 98%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T23:21:41Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/7.01,100.47",
-              "period": "Hat Yai 2026-11-20 morning",
-              "city": "Hat Yai",
-              "sky": "light rain showers"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.01&lon=100.47",
-            "content_type": "application/json",
-            "elapsed_ms": 131,
-            "not_modified": false,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/7.01,100.47"
-    },
-    {
-      "id": "2d0402fbbfcc34836001",
-      "title": "Bangkok: partly cloudy, 32°C now",
-      "content_text": "Next 6 hours: 29–31°C, 0.0 mm of rain, humidity 50%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T11:21:14Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "2d0402fbbfcc34836001",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50#Bangkok 2026-11-19 evening",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
-          "timestamp": null,
-          "observed_at": "2026-11-19T12:48:45Z",
-          "data": {
-            "change": "added",
-            "label": "Bangkok: partly cloudy, 32°C now",
-            "item_type": "record",
-            "summary": "added: Bangkok: partly cloudy, 32°C now",
-            "after": {
-              "title": "Bangkok: partly cloudy, 32°C now",
-              "summary": "Next 6 hours: 29–31°C, 0.0 mm of rain, humidity 50%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T11:21:14Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/13.75,100.50",
-              "period": "Bangkok 2026-11-19 evening",
-              "city": "Bangkok",
-              "sky": "partly cloudy"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=13.75&lon=100.50",
-            "content_type": "application/json",
-            "elapsed_ms": 149,
-            "not_modified": true,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/13.75,100.50"
-    },
-    {
-      "id": "924305840ef239280e86",
-      "title": "Chiang Mai: partly cloudy, 24°C now",
-      "content_text": "Next 6 hours: 23–24°C, 0.0 mm of rain, humidity 93%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T11:21:18Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "924305840ef239280e86",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98#Chiang Mai 2026-11-19 evening",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
-          "timestamp": null,
-          "observed_at": "2026-11-19T12:48:46Z",
-          "data": {
-            "change": "added",
-            "label": "Chiang Mai: partly cloudy, 24°C now",
-            "item_type": "record",
-            "summary": "added: Chiang Mai: partly cloudy, 24°C now",
-            "after": {
-              "title": "Chiang Mai: partly cloudy, 24°C now",
-              "summary": "Next 6 hours: 23–24°C, 0.0 mm of rain, humidity 93%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T11:21:18Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/18.79,98.98",
-              "period": "Chiang Mai 2026-11-19 evening",
-              "city": "Chiang Mai",
-              "sky": "partly cloudy"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=18.79&lon=98.98",
-            "content_type": "application/json",
-            "elapsed_ms": 149,
-            "not_modified": true,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/18.79,98.98"
-    },
-    {
-      "id": "8c911dc68f1d358f5e03",
-      "title": "Phuket: light rain showers, 27°C now",
-      "content_text": "Next 6 hours: 27–27°C, 0.2 mm of rain, humidity 85%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T11:21:08Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "8c911dc68f1d358f5e03",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39#Phuket 2026-11-19 evening",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
-          "timestamp": null,
-          "observed_at": "2026-11-19T12:48:47Z",
-          "data": {
-            "change": "added",
-            "label": "Phuket: light rain showers, 27°C now",
-            "item_type": "record",
-            "summary": "added: Phuket: light rain showers, 27°C now",
-            "after": {
-              "title": "Phuket: light rain showers, 27°C now",
-              "summary": "Next 6 hours: 27–27°C, 0.2 mm of rain, humidity 85%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T11:21:08Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/7.88,98.39",
-              "period": "Phuket 2026-11-19 evening",
-              "city": "Phuket",
-              "sky": "light rain showers"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=7.88&lon=98.39",
-            "content_type": "application/json",
-            "elapsed_ms": 150,
-            "not_modified": true,
-            "method": "json"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "city=replace(source_url, \"^.*lat=([\\\\d.]+)&.*$\", \"\\\\1\")",
-                  "city=replace(city, \"^13\\\\.75$\", \"Bangkok\")",
-                  "city=replace(city, \"^18\\\\.79$\", \"Chiang Mai\")",
-                  "city=replace(city, \"^7\\\\.88$\", \"Phuket\")",
-                  "city=replace(city, \"^12\\\\.93$\", \"Pattaya\")",
-                  "city=replace(city, \"^16\\\\.43$\", \"Khon Kaen\")",
-                  "city=replace(city, \"^7\\\\.01$\", \"Hat Yai\")",
-                  "now=properties.timeseries.0.data",
-                  "sky=replace(now.next_12_hours.summary.symbol_code, \"_(day|night|polartwilight)$\", \"\")",
-                  "sky=replace(replace(replace(sky, \"andthunder$\", \" and thunder\"), \"showers\", \" showers\"), \"^(light|heavy)\", \"\\\\1 \")",
-                  "sky=replace(replace(sky, \"^clearsky$\", \"clear sky\"), \"^partlycloudy$\", \"partly cloudy\")",
-                  "title=city + \": \" + sky + \", \" + round(now.instant.details.air_temperature) + \"°C now\"",
-                  "summary=\"Next 6 hours: \" + round(now.next_6_hours.details.air_temperature_min) + \"–\" + round(now.next_6_hours.details.air_temperature_max) + \"°C, \" + now.next_6_hours.details.precipitation_amount + \" mm of rain, humidity \" + round(now.instant.details.relative_humidity) + \"%. Forecast by MET Norway.\"",
-                  "published_at=properties.meta.updated_at",
-                  "link=\"https://www.yr.no/en/forecast/daily-table/\" + replace(source_url, \"^.*lat=([\\\\d.]+)&lon=([\\\\d.]+).*$\", \"\\\\1,\\\\2\")",
-                  "period=city + \" \" + replace(replace(properties.timeseries.0.time, \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T(0\\\\d|1[01]).*$\", \"\\\\1 morning\"), \"^(\\\\d{4}-\\\\d\\\\d-\\\\d\\\\d)T\\\\d\\\\d:.*$\", \"\\\\1 evening\")"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "published_at",
-                  "link",
-                  "period",
-                  "city",
-                  "sky"
-                ]
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "period",
-                "namespace": "thailand-weather",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://www.yr.no/en/forecast/daily-table/7.88,98.39"
-    },
-    {
-      "id": "69e15a5d66afb4b4d7d7",
-      "title": "Pattaya: partly cloudy, 29°C now",
-      "content_text": "Next 6 hours: 27–29°C, 0.0 mm of rain, humidity 77%. Forecast by MET Norway.",
-      "date_published": "2026-11-19T11:21:18Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "69e15a5d66afb4b4d7d7",
-          "source": "web",
-          "type": "change",
-          "key": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88#Pattaya 2026-11-19 evening",
-          "source_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
-          "timestamp": null,
-          "observed_at": "2026-11-19T12:48:48Z",
-          "data": {
-            "change": "added",
-            "label": "Pattaya: partly cloudy, 29°C now",
-            "item_type": "record",
-            "summary": "added: Pattaya: partly cloudy, 29°C now",
-            "after": {
-              "title": "Pattaya: partly cloudy, 29°C now",
-              "summary": "Next 6 hours: 27–29°C, 0.0 mm of rain, humidity 77%. Forecast by MET Norway.",
-              "published_at": "2026-11-19T11:21:18Z",
-              "link": "https://www.yr.no/en/forecast/daily-table/12.93,100.88",
-              "period": "Pattaya 2026-11-19 evening",
-              "city": "Pattaya",
-              "sky": "partly cloudy"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=12.93&lon=100.88",
-            "content_type": "application/json",
-            "elapsed_ms": 153,
-            "not_modified": true,
             "method": "json"
           },
           "provenance": [
