@@ -1,13 +1,128 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Stock indices, latest close (via FRED)",
-  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2026-11-21&coed=2026-11-28",
+  "home_page_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2026-11-21&coed=2026-11-28",
   "description": "Events collected by UnlimitedPipe 0.10.62",
   "_unlimitedpipe": {
     "schema": "unlimitedpipe.event/1",
     "generator": "UnlimitedPipe 0.10.62"
   },
   "items": [
+    {
+      "id": "466d26e69d84a20c8d7a",
+      "title": "Nasdaq Composite: 24,129.50 on 2026-11-27",
+      "content_text": "Latest close of the Nasdaq Composite (2026-11-27), © Nasdaq, Inc., as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
+      "date_published": "2026-11-27T21:00:00Z",
+      "_unlimitedpipe": {
+        "event": {
+          "schema": "unlimitedpipe.event/1",
+          "id": "466d26e69d84a20c8d7a",
+          "source": "web",
+          "type": "change",
+          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2026-11-21&coed=2026-11-28#NASDAQCOM 2026-11-27",
+          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2026-11-21&coed=2026-11-28",
+          "timestamp": null,
+          "observed_at": "2026-11-28T04:43:47Z",
+          "data": {
+            "change": "added",
+            "label": "Nasdaq Composite: 24,129.50 on 2026-11-27",
+            "item_type": "record",
+            "summary": "added: Nasdaq Composite: 24,129.50 on 2026-11-27",
+            "after": {
+              "title": "Nasdaq Composite: 24,129.50 on 2026-11-27",
+              "summary": "Latest close of the Nasdaq Composite (2026-11-27), © Nasdaq, Inc., as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
+              "link": "https://fred.stlouisfed.org/series/NASDAQCOM",
+              "published_at": "2026-11-27T21:00:00Z",
+              "day": "NASDAQCOM 2026-11-27"
+            }
+          },
+          "metadata": {
+            "status": 200,
+            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2026-11-21&coed=2026-11-28",
+            "content_type": "application/csv",
+            "elapsed_ms": 340,
+            "not_modified": false,
+            "method": "csv"
+          },
+          "provenance": [
+            {
+              "step": "web",
+              "version": "0.10.62"
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "date=observation_date",
+                  "value=SP500|DJIA|NASDAQCOM|NIKKEI225|VIXCLS"
+                ]
+              }
+            },
+            {
+              "step": "filter",
+              "version": "0.10.62",
+              "args": {
+                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
+              }
+            },
+            {
+              "step": "map",
+              "version": "0.10.62",
+              "args": {
+                "assign": [
+                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
+                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
+                  "name=replace(name, \"^VIXCLS$\", \"VIX volatility index\")",
+                  "owner=replace(replace(replace(replace(replace(series, \"^SP500$\", \"S&P Dow Jones Indices\"), \"^DJIA$\", \"S&P Dow Jones Indices\"), \"^NASDAQCOM$\", \"Nasdaq, Inc.\"), \"^NIKKEI225$\", \"Nikkei Inc.\"), \"^VIXCLS$\", \"Cboe Global Markets\")",
+                  "title=name + \": \" + commas(value, 2) + \" on \" + date",
+                  "summary=\"Latest close of the \" + name + \" (\" + date + \"), © \" + owner + \", as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.\"",
+                  "link=\"https://fred.stlouisfed.org/series/\" + series",
+                  "published_at=date + \"T21:00:00Z\"",
+                  "day=series + \" \" + date"
+                ]
+              }
+            },
+            {
+              "step": "select",
+              "version": "0.10.62",
+              "args": {
+                "fields": [
+                  "title",
+                  "summary",
+                  "link",
+                  "published_at",
+                  "day"
+                ]
+              }
+            },
+            {
+              "step": "sort",
+              "version": "0.10.62",
+              "args": {
+                "by": [
+                  "published_at"
+                ],
+                "reverse": true
+              }
+            },
+            {
+              "step": "diff",
+              "version": "0.10.62",
+              "args": {
+                "key": "day",
+                "namespace": "stock-indices",
+                "only": [
+                  "added"
+                ],
+                "emit_initial": true
+              }
+            }
+          ]
+        }
+      },
+      "url": "https://fred.stlouisfed.org/series/NASDAQCOM"
+    },
     {
       "id": "2d153dc1249200997973",
       "title": "Dow Jones Industrial Average: 50,774.94 on 2026-11-27",
@@ -1042,121 +1157,6 @@
         }
       },
       "url": "https://fred.stlouisfed.org/series/VIXCLS"
-    },
-    {
-      "id": "09932ba13e8ce83768a0",
-      "title": "S&P 500: 7,201.09 on 2026-11-24",
-      "content_text": "Latest close of the S&P 500 (2026-11-24), © S&P Dow Jones Indices, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
-      "date_published": "2026-11-24T21:00:00Z",
-      "_unlimitedpipe": {
-        "event": {
-          "schema": "unlimitedpipe.event/1",
-          "id": "09932ba13e8ce83768a0",
-          "source": "web",
-          "type": "change",
-          "key": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2026-11-21&coed=2026-11-28#SP500 2026-11-24",
-          "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2026-11-21&coed=2026-11-28",
-          "timestamp": null,
-          "observed_at": "2026-11-28T00:56:24Z",
-          "data": {
-            "change": "added",
-            "label": "S&P 500: 7,201.09 on 2026-11-24",
-            "item_type": "record",
-            "summary": "added: S&P 500: 7,201.09 on 2026-11-24",
-            "after": {
-              "title": "S&P 500: 7,201.09 on 2026-11-24",
-              "summary": "Latest close of the S&P 500 (2026-11-24), © S&P Dow Jones Indices, as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.",
-              "link": "https://fred.stlouisfed.org/series/SP500",
-              "published_at": "2026-11-24T21:00:00Z",
-              "day": "SP500 2026-11-24"
-            }
-          },
-          "metadata": {
-            "status": 200,
-            "final_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2026-11-21&coed=2026-11-28",
-            "content_type": "application/csv",
-            "elapsed_ms": 415,
-            "not_modified": false,
-            "method": "csv"
-          },
-          "provenance": [
-            {
-              "step": "web",
-              "version": "0.10.62"
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "date=observation_date",
-                  "value=SP500|DJIA|NASDAQCOM|NIKKEI225|VIXCLS"
-                ]
-              }
-            },
-            {
-              "step": "filter",
-              "version": "0.10.62",
-              "args": {
-                "expr": "value matches \"^[\\\\d.]+$\" and value != \".\""
-              }
-            },
-            {
-              "step": "map",
-              "version": "0.10.62",
-              "args": {
-                "assign": [
-                  "series=replace(source_url, \"^.*[?&]id=([A-Z0-9]+).*$\", \"\\\\1\")",
-                  "name=replace(replace(replace(replace(series, \"^SP500$\", \"S&P 500\"), \"^NASDAQCOM$\", \"Nasdaq Composite\"), \"^DJIA$\", \"Dow Jones Industrial Average\"), \"^NIKKEI225$\", \"Nikkei 225\")",
-                  "name=replace(name, \"^VIXCLS$\", \"VIX volatility index\")",
-                  "owner=replace(replace(replace(replace(replace(series, \"^SP500$\", \"S&P Dow Jones Indices\"), \"^DJIA$\", \"S&P Dow Jones Indices\"), \"^NASDAQCOM$\", \"Nasdaq, Inc.\"), \"^NIKKEI225$\", \"Nikkei Inc.\"), \"^VIXCLS$\", \"Cboe Global Markets\")",
-                  "title=name + \": \" + commas(value, 2) + \" on \" + date",
-                  "summary=\"Latest close of the \" + name + \" (\" + date + \"), © \" + owner + \", as shown by FRED (Federal Reserve Bank of St. Louis). Its history is on FRED. Data, not investment advice.\"",
-                  "link=\"https://fred.stlouisfed.org/series/\" + series",
-                  "published_at=date + \"T21:00:00Z\"",
-                  "day=series + \" \" + date"
-                ]
-              }
-            },
-            {
-              "step": "select",
-              "version": "0.10.62",
-              "args": {
-                "fields": [
-                  "title",
-                  "summary",
-                  "link",
-                  "published_at",
-                  "day"
-                ]
-              }
-            },
-            {
-              "step": "sort",
-              "version": "0.10.62",
-              "args": {
-                "by": [
-                  "published_at"
-                ],
-                "reverse": true
-              }
-            },
-            {
-              "step": "diff",
-              "version": "0.10.62",
-              "args": {
-                "key": "day",
-                "namespace": "stock-indices",
-                "only": [
-                  "added"
-                ],
-                "emit_initial": true
-              }
-            }
-          ]
-        }
-      },
-      "url": "https://fred.stlouisfed.org/series/SP500"
     }
   ]
 }
